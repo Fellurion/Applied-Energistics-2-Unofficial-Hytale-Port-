@@ -1,0 +1,353 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Fluix_Glass_Cable.name",
+    "Description": "ae2.items.AE2_Fluix_Glass_Cable.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Fluix_Glass_Cable.png",
+  "Categories": [
+    "AE2.Cables"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Cable"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Cable"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Cables/Glass_0.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Cables/Textures/Glass_Fluix.png",
+        "Weight": 1
+      }
+    ],
+    "State": {
+      "Definitions": {
+        "C0": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_0.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_0"
+        },
+        "C1": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_1.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_1"
+        },
+        "C2": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_2.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_2"
+        },
+        "C3": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_3.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_3"
+        },
+        "C4": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_4.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_4"
+        },
+        "C5": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_5.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_5"
+        },
+        "C6": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_6.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_6"
+        },
+        "C7": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_7.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_7"
+        },
+        "C8": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_8.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_8"
+        },
+        "C9": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_9.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_9"
+        },
+        "C10": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_10.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_10"
+        },
+        "C11": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_11.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_11"
+        },
+        "C12": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_12.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_12"
+        },
+        "C13": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_13.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_13"
+        },
+        "C14": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_14.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_14"
+        },
+        "C15": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_15.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_15"
+        },
+        "C16": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_16.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_16"
+        },
+        "C17": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_17.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_17"
+        },
+        "C18": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_18.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_18"
+        },
+        "C19": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_19.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_19"
+        },
+        "C20": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_20.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_20"
+        },
+        "C21": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_21.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_21"
+        },
+        "C22": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_22.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_22"
+        },
+        "C23": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_23.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_23"
+        },
+        "C24": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_24.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_24"
+        },
+        "C25": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_25.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_25"
+        },
+        "C26": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_26.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_26"
+        },
+        "C27": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_27.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_27"
+        },
+        "C28": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_28.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_28"
+        },
+        "C29": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_29.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_29"
+        },
+        "C30": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_30.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_30"
+        },
+        "C31": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_31.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_31"
+        },
+        "C32": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_32.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_32"
+        },
+        "C33": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_33.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_33"
+        },
+        "C34": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_34.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_34"
+        },
+        "C35": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_35.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_35"
+        },
+        "C36": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_36.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_36"
+        },
+        "C37": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_37.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_37"
+        },
+        "C38": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_38.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_38"
+        },
+        "C39": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_39.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_39"
+        },
+        "C40": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_40.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_40"
+        },
+        "C41": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_41.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_41"
+        },
+        "C42": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_42.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_42"
+        },
+        "C43": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_43.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_43"
+        },
+        "C44": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_44.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_44"
+        },
+        "C45": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_45.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_45"
+        },
+        "C46": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_46.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_46"
+        },
+        "C47": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_47.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_47"
+        },
+        "C48": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_48.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_48"
+        },
+        "C49": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_49.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_49"
+        },
+        "C50": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_50.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_50"
+        },
+        "C51": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_51.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_51"
+        },
+        "C52": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_52.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_52"
+        },
+        "C53": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_53.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_53"
+        },
+        "C54": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_54.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_54"
+        },
+        "C55": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_55.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_55"
+        },
+        "C56": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_56.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_56"
+        },
+        "C57": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_57.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_57"
+        },
+        "C58": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_58.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_58"
+        },
+        "C59": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_59.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_59"
+        },
+        "C60": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_60.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_60"
+        },
+        "C61": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_61.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_61"
+        },
+        "C62": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_62.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_62"
+        },
+        "C63": {
+          "CustomModel": "Blocks/AE2/Cables/Glass_63.blockymodel",
+          "HitboxType": "AE2_Cable_Glass_63"
+        }
+      }
+    },
+    "HitboxType": "AE2_Cable_Glass_0",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "BlockParticleSetId": "Glass",
+    "ParticleColor": "#915dcd",
+    "BlockSoundSetId": "Glass",
+    "PhysicalMaterialId": "Glass",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "cable",
+          "CableType": "glass",
+          "Color": "fluix"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Quartz_Fiber",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Fluix_Crystal",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Cables"
+        ]
+      }
+    ],
+    "OutputQuantity": 4,
+    "TimeSeconds": 1
+  }
+}

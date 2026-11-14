@@ -1,0 +1,40 @@
+# Applied Energistics 2 – autocrafting UI
+# File ae2craft.lang -> key prefix 'ae2craft.'
+
+encode.useHeld = Held item
+encode.results = Items with a recipe ({count})
+encode.chooseItem = Search an item or use the held item
+encode.blanks = Blank patterns: {inventory} in inventory · {network} in network
+encode.kindCrafting = Crafting pattern ({bench})
+encode.kindProcessing = Processing pattern ({bench})
+encode.encode = Encode
+encode.noRecipe = There is no recipe for this item.
+encode.unsupported = This recipe cannot be encoded as a pattern.
+encode.noBlank = No blank pattern in your inventory or the ME network.
+encode.done = Pattern encoded and put into your inventory.
+request.title = Crafting job
+request.amount = Amount: {amount}
+request.calculate = Calculate
+request.start = Start
+request.planInfo = Needs {bytes} bytes · produces {output}
+request.missing = Missing items:
+request.used = Required items:
+request.offline = The ME network is offline.
+request.notCraftable = The network cannot craft this item.
+request.started = Crafting started: {amount}×
+request.error.no_cpu_found = No crafting CPU in the network.
+request.error.incomplete_plan = Items are still missing.
+request.error.cpu_busy = All crafting CPUs are busy.
+request.error.cpu_offline = The crafting CPU is offline.
+request.error.cpu_too_small = The crafting CPU does not have enough storage.
+request.error.missing_ingredient = An ingredient went missing.
+request.error.no_suitable_cpu_found = No suitable crafting CPU available.
+status.title = Crafting status
+status.noCpu = No crafting CPU in the network (build crafting units + crafting storage as a cuboid).
+status.summary = {cpus} CPUs · {busy} busy
+status.cpu = CPU {index} · {bytes} bytes · {threads} co-processors
+status.job = Crafting {amount}× · {progress}/{total} · {seconds} s
+status.suspended = Suspended: {amount}× · {progress}/{total}
+status.idle = Idle
+status.offline = Offline
+status.cancel = Cancel

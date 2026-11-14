@@ -1,0 +1,72 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Quartz_Bricks.name",
+    "Description": "ae2.items.AE2_Quartz_Bricks.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Quartz_Bricks.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "All": "Blocks/AE2/Textures/AE2_Quartz_Bricks.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Crystal",
+    "ParticleColor": "#77a1c5",
+    "BlockSoundSetId": "Crystal",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Cut_Quartz_Block",
+        "Quantity": 4
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 4,
+    "TimeSeconds": 1
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Fluix_Pearl.name",
+    "Description": "ae2.items.AE2_Fluix_Pearl.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Fluix_Pearl.png",
+  "Categories": [
+    "AE2.Materials"
+  ],
+  "MaxStack": 64,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Fluix_Pearl.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Ingredient"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Material"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Fluix_Dust",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Fluix_Crystal",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "Ingredient_Void_Essence",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Materials"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

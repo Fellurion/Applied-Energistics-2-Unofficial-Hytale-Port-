@@ -1,0 +1,29 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Cable_Interface",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Interface",
+    "Quantity": 1
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Interface",
+      "Quantity": 1
+    }
+  ],
+  "OutputQuantity": 1,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Network"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

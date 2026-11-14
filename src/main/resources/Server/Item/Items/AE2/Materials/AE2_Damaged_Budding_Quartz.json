@@ -1,0 +1,68 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Damaged_Budding_Quartz.name",
+    "Description": "ae2.items.AE2_Damaged_Budding_Quartz.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Damaged_Budding_Quartz.png",
+  "Categories": [
+    "AE2.Materials"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "BuddingQuartz"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "All": "Blocks/AE2/Textures/AE2_Damaged_Budding_Quartz.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks",
+        "ItemId": "AE2_Quartz_Block"
+      }
+    },
+    "BlockParticleSetId": "Crystal",
+    "ParticleColor": "#7aadcc",
+    "BlockSoundSetId": "Crystal",
+    "PhysicalMaterialId": "Stone",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "budding_quartz",
+          "Grade": "damaged"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  }
+}

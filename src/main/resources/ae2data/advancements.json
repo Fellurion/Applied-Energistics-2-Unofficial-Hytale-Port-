@@ -1,0 +1,517 @@
+{
+  "_comment": "AE2-Advancements (data/ae2/advancement/main/*.json), Reihenfolge = AE2-Baum (Tiefensuche). Trigger: has_item (= minecraft:inventory_changed, eins der Items), network_channels (Kanäle >= channels), recursive_networking, spatial_explorer. requirements: äußere Liste = UND, innere = ODER (wie Minecraft). Texte: Server/Languages/*/ae2adv.lang (<id>.title, <id>.desc).",
+  "advancements": [
+    {
+      "id": "root",
+      "ae2": "ae2:main/root",
+      "parent": null,
+      "icon": "AE2_Certus_Quartz_Crystal",
+      "frame": "task",
+      "toast": false,
+      "announce": false,
+      "hidden": false,
+      "criteria": {
+        "copper": {
+          "trigger": "has_item",
+          "items": ["Ingredient_Bar_Copper"]
+        }
+      },
+      "requirements": [["copper"]],
+      "available": true
+    },
+    {
+      "id": "charger",
+      "ae2": "ae2:main/charger",
+      "parent": "root",
+      "icon": "AE2_Charger",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Charger"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "compass",
+      "ae2": "ae2:main/compass",
+      "parent": "charger",
+      "icon": "AE2_Meteorite_Compass",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "compass": {
+          "trigger": "has_item",
+          "items": ["AE2_Meteorite_Compass"]
+        }
+      },
+      "requirements": [["compass"]],
+      "available": true
+    },
+    {
+      "id": "charged_quartz",
+      "ae2": "ae2:main/charged_quartz",
+      "parent": "charger",
+      "icon": "AE2_Charged_Certus_Quartz_Crystal",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Charged_Certus_Quartz_Crystal"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "fluix",
+      "ae2": "ae2:main/fluix",
+      "parent": "charged_quartz",
+      "icon": "AE2_Fluix_Crystal",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Fluix_Crystal"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "glass_cable",
+      "ae2": "ae2:main/glass_cable",
+      "parent": "fluix",
+      "icon": "AE2_Fluix_Glass_Cable",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_White_Glass_Cable", "AE2_Orange_Glass_Cable", "AE2_Magenta_Glass_Cable", "AE2_Light_Blue_Glass_Cable", "AE2_Yellow_Glass_Cable", "AE2_Lime_Glass_Cable", "AE2_Pink_Glass_Cable", "AE2_Gray_Glass_Cable", "AE2_Light_Gray_Glass_Cable", "AE2_Cyan_Glass_Cable", "AE2_Purple_Glass_Cable", "AE2_Blue_Glass_Cable", "AE2_Brown_Glass_Cable", "AE2_Green_Glass_Cable", "AE2_Red_Glass_Cable", "AE2_Black_Glass_Cable", "AE2_Fluix_Glass_Cable"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "facade",
+      "ae2": "ae2:main/facade",
+      "parent": "glass_cable",
+      "icon": "AE2_Facade",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "facade": {
+          "trigger": "has_item",
+          "items": ["AE2_Facade"]
+        }
+      },
+      "requirements": [["facade"]],
+      "available": false,
+      "note": "Kabelfassaden (Facades) sind noch nicht portiert – es gibt kein Rezept."
+    },
+    {
+      "id": "network1",
+      "ae2": "ae2:main/network1",
+      "parent": "glass_cable",
+      "icon": "AE2_Fluix_Covered_Cable",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "cable": {
+          "trigger": "network_channels",
+          "channels": 8
+        }
+      },
+      "requirements": [["cable"]],
+      "available": true
+    },
+    {
+      "id": "network2",
+      "ae2": "ae2:main/network2",
+      "parent": "network1",
+      "icon": "AE2_Fluix_Smart_Cable",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "cable": {
+          "trigger": "network_channels",
+          "channels": 128
+        }
+      },
+      "requirements": [["cable"]],
+      "available": true
+    },
+    {
+      "id": "network3",
+      "ae2": "ae2:main/network3",
+      "parent": "network2",
+      "icon": "AE2_Fluix_Smart_Dense_Cable",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "cable": {
+          "trigger": "network_channels",
+          "channels": 2048
+        }
+      },
+      "requirements": [["cable"]],
+      "available": true
+    },
+    {
+      "id": "p2p",
+      "ae2": "ae2:main/p2p",
+      "parent": "glass_cable",
+      "icon": "AE2_ME_P2P_Tunnel",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_ME_P2P_Tunnel"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "qnb",
+      "ae2": "ae2:main/qnb",
+      "parent": "p2p",
+      "icon": "AE2_Quantum_Link",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Quantum_Link"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "storage_bus",
+      "ae2": "ae2:main/storage_bus",
+      "parent": "glass_cable",
+      "icon": "AE2_Storage_Bus",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "part": {
+          "trigger": "has_item",
+          "items": ["AE2_Storage_Bus"]
+        }
+      },
+      "requirements": [["part"]],
+      "available": true
+    },
+    {
+      "id": "recursive",
+      "ae2": "ae2:main/recursive",
+      "parent": "storage_bus",
+      "icon": "AE2_Interface",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "recursive": {
+          "trigger": "recursive_networking"
+        }
+      },
+      "requirements": [["recursive"]],
+      "available": true
+    },
+    {
+      "id": "growth_accelerator",
+      "ae2": "ae2:main/growth_accelerator",
+      "parent": "fluix",
+      "icon": "AE2_Growth_Accelerator",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Growth_Accelerator"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "presses",
+      "ae2": "ae2:main/presses",
+      "parent": "root",
+      "icon": "AE2_Logic_Processor_Press",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "calculation": {
+          "trigger": "has_item",
+          "items": ["AE2_Calculation_Processor_Press"]
+        },
+        "engineering": {
+          "trigger": "has_item",
+          "items": ["AE2_Engineering_Processor_Press"]
+        },
+        "logic": {
+          "trigger": "has_item",
+          "items": ["AE2_Logic_Processor_Press"]
+        },
+        "silicon": {
+          "trigger": "has_item",
+          "items": ["AE2_Silicon_Press"]
+        }
+      },
+      "requirements": [["calculation"], ["engineering"], ["logic"], ["silicon"]],
+      "available": true
+    },
+    {
+      "id": "controller",
+      "ae2": "ae2:main/controller",
+      "parent": "presses",
+      "icon": "AE2_Controller",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Controller"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "storage_cell",
+      "ae2": "ae2:main/storage_cell",
+      "parent": "controller",
+      "icon": "AE2_Item_Storage_Cell_64k",
+      "frame": "task",
+      "toast": false,
+      "announce": false,
+      "hidden": false,
+      "criteria": {
+        "c16k": {
+          "trigger": "has_item",
+          "items": ["AE2_Item_Storage_Cell_16k"]
+        },
+        "c1k": {
+          "trigger": "has_item",
+          "items": ["AE2_Item_Storage_Cell_1k"]
+        },
+        "c256k": {
+          "trigger": "has_item",
+          "items": ["AE2_Item_Storage_Cell_256k"]
+        },
+        "c4k": {
+          "trigger": "has_item",
+          "items": ["AE2_Item_Storage_Cell_4k"]
+        },
+        "c64k": {
+          "trigger": "has_item",
+          "items": ["AE2_Item_Storage_Cell_64k"]
+        }
+      },
+      "requirements": [["c1k", "c4k", "c16k", "c64k", "c256k"]],
+      "available": true
+    },
+    {
+      "id": "ioport",
+      "ae2": "ae2:main/ioport",
+      "parent": "storage_cell",
+      "icon": "AE2_IO_Port",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_IO_Port"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "spatial_ioport",
+      "ae2": "ae2:main/spatial_ioport",
+      "parent": "ioport",
+      "icon": "AE2_Spatial_IO_Port",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Spatial_IO_Port"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "spatial_explorer",
+      "ae2": "ae2:main/spatial_explorer",
+      "parent": "spatial_ioport",
+      "icon": "AE2_Spatial_Cell_Component_128",
+      "frame": "task",
+      "toast": false,
+      "announce": false,
+      "hidden": false,
+      "criteria": {
+        "explorer": {
+          "trigger": "spatial_explorer"
+        }
+      },
+      "requirements": [["explorer"]],
+      "available": false,
+      "note": "Spatial IO (Raumspeicher) ist noch nicht portiert."
+    },
+    {
+      "id": "portable_cell",
+      "ae2": "ae2:main/portable_cell",
+      "parent": "storage_cell",
+      "icon": "AE2_Portable_Item_Cell_1k",
+      "frame": "task",
+      "toast": false,
+      "announce": false,
+      "hidden": false,
+      "criteria": {
+        "pc_16k": {
+          "trigger": "has_item",
+          "items": ["AE2_Portable_Item_Cell_16k"]
+        },
+        "pc_1k": {
+          "trigger": "has_item",
+          "items": ["AE2_Portable_Item_Cell_1k"]
+        },
+        "pc_256k": {
+          "trigger": "has_item",
+          "items": ["AE2_Portable_Item_Cell_256k"]
+        },
+        "pc_4k": {
+          "trigger": "has_item",
+          "items": ["AE2_Portable_Item_Cell_4k"]
+        },
+        "pc_64k": {
+          "trigger": "has_item",
+          "items": ["AE2_Portable_Item_Cell_64k"]
+        }
+      },
+      "requirements": [["pc_1k", "pc_4k", "pc_16k", "pc_64k", "pc_256k"]],
+      "available": true
+    },
+    {
+      "id": "crafting_terminal",
+      "ae2": "ae2:main/crafting_terminal",
+      "parent": "controller",
+      "icon": "AE2_Crafting_Terminal",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Crafting_Terminal"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "pattern_encoding_terminal",
+      "ae2": "ae2:main/pattern_encoding_terminal",
+      "parent": "crafting_terminal",
+      "icon": "AE2_Pattern_Encoding_Terminal",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "certus": {
+          "trigger": "has_item",
+          "items": ["AE2_Pattern_Encoding_Terminal"]
+        }
+      },
+      "requirements": [["certus"]],
+      "available": true
+    },
+    {
+      "id": "crafting_cpu",
+      "ae2": "ae2:main/crafting_cpu",
+      "parent": "pattern_encoding_terminal",
+      "icon": "AE2_64k_Crafting_Storage",
+      "frame": "task",
+      "toast": false,
+      "announce": false,
+      "hidden": false,
+      "criteria": {
+        "cu": {
+          "trigger": "has_item",
+          "items": ["AE2_Crafting_Unit"]
+        }
+      },
+      "requirements": [["cu"]],
+      "available": true
+    },
+    {
+      "id": "network_tool",
+      "ae2": "ae2:main/network_tool",
+      "parent": "controller",
+      "icon": "AE2_Network_Tool",
+      "frame": "task",
+      "toast": true,
+      "announce": true,
+      "hidden": false,
+      "criteria": {
+        "network_tool": {
+          "trigger": "has_item",
+          "items": ["AE2_Network_Tool"]
+        }
+      },
+      "requirements": [["network_tool"]],
+      "available": true
+    }
+  ]
+}

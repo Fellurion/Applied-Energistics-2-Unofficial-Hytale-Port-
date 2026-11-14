@@ -1,0 +1,23 @@
+{
+  "Group": "de.fellurion",
+  "Name": "AppliedEnergistics2",
+  "Version": "${version}",
+  "Description": "Applied Energistics 2 for Hytale – ported by Fellurion from Applied Energistics 2 (AlgorithmX2 et al.). Code LGPL-3.0, API MIT, textures/models CC BY-NC-SA 3.0 (Ridanisaurus Rid, AlgorithmX2 et al.), texts CC0.",
+  "Authors": [
+    {
+      "Name": "Fellurion"
+    },
+    {
+      "Name": "AlgorithmX2 et al. (Original-Mod Applied Energistics 2)"
+    }
+  ],
+  "Website": "https://github.com/AppliedEnergistics/Applied-Energistics-2",
+  "ServerVersion": ">=0.7.0",
+  "Main": "de.fellurion.ae2.AE2Plugin",
+  "Dependencies": {},
+  "OptionalDependencies": {
+    "de.fellurion:FTCore": "*"
+  },
+  "IncludesAssetPack": true,
+  "DisabledByDefault": false
+}

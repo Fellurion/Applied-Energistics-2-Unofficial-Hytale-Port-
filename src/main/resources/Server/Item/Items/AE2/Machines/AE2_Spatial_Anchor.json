@@ -1,0 +1,124 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Spatial_Anchor.name",
+    "Description": "ae2.items.AE2_Spatial_Anchor.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Spatial_Anchor.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "SpatialAnchor"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "Up": "Blocks/AE2/Textures/AE2_Spatial_Anchor_Up.png",
+        "Down": "Blocks/AE2/Textures/AE2_Spatial_Anchor_Down.png",
+        "North": "Blocks/AE2/Textures/AE2_Spatial_Anchor_North.png",
+        "South": "Blocks/AE2/Textures/AE2_Spatial_Anchor_South.png",
+        "West": "Blocks/AE2/Textures/AE2_Spatial_Anchor_West.png",
+        "East": "Blocks/AE2/Textures/AE2_Spatial_Anchor_East.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Online": {
+          "Textures": [
+            {
+              "Up": "Blocks/AE2/Textures/AE2_Spatial_Anchor_Up.png",
+              "Down": "Blocks/AE2/Textures/AE2_Spatial_Anchor_Down.png",
+              "North": "Blocks/AE2/Textures/AE2_Spatial_Anchor_North.png",
+              "South": "Blocks/AE2/Textures/AE2_Spatial_Anchor_South.png",
+              "West": "Blocks/AE2/Textures/AE2_Spatial_Anchor_West.png",
+              "East": "Blocks/AE2/Textures/AE2_Spatial_Anchor_East.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#817c96",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "spatial_anchor"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Spatial_Pylon",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "AE2_Fluix_Glass_Cable",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Spatial_Cell_Component_128",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Engineering_Processor",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Machines"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

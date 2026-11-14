@@ -1,0 +1,103 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Not_So_Mysterious_Cube.name",
+    "Description": "ae2.items.AE2_Not_So_Mysterious_Cube.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Not_So_Mysterious_Cube.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "MysteriousCube"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "Sides": "Blocks/AE2/Textures/AE2_Not_So_Mysterious_Cube_Sides.png",
+        "UpDown": "Blocks/AE2/Textures/AE2_Not_So_Mysterious_Cube_UpDown.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#2e3b49",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "mysterious_cube"
+        }
+      }
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Smooth_Sky_Stone_Block",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Calculation_Processor_Press",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Engineering_Processor_Press",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Controller",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Logic_Processor_Press",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Silicon_Press",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 4,
+    "TimeSeconds": 1
+  }
+}

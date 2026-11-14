@@ -1,0 +1,59 @@
+# Applied Energistics 2 – Hytale UI texts (terminal etc.)
+# File ae2ui.lang -> key prefix 'ae2ui.'
+
+terminal.insertHeld = Insert held
+terminal.insertInventory = Insert inventory
+terminal.sort.amount = Sort: Amount
+terminal.sort.name = Sort: Name
+terminal.sort.id = Sort: ID
+terminal.offline = The ME network is offline (no power or no channel).
+terminal.empty = No items in the network.
+terminal.noMatch = No items match the search.
+terminal.noSession = Use an ME Terminal block to open the network here.
+terminal.tab = ME Terminal
+terminal.search = Search…
+terminal.inventory = Inventory
+terminal.hotbar = Hotbar
+terminal.backpack = Backpack
+terminal.craftingStatus = Crafting Status
+terminal.craftMode.on = Craft mode: on
+terminal.craftMode.off = Craft mode: off
+terminal.craftable = Craft
+terminal.status.online = Online · {stored} / {max} AE · {usage} AE/t
+terminal.status.offline = Offline
+terminal.storage = {types} types · {items} items
+terminal.hint = Network: left click = stack, right click = 1, middle click = craft. Inventory: click or drag onto the network to store, drag out of the network to take.
+terminal.tooltip.stored = In the ME network: {amount}
+terminal.tooltip.soulbound = Soulbound
+terminal.tooltip.soulboundTo = Soulbound to {owner}
+terminal.tooltip.craftable = Craftable
+terminal.tooltip.takeHint = Left click: stack · right click: 1 · drag into your inventory
+terminal.tooltip.craftHint = Click to request crafting
+
+workbench.noCell = No cell inserted
+workbench.addHeld = Add held item
+workbench.addInventory = Add inventory
+workbench.fromContents = Partition from contents
+workbench.clear = Clear
+workbench.insertCard = Insert card
+workbench.configHeader = Configuration / partition ({count}/{max}) – click removes
+workbench.upgradeHeader = Upgrade cards ({count}/{max}) – click removes
+workbench.noUpgrades = This cell has no upgrade slots
+workbench.cellInfo = {used} / {total} bytes · {types} / {maxTypes} types
+workbench.creativeInfo = Creative cell: provides an endless supply of every configured item
+workbench.creativeHint = Add items, then put the cell into an ME Drive or ME Chest.
+workbench.partitionHint = With a configuration the cell only accepts these items (partition).
+workbench.fuzzy.ignore_all = Fuzzy: ignore all
+workbench.fuzzy.percent_99 = Fuzzy: 99% durability
+workbench.fuzzy.percent_75 = Fuzzy: 75% durability
+workbench.fuzzy.percent_50 = Fuzzy: 50% durability
+workbench.fuzzy.percent_25 = Fuzzy: 25% durability
+
+crank.noTarget = The crank only turns when attached to an Inscriber or Charger that can take more power.
+cell.bytes = {used} of {total} bytes used
+cell.types = {types} of {maxTypes} types
+cell.partitioned = Partitioned ({count} types)
+cell.upgrades = {count} upgrade card(s)
+cell.entry = {amount} {item}
+cell.more = … and {count} more
+cell.creative = Creative: {types} types, infinite

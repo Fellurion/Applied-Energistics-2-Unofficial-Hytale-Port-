@@ -1,0 +1,118 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Molecular_Assembler.name",
+    "Description": "ae2.items.AE2_Molecular_Assembler.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Molecular_Assembler.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "MolecularAssembler"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Molecular_Assembler.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Molecular_Assembler_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Working": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Molecular_Assembler_Working.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Molecular_Assembler_Working_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#898995",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "molecular_assembler"
+        },
+        "ItemContainerBlock": {
+          "Capacity": 10
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Quartz_Glass",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Annihilation_Core",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Bench_WorkBench",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Formation_Core",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Machines"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

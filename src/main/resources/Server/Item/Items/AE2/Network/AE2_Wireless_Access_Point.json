@@ -1,0 +1,111 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Wireless_Access_Point.name",
+    "Description": "ae2.items.AE2_Wireless_Access_Point.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Wireless_Access_Point.png",
+  "Categories": [
+    "AE2.Network"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "WirelessAccessPoint"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Wireless_Access_Point.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Wireless_Access_Point_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Wireless_Access_Point_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Wireless_Access_Point_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#736a87",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "wireless_access_point"
+        },
+        "ItemContainerBlock": {
+          "Capacity": 1
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Wireless_Receiver",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Calculation_Processor",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Fluix_Glass_Cable",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Network"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

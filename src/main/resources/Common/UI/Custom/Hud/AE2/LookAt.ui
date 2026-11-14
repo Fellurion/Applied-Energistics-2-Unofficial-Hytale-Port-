@@ -1,0 +1,108 @@
+// AE2 – Blockinfo beim Anschauen (wie Jade/WAILA), oben mittig unter Kompass bzw. FTCore-Leiste.
+// Ein HUD fängt keine Eingaben ab. Inhalt, Breite/Höhe der Platte und die Lage der Zeilen setzt
+// de.fellurion.ae2.hytale.hud.LookAtHud (Maße: HudLayout). Farben aus FTCores Theme.ui.
+// Bewusst ohne Texturen: Ein Pfad, der beim Client nicht auflöst, bricht das Laden der Anzeige ab.
+// FTCore hudcontrol.json kann die Platte verschieben: HUD "AE2.LookAt", Element "#AE2Look".
+
+@NameStyle = (FontSize: 12, TextColor: #e8f2dc, RenderBold: true, VerticalAlignment: Center);
+@ModStyle = (FontSize: 8, TextColor: #5f7a4a, RenderBold: true, LetterSpacing: 1, FontName: "Secondary", VerticalAlignment: Center, HorizontalAlignment: End);
+@LineStyle = (FontSize: 10, TextColor: #c9ccc8, VerticalAlignment: Center);
+
+Group #AE2Look {
+  Anchor: (Left: 0, Right: 0, Top: 48, Height: 200);
+  Visible: false;
+
+  Group #AE2LookPanel {
+    Anchor: (Top: 0, Width: 260, Height: 50);
+    Background: #0b0c0c(0.84);
+
+    // Kante oben und Zustandsstreifen links
+    Group #AE2LookTopLine {
+      Anchor: (Left: 0, Right: 0, Top: 0, Height: 1);
+      Background: #4e6b3c;
+    }
+    Group #AE2LookStripe {
+      Anchor: (Left: 0, Top: 0, Bottom: 0, Width: 3);
+      Background: #9ec47a;
+    }
+
+    ItemIcon #AE2LookIcon {
+      Anchor: (Left: 11, Top: 9, Width: 32, Height: 32);
+    }
+
+    Label #AE2LookName {
+      Anchor: (Left: 52, Right: 40, Top: 7, Height: 18);
+      Style: @NameStyle;
+      Text: "";
+    }
+
+    Label #AE2LookMod {
+      Anchor: (Right: 10, Top: 7, Width: 30, Height: 18);
+      Style: @ModStyle;
+      Text: "AE2";
+    }
+
+    Group #AE2LookDot {
+      Anchor: (Left: 52, Top: 31, Width: 6, Height: 6);
+      Background: #9ad47f;
+      Visible: false;
+    }
+
+    // Stil direkt am Element: der Server setzt Style.TextColor je Zustand
+    Label #AE2LookStatus {
+      Anchor: (Left: 63, Right: 12, Top: 26, Height: 15);
+      Style: (FontSize: 10, TextColor: #9ad47f, RenderBold: true, VerticalAlignment: Center);
+      Text: "";
+      Visible: false;
+    }
+
+    Label #AE2LookLine0 {
+      Anchor: (Left: 52, Right: 12, Top: 41, Height: 15);
+      Style: @LineStyle;
+      Text: "";
+      Visible: false;
+    }
+    Label #AE2LookLine1 {
+      Anchor: (Left: 52, Right: 12, Top: 56, Height: 15);
+      Style: @LineStyle;
+      Text: "";
+      Visible: false;
+    }
+    Label #AE2LookLine2 {
+      Anchor: (Left: 52, Right: 12, Top: 71, Height: 15);
+      Style: @LineStyle;
+      Text: "";
+      Visible: false;
+    }
+    Label #AE2LookLine3 {
+      Anchor: (Left: 52, Right: 12, Top: 86, Height: 15);
+      Style: @LineStyle;
+      Text: "";
+      Visible: false;
+    }
+    Label #AE2LookLine4 {
+      Anchor: (Left: 52, Right: 12, Top: 101, Height: 15);
+      Style: @LineStyle;
+      Text: "";
+      Visible: false;
+    }
+    Label #AE2LookLine5 {
+      Anchor: (Left: 52, Right: 12, Top: 116, Height: 15);
+      Style: @LineStyle;
+      Text: "";
+      Visible: false;
+    }
+
+    // Füllstand (Energie, Bytes, Fortschritt): Bahn + Füllung, Breite der Füllung setzt der Server
+    Group #AE2LookBar {
+      Anchor: (Left: 52, Right: 12, Top: 135, Height: 4);
+      Background: #2a2d2e;
+      Visible: false;
+
+      Group #AE2LookBarFill {
+        Anchor: (Left: 0, Top: 0, Width: 0, Height: 4);
+        Background: #9ec47a;
+      }
+    }
+  }
+}

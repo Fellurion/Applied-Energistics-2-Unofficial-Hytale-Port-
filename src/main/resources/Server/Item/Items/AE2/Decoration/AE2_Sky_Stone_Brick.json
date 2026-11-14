@@ -1,0 +1,72 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Sky_Stone_Brick.name",
+    "Description": "ae2.items.AE2_Sky_Stone_Brick.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Sky_Stone_Brick.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "All": "Blocks/AE2/Textures/AE2_Sky_Stone_Brick.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#181a18",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Smooth_Sky_Stone_Block",
+        "Quantity": 4
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 4,
+    "TimeSeconds": 1
+  }
+}

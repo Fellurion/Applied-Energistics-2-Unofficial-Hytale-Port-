@@ -1,0 +1,25 @@
+$C = "../../Common.ui";
+
+// Kleines Item-Symbol mit Menge (Zutaten, Fehlmengen, CPU-Inhalt).
+Group {
+  Anchor: (Width: 50, Height: 50);
+  Padding: 2;
+
+  Group {
+    Anchor: (Full: 0);
+    Background: #1a2530;
+    Padding: 2;
+
+    ItemSlot #Icon {
+      Anchor: (Full: 0);
+      ShowQualityBackground: true;
+      ShowQuantity: false;
+    }
+
+    Label #Quantity {
+      Anchor: (Right: 2, Bottom: 0);
+      Style: (FontSize: 12, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: End, VerticalAlignment: End);
+      Text: "";
+    }
+  }
+}

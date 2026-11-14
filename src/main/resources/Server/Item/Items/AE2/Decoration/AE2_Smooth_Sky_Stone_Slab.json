@@ -1,0 +1,135 @@
+{
+  "Parent": "Rock_Stone_Brick_Half",
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Smooth_Sky_Stone_Slab.name",
+    "Description": "ae2.items.AE2_Smooth_Sky_Stone_Slab.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Smooth_Sky_Stone_Slab.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "Set": "AE2_Sky_Stone",
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Parent": "Half_Block",
+          "Matchers": [
+            {
+              "Block": {
+                "Id": "AE2_Smooth_Sky_Stone_Slab",
+                "State": "default"
+              },
+              "Face": "Up",
+              "StaticFace": false
+            }
+          ]
+        }
+      ],
+      "Cooldown": {
+        "Id": "BlockInteraction",
+        "Cooldown": 0.3,
+        "ClickBypass": true
+      },
+      "Settings": {
+        "Creative": {
+          "AllowSkipChainOnClick": true
+        }
+      }
+    }
+  },
+  "BlockType": {
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Textures/AE2_Smooth_Sky_Stone_Block.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Block": {
+          "Material": "Solid",
+          "DrawType": "Cube",
+          "HitboxType": "Full",
+          "Textures": [
+            {
+              "All": "Blocks/AE2/Textures/AE2_Smooth_Sky_Stone_Block.png",
+              "Weight": 1
+            }
+          ],
+          "Supporting": {
+            "BlockSides": [
+              {}
+            ]
+          },
+          "Gathering": {
+            "Breaking": {
+              "GatherType": "Rocks",
+              "DropList": {
+                "Container": {
+                  "Type": "Single",
+                  "Item": {
+                    "ItemId": "AE2_Smooth_Sky_Stone_Slab",
+                    "QuantityMax": 2,
+                    "QuantityMin": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#181a18",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Smooth_Sky_Stone_Block",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 6,
+    "TimeSeconds": 1
+  }
+}

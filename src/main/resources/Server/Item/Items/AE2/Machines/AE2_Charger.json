@@ -1,0 +1,97 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Charger.name",
+    "Description": "ae2.items.AE2_Charger.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Charger.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Charger"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Charger.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Charger_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "Light": {
+      "Color": "#221"
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#9894aa",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "charger"
+        },
+        "ItemContainerBlock": {
+          "Capacity": 1
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 5
+      },
+      {
+        "ItemId": "Ingredient_Bar_Copper",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Machines"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

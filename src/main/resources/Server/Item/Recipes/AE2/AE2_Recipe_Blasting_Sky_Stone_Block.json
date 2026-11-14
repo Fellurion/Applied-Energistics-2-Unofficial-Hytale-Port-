@@ -1,0 +1,26 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Sky_Dust",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Sky_Stone_Block",
+    "Quantity": 1
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Sky_Stone_Block",
+      "Quantity": 1
+    }
+  ],
+  "OutputQuantity": 1,
+  "BenchRequirement": [
+    {
+      "Type": "Processing",
+      "Id": "Furnace"
+    }
+  ],
+  "TimeSeconds": 10
+}

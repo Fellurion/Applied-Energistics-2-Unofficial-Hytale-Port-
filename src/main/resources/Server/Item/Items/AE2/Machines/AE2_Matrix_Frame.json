@@ -1,0 +1,53 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Matrix_Frame.name",
+    "Description": "ae2.items.AE2_Matrix_Frame.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Matrix_Frame.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "All": "Blocks/AE2/Textures/AE2_Matrix_Frame.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Unbreakable"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#6e6692",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal"
+  }
+}

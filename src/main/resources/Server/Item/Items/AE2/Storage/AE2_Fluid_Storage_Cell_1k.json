@@ -1,0 +1,69 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Fluid_Storage_Cell_1k.name",
+    "Description": "ae2.items.AE2_Fluid_Storage_Cell_1k.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Fluid_Storage_Cell_1k.png",
+  "Categories": [
+    "AE2.Storage"
+  ],
+  "MaxStack": 1,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Fluid_Storage_Cell_1k.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Storage"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "StorageCell"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Quartz_Glass",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Crystal_Red",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "AE2_Cell_Component_1k",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Bar_Copper",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Storage"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

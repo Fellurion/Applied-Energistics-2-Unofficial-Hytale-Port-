@@ -1,0 +1,160 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Energistics_Workbench.name",
+    "Description": "ae2.items.AE2_Energistics_Workbench.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Energistics_Workbench.png",
+  "Categories": [
+    "AE2.Machines",
+    "Furniture.Benches"
+  ],
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 8
+      },
+      {
+        "ItemId": "Ingredient_Bar_Copper",
+        "Quantity": 6
+      },
+      {
+        "ItemId": "Ingredient_Crystal_White",
+        "Quantity": 4
+      },
+      {
+        "ResourceTypeId": "Wood_Trunk",
+        "Quantity": 4
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Tinkering"
+        ],
+        "Id": "Workbench"
+      }
+    ],
+    "TimeSeconds": 3
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2Extra/Workbench/AE2_Energistics_Workbench.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2Extra/Workbench/AE2_Energistics_Workbench_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "HitboxType": "AE2_Bench_Workbench",
+    "VariantRotation": "NESW",
+    "Bench": {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        {
+          "Id": "AE2_Materials",
+          "Icon": "Icons/CraftingCategories/AE2/Materials.png",
+          "Name": "ae2.benchCategories.materials"
+        },
+        {
+          "Id": "AE2_Network",
+          "Icon": "Icons/CraftingCategories/AE2/Network.png",
+          "Name": "ae2.benchCategories.network"
+        },
+        {
+          "Id": "AE2_Storage",
+          "Icon": "Icons/CraftingCategories/AE2/Storage.png",
+          "Name": "ae2.benchCategories.storage"
+        },
+        {
+          "Id": "AE2_Machines",
+          "Icon": "Icons/CraftingCategories/AE2/Machines.png",
+          "Name": "ae2.benchCategories.machines"
+        },
+        {
+          "Id": "AE2_Tools",
+          "Icon": "Icons/CraftingCategories/AE2/Tools.png",
+          "Name": "ae2.benchCategories.tools"
+        },
+        {
+          "Id": "AE2_Decoration",
+          "Icon": "Icons/CraftingCategories/AE2/Decoration.png",
+          "Name": "ae2.benchCategories.decoration"
+        },
+        {
+          "Id": "AE2_Cables",
+          "Icon": "Icons/CraftingCategories/AE2/Cables.png",
+          "Name": "ae2.benchCategories.cables"
+        },
+        {
+          "Id": "AE2_Bridge",
+          "Icon": "Icons/CraftingCategories/AE2/Bridge.png",
+          "Name": "ae2.benchCategories.bridge"
+        }
+      ],
+      "LocalOpenSoundEventId": "SFX_Workbench_Open",
+      "LocalCloseSoundEventId": "SFX_Workbench_Close",
+      "CompletedSoundEventId": "SFX_Workbench_Craft",
+      "FailedSoundEventId": "SFX_Generic_Crafting_Failed"
+    },
+    "BlockEntity": {
+      "Components": {
+        "BenchBlock": {}
+      }
+    },
+    "State": {
+      "Definitions": {
+        "CraftCompleted": {
+          "CustomModelAnimation": "Blocks/AE2Extra/Workbench/AE2_Energistics_Workbench_Crafting.blockyanim",
+          "Looping": true
+        },
+        "CraftCompletedInstant": {
+          "CustomModelAnimation": "Blocks/AE2Extra/Workbench/AE2_Energistics_Workbench_Crafting.blockyanim"
+        }
+      }
+    },
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Benches"
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#3d3b4a",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    },
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal"
+  },
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.42,
+    "Rotation": [
+      22.5,
+      45.0,
+      22.5
+    ],
+    "Translation": [
+      12.9,
+      -11.7
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Bench"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "MaxStack": 1,
+  "ItemSoundSetId": "ISS_Items_Metal"
+}

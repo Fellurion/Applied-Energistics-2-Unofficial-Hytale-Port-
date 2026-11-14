@@ -1,0 +1,116 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Controller.name",
+    "Description": "ae2.items.AE2_Controller.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Controller.png",
+  "Categories": [
+    "AE2.Network"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Controller"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "All": "Blocks/AE2/Textures/AE2_Controller.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Conflicted": {
+          "Textures": [
+            {
+              "All": "Blocks/AE2/Textures/AE2_Controller_Conflicted.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Online": {
+          "Textures": [
+            {
+              "All": "Blocks/AE2/Textures/AE2_Controller_Online.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#436"
+          }
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#767782",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "controller"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Smooth_Sky_Stone_Block",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Fluix_Crystal",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Engineering_Processor",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Network"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

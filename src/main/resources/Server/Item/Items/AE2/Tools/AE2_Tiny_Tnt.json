@@ -1,0 +1,90 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Tiny_Tnt.name",
+    "Description": "ae2.items.AE2_Tiny_Tnt.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Tiny_Tnt.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Tool"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "TinyTnt"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Gravel",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Tiny_Tnt.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Tiny_Tnt_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "BlockParticleSetId": "Dust",
+    "ParticleColor": "#913f3e",
+    "BlockSoundSetId": "Gravel",
+    "PhysicalMaterialId": "Stone",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "tiny_tnt"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Certus_Quartz_Dust",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Powder_Boom",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Tools"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

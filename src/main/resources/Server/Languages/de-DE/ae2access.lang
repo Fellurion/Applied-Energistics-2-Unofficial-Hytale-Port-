@@ -1,0 +1,39 @@
+# Applied Energistics 2 – Besitz und Zugriff auf ME-Netze
+# Datei ae2access.lang -> Schlüsselpräfix 'ae2access.'
+
+denied.title = Kein Zugriff
+denied.network = Dieses ME-Netz gehört {owner}.
+denied.block = Dieser Block gehört {owner}.
+noOwner = Dieses ME-Netz hat keinen Besitzer – jeder darf es benutzen.
+
+terminal.button = Zugriff
+terminal.status = Kein Zugriff
+terminal.denied = Dieses ME-Netz gehört {owner}. Bitte {owner}, dich im Terminal unter „Zugriff“ einzutragen.
+
+page.title = Zugriff auf ME-Netze
+page.owner = Besitzer: {owner}
+page.info = Eingetragene Spieler dürfen alle deine ME-Netze benutzen: Terminals, Laufwerke, ME-Truhen, Maschinen und Autocrafting.
+page.infoAdmin = Du bearbeitest als Admin die Liste von {owner}. Sie gilt für alle ME-Netze von {owner}.
+page.add = Spieler hinzufügen
+search = Name suchen …
+dropdown.choose = Spieler auswählen …
+dropdown.none = Kein Spieler gefunden
+dropdown.online = online
+add = Hinzufügen
+list = Eingetragene Spieler ({count})
+empty = Noch niemand eingetragen – nur {owner} kann diese ME-Netze benutzen.
+remove = Entfernen
+state.online = online
+state.offline = offline
+back = Zurück zum Terminal
+
+msg.added = {name} darf jetzt die ME-Netze von {owner} benutzen.
+msg.removed = {name} wurde entfernt.
+msg.already = {name} steht schon auf der Liste.
+msg.self = {name} ist der Besitzer und hat immer Zugriff.
+msg.choose = Gib einen Namen ein oder wähle einen Spieler aus der Liste.
+msg.notFound = Kein passender Spieler. Wähle einen aus der Liste – Spieler müssen schon einmal auf dem Server gewesen sein.
+
+notify.title = ME-Netz-Zugriff
+notify.granted = Du darfst jetzt die ME-Netze von {owner} benutzen.
+notify.revoked = {owner} hat dir den Zugriff auf die eigenen ME-Netze entzogen.

@@ -1,0 +1,108 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Formation_Plane.name",
+    "Description": "ae2.items.AE2_Formation_Plane.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Formation_Plane.png",
+  "Categories": [
+    "AE2.Network"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "FormationPlane"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Formation_Plane.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Formation_Plane_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Formation_Plane_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Formation_Plane_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#6882a7",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "formation_plane"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Fluix_Crystal",
+        "Quantity": 3
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Formation_Core",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Network"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

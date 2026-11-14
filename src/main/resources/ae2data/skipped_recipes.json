@@ -1,0 +1,877 @@
+[
+  {
+    "recipe": "add_item_upgrade",
+    "type": "ae2:add_item_upgrade",
+    "reason": "Item-Upgrade hinzufügen (Java)"
+  },
+  {
+    "recipe": "block_cutter/slabs/chiseled_quartz_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/cut_quartz_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/fluix_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/quartz_brick_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/quartz_pillar_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/quartz_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/sky_stone_brick_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/sky_stone_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/sky_stone_small_brick_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/smooth_quartz_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/slabs/smooth_sky_stone_slab",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/chiseled_quartz_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/cut_quartz_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/fluix_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/quartz_brick_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/quartz_pillar_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/quartz_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/sky_stone_brick_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/sky_stone_small_brick_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/sky_stone_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/smooth_quartz_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/stairs/smooth_sky_stone_stairs",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/chiseled_quartz_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/cut_quartz_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/fluix_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/quartz_brick_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/quartz_pillar_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/quartz_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/sky_stone_brick_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/sky_stone_small_brick_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/sky_stone_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/smooth_quartz_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "block_cutter/walls/smooth_sky_stone_wall",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "cell_upgrade/fluid_storage_cell_16k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/fluid_storage_cell_1k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/fluid_storage_cell_256k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/fluid_storage_cell_4k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/fluid_storage_cell_64k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/item_storage_cell_16k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/item_storage_cell_1k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/item_storage_cell_256k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/item_storage_cell_4k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/item_storage_cell_64k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_fluid_cell_16k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_fluid_cell_1k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_fluid_cell_256k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_fluid_cell_4k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_fluid_cell_64k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_item_cell_16k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_item_cell_1k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_item_cell_256k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_item_cell_4k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "cell_upgrade/portable_item_cell_64k",
+    "type": "ae2:storage_cell_disassembly",
+    "reason": "Zell-Zerlegung (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/16k_crafting_storage",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/1k_crafting_storage",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/256k_crafting_storage",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/4k_crafting_storage",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/64k_crafting_storage",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/crafting_accelerator",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "crafting_unit_upgrade/crafting_monitor",
+    "type": "ae2:crafting_unit_transform",
+    "reason": "Fertigungseinheit-Umbau (Java)"
+  },
+  {
+    "recipe": "decorative/certus_quartz_bricks_from_stonecutting",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "decorative/certus_quartz_pillar_from_stonecutting",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "decorative/chiseled_quartz_block_from_stonecutting",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "decorative/cut_quartz_block_from_stonecutting",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "decorative/sky_stone_brick_from_stonecutting",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "decorative/sky_stone_small_brick_from_stonecutting",
+    "type": "minecraft:stonecutting",
+    "reason": "Steinsäge – Formen werden an der AE2-Werkbank (Dekoration) hergestellt"
+  },
+  {
+    "recipe": "entropy/cool/stone_bricks_cracked_stone_bricks",
+    "type": "ae2:entropy",
+    "reason": "Weltblock ohne Mapping: {'block': {'id': 'minecraft:cracked_stone_bricks'}}"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/aluminum",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/aluminum"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/antimony",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/antimony"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/barium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/barium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/beef",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/beef"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/beryllium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/beryllium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/bismuth",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/bismuth"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/boron",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/boron"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/bromine",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/bromine"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/cadmium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/cadmium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/calcium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/calcium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/carbon",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/carbon"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/cerium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/cerium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/cesium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/cesium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/chicken",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/chicken"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/electrum",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/electrum"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/fish",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/fish"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/gallium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/gallium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/germanium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/germanium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/indium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/indium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/invar",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/invar"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/iodine",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/iodine"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/iridium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/iridium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/krypton",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/krypton"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/lanthanum",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/lanthanum"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/lead",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/lead"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/lithium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/lithium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/magnesium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/magnesium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/manganese",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/manganese"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/meat",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/meat"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/meatcooked",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/meatcooked"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/meatraw",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/meatraw"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/nickel",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/nickel"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/niobium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/niobium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/osmium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/osmium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/palladium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/palladium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/phosphorus",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/phosphorus"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/platinum",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/platinum"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/plutonium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/plutonium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/potassium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/potassium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/rhodium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/rhodium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/rubidium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/rubidium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/ruthenium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/ruthenium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/scandium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/scandium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/sheep",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/sheep"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/silicon",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/silicon"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/sodium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/sodium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/strontium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/strontium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/sulfur",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/sulfur"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/tantalum",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/tantalum"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/technetium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/technetium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/tellurium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/tellurium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/tin",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/tin"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/titanium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/titanium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/tungsten",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/tungsten"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/uranium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/uranium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/vanadium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/vanadium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/xenon",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/xenon"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/yttrium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/yttrium"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/zinc",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/zinc"
+  },
+  {
+    "recipe": "matter_cannon/nuggets/zirconium",
+    "type": "ae2:matter_cannon",
+    "reason": "Tag ohne Mapping: #c:nuggets/zirconium"
+  },
+  {
+    "recipe": "network/cables/covered_fluix_clean",
+    "type": "minecraft:crafting_shapeless",
+    "reason": "Sonderzutat neoforge:difference"
+  },
+  {
+    "recipe": "network/cables/dense_covered_fluix_clean",
+    "type": "minecraft:crafting_shapeless",
+    "reason": "Sonderzutat neoforge:difference"
+  },
+  {
+    "recipe": "network/cables/dense_smart_fluix_clean",
+    "type": "minecraft:crafting_shapeless",
+    "reason": "Sonderzutat neoforge:difference"
+  },
+  {
+    "recipe": "network/cables/glass_fluix_clean",
+    "type": "minecraft:crafting_shapeless",
+    "reason": "Sonderzutat neoforge:difference"
+  },
+  {
+    "recipe": "network/cables/smart_fluix_clean",
+    "type": "minecraft:crafting_shapeless",
+    "reason": "Sonderzutat neoforge:difference"
+  },
+  {
+    "recipe": "remove_item_upgrade",
+    "type": "ae2:remove_item_upgrade",
+    "reason": "Item-Upgrade entfernen (Java)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_16k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_16k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_1k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_1k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_1k_to_4k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_1k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_4k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_4k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_4k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/fluid_storage_cell_64k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_16k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_16k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_1k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_1k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_1k_to_4k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_1k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_4k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_4k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_4k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/item_storage_cell_64k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_16k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_16k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_1k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_1k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_1k_to_4k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_1k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_4k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_4k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_4k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_fluid_cell_64k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_16k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_16k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_1k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_1k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_1k_to_4k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_1k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_4k_to_16k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_4k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_4k_to_64k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "upgrade/portable_item_cell_64k_to_256k",
+    "type": "ae2:storage_cell_upgrade",
+    "reason": "Zell-Upgrade (Java/Zellwerkbank)"
+  },
+  {
+    "recipe": "blasting/silicon_from_certus_quartz_dust",
+    "type": "minecraft:blasting",
+    "reason": "Duplikat (Hochofen = Ofen)"
+  }
+]

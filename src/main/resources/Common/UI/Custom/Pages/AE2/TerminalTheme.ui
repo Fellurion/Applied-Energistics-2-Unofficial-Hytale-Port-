@@ -1,0 +1,42 @@
+// Farbwelt des ME-Terminals in der FTCore-Schale – Auszug aus FTCore Pages/FTCore/Theme.ui (gleiche Werte und
+// Texturen, damit das Terminal wie der Rest der Schale aussieht). Wie FTEco und SetSys eine eigene Kopie:
+// Texturpfade lösen relativ zu dieser Datei auf (TerminalTextures/ = Kopien aus FTCore textures/).
+// Ändert sich die Farbwelt in FTCore, hier nachziehen.
+
+@Accent = #9ec47a;
+@AccentSoft = #4e6b3c;
+@AccentDeep = #2a2d2e;
+
+@TextBody = #c9ccc8;
+@TextMuted = #868a85;
+@TextFaint = #4b4e4c;
+
+@ButtonLabel = LabelStyle(FontSize: 11, TextColor: #c9ccc8, VerticalAlignment: Center, HorizontalAlignment: Center);
+@ButtonLabelActive = LabelStyle(...@ButtonLabel, TextColor: #9ec47a, RenderBold: true);
+@ButtonLabelOff = LabelStyle(...@ButtonLabel, TextColor: #5b5e5c);
+
+@TextButtonStyle = TextButtonStyle(
+  Default: (Background: (TexturePath: "TerminalTextures/Button.png", Border: 6), LabelStyle: @ButtonLabel),
+  Hovered: (Background: (TexturePath: "TerminalTextures/ButtonHovered.png", Border: 6), LabelStyle: @ButtonLabelActive),
+  Pressed: (Background: (TexturePath: "TerminalTextures/ButtonPressed.png", Border: 6), LabelStyle: @ButtonLabelActive),
+  Disabled: (Background: (TexturePath: "TerminalTextures/ButtonDisabled.png", Border: 6), LabelStyle: @ButtonLabelOff)
+);
+
+@PrimaryLabel = LabelStyle(FontSize: 12, TextColor: #e8f2dc, RenderBold: true, RenderUppercase: true, FontName: "Secondary", LetterSpacing: 1, VerticalAlignment: Center, HorizontalAlignment: Center);
+@PrimaryButtonStyle = TextButtonStyle(
+  Default: (Background: (TexturePath: "TerminalTextures/ButtonPrimary.png", Border: 6), LabelStyle: @PrimaryLabel),
+  Hovered: (Background: (TexturePath: "TerminalTextures/ButtonPrimaryHovered.png", Border: 6), LabelStyle: @PrimaryLabel),
+  Pressed: (Background: (TexturePath: "TerminalTextures/ButtonPrimaryPressed.png", Border: 6), LabelStyle: @PrimaryLabel),
+  Disabled: (Background: (TexturePath: "TerminalTextures/ButtonDisabled.png", Border: 6), LabelStyle: @ButtonLabelOff)
+);
+
+@ColumnBackground = PatchStyle(TexturePath: "TerminalTextures/Column.png", Border: 12);
+@DividerBackground = PatchStyle(TexturePath: "TerminalTextures/Divider.png", Border: 1);
+
+@TitleLabel = LabelStyle(FontSize: 13, TextColor: @Accent, RenderBold: true, RenderUppercase: true, FontName: "Secondary", LetterSpacing: 1, VerticalAlignment: Center);
+@SectionLabel = LabelStyle(FontSize: 9, TextColor: @TextMuted, RenderUppercase: true, LetterSpacing: 2, VerticalAlignment: Center);
+@HintLabel = LabelStyle(FontSize: 10, TextColor: @TextMuted, VerticalAlignment: Center, Wrap: true);
+
+@InputFieldStyle = InputFieldStyle(FontSize: 12, TextColor: @TextBody);
+@InputPlaceholderStyle = InputFieldStyle(FontSize: 12, TextColor: @TextFaint);
+@InputBackground = PatchStyle(TexturePath: "TerminalTextures/PanelInner.png", Border: 16);

@@ -1,0 +1,137 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_ME_Chest.name",
+    "Description": "ae2.items.AE2_ME_Chest.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_ME_Chest.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "MeChest"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_ME_Chest.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_ME_Chest_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Cell": {
+          "CustomModel": "Blocks/AE2/Models/AE2_ME_Chest_Cell.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_ME_Chest_Cell_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cell_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_ME_Chest_Cell_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_ME_Chest_Cell_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_ME_Chest_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_ME_Chest_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#9694a4",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "me_chest"
+        },
+        "ItemContainerBlock": {
+          "Capacity": 1
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Potion_Empty",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Terminal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Fluix_Glass_Cable",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Bar_Copper",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Machines"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

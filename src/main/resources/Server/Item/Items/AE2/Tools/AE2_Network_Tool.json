@@ -1,0 +1,69 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Network_Tool.name",
+    "Description": "ae2.items.AE2_Network_Tool.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Network_Tool.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "MaxStack": 1,
+  "Model": "Items/AE2/AE2_Network_Tool.blockymodel",
+  "Texture": "Items/AE2/AE2_Network_Tool_Texture.png",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Tool"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "NetworkTool"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Gadget",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Monitor",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Furniture_Crude_Chest_Small",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Certus_Quartz_Wrench",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Calculation_Processor",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Tools"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

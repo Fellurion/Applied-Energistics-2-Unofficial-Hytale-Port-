@@ -1,0 +1,61 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Fluix_Upgrade_Smithing_Template.name",
+    "Description": "ae2.items.AE2_Fluix_Upgrade_Smithing_Template.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Fluix_Upgrade_Smithing_Template.png",
+  "Categories": [
+    "AE2.Materials"
+  ],
+  "MaxStack": 64,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Fluix_Upgrade_Smithing_Template.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Ingredient"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Material"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Fluix_Crystal",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Materials"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

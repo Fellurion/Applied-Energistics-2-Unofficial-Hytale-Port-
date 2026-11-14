@@ -1,0 +1,69 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Portable_Item_Cell_256k.name",
+    "Description": "ae2.items.AE2_Portable_Item_Cell_256k.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Portable_Item_Cell_256k.png",
+  "Categories": [
+    "AE2.Storage"
+  ],
+  "MaxStack": 1,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Portable_Item_Cell_256k.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Storage"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "PortableCell"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Gadget",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_ME_Chest",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Cell_Component_256k",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Energy_Cell",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Item_Cell_Housing",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Storage"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

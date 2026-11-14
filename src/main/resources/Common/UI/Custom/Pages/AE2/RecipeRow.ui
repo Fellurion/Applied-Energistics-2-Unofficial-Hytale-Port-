@@ -1,0 +1,61 @@
+$C = "../../Common.ui";
+
+// Ein Hytale-Rezept im Pattern-Terminal: Ergebnis, Zutaten, Art, Knopf "Kodieren".
+Group {
+  Anchor: (Height: 84);
+  LayoutMode: Left;
+  Padding: (Vertical: 3);
+
+  Group #Card {
+    FlexWeight: 1;
+    LayoutMode: Left;
+    Background: #1c2835;
+    Padding: (Horizontal: 6, Vertical: 4);
+
+    Group {
+      Anchor: (Width: 64, Height: 64);
+      Background: #1a2530;
+      Padding: 2;
+
+      ItemSlot #Output {
+        Anchor: (Full: 0);
+        ShowQualityBackground: true;
+        ShowQuantity: false;
+      }
+
+      Label #OutputQty {
+        Anchor: (Right: 4, Bottom: 2);
+        Style: (FontSize: 13, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: End, VerticalAlignment: End);
+        Text: "";
+      }
+    }
+
+    Label #Arrow {
+      Anchor: (Width: 34);
+      Style: (FontSize: 20, TextColor: #7caacc, HorizontalAlignment: Center, VerticalAlignment: Center);
+      Text: "<";
+    }
+
+    Group #Inputs {
+      FlexWeight: 1;
+      LayoutMode: LeftCenterWrap;
+    }
+
+    Group {
+      Anchor: (Width: 190);
+      LayoutMode: Top;
+      Padding: (Left: 8);
+
+      Label #Kind {
+        Anchor: (Height: 24);
+        Style: (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center);
+        Text: "";
+      }
+
+      $C.@TextButton #Encode {
+        @Anchor = (Width: 180);
+        Text: "Encode";
+      }
+    }
+  }
+}

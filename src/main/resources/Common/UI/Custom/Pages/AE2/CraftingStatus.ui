@@ -1,0 +1,40 @@
+$C = "../../Common.ui";
+
+// Crafting-Status (AE2: CraftingCPUScreen): alle CPUs des Netzes, laufende Aufträge, Abbrechen.
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 820, Height: 600);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Crafting Status";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 12, Vertical: 8);
+
+    Label #Summary {
+      Anchor: (Height: 28);
+      Style: (FontSize: 14, TextColor: #96a9be, VerticalAlignment: Center);
+      Text: "";
+    }
+
+    Group #CpuContainer {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+
+      Group #Cpus {
+        LayoutMode: Top;
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

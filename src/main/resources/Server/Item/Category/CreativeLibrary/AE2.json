@@ -1,0 +1,42 @@
+{
+  "Name": "ae2.itemCategories.root",
+  "Icon": "Icons/ItemCategories/AE2.png",
+  "Order": 10,
+  "Children": [
+    {
+      "Id": "Materials",
+      "Name": "ae2.itemCategories.materials",
+      "Icon": "Icons/ItemCategories/AE2-Materials.png"
+    },
+    {
+      "Id": "Network",
+      "Name": "ae2.itemCategories.network",
+      "Icon": "Icons/ItemCategories/AE2-Network.png"
+    },
+    {
+      "Id": "Storage",
+      "Name": "ae2.itemCategories.storage",
+      "Icon": "Icons/ItemCategories/AE2-Storage.png"
+    },
+    {
+      "Id": "Machines",
+      "Name": "ae2.itemCategories.machines",
+      "Icon": "Icons/ItemCategories/AE2-Machines.png"
+    },
+    {
+      "Id": "Tools",
+      "Name": "ae2.itemCategories.tools",
+      "Icon": "Icons/ItemCategories/AE2-Tools.png"
+    },
+    {
+      "Id": "Decoration",
+      "Name": "ae2.itemCategories.decoration",
+      "Icon": "Icons/ItemCategories/AE2-Decoration.png"
+    },
+    {
+      "Id": "Cables",
+      "Name": "ae2.itemCategories.cables",
+      "Icon": "Icons/ItemCategories/AE2-Cables.png"
+    }
+  ]
+}

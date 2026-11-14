@@ -1,0 +1,68 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Quartz_Cluster.name",
+    "Description": "ae2.items.AE2_Quartz_Cluster.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Quartz_Cluster.png",
+  "Categories": [
+    "AE2.Materials"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Quartz_Cluster.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Quartz_Cluster_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "HitboxType": "AE2_Quartz_Cluster",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks",
+        "ItemId": "AE2_Certus_Quartz_Crystal",
+        "Quantity": 4
+      }
+    },
+    "Light": {
+      "Color": "#578"
+    },
+    "BlockParticleSetId": "Crystal",
+    "ParticleColor": "#6d8ea4",
+    "BlockSoundSetId": "Crystal",
+    "PhysicalMaterialId": "Stone",
+    "Support": {
+      "Down": [
+        {
+          "FaceType": "Full"
+        }
+      ]
+    }
+  }
+}

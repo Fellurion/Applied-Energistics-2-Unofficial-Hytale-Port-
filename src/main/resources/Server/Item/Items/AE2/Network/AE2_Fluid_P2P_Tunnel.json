@@ -1,0 +1,82 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Fluid_P2P_Tunnel.name",
+    "Description": "ae2.items.AE2_Fluid_P2P_Tunnel.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Fluid_P2P_Tunnel.png",
+  "Categories": [
+    "AE2.Network"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "P2pTunnel"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Fluid_P2P_Tunnel.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Fluid_P2P_Tunnel_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Fluid_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Fluid_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#607697",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "p2p_tunnel",
+          "TunnelType": "fluid"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  }
+}

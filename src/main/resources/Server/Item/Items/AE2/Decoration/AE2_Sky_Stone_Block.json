@@ -1,0 +1,76 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Sky_Stone_Block.name",
+    "Description": "ae2.items.AE2_Sky_Stone_Block.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Sky_Stone_Block.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "All": "Blocks/AE2/Textures/AE2_Sky_Stone_Block.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "VolcanicRocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#131514",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Rock",
+        "Quantity": 8
+      },
+      {
+        "ItemId": "Ingredient_Void_Essence",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Bridge"
+        ]
+      }
+    ],
+    "OutputQuantity": 8,
+    "TimeSeconds": 3
+  }
+}

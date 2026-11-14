@@ -1,0 +1,37 @@
+{
+  "Input": [
+    {
+      "ItemId": "Ingredient_Bar_Iron",
+      "Quantity": 2
+    },
+    {
+      "ItemId": "AE2_Fluix_Crystal",
+      "Quantity": 3
+    },
+    {
+      "ItemId": "AE2_Annihilation_Core",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Annihilation_Plane",
+    "Quantity": 1
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Annihilation_Plane",
+      "Quantity": 1
+    }
+  ],
+  "OutputQuantity": 1,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Network"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

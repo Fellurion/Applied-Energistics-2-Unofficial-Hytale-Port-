@@ -1,0 +1,114 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Growth_Accelerator.name",
+    "Description": "ae2.items.AE2_Growth_Accelerator.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Growth_Accelerator.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "GrowthAccelerator"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "Sides": "Blocks/AE2/Textures/AE2_Growth_Accelerator_Sides.png",
+        "Up": "Blocks/AE2/Textures/AE2_Growth_Accelerator_Up.png",
+        "Down": "Blocks/AE2/Textures/AE2_Growth_Accelerator_Down.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "DoublePipe",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Online": {
+          "Textures": [
+            {
+              "Sides": "Blocks/AE2/Textures/AE2_Growth_Accelerator_Sides.png",
+              "Up": "Blocks/AE2/Textures/AE2_Growth_Accelerator_Up.png",
+              "Down": "Blocks/AE2/Textures/AE2_Growth_Accelerator_Down.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#847d9c",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "growth_accelerator"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Fluix_Glass_Cable",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Quartz_Glass",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Fluix_Block",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Machines"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

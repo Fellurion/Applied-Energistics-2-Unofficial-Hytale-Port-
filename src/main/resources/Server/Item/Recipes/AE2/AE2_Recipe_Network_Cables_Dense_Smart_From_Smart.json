@@ -1,0 +1,29 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Fluix_Smart_Cable",
+      "Quantity": 4
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Fluix_Smart_Dense_Cable",
+    "Quantity": 1
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Fluix_Smart_Dense_Cable",
+      "Quantity": 1
+    }
+  ],
+  "OutputQuantity": 1,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Cables"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

@@ -1,0 +1,61 @@
+{
+  "Parent": "Weapon_Sword_Iron",
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Nether_Quartz_Sword.name",
+    "Description": "ae2.items.AE2_Nether_Quartz_Sword.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Nether_Quartz_Sword.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "MaxStack": 1,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Nether_Quartz_Sword.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "MaxDurability": 250,
+  "Tags": {
+    "Type": [
+      "Weapon"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Weapon"
+    ]
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Crystal_White",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Tools"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

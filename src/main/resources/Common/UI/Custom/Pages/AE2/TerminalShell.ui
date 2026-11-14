@@ -1,0 +1,179 @@
+$T = "TerminalTheme.ui";
+
+// ME-Terminal (AE2) als Reiter der FTCore-Schale: links der Inhalt des ME-Netzes, rechts das Inventar.
+//
+// Die Gitter des Inventars heißen wie im Inventar der Schale (#StorageGrid, #HotbarGrid, #BackpackGrid): Unter
+// diesen Namen liegen ihre Fenster in FTCores InventoryWindows. #AE2NetGrid hängt am Fenster des
+// AE2-ShellContainers. Ohne beides im selben Fenster ließe sich nichts ziehen – der Client zieht nur zwischen
+// Gittern, die gleichzeitig zu sehen sind.
+//
+// Feldgröße 56 mit Abstand 2 wie im Inventar der Schale; ein Feld belegt damit 58 Punkte. Über dem Netz-Gitter
+// liegen die Mengen im AE2-Stil (#AE2NetAmounts, eine Zeile je 9 Felder, TerminalShellAmountRow.ui); sie fangen
+// keine Klicks ab, Ablegen und Tooltips landen im Gitter darunter.
+
+@GridStyle = (
+  SlotSize: 56,
+  SlotIconSize: 48,
+  SlotSpacing: 2,
+  SlotBackground: "TerminalTextures/Slot.png"
+);
+
+@StatusStyle = (FontSize: 11, TextColor: $T.@Accent, RenderBold: true, VerticalAlignment: Center, HorizontalAlignment: End);
+@PageStyle = (FontSize: 11, TextColor: $T.@TextBody, HorizontalAlignment: Center, VerticalAlignment: Center);
+@EmptyStyle = (FontSize: 12, TextColor: $T.@TextMuted, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
+
+Group {
+  LayoutMode: Left;
+  Padding: (Horizontal: 6, Top: 4, Bottom: 4);
+
+  // Linke Spalte: das ME-Netz
+  Group #AE2NetColumn {
+    Anchor: (Width: 552);
+    LayoutMode: Top;
+    Background: $T.@ColumnBackground;
+    Padding: (Left: 15, Right: 15, Top: 12, Bottom: 12);
+
+    Group {
+      Anchor: (Height: 22);
+      LayoutMode: Left;
+
+      Label #AE2Title { Text: ""; FlexWeight: 1; Style: $T.@TitleLabel; }
+      Label #AE2Status { Text: ""; Anchor: (Width: 300); Style: @StatusStyle; }
+    }
+
+    Group { Anchor: (Height: 3); Background: $T.@DividerBackground; }
+
+    // Speicherbelegung, rechts daneben „Zugriff“ (nur für Besitzer/Admins sichtbar, TerminalView)
+    Group {
+      Anchor: (Top: 4, Height: 22);
+      LayoutMode: Left;
+
+      Label #AE2Storage { Text: ""; FlexWeight: 1; Style: $T.@HintLabel; }
+      TextButton #AE2Access { Text: ""; Anchor: (Width: 130, Height: 22); Style: $T.@TextButtonStyle; Visible: false; }
+    }
+
+    Group {
+      Anchor: (Height: 30);
+      LayoutMode: Left;
+
+      TextField #AE2Search {
+        FlexWeight: 1;
+        Anchor: (Height: 30);
+        Style: $T.@InputFieldStyle;
+        PlaceholderStyle: $T.@InputPlaceholderStyle;
+        PlaceholderText: %ae2ui.terminal.search;
+        Background: $T.@InputBackground;
+        Padding: (Horizontal: 10);
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      TextButton #AE2Sort { Text: ""; Anchor: (Width: 170, Height: 30); Style: $T.@TextButtonStyle; }
+    }
+
+    Group { Anchor: (Height: 8); }
+
+    // Gitter und Mengen übereinander: die Gruppe hat kein LayoutMode
+    Group #AE2NetStack {
+      Anchor: (Width: 522, Height: 406);
+
+      ItemGrid #AE2NetGrid {
+        Anchor: (Left: 0, Top: 0, Width: 522, Height: 406);
+        SlotsPerRow: 9;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: false;
+        Style: @GridStyle;
+      }
+
+      Group #AE2NetAmounts {
+        Anchor: (Left: 0, Top: 0, Width: 522, Height: 406);
+        LayoutMode: Top;
+        HitTestVisible: false;
+      }
+
+      Label #AE2Empty {
+        Text: "";
+        Anchor: (Left: 20, Top: 170, Width: 482, Height: 60);
+        Style: @EmptyStyle;
+        Visible: false;
+      }
+    }
+
+    Group { Anchor: (Height: 8); }
+
+    Group {
+      Anchor: (Height: 30);
+      LayoutMode: Left;
+
+      TextButton #AE2Prev { Text: "<"; Anchor: (Width: 36, Height: 30); Style: $T.@TextButtonStyle; }
+      Label #AE2PageLabel { Text: "1 / 1"; Anchor: (Width: 80, Height: 30); Style: @PageStyle; }
+      TextButton #AE2Next { Text: ">"; Anchor: (Width: 36, Height: 30); Style: $T.@TextButtonStyle; }
+
+      Group { FlexWeight: 1; }
+
+      TextButton #AE2CraftMode { Text: ""; Anchor: (Width: 180, Height: 30); Style: $T.@TextButtonStyle; }
+    }
+
+    Group { Anchor: (Height: 6); }
+
+    Group {
+      Anchor: (Height: 30);
+      LayoutMode: Left;
+
+      TextButton #AE2InsertAll { Text: ""; Anchor: (Width: 240, Height: 30); Style: $T.@PrimaryButtonStyle; }
+
+      Group { FlexWeight: 1; }
+
+      TextButton #AE2Cpus { Text: ""; Anchor: (Width: 200, Height: 30); Style: $T.@TextButtonStyle; }
+    }
+
+    Label #AE2Hint { Text: ""; Anchor: (Top: 6, Height: 30); Style: $T.@HintLabel; }
+  }
+
+  Group { Anchor: (Width: 12); }
+
+  // Rechte Spalte: das Inventar des Spielers, zum Hinein- und Herausziehen.
+  // #BackpackGrid ist die Zusatztasche und bleibt aus, solange der Spieler keine trägt.
+  Group #AE2InvColumn {
+    Anchor: (Width: 552);
+    LayoutMode: Top;
+    Background: $T.@ColumnBackground;
+    Padding: (Left: 15, Right: 15, Top: 12, Bottom: 12);
+
+    Label #AE2InvHeader { Text: ""; Anchor: (Height: 22); Style: $T.@TitleLabel; }
+    Group { Anchor: (Height: 3); Background: $T.@DividerBackground; }
+    Group { Anchor: (Height: 8); }
+
+    ItemGrid #StorageGrid {
+      Anchor: (Width: 522, Height: 232);
+      SlotsPerRow: 9;
+      AreItemsDraggable: true;
+      RenderEmptySlots: true;
+      DisplayItemQuantity: true;
+      Style: @GridStyle;
+    }
+
+    Label #AE2HotbarHeader { Text: ""; Anchor: (Top: 8, Height: 18); Style: $T.@SectionLabel; }
+
+    ItemGrid #HotbarGrid {
+      Anchor: (Width: 522, Height: 58);
+      SlotsPerRow: 9;
+      AreItemsDraggable: true;
+      RenderEmptySlots: true;
+      DisplayItemQuantity: true;
+      Style: @GridStyle;
+    }
+
+    Label #AE2BackpackHeader { Text: ""; Anchor: (Top: 8, Height: 18); Style: $T.@SectionLabel; }
+
+    ItemGrid #BackpackGrid {
+      Anchor: (Width: 522, Height: 232);
+      SlotsPerRow: 9;
+      AreItemsDraggable: true;
+      RenderEmptySlots: true;
+      DisplayItemQuantity: true;
+      Style: @GridStyle;
+    }
+  }
+}

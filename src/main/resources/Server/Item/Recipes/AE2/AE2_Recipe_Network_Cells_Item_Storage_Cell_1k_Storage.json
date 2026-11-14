@@ -1,0 +1,33 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Item_Cell_Housing",
+      "Quantity": 1
+    },
+    {
+      "ItemId": "AE2_Cell_Component_1k",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Item_Storage_Cell_1k",
+    "Quantity": 1
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Item_Storage_Cell_1k",
+      "Quantity": 1
+    }
+  ],
+  "OutputQuantity": 1,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Storage"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

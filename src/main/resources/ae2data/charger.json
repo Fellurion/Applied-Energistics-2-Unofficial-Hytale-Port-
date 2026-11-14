@@ -1,0 +1,35 @@
+[
+  {
+    "id": "AE2_Charger_charged_certus_quartz_crystal",
+    "input": {
+      "ItemId": "AE2_Certus_Quartz_Crystal",
+      "Quantity": 1
+    },
+    "output": {
+      "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+      "Quantity": 1
+    }
+  },
+  {
+    "id": "AE2_Charger_guide",
+    "input": {
+      "ItemId": "Deco_Book_Pile_Small",
+      "Quantity": 1
+    },
+    "output": {
+      "ItemId": "AE2_Guide",
+      "Quantity": 1
+    }
+  },
+  {
+    "id": "AE2_Charger_meteorite_compass",
+    "input": {
+      "ItemId": "Ingredient_Bar_Iron",
+      "Quantity": 1
+    },
+    "output": {
+      "ItemId": "AE2_Meteorite_Compass",
+      "Quantity": 1
+    }
+  }
+]

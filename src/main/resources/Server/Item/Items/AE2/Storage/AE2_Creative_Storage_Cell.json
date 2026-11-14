@@ -1,0 +1,39 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Creative_Storage_Cell.name",
+    "Description": "ae2.items.AE2_Creative_Storage_Cell.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Creative_Storage_Cell.png",
+  "Categories": [
+    "AE2.Storage"
+  ],
+  "MaxStack": 1,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Creative_Storage_Cell.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Storage"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "CreativeCell"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "Quality": "Epic"
+}

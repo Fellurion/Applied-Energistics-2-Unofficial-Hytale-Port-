@@ -1,0 +1,49 @@
+$C = "../../Common.ui";
+
+// Eine Crafting-CPU: Größe, Auftrag mit Fortschritt, Abbrechen.
+Group {
+  Anchor: (Height: 84);
+  Padding: (Vertical: 3);
+
+  Group #Card {
+    Anchor: (Full: 0);
+    LayoutMode: Left;
+    Background: #1c2835;
+    Padding: (Horizontal: 8, Vertical: 6);
+
+    Group {
+      Anchor: (Width: 64, Height: 64);
+      Background: #1a2530;
+      Padding: 2;
+
+      ItemSlot #JobIcon {
+        Anchor: (Full: 0);
+        ShowQualityBackground: true;
+        ShowQuantity: false;
+      }
+    }
+
+    Group {
+      FlexWeight: 1;
+      LayoutMode: Top;
+      Padding: (Left: 12, Top: 4);
+
+      Label #CpuName {
+        Anchor: (Height: 24);
+        Style: (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+        Text: "";
+      }
+
+      Label #JobText {
+        Anchor: (Height: 22);
+        Style: (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center);
+        Text: "";
+      }
+    }
+
+    $C.@SecondaryTextButton #Cancel {
+      @Anchor = (Width: 160);
+      Text: "Cancel";
+    }
+  }
+}

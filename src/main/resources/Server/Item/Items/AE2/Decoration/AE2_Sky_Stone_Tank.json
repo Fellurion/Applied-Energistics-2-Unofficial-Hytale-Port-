@@ -1,0 +1,90 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Sky_Stone_Tank.name",
+    "Description": "ae2.items.AE2_Sky_Stone_Tank.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Sky_Stone_Tank.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "SkyStoneTank"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Sky_Stone_Tank.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Sky_Stone_Tank_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Stone",
+    "ParticleColor": "#1c1e1e",
+    "BlockSoundSetId": "Stone",
+    "PhysicalMaterialId": "Stone",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "sky_stone_tank"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Sky_Stone_Block",
+        "Quantity": 8
+      },
+      {
+        "ItemId": "AE2_Quartz_Glass",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

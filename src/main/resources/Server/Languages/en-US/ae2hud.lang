@@ -1,0 +1,60 @@
+# Applied Energistics 2 – block info while looking at a block (HUD top center, like Jade/WAILA)
+# File ae2hud.lang -> key prefix 'ae2hud.'
+
+status.online = Online
+status.noPower = No power
+status.noChannel = No channel
+status.tooManyDevices = No channel – more than 8 devices without a controller
+status.conflict = Controller conflict
+status.booting = Assigning channels …
+status.notConnected = Not connected
+
+label.channels = Channels
+label.sides = Sides
+label.network = Network
+label.energy = Energy
+label.stored = Stored
+label.usage = Usage
+label.input = Input
+label.cells = Cells
+label.progress = Progress
+label.output = Output
+label.fuel = Fuel
+label.patterns = Patterns
+label.cpu = CPU
+label.job = Job
+
+side.east = East
+side.west = West
+side.up = Up
+side.down = Down
+side.south = South
+side.north = North
+
+value.infinite = unlimited
+value.channelsOfDevices = {used} / {devices} devices
+value.blocks = {count} blocks
+value.energyPercent = {stored} / {max} AE · {percent} %
+value.rate = {rate} AE/t
+value.percent = {percent} %
+value.seconds = {seconds} s
+value.cellsSummary = {count} / {slots} · {used} / {total} bytes
+value.cell = {used} / {total} bytes · {types} / {maxTypes} types
+value.cellShort = {used}/{total} B · {types}/{maxTypes}
+value.cpu = {bytes} bytes · {threads} co-processors
+value.job = {amount}x {item}
+
+cell.none = No cell inserted
+cell.fluid = Fluid
+cell.creative = Creative
+cell.other = Storage cell
+
+machine.idle = Idle
+machine.charging = Charging
+machine.noFuel = No fuel
+pattern.busy = Delivering ingredients
+cpu.notFormed = No CPU – build the blocks into a cuboid with storage
+cpu.idle = Idle
+cpu.suspended = paused
+owner.locked = Foreign ME network – no access
+owner.label = Owned by

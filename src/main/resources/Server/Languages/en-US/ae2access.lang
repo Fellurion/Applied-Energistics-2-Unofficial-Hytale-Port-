@@ -1,0 +1,39 @@
+# Applied Energistics 2 – ownership of and access to ME networks
+# File ae2access.lang -> key prefix 'ae2access.'
+
+denied.title = No access
+denied.network = This ME network belongs to {owner}.
+denied.block = This block belongs to {owner}.
+noOwner = This ME network has no owner – everyone may use it.
+
+terminal.button = Access
+terminal.status = No access
+terminal.denied = This ME network belongs to {owner}. Ask {owner} to add you under "Access" in the terminal.
+
+page.title = ME Network Access
+page.owner = Owner: {owner}
+page.info = Players on this list may use all of your ME networks: terminals, drives, ME chests, machines and autocrafting.
+page.infoAdmin = You are editing the list of {owner} as an admin. It applies to all ME networks of {owner}.
+page.add = Add player
+search = Search name …
+dropdown.choose = Choose a player …
+dropdown.none = No player found
+dropdown.online = online
+add = Add
+list = Players with access ({count})
+empty = Nobody added yet – only {owner} can use these ME networks.
+remove = Remove
+state.online = online
+state.offline = offline
+back = Back to terminal
+
+msg.added = {name} may now use the ME networks of {owner}.
+msg.removed = {name} was removed.
+msg.already = {name} is already on the list.
+msg.self = {name} is the owner and always has access.
+msg.choose = Type a name or choose a player from the list.
+msg.notFound = No matching player. Choose one from the list – players must have joined the server before.
+
+notify.title = ME network access
+notify.granted = You may now use the ME networks of {owner}.
+notify.revoked = {owner} revoked your access to their ME networks.

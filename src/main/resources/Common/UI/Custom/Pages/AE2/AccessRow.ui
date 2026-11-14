@@ -1,0 +1,31 @@
+$C = "../../Common.ui";
+
+// Ein eingetragener Spieler der Zugriffsliste: Name, online/offline, Entfernen.
+Group {
+  Anchor: (Height: 56);
+  Padding: (Vertical: 3);
+
+  Group #Card {
+    Anchor: (Full: 0);
+    LayoutMode: Left;
+    Background: #1c2835;
+    Padding: (Horizontal: 12, Vertical: 3);
+
+    Label #Name {
+      Text: "";
+      FlexWeight: 1;
+      Style: (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+    }
+
+    Label #State {
+      Text: "";
+      Anchor: (Width: 120);
+      Style: (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center);
+    }
+
+    $C.@CancelTextButton #Remove {
+      @Anchor = (Width: 160);
+      Text: "";
+    }
+  }
+}

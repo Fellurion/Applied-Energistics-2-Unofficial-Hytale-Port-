@@ -1,0 +1,72 @@
+$C = "../../Common.ui";
+
+// Ein Erfolg: Einrückung (Baumtiefe, per Code), Symbol, Titel, Beschreibung, Zustand.
+// #Accent (goldener Balken) ist nur bei erzielten Erfolgen sichtbar.
+Group {
+  Anchor: (Height: 66);
+  LayoutMode: Left;
+  Padding: (Bottom: 4);
+
+  Group #Indent {
+    Anchor: (Width: 0);
+  }
+
+  Group #Card {
+    FlexWeight: 1;
+    LayoutMode: Left;
+    Background: #1a2530;
+
+    Group #AccentSlot {
+      Anchor: (Width: 4);
+      Background: #1a2530;
+
+      Group #Accent {
+        Anchor: (Full: 0);
+        Background: #e8a93b;
+        Visible: false;
+      }
+    }
+
+    Group #IconFrame {
+      Anchor: (Width: 62, Height: 62);
+      Padding: 4;
+
+      Group {
+        Anchor: (Full: 0);
+        Background: #141d26;
+        Padding: 2;
+
+        ItemSlot #Icon {
+          Anchor: (Full: 0);
+          ShowQualityBackground: true;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Group {
+      FlexWeight: 1;
+      LayoutMode: Top;
+      Padding: (Left: 10, Top: 8);
+
+      Label #Name {
+        Anchor: (Height: 24);
+        Style: (FontSize: 16, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+        Text: "";
+      }
+
+      Label #Desc {
+        Anchor: (Height: 20);
+        Style: (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center);
+        Text: "";
+      }
+    }
+
+    Label #State {
+      Anchor: (Width: 200);
+      Padding: (Right: 12);
+      Style: (FontSize: 13, TextColor: #96a9be, HorizontalAlignment: End, VerticalAlignment: Center);
+      Text: "";
+    }
+  }
+}

@@ -1,0 +1,40 @@
+# Applied Energistics 2 – Autocrafting-Oberfläche
+# Datei ae2craft.lang -> Schlüsselpräfix 'ae2craft.'
+
+encode.useHeld = Gehaltenes Item
+encode.results = Items mit Rezept ({count})
+encode.chooseItem = Item suchen oder gehaltenes Item wählen
+encode.blanks = Leere Patterns: {inventory} im Inventar · {network} im Netz
+encode.kindCrafting = Crafting-Pattern ({bench})
+encode.kindProcessing = Processing-Pattern ({bench})
+encode.encode = Kodieren
+encode.noRecipe = Für dieses Item gibt es kein Rezept.
+encode.unsupported = Dieses Rezept lässt sich nicht als Pattern kodieren.
+encode.noBlank = Kein leeres Pattern im Inventar oder im ME-Netz.
+encode.done = Pattern kodiert und ins Inventar gelegt.
+request.title = Crafting-Auftrag
+request.amount = Menge: {amount}
+request.calculate = Berechnen
+request.start = Starten
+request.planInfo = Benötigt {bytes} Bytes · stellt {output} her
+request.missing = Fehlende Items:
+request.used = Benötigte Items:
+request.offline = Das ME-Netz ist offline.
+request.notCraftable = Dieses Item kann das Netz nicht herstellen.
+request.started = Crafting gestartet: {amount}×
+request.error.no_cpu_found = Keine Crafting-CPU im Netz.
+request.error.incomplete_plan = Es fehlen noch Items.
+request.error.cpu_busy = Alle Crafting-CPUs sind beschäftigt.
+request.error.cpu_offline = Die Crafting-CPU ist offline.
+request.error.cpu_too_small = Die Crafting-CPU hat zu wenig Speicher.
+request.error.missing_ingredient = Eine Zutat fehlt inzwischen.
+request.error.no_suitable_cpu_found = Keine passende Crafting-CPU frei.
+status.title = Crafting-Status
+status.noCpu = Keine Crafting-CPU im Netz (Crafting Unit + Crafting Storage als Quader bauen).
+status.summary = {cpus} CPUs · {busy} beschäftigt
+status.cpu = CPU {index} · {bytes} Bytes · {threads} Co-Prozessoren
+status.job = Stellt {amount}× her · {progress}/{total} · {seconds} s
+status.suspended = Pausiert: {amount}× · {progress}/{total}
+status.idle = Frei
+status.offline = Offline
+status.cancel = Abbrechen

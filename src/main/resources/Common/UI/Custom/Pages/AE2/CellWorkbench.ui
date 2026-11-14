@@ -1,0 +1,163 @@
+$C = "../../Common.ui";
+
+// Zellen-Werkbank (AE2): Partition/Konfiguration und Upgrade-Karten einer Speicherzelle.
+// Creative-Zelle: liefert unendlich von jedem konfigurierten Item.
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 820, Height: 640);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #WorkbenchTitle {
+        @Text = "Cell Workbench";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 12);
+
+    // Zelle + Infos
+    Group #CellRow {
+      Anchor: (Height: 84);
+      LayoutMode: Left;
+      Padding: (Top: 10);
+
+      Group #CellSlot {
+        Anchor: (Width: 66, Height: 66);
+        Background: #1a2530;
+        Padding: 2;
+
+        ItemSlot #CellIcon {
+          Anchor: (Full: 0);
+          ShowQualityBackground: true;
+          ShowQuantity: false;
+        }
+      }
+
+      Group {
+        FlexWeight: 1;
+        LayoutMode: Top;
+        Padding: (Left: 14, Top: 4);
+
+        Label #CellName {
+          Anchor: (Height: 26);
+          Style: (FontSize: 18, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+          Text: "";
+        }
+
+        Label #CellInfo {
+          Anchor: (Height: 22);
+          Style: (FontSize: 14, TextColor: #96a9be, VerticalAlignment: Center);
+          Text: "";
+        }
+
+        Label #CellHint {
+          Anchor: (Height: 20);
+          Style: (FontSize: 13, TextColor: #7caacc, VerticalAlignment: Center);
+          Text: "";
+        }
+      }
+    }
+
+    Group {
+      Anchor: (Height: 2);
+      Background: #19252F;
+    }
+
+    Label #ConfigHeader {
+      Anchor: (Height: 30);
+      Padding: (Top: 6);
+      Style: (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+      Text: "";
+    }
+
+    // Konfiguration (max. 63 Einträge), Klick entfernt
+    Group #ConfigContainer {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+      Padding: (Top: 4, Left: 4, Right: 4);
+      Background: #141d26;
+
+      Group #Config {
+        LayoutMode: LeftCenterWrap;
+      }
+    }
+
+    Group #ConfigButtons {
+      Anchor: (Height: 48);
+      LayoutMode: Left;
+      Padding: (Top: 8);
+
+      $C.@TextButton #AddHeld {
+        @Anchor = (Width: 190);
+        Text: "Add held";
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@SecondaryTextButton #AddInventory {
+        @Anchor = (Width: 190);
+        Text: "Add inventory";
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@SecondaryTextButton #FromContents {
+        @Anchor = (Width: 190);
+        Text: "From contents";
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@SecondaryTextButton #Clear {
+        @Anchor = (Width: 170);
+        Text: "Clear";
+      }
+    }
+
+    Group {
+      Anchor: (Height: 10);
+    }
+
+    Group {
+      Anchor: (Height: 2);
+      Background: #19252F;
+    }
+
+    Label #UpgradeHeader {
+      Anchor: (Height: 30);
+      Padding: (Top: 6);
+      Style: (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+      Text: "";
+    }
+
+    Group #UpgradeRow {
+      Anchor: (Height: 66);
+      LayoutMode: Left;
+
+      Group #Upgrades {
+        FlexWeight: 1;
+        LayoutMode: Left;
+      }
+
+      $C.@TextButton #InsertCard {
+        @Anchor = (Width: 200);
+        Text: "Insert card";
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@SecondaryTextButton #FuzzyMode {
+        @Anchor = (Width: 200);
+        Text: "Fuzzy";
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

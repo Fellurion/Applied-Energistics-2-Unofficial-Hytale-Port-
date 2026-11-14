@@ -1,0 +1,29 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Cut_Quartz_Block",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Certus_Quartz_Crystal",
+    "Quantity": 4
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Certus_Quartz_Crystal",
+      "Quantity": 4
+    }
+  ],
+  "OutputQuantity": 4,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Materials"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

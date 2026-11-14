@@ -1,0 +1,38 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Meteorite_Compass.name",
+    "Description": "ae2.items.AE2_Meteorite_Compass.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Meteorite_Compass.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "MaxStack": 64,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Meteorite_Compass.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Tool"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "MeteoriteCompass"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Gadget"
+}

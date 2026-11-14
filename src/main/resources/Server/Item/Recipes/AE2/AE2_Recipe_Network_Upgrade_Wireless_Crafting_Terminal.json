@@ -1,0 +1,37 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Wireless_Terminal",
+      "Quantity": 1
+    },
+    {
+      "ItemId": "Bench_WorkBench",
+      "Quantity": 1
+    },
+    {
+      "ItemId": "AE2_Calculation_Processor",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Wireless_Crafting_Terminal",
+    "Quantity": 1
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Wireless_Crafting_Terminal",
+      "Quantity": 1
+    }
+  ],
+  "OutputQuantity": 1,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Tools"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

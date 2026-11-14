@@ -1,0 +1,150 @@
+[
+  {
+    "id": "AE2_Transform_certus_quartz_crystals",
+    "inputs": [
+      {
+        "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Certus_Quartz_Dust",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "fluid:water",
+    "output": {
+      "ItemId": "AE2_Certus_Quartz_Crystal",
+      "Quantity": 2
+    }
+  },
+  {
+    "id": "AE2_Transform_chipped_budding_quartz",
+    "inputs": [
+      {
+        "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Damaged_Budding_Quartz",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "fluid:water",
+    "output": {
+      "ItemId": "AE2_Chipped_Budding_Quartz",
+      "Quantity": 1
+    }
+  },
+  {
+    "id": "AE2_Transform_damaged_budding_quartz",
+    "inputs": [
+      {
+        "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Quartz_Block",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "fluid:water",
+    "output": {
+      "ItemId": "AE2_Damaged_Budding_Quartz",
+      "Quantity": 1
+    }
+  },
+  {
+    "id": "AE2_Transform_entangled_singularity",
+    "inputs": [
+      {
+        "ItemId": "AE2_Singularity",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Ender_Dust",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "explosion",
+    "output": {
+      "ItemId": "AE2_Quantum_Entangled_Singularity",
+      "Quantity": 2
+    }
+  },
+  {
+    "id": "AE2_Transform_entangled_singularity_from_pearl",
+    "inputs": [
+      {
+        "ItemId": "AE2_Singularity",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Void_Essence",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "explosion",
+    "output": {
+      "ItemId": "AE2_Quantum_Entangled_Singularity",
+      "Quantity": 2
+    }
+  },
+  {
+    "id": "AE2_Transform_flawed_budding_quartz",
+    "inputs": [
+      {
+        "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Chipped_Budding_Quartz",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "fluid:water",
+    "output": {
+      "ItemId": "AE2_Flawed_Budding_Quartz",
+      "Quantity": 1
+    }
+  },
+  {
+    "id": "AE2_Transform_fluix_crystal",
+    "inputs": [
+      {
+        "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "AE2_Fluix_Dust",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "fluid:water",
+    "output": {
+      "ItemId": "AE2_Fluix_Crystal",
+      "Quantity": 1
+    }
+  },
+  {
+    "id": "AE2_Transform_fluix_crystals",
+    "inputs": [
+      {
+        "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Crystal_Red",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Crystal_White",
+        "Quantity": 1
+      }
+    ],
+    "circumstance": "fluid:water",
+    "output": {
+      "ItemId": "AE2_Fluix_Crystal",
+      "Quantity": 2
+    }
+  }
+]

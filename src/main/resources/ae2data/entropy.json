@@ -1,0 +1,97 @@
+[
+  {
+    "id": "AE2_Entropy_flowing_water_snowball",
+    "mode": "cool",
+    "input": {
+      "FluidId": "Water"
+    },
+    "output": {
+      "drops": [
+        {
+          "ItemId": "Soil_Snow",
+          "Quantity": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "AE2_Entropy_grass_block_dirt",
+    "mode": "cool",
+    "input": {
+      "BlockId": "Soil_Grass"
+    },
+    "output": {
+      "BlockId": "Soil_Dirt"
+    }
+  },
+  {
+    "id": "AE2_Entropy_lava_obsidian",
+    "mode": "cool",
+    "input": {
+      "FluidId": "Lava_Source"
+    },
+    "output": {
+      "BlockId": "Rock_Magma_Cooled"
+    }
+  },
+  {
+    "id": "AE2_Entropy_stone_cobblestone",
+    "mode": "cool",
+    "input": {
+      "BlockId": "Rock_Stone"
+    },
+    "output": {
+      "BlockId": "Rock_Stone_Cobble"
+    }
+  },
+  {
+    "id": "AE2_Entropy_water_ice",
+    "mode": "cool",
+    "input": {
+      "FluidId": "Water_Source"
+    },
+    "output": {
+      "BlockId": "Rock_Ice"
+    }
+  },
+  {
+    "id": "AE2_Entropy_cobblestone_stone",
+    "mode": "heat",
+    "input": {
+      "BlockId": "Rock_Stone_Cobble"
+    },
+    "output": {
+      "BlockId": "Rock_Stone"
+    }
+  },
+  {
+    "id": "AE2_Entropy_ice_water",
+    "mode": "heat",
+    "input": {
+      "BlockId": "Rock_Ice"
+    },
+    "output": {
+      "FluidId": "Water_Source"
+    }
+  },
+  {
+    "id": "AE2_Entropy_snow_water",
+    "mode": "heat",
+    "input": {
+      "BlockId": "Soil_Snow"
+    },
+    "output": {
+      "FluidId": "Water"
+    }
+  },
+  {
+    "id": "AE2_Entropy_water_air",
+    "mode": "heat",
+    "input": {
+      "FluidId": "Water_Source"
+    },
+    "output": {
+      "BlockId": "Empty"
+    }
+  }
+]

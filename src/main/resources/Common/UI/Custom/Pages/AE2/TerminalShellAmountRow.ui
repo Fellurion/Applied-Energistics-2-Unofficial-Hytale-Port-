@@ -1,0 +1,92 @@
+// Eine Zeile Mengen über dem Netz-Gitter des ME-Terminals in der FTCore-Schale: 9 Felder à 56 Punkte + 2 Abstand.
+// #A = Menge im AE2-Stil ("12.5k", "Craft"), #S = Seelenbund (SetSys), #K = auch herstellbar.
+// Liegt über dem Gitter und fängt keine Klicks ab; Ablegen und Tooltips landen im Gitter darunter.
+
+@AmountStyle = (FontSize: 13, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: End, VerticalAlignment: End);
+
+Group {
+  Anchor: (Height: 58);
+  LayoutMode: Left;
+  HitTestVisible: false;
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A0 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S0 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K0 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A1 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S1 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K1 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A2 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S2 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K2 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A3 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S3 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K3 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A4 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S4 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K4 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A5 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S5 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K5 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A6 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S6 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K6 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A7 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S7 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K7 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+
+  Group {
+    Anchor: (Width: 58, Height: 58);
+    HitTestVisible: false;
+
+    Label #A8 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 53, Height: 54); Style: @AmountStyle; }
+    Group #S8 { Anchor: (Left: 4, Top: 4, Width: 8, Height: 8); Background: #b06cff; Visible: false; HitTestVisible: false; }
+    Group #K8 { Anchor: (Left: 44, Top: 4, Width: 8, Height: 8); Background: #9ec47a; Visible: false; HitTestVisible: false; }
+  }
+}

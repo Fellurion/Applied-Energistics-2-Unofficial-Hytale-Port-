@@ -1,0 +1,662 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Quartz_Vibrant_Glass.name",
+    "Description": "ae2.items.AE2_Quartz_Vibrant_Glass.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Quartz_Vibrant_Glass.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "QuartzGlass"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Gems",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "RequiresAlphaBlending": true,
+    "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_0.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "Light": {
+      "Color": "#fff"
+    },
+    "State": {
+      "Definitions": {
+        "C1": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_1.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C10": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_10.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C11": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_11.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C12": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_12.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C13": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_13.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C14": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_14.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C15": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_15.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C16": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_16.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C17": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_17.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C18": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_18.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C19": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_19.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C2": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_2.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C20": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_20.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C21": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_21.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C22": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_22.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C23": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_23.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C24": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_24.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C25": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_25.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C26": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_26.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C27": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_27.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C28": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_28.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C29": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_29.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C3": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C30": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_30.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C31": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_31.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C32": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_32.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C33": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_33.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C34": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_34.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C35": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_35.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C36": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_36.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C37": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_37.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C38": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_38.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C39": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_39.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C4": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_4.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C40": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_40.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C41": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_41.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C42": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_42.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C43": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_43.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C44": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_44.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C45": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_45.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C46": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_46.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C47": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_47.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C48": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_48.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C49": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_49.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C5": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_5.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C50": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_50.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C51": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_51.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C52": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_52.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C53": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_53.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C54": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_54.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C55": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_55.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C56": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_56.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C57": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_57.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C58": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_58.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C59": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_59.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C6": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_6.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C60": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_60.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C61": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_61.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C62": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_62.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C63": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_63.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C7": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_7.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C8": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_8.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "C9": {
+          "CustomModel": "Blocks/AE2/Glass/Quartz_Glass_9.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Glass/Quartz_Glass_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Glass",
+    "ParticleColor": "#dcecf0",
+    "BlockSoundSetId": "Glass",
+    "PhysicalMaterialId": "Glass",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "quartz_glass"
+        }
+      }
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Crystal_Yellow",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Quartz_Glass",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

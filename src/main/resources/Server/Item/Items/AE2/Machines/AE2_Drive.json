@@ -1,0 +1,282 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Drive.name",
+    "Description": "ae2.items.AE2_Drive.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Drive.png",
+  "Categories": [
+    "AE2.Machines"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Device"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Drive"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Metal",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Models/AE2_Drive.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Models/AE2_Drive_Texture.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "NESW",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "State": {
+      "Definitions": {
+        "Cells_1": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_1.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_1_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_10": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_10.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_10_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_10_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_10_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_10_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_1_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_1_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_1_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_2": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_2.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_2_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_2_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_2_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_2_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_3": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_3_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_3_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_3_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_3_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_4": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_4.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_4_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_4_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_4_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_4_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_5": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_5.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_5_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_5_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_5_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_5_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_6": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_6.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_6_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_6_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_6_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_6_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_7": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_7.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_7_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_7_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_7_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_7_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_8": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_8.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_8_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_8_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_8_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_8_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_9": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_9.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_9_Texture.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Cells_9_Online": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Drive_Cells_9_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Drive_Cells_9_Online_Texture.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "BlockParticleSetId": "Metal",
+    "ParticleColor": "#9596a3",
+    "BlockSoundSetId": "Metal",
+    "PhysicalMaterialId": "Metal",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "drive"
+        },
+        "ItemContainerBlock": {
+          "Capacity": 10
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "AE2_Engineering_Processor",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "AE2_Fluix_Glass_Cable",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Machines"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

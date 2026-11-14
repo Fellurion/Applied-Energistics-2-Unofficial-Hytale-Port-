@@ -1,0 +1,2913 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Blue_Smart_Cable.name",
+    "Description": "ae2.items.AE2_Blue_Smart_Cable.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Blue_Smart_Cable.png",
+  "Categories": [
+    "AE2.Cables"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Cable"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Cable"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Cloth",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "Opacity": "Transparent",
+    "CustomModel": "Blocks/AE2/Cables/Smart_0.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue.png",
+        "Weight": 1
+      }
+    ],
+    "State": {
+      "Definitions": {
+        "C0": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_0.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_0"
+        },
+        "C0_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_0.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_0"
+        },
+        "C0_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_0.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_0"
+        },
+        "C0_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_0.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_0"
+        },
+        "C0_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_0.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_0"
+        },
+        "C1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_1.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_1"
+        },
+        "C1_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_1.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_1"
+        },
+        "C1_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_1.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_1"
+        },
+        "C1_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_1.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_1"
+        },
+        "C1_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_1.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_1"
+        },
+        "C2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_2.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_2"
+        },
+        "C2_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_2.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_2"
+        },
+        "C2_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_2.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_2"
+        },
+        "C2_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_2.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_2"
+        },
+        "C2_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_2.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_2"
+        },
+        "C3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_3.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_3"
+        },
+        "C3_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_3"
+        },
+        "C3_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_3"
+        },
+        "C3_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_3"
+        },
+        "C3_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_3.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_3"
+        },
+        "C4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_4.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_4"
+        },
+        "C4_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_4.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_4"
+        },
+        "C4_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_4.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_4"
+        },
+        "C4_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_4.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_4"
+        },
+        "C4_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_4.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_4"
+        },
+        "C5": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_5.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_5"
+        },
+        "C5_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_5.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_5"
+        },
+        "C5_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_5.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_5"
+        },
+        "C5_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_5.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_5"
+        },
+        "C5_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_5.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_5"
+        },
+        "C6": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_6.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_6"
+        },
+        "C6_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_6.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_6"
+        },
+        "C6_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_6.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_6"
+        },
+        "C6_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_6.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_6"
+        },
+        "C6_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_6.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_6"
+        },
+        "C7": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_7.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_7"
+        },
+        "C7_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_7.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_7"
+        },
+        "C7_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_7.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_7"
+        },
+        "C7_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_7.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_7"
+        },
+        "C7_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_7.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_7"
+        },
+        "C8": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_8.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_8"
+        },
+        "C8_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_8.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_8"
+        },
+        "C8_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_8.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_8"
+        },
+        "C8_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_8.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_8"
+        },
+        "C8_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_8.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_8"
+        },
+        "C9": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_9.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_9"
+        },
+        "C9_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_9.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_9"
+        },
+        "C9_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_9.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_9"
+        },
+        "C9_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_9.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_9"
+        },
+        "C9_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_9.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_9"
+        },
+        "C10": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_10.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_10"
+        },
+        "C10_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_10.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_10"
+        },
+        "C10_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_10.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_10"
+        },
+        "C10_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_10.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_10"
+        },
+        "C10_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_10.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_10"
+        },
+        "C11": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_11.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_11"
+        },
+        "C11_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_11.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_11"
+        },
+        "C11_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_11.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_11"
+        },
+        "C11_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_11.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_11"
+        },
+        "C11_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_11.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_11"
+        },
+        "C12": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_12.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_12"
+        },
+        "C12_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_12.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_12"
+        },
+        "C12_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_12.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_12"
+        },
+        "C12_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_12.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_12"
+        },
+        "C12_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_12.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_12"
+        },
+        "C13": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_13.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_13"
+        },
+        "C13_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_13.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_13"
+        },
+        "C13_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_13.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_13"
+        },
+        "C13_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_13.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_13"
+        },
+        "C13_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_13.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_13"
+        },
+        "C14": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_14.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_14"
+        },
+        "C14_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_14.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_14"
+        },
+        "C14_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_14.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_14"
+        },
+        "C14_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_14.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_14"
+        },
+        "C14_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_14.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_14"
+        },
+        "C15": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_15.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_15"
+        },
+        "C15_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_15.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_15"
+        },
+        "C15_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_15.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_15"
+        },
+        "C15_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_15.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_15"
+        },
+        "C15_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_15.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_15"
+        },
+        "C16": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_16.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_16"
+        },
+        "C16_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_16.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_16"
+        },
+        "C16_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_16.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_16"
+        },
+        "C16_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_16.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_16"
+        },
+        "C16_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_16.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_16"
+        },
+        "C17": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_17.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_17"
+        },
+        "C17_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_17.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_17"
+        },
+        "C17_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_17.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_17"
+        },
+        "C17_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_17.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_17"
+        },
+        "C17_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_17.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_17"
+        },
+        "C18": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_18.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_18"
+        },
+        "C18_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_18.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_18"
+        },
+        "C18_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_18.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_18"
+        },
+        "C18_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_18.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_18"
+        },
+        "C18_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_18.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_18"
+        },
+        "C19": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_19.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_19"
+        },
+        "C19_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_19.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_19"
+        },
+        "C19_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_19.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_19"
+        },
+        "C19_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_19.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_19"
+        },
+        "C19_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_19.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_19"
+        },
+        "C20": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_20.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_20"
+        },
+        "C20_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_20.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_20"
+        },
+        "C20_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_20.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_20"
+        },
+        "C20_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_20.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_20"
+        },
+        "C20_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_20.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_20"
+        },
+        "C21": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_21.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_21"
+        },
+        "C21_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_21.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_21"
+        },
+        "C21_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_21.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_21"
+        },
+        "C21_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_21.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_21"
+        },
+        "C21_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_21.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_21"
+        },
+        "C22": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_22.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_22"
+        },
+        "C22_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_22.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_22"
+        },
+        "C22_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_22.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_22"
+        },
+        "C22_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_22.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_22"
+        },
+        "C22_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_22.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_22"
+        },
+        "C23": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_23.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_23"
+        },
+        "C23_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_23.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_23"
+        },
+        "C23_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_23.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_23"
+        },
+        "C23_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_23.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_23"
+        },
+        "C23_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_23.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_23"
+        },
+        "C24": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_24.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_24"
+        },
+        "C24_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_24.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_24"
+        },
+        "C24_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_24.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_24"
+        },
+        "C24_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_24.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_24"
+        },
+        "C24_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_24.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_24"
+        },
+        "C25": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_25.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_25"
+        },
+        "C25_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_25.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_25"
+        },
+        "C25_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_25.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_25"
+        },
+        "C25_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_25.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_25"
+        },
+        "C25_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_25.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_25"
+        },
+        "C26": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_26.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_26"
+        },
+        "C26_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_26.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_26"
+        },
+        "C26_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_26.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_26"
+        },
+        "C26_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_26.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_26"
+        },
+        "C26_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_26.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_26"
+        },
+        "C27": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_27.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_27"
+        },
+        "C27_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_27.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_27"
+        },
+        "C27_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_27.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_27"
+        },
+        "C27_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_27.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_27"
+        },
+        "C27_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_27.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_27"
+        },
+        "C28": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_28.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_28"
+        },
+        "C28_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_28.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_28"
+        },
+        "C28_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_28.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_28"
+        },
+        "C28_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_28.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_28"
+        },
+        "C28_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_28.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_28"
+        },
+        "C29": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_29.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_29"
+        },
+        "C29_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_29.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_29"
+        },
+        "C29_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_29.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_29"
+        },
+        "C29_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_29.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_29"
+        },
+        "C29_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_29.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_29"
+        },
+        "C30": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_30.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_30"
+        },
+        "C30_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_30.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_30"
+        },
+        "C30_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_30.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_30"
+        },
+        "C30_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_30.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_30"
+        },
+        "C30_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_30.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_30"
+        },
+        "C31": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_31.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_31"
+        },
+        "C31_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_31.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_31"
+        },
+        "C31_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_31.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_31"
+        },
+        "C31_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_31.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_31"
+        },
+        "C31_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_31.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_31"
+        },
+        "C32": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_32.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_32"
+        },
+        "C32_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_32.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_32"
+        },
+        "C32_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_32.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_32"
+        },
+        "C32_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_32.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_32"
+        },
+        "C32_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_32.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_32"
+        },
+        "C33": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_33.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_33"
+        },
+        "C33_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_33.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_33"
+        },
+        "C33_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_33.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_33"
+        },
+        "C33_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_33.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_33"
+        },
+        "C33_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_33.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_33"
+        },
+        "C34": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_34.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_34"
+        },
+        "C34_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_34.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_34"
+        },
+        "C34_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_34.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_34"
+        },
+        "C34_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_34.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_34"
+        },
+        "C34_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_34.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_34"
+        },
+        "C35": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_35.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_35"
+        },
+        "C35_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_35.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_35"
+        },
+        "C35_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_35.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_35"
+        },
+        "C35_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_35.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_35"
+        },
+        "C35_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_35.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_35"
+        },
+        "C36": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_36.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_36"
+        },
+        "C36_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_36.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_36"
+        },
+        "C36_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_36.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_36"
+        },
+        "C36_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_36.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_36"
+        },
+        "C36_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_36.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_36"
+        },
+        "C37": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_37.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_37"
+        },
+        "C37_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_37.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_37"
+        },
+        "C37_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_37.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_37"
+        },
+        "C37_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_37.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_37"
+        },
+        "C37_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_37.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_37"
+        },
+        "C38": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_38.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_38"
+        },
+        "C38_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_38.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_38"
+        },
+        "C38_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_38.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_38"
+        },
+        "C38_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_38.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_38"
+        },
+        "C38_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_38.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_38"
+        },
+        "C39": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_39.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_39"
+        },
+        "C39_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_39.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_39"
+        },
+        "C39_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_39.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_39"
+        },
+        "C39_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_39.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_39"
+        },
+        "C39_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_39.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_39"
+        },
+        "C40": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_40.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_40"
+        },
+        "C40_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_40.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_40"
+        },
+        "C40_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_40.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_40"
+        },
+        "C40_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_40.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_40"
+        },
+        "C40_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_40.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_40"
+        },
+        "C41": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_41.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_41"
+        },
+        "C41_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_41.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_41"
+        },
+        "C41_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_41.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_41"
+        },
+        "C41_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_41.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_41"
+        },
+        "C41_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_41.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_41"
+        },
+        "C42": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_42.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_42"
+        },
+        "C42_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_42.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_42"
+        },
+        "C42_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_42.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_42"
+        },
+        "C42_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_42.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_42"
+        },
+        "C42_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_42.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_42"
+        },
+        "C43": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_43.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_43"
+        },
+        "C43_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_43.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_43"
+        },
+        "C43_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_43.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_43"
+        },
+        "C43_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_43.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_43"
+        },
+        "C43_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_43.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_43"
+        },
+        "C44": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_44.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_44"
+        },
+        "C44_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_44.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_44"
+        },
+        "C44_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_44.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_44"
+        },
+        "C44_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_44.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_44"
+        },
+        "C44_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_44.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_44"
+        },
+        "C45": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_45.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_45"
+        },
+        "C45_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_45.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_45"
+        },
+        "C45_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_45.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_45"
+        },
+        "C45_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_45.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_45"
+        },
+        "C45_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_45.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_45"
+        },
+        "C46": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_46.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_46"
+        },
+        "C46_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_46.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_46"
+        },
+        "C46_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_46.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_46"
+        },
+        "C46_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_46.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_46"
+        },
+        "C46_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_46.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_46"
+        },
+        "C47": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_47.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_47"
+        },
+        "C47_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_47.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_47"
+        },
+        "C47_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_47.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_47"
+        },
+        "C47_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_47.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_47"
+        },
+        "C47_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_47.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_47"
+        },
+        "C48": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_48.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_48"
+        },
+        "C48_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_48.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_48"
+        },
+        "C48_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_48.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_48"
+        },
+        "C48_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_48.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_48"
+        },
+        "C48_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_48.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_48"
+        },
+        "C49": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_49.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_49"
+        },
+        "C49_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_49.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_49"
+        },
+        "C49_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_49.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_49"
+        },
+        "C49_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_49.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_49"
+        },
+        "C49_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_49.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_49"
+        },
+        "C50": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_50.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_50"
+        },
+        "C50_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_50.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_50"
+        },
+        "C50_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_50.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_50"
+        },
+        "C50_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_50.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_50"
+        },
+        "C50_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_50.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_50"
+        },
+        "C51": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_51.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_51"
+        },
+        "C51_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_51.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_51"
+        },
+        "C51_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_51.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_51"
+        },
+        "C51_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_51.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_51"
+        },
+        "C51_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_51.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_51"
+        },
+        "C52": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_52.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_52"
+        },
+        "C52_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_52.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_52"
+        },
+        "C52_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_52.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_52"
+        },
+        "C52_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_52.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_52"
+        },
+        "C52_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_52.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_52"
+        },
+        "C53": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_53.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_53"
+        },
+        "C53_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_53.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_53"
+        },
+        "C53_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_53.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_53"
+        },
+        "C53_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_53.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_53"
+        },
+        "C53_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_53.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_53"
+        },
+        "C54": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_54.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_54"
+        },
+        "C54_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_54.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_54"
+        },
+        "C54_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_54.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_54"
+        },
+        "C54_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_54.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_54"
+        },
+        "C54_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_54.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_54"
+        },
+        "C55": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_55.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_55"
+        },
+        "C55_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_55.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_55"
+        },
+        "C55_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_55.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_55"
+        },
+        "C55_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_55.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_55"
+        },
+        "C55_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_55.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_55"
+        },
+        "C56": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_56.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_56"
+        },
+        "C56_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_56.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_56"
+        },
+        "C56_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_56.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_56"
+        },
+        "C56_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_56.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_56"
+        },
+        "C56_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_56.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_56"
+        },
+        "C57": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_57.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_57"
+        },
+        "C57_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_57.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_57"
+        },
+        "C57_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_57.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_57"
+        },
+        "C57_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_57.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_57"
+        },
+        "C57_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_57.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_57"
+        },
+        "C58": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_58.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_58"
+        },
+        "C58_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_58.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_58"
+        },
+        "C58_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_58.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_58"
+        },
+        "C58_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_58.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_58"
+        },
+        "C58_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_58.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_58"
+        },
+        "C59": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_59.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_59"
+        },
+        "C59_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_59.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_59"
+        },
+        "C59_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_59.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_59"
+        },
+        "C59_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_59.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_59"
+        },
+        "C59_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_59.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_59"
+        },
+        "C60": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_60.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_60"
+        },
+        "C60_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_60.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_60"
+        },
+        "C60_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_60.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_60"
+        },
+        "C60_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_60.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_60"
+        },
+        "C60_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_60.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_60"
+        },
+        "C61": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_61.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_61"
+        },
+        "C61_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_61.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_61"
+        },
+        "C61_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_61.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_61"
+        },
+        "C61_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_61.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_61"
+        },
+        "C61_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_61.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_61"
+        },
+        "C62": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_62.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_62"
+        },
+        "C62_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_62.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_62"
+        },
+        "C62_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_62.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_62"
+        },
+        "C62_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_62.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_62"
+        },
+        "C62_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_62.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_62"
+        },
+        "C63": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_63.blockymodel",
+          "HitboxType": "AE2_Cable_Covered_63"
+        },
+        "C63_L1": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_63.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L1.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_63"
+        },
+        "C63_L2": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_63.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L2.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_63"
+        },
+        "C63_L3": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_63.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L3.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_63"
+        },
+        "C63_L4": {
+          "CustomModel": "Blocks/AE2/Cables/Smart_63.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Cables/Textures/Smart_Blue_L4.png",
+              "Weight": 1
+            }
+          ],
+          "HitboxType": "AE2_Cable_Covered_63"
+        }
+      }
+    },
+    "HitboxType": "AE2_Cable_Covered_0",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "SoftBlocks"
+      }
+    },
+    "BlockParticleSetId": "Dust",
+    "ParticleColor": "#3894ff",
+    "BlockSoundSetId": "Cloth",
+    "PhysicalMaterialId": "Cloth",
+    "BlockEntity": {
+      "Components": {
+        "AE2_Block": {
+          "Kind": "cable",
+          "CableType": "smart",
+          "Color": "blue"
+        }
+      }
+    },
+    "Interactions": {
+      "Use": "AE2_Use_Block"
+    }
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Fluix_Smart_Cable",
+        "Quantity": 8
+      },
+      {
+        "ItemId": "Plant_Petals_Blue",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Cables"
+        ]
+      }
+    ],
+    "OutputQuantity": 8,
+    "TimeSeconds": 1
+  }
+}

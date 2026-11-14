@@ -1,0 +1,74 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Quartz_Pillar.name",
+    "Description": "ae2.items.AE2_Quartz_Pillar.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Quartz_Pillar.png",
+  "Categories": [
+    "AE2.Decoration"
+  ],
+  "MaxStack": 64,
+  "PlayerAnimationsId": "Block",
+  "IconProperties": {
+    "Scale": 0.58823,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -13.5
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Rock"
+    ],
+    "Family": [
+      "AE2"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Cube",
+    "Opacity": "Solid",
+    "Textures": [
+      {
+        "Sides": "Blocks/AE2/Textures/AE2_Quartz_Pillar_Sides.png",
+        "UpDown": "Blocks/AE2/Textures/AE2_Chiseled_Quartz_Block_UpDown.png",
+        "Weight": 1
+      }
+    ],
+    "VariantRotation": "Pipe",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Rocks"
+      }
+    },
+    "BlockParticleSetId": "Crystal",
+    "ParticleColor": "#75a3c4",
+    "BlockSoundSetId": "Crystal",
+    "PhysicalMaterialId": "Stone"
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Cut_Quartz_Block",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Decoration"
+        ]
+      }
+    ],
+    "OutputQuantity": 2,
+    "TimeSeconds": 1
+  }
+}

@@ -1,0 +1,60 @@
+# Applied Energistics 2 – Blockinfo beim Anschauen (HUD oben mittig, wie Jade/WAILA)
+# Datei ae2hud.lang -> Schlüsselpräfix 'ae2hud.'
+
+status.online = Online
+status.noPower = Kein Strom
+status.noChannel = Kein Kanal
+status.tooManyDevices = Kein Kanal – über 8 Geräte ohne Controller
+status.conflict = Controller-Konflikt
+status.booting = Kanäle werden verteilt …
+status.notConnected = Nicht verbunden
+
+label.channels = Kanäle
+label.sides = Seiten
+label.network = Netz
+label.energy = Energie
+label.stored = Gespeichert
+label.usage = Verbrauch
+label.input = Zufuhr
+label.cells = Zellen
+label.progress = Fortschritt
+label.output = Erzeugung
+label.fuel = Brennstoff
+label.patterns = Muster
+label.cpu = CPU
+label.job = Auftrag
+
+side.east = Ost
+side.west = West
+side.up = Oben
+side.down = Unten
+side.south = Süd
+side.north = Nord
+
+value.infinite = unbegrenzt
+value.channelsOfDevices = {used} / {devices} Geräte
+value.blocks = {count} Blöcke
+value.energyPercent = {stored} / {max} AE · {percent} %
+value.rate = {rate} AE/t
+value.percent = {percent} %
+value.seconds = {seconds} s
+value.cellsSummary = {count} / {slots} · {used} / {total} Bytes
+value.cell = {used} / {total} Bytes · {types} / {maxTypes} Typen
+value.cellShort = {used}/{total} B · {types}/{maxTypes}
+value.cpu = {bytes} Bytes · {threads} Co-Prozessoren
+value.job = {amount}x {item}
+
+cell.none = Keine Zelle eingelegt
+cell.fluid = Fluid
+cell.creative = Creative
+cell.other = Speicherzelle
+
+machine.idle = Leerlauf
+machine.charging = Lädt
+machine.noFuel = Kein Brennstoff
+pattern.busy = Liefert Zutaten aus
+cpu.notFormed = Keine CPU – Blöcke zu einem Quader mit Speicher zusammensetzen
+cpu.idle = Bereit
+cpu.suspended = pausiert
+owner.locked = Fremdes ME-Netz – kein Zugriff
+owner.label = Gehört

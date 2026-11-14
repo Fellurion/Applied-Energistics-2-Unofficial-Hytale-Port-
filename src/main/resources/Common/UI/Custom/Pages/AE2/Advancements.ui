@@ -1,0 +1,63 @@
+$C = "../../Common.ui";
+
+// AE2-Erfolge: alle Erfolge in Baumreihenfolge (eingerückt), oben der Gesamtfortschritt.
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 860, Height: 680);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #AdvTitle {
+        @Text = "AE2 Advancements";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 10);
+
+    // Gesamtfortschritt
+    Group #Header {
+      Anchor: (Height: 36);
+      LayoutMode: Left;
+      Padding: (Top: 6, Horizontal: 6);
+
+      Label #Progress {
+        FlexWeight: 1;
+        Style: (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+        Text: "";
+      }
+
+      Group {
+        Anchor: (Width: 290);
+        LayoutMode: Middle;
+
+        $C.@ProgressBar #ProgressBar {
+          Value: 0.0;
+        }
+      }
+    }
+
+    Group #Divider {
+      Anchor: (Height: 2);
+      Background: #19252F;
+    }
+
+    // Erfolgsliste mit Scrollbar
+    Group #ListContainer {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+      Padding: (Top: 8, Left: 6, Right: 6, Bottom: 6);
+
+      Group #List {
+        LayoutMode: Top;
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

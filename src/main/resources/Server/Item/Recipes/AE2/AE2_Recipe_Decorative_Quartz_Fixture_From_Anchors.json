@@ -1,0 +1,33 @@
+{
+  "Input": [
+    {
+      "ItemId": "AE2_Charged_Certus_Quartz_Crystal",
+      "Quantity": 1
+    },
+    {
+      "ItemId": "AE2_Cable_Anchor",
+      "Quantity": 1
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "AE2_Quartz_Fixture",
+    "Quantity": 2
+  },
+  "Output": [
+    {
+      "ItemId": "AE2_Quartz_Fixture",
+      "Quantity": 2
+    }
+  ],
+  "OutputQuantity": 2,
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "AE2_Workbench",
+      "Categories": [
+        "AE2_Decoration"
+      ]
+    }
+  ],
+  "TimeSeconds": 1
+}

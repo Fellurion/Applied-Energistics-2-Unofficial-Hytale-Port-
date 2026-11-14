@@ -1,0 +1,44 @@
+[
+  {
+    "ammo": {
+      "ItemId": "AE2_Matter_Ball"
+    },
+    "weight": 32.0
+  },
+  {
+    "ammo": {
+      "ItemId": "Ingredient_Charcoal"
+    },
+    "weight": 12.0107
+  },
+  {
+    "ammo": {
+      "ItemId": "Ingredient_Bar_Cobalt"
+    },
+    "weight": 58.9332
+  },
+  {
+    "ammo": {
+      "ItemId": "Ingredient_Bar_Copper"
+    },
+    "weight": 63.546
+  },
+  {
+    "ammo": {
+      "ItemId": "Ingredient_Bar_Gold"
+    },
+    "weight": 196.96655
+  },
+  {
+    "ammo": {
+      "ItemId": "Ingredient_Bar_Iron"
+    },
+    "weight": 55.845
+  },
+  {
+    "ammo": {
+      "ItemId": "Ingredient_Bar_Silver"
+    },
+    "weight": 107.8682
+  }
+]

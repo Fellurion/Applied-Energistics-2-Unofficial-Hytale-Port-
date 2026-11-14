@@ -1,0 +1,106 @@
+$C = "../../Common.ui";
+
+// Zugriff auf ME-Netze (AE2, Knopf „Zugriff“ im Terminal; nur Besitzer und Admins).
+//
+// Oben der Besitzer, darunter „Spieler hinzufügen“: Suchfeld (filtert das Auswahlfeld, bester Treffer vorgewählt),
+// Auswahlfeld mit Online-Spielern und allen, die schon einmal da waren, und „Hinzufügen“. Darunter die eingetragenen
+// Spieler (AccessRow.ui, je Zeile „Entfernen“). Einträge und Auswahl setzt AccessPage.java
+// (#AccessPlayer.Entries = DropdownEntryInfo-Liste, gelesen über "@Player" = #AccessPlayer.Value).
+
+@OwnerStyle = (FontSize: 17, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+@InfoStyle = (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center, Wrap: true);
+@HeaderStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+@OkStyle = (FontSize: 13, TextColor: #9ec47a, VerticalAlignment: Center);
+@ErrorStyle = (FontSize: 13, TextColor: #e0796b, VerticalAlignment: Center);
+@EmptyStyle = (FontSize: 14, TextColor: #5a6a7a, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 700, Height: 640);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #AccessTitle {
+        @Text = "Access";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 16, Vertical: 10);
+
+    Label #AccessOwner { Text: ""; Anchor: (Height: 30); Style: @OwnerStyle; }
+    Label #AccessInfo { Text: ""; Anchor: (Height: 40); Style: @InfoStyle; }
+
+    Group { Anchor: (Height: 10); }
+
+    Label #AccessAddHeader { Text: ""; Anchor: (Height: 26); Style: @HeaderStyle; }
+
+    Group {
+      Anchor: (Height: 44);
+      LayoutMode: Left;
+
+      $C.@TextField #AccessSearch {
+        @Anchor = (Top: 3);
+        FlexWeight: 1;
+        PlaceholderText: %ae2access.search;
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      DropdownBox #AccessPlayer {
+        Anchor: (Top: 3, Width: 250, Height: 38);
+        Style: $C.@DefaultDropdownBoxStyle;
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@TextButton #AccessAdd {
+        @Anchor = (Width: 170);
+        Text: "";
+      }
+    }
+
+    Group {
+      Anchor: (Height: 26);
+
+      Label #AccessFeedback { Text: ""; Anchor: (Full: 0); Style: @OkStyle; }
+      Label #AccessFeedbackError { Text: ""; Anchor: (Full: 0); Style: @ErrorStyle; }
+    }
+
+    Group { Anchor: (Height: 8); }
+    Group { Anchor: (Height: 1); Background: #2b3a4a; }
+    Group { Anchor: (Height: 8); }
+
+    Label #AccessListHeader { Text: ""; Anchor: (Height: 26); Style: @HeaderStyle; }
+
+    Label #AccessEmpty { Text: ""; Anchor: (Height: 60); Style: @EmptyStyle; Visible: false; }
+
+    Group #AccessListBox {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+
+      Group #AccessRows {
+        LayoutMode: Top;
+      }
+    }
+
+    Group { Anchor: (Height: 8); }
+
+    Group {
+      Anchor: (Height: 44);
+      LayoutMode: Left;
+
+      $C.@SecondaryTextButton #AccessBack {
+        @Anchor = (Width: 260);
+        Text: "";
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

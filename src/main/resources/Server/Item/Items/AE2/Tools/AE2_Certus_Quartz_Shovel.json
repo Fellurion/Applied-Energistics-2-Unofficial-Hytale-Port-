@@ -1,0 +1,61 @@
+{
+  "Parent": "Tool_Shovel_Iron",
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Certus_Quartz_Shovel.name",
+    "Description": "ae2.items.AE2_Certus_Quartz_Shovel.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Certus_Quartz_Shovel.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "MaxStack": 1,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Certus_Quartz_Shovel.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "MaxDurability": 250,
+  "Tags": {
+    "Type": [
+      "Tool"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Tool"
+    ]
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Certus_Quartz_Crystal",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Stick",
+        "Quantity": 2
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Tools"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

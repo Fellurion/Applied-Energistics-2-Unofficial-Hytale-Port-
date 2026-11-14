@@ -1,0 +1,124 @@
+$C = "../../Common.ui";
+
+// Craft-Anfrage (AE2: CraftAmountScreen + CraftConfirmScreen): Menge, Berechnung, Start.
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 760, Height: 600);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Crafting";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 12, Vertical: 8);
+
+    Group #TargetRow {
+      Anchor: (Height: 74);
+      LayoutMode: Left;
+
+      Group {
+        Anchor: (Width: 64, Height: 64);
+        Background: #1a2530;
+        Padding: 2;
+
+        ItemSlot #TargetIcon {
+          Anchor: (Full: 0);
+          ShowQualityBackground: true;
+          ShowQuantity: false;
+        }
+      }
+
+      Group {
+        FlexWeight: 1;
+        LayoutMode: Top;
+        Padding: (Left: 12, Top: 6);
+
+        Label #TargetName {
+          Anchor: (Height: 26);
+          Style: (FontSize: 18, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+          Text: "";
+        }
+
+        Label #Amount {
+          Anchor: (Height: 26);
+          Style: (FontSize: 18, TextColor: #ffffff, VerticalAlignment: Center);
+          Text: "1";
+        }
+      }
+    }
+
+    Group #AmountButtons {
+      Anchor: (Height: 46);
+      LayoutMode: Left;
+      Padding: (Top: 6);
+
+      $C.@SecondaryTextButton #Minus64 { @Anchor = (Width: 78); Text: "-64"; }
+      Group { Anchor: (Width: 6); }
+      $C.@SecondaryTextButton #Minus10 { @Anchor = (Width: 78); Text: "-10"; }
+      Group { Anchor: (Width: 6); }
+      $C.@SecondaryTextButton #Minus1 { @Anchor = (Width: 78); Text: "-1"; }
+      Group { Anchor: (Width: 18); }
+      $C.@SecondaryTextButton #Plus1 { @Anchor = (Width: 78); Text: "+1"; }
+      Group { Anchor: (Width: 6); }
+      $C.@SecondaryTextButton #Plus10 { @Anchor = (Width: 78); Text: "+10"; }
+      Group { Anchor: (Width: 6); }
+      $C.@SecondaryTextButton #Plus64 { @Anchor = (Width: 78); Text: "+64"; }
+    }
+
+    Group {
+      Anchor: (Height: 2);
+      Background: #19252F;
+    }
+
+    Label #PlanInfo {
+      Anchor: (Height: 28);
+      Style: (FontSize: 14, TextColor: #96a9be, VerticalAlignment: Center);
+      Text: "";
+    }
+
+    Label #MissingHeader {
+      Anchor: (Height: 24);
+      Style: (FontSize: 14, TextColor: #d36b6b, RenderBold: true, VerticalAlignment: Center);
+      Text: "";
+    }
+
+    Group #PlanContainer {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+      Background: #141d26;
+      Padding: 4;
+
+      Group #Plan {
+        LayoutMode: LeftCenterWrap;
+      }
+    }
+
+    Group {
+      Anchor: (Height: 52);
+      LayoutMode: Left;
+      Padding: (Top: 8);
+
+      $C.@SecondaryTextButton #Calculate {
+        @Anchor = (Width: 220);
+        Text: "Calculate";
+      }
+
+      Group { FlexWeight: 1; }
+
+      $C.@TextButton #Start {
+        @Anchor = (Width: 220);
+        Text: "Start";
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

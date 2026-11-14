@@ -1,0 +1,37 @@
+$C = "../../Common.ui";
+
+// Ein Eintrag im ME-Terminal: Item-Icon + Menge. Linksklick = Stapel entnehmen, Rechtsklick = 1 entnehmen.
+Group {
+  Anchor: (Width: 62, Height: 62);
+  Padding: (Horizontal: 2, Vertical: 2);
+
+  ItemSlotButton #Button {
+    Anchor: (Full: 0);
+    LayoutMode: Full;
+    Padding: 2;
+    Style: (
+      Default: (Background: #1c2835),
+      Hovered: (Background: #3a5a7a),
+      Pressed: (Background: #2a4058),
+      Sounds: $C.@ButtonSounds,
+    );
+
+    ItemSlot #Icon {
+      Anchor: (Full: 0);
+      ShowQualityBackground: true;
+      ShowQuantity: false;
+    }
+
+    Label #Quantity {
+      Anchor: (Right: 3, Bottom: 1);
+      Style: (
+        FontSize: 13,
+        TextColor: #ffffff,
+        HorizontalAlignment: End,
+        VerticalAlignment: End,
+        RenderBold: true,
+      );
+      Text: "";
+    }
+  }
+}

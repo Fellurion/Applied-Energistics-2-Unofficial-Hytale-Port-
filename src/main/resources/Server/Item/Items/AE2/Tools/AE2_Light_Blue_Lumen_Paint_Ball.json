@@ -1,0 +1,64 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2.items.AE2_Light_Blue_Lumen_Paint_Ball.name",
+    "Description": "ae2.items.AE2_Light_Blue_Lumen_Paint_Ball.description"
+  },
+  "Icon": "Icons/ItemsGenerated/AE2_Light_Blue_Lumen_Paint_Ball.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "MaxStack": 64,
+  "Model": "Items/AE2/Flat_Item.blockymodel",
+  "Texture": "Items/AE2/Textures/AE2_Light_Blue_Lumen_Paint_Ball.png",
+  "IconProperties": {
+    "Scale": 1.0,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -16
+    ]
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Tool"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "LumenPaintBall"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Items_Splatty",
+  "Light": {
+    "Color": "#8ff"
+  },
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "AE2_Light_Blue_Paint_Ball",
+        "Quantity": 8
+      },
+      {
+        "ItemId": "Ingredient_Crystal_Yellow",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "AE2_Workbench",
+        "Categories": [
+          "AE2_Tools"
+        ]
+      }
+    ],
+    "OutputQuantity": 8,
+    "TimeSeconds": 1
+  }
+}
