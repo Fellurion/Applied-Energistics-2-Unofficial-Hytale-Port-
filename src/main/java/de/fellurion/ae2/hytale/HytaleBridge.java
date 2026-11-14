@@ -28,6 +28,7 @@ public final class HytaleBridge {
 
     public static void setup(JavaPlugin plugin) {
         ItemCatalog.load();
+        de.fellurion.ae2.hytale.lang.AE2Language.setup(plugin);
         de.fellurion.ae2.hytale.advancements.AE2Advancements.setup(plugin);
         Devices.init();
         de.fellurion.ae2.hytale.ui.TerminalOpener.setup(plugin);
@@ -53,6 +54,6 @@ public final class HytaleBridge {
             return new CellItemData();
         });
         plugin.getCommandRegistry().registerCommand(new AE2Command());
-        plugin.getLogger().at(Level.INFO).log("AE2: %d Items/Blöcke aus ae2data geladen", ItemCatalog.size());
+        plugin.getLogger().at(Level.INFO).log("AE2: loaded %d items/blocks from ae2data", ItemCatalog.size());
     }
 }

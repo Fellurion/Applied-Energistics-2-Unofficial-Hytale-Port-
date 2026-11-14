@@ -113,7 +113,7 @@ final class KnownPlayers {
                 }
             }
         } catch (IOException | RuntimeException e) {
-            warn.accept("AE2-Spielernamen nicht lesbar: " + file, e);
+            warn.accept("AE2: could not read player names: " + file, e);
         }
     }
 
@@ -131,7 +131,7 @@ final class KnownPlayers {
             JsonFiles.write(file, root);
             dirty = false;
         } catch (IOException | RuntimeException e) {
-            warn.accept("AE2-Spielernamen nicht speicherbar: " + file, e);
+            warn.accept("AE2: could not save player names: " + file, e);
         }
     }
 }

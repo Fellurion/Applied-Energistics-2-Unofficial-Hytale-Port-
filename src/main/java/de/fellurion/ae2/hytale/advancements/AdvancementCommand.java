@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 final class AdvancementCommand extends AbstractPlayerCommand {
 
     AdvancementCommand() {
-        super("erfolge", "Zeigt deine AE2-Erfolge");
+        super("erfolge", "ae2cmd.adv.desc");
         addAliases("advancements");
         requireNoPermission();
         addSubCommand(new Reset());
@@ -43,7 +43,7 @@ final class AdvancementCommand extends AbstractPlayerCommand {
     /** Setzt die eigenen AE2-Erfolge zurück (zum Testen). */
     private static final class Reset extends AbstractPlayerCommand {
         Reset() {
-            super("reset", "Setzt deine AE2-Erfolge zurück");
+            super("reset", "ae2cmd.adv.reset.desc");
         }
 
         @Override

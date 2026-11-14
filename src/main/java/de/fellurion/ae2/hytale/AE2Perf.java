@@ -4,6 +4,8 @@
  */
 package de.fellurion.ae2.hytale;
 
+import com.hypixel.hytale.server.core.Message;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,13 +20,13 @@ public final class AE2Perf {
 
     /** Phasen eines AE2-Ticks in {@link WorldNetworks#tick()}. */
     public enum Phase {
-        ATTACH("Anbinden"), DEVICES("Geräte vor Kern"), CORE("ME-Kern (Kanäle, Energie, Speicher, Crafting)"),
-        ADVANCEMENTS("Erfolge"), AFTER("Geräte nach Kern + Blockzustand"), UI("Offene Terminals/Seiten");
+        ATTACH("attach"), DEVICES("devices"), CORE("core"), ADVANCEMENTS("advancements"), AFTER("after"), UI("ui");
 
-        final String label;
+        /** Übersetzungsschlüssel {@code ae2cmd.perf.phase.<key>}. */
+        final String key;
 
-        Phase(String label) {
-            this.label = label;
+        Phase(String key) {
+            this.key = key;
         }
     }
 
@@ -87,12 +89,12 @@ public final class AE2Perf {
         detailTicks = n;
     }
 
-    /** Bericht als Textzeilen. */
-    public List<String> report(WorldNetworks nets) {
-        List<String> out = new ArrayList<>();
+    /** Bericht als übersetzte Zeilen ({@code ae2cmd.perf.*}). */
+    public List<Message> report(WorldNetworks nets) {
+        List<Message> out = new ArrayList<>();
         int n = (int) Math.min(ticks, WINDOW);
         if (n == 0) {
-            out.add("Noch keine Ticks gemessen.");
+            out.add(Message.translation("ae2cmd.perf.none"));
             return out;
         }
         long sum = 0, max = 0;
@@ -100,28 +102,37 @@ public final class AE2Perf {
             sum += totals[i];
             max = Math.max(max, totals[i]);
         }
-        out.add(String.format(Locale.ROOT, "Welt %s: %d AE2-Blöcke, %d Netze, %d Grid-Knoten",
-                nets.world().getName(), nets.size(), nets.me().getGrids().size(), nets.me().getNodes().size()));
-        out.add(String.format(Locale.ROOT, "AE2-Tick (letzte %d): Ø %.3f ms, max %.3f ms  (Budget 50 ms, %.2f %%)",
-                n, sum / (double) n / 1e6, max / 1e6, sum / (double) n / 1e6 / 50.0 * 100.0));
+        out.add(Message.translation("ae2cmd.perf.world").param("world", nets.world().getName())
+                .param("blocks", nets.size()).param("grids", nets.me().getGrids().size())
+                .param("nodes", nets.me().getNodes().size()));
+        out.add(Message.translation("ae2cmd.perf.tick").param("ticks", n).param("avg", ms(sum / (double) n))
+                .param("max", ms(max)).param("percent", String.format(Locale.ROOT, "%.2f", sum / (double) n / 1e6 / 50.0 * 100.0)));
         for (Phase p : Phase.values()) {
             long ps = 0, pm = 0;
             for (int i = 0; i < n; i++) {
                 ps += samples[p.ordinal()][i];
                 pm = Math.max(pm, samples[p.ordinal()][i]);
             }
-            out.add(String.format(Locale.ROOT, "  %-46s Ø %.3f ms  max %.3f ms", p.label, ps / (double) n / 1e6, pm / 1e6));
+            out.add(Message.translation("ae2cmd.perf.phase")
+                    .param("phase", Message.translation("ae2cmd.perf.phase." + p.key))
+                    .param("avg", ms(ps / (double) n)).param("max", ms(pm)));
         }
         if (!byKind.isEmpty() && detailMeasured > 0) {
-            out.add(String.format(Locale.ROOT, "Je Block-Art (über %d Ticks, Geräte vor+nach Kern+Zustand):", detailMeasured));
+            out.add(Message.translation("ae2cmd.perf.kinds").param("ticks", detailMeasured));
             byKind.entrySet().stream()
                     .sorted((a, b) -> Long.compare(b.getValue()[0], a.getValue()[0]))
                     .limit(12)
-                    .forEach(e -> out.add(String.format(Locale.ROOT, "  %-28s Ø %.3f ms/Tick  (%d Aufrufe/Tick)", e.getKey(),
-                            e.getValue()[0] / (double) detailMeasured / 1e6, e.getValue()[1] / detailMeasured)));
+                    .forEach(e -> out.add(Message.translation("ae2cmd.perf.kind").param("kind", e.getKey())
+                            .param("avg", ms(e.getValue()[0] / (double) detailMeasured))
+                            .param("calls", e.getValue()[1] / detailMeasured)));
         } else if (detailTicks > 0) {
-            out.add("Messung je Block-Art läuft noch " + detailTicks + " Ticks …");
+            out.add(Message.translation("ae2cmd.perf.detailLeft").param("ticks", detailTicks));
         }
         return out;
+    }
+
+    /** Nanosekunden als Millisekunden mit 3 Nachkommastellen. */
+    private static String ms(double nanos) {
+        return String.format(Locale.ROOT, "%.3f", nanos / 1e6);
     }
 }

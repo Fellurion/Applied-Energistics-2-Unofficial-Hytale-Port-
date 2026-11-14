@@ -37,7 +37,7 @@ public final class AE2TickSystem extends DelayedSystem<ChunkStore> {
         try {
             WorldNetworks.of(world).tick();
         } catch (RuntimeException e) {
-            logger.at(Level.SEVERE).withCause(e).log("AE2-Tick in Welt %s fehlgeschlagen", world.getName());
+            logger.at(Level.SEVERE).withCause(e).log("AE2 tick in world %s failed", world.getName());
         }
     }
 }

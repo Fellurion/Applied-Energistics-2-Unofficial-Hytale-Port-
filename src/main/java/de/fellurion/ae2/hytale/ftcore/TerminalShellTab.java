@@ -137,13 +137,8 @@ final class TerminalShellTab implements ShellTab {
         FTCorePlugin core = FTCorePlugin.get();
         Map<String, Integer> sections = core == null ? Map.of()
                 : core.inventoryWindows().sectionsOf(s.playerRef.getUuid());
-        String l = locale;
-        if (l == null) {
-            l = core == null ? null : core.messages().languageOf(s.playerRef.getUuid());
-        }
-        if (l == null) {
-            l = s.playerRef.getLanguage();
-        }
-        return new TerminalView.Viewer(ref, store, player, s.playerRef, l == null ? "en-US" : l, sections);
+        // AE2-Texte immer in der AE2-Sprache des Spielers (wie Items und Blöcke), sonst entsteht ein Sprachmix
+        String l = de.fellurion.ae2.hytale.lang.AE2Language.of(s.playerRef);
+        return new TerminalView.Viewer(ref, store, player, s.playerRef, l, sections);
     }
 }

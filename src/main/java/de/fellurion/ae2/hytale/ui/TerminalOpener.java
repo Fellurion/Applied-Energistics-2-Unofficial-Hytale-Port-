@@ -53,7 +53,7 @@ public final class TerminalOpener {
         plugin = p;
         p.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, e -> forget(e.getPlayerRef().getUuid()));
         if (ftcoreReady()) {
-            p.getLogger().at(Level.INFO).log("AE2: FTCore gefunden – ME-Terminals öffnen in der FTCore-Schale");
+            p.getLogger().at(Level.INFO).log("AE2: FTCore found – ME terminals open in the FTCore shell");
         }
     }
 
@@ -148,7 +148,7 @@ public final class TerminalOpener {
         JavaPlugin p = plugin;
         if (p != null) {
             p.getLogger().at(Level.WARNING).withCause(e)
-                    .log("AE2: FTCore-Anbindung fehlgeschlagen – Terminals öffnen als eigene Seite");
+                    .log("AE2: FTCore integration failed – terminals open as their own page");
         }
     }
 }

@@ -21,8 +21,8 @@ One jar = Java server plugin **and** asset pack (`IncludesAssetPack: true`).
 ## Building
 
 Requirements: Java 25 and a local Hytale installation. The default is the macOS path
-`~/Library/Application Support/Hytale`; if Hytale is installed elsewhere, set `hytaleHome` (and optionally
-`ftcoreDir`) in `~/.gradle/gradle.properties`.
+`~/Library/Application Support/Hytale`; if Hytale is installed elsewhere, set `hytaleHome` in
+`~/.gradle/gradle.properties`.
 
 ```bash
 ./gradlew build
@@ -33,6 +33,21 @@ The jar ends up in `build/libs/`.
 ## Installing
 
 Copy the jar into your Hytale mods folder (`UserData/Mods`) or into the `mods` folder of your server and restart it.
+
+## Language
+
+AE2 is in **English** by default. Every player can switch the language for themselves:
+
+| Command | Language |
+|---|---|
+| `/ae2 language de` | German (Deutsch) |
+| `/ae2 language en` | English |
+
+The choice is saved per player and applies to everything from AE2: item and block names, terminals and other
+windows, the look-at info, messages and commands. It does not change the language of Hytale itself.
+
+Server owners can change the default for all players in `mods/de.fellurion_AppliedEnergistics2/language.json`
+(created on first start): `"default": "de-DE"` or `"default": "en-US"`.
 
 ## Differences from Minecraft
 
@@ -74,6 +89,7 @@ for now).
 |---|---|---|
 | `/ae2 info x y z` | everyone | Network info for an AE2 block (own networks only) |
 | `/ae2 advancements` | everyone | AE2 achievements (alias `/ae2 erfolge`) |
+| `/ae2 language en\|de` | everyone | Switch your AE2 language (default English) |
 | `/ae2 craft x y z item amount` | admin (`ae2.admin`) | Start a crafting job |
 | `/ae2 cpus x y z`, `/ae2 count x y z item` | admin | CPUs / item amount in the network |
 | `/ae2 insert x y z item amount` | admin | Put items into the network (creative) |

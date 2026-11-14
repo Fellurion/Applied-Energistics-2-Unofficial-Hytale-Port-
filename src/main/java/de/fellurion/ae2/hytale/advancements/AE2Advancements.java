@@ -70,7 +70,7 @@ public final class AE2Advancements {
         plugin.getEntityStoreRegistry().registerSystem(new AdvancementInventorySystem());
         plugin.getEventRegistry().registerGlobal(PlayerReadyEvent.class, AE2Advancements::onPlayerReady);
         plugin.getEventRegistry().register(PlayerDisconnectEvent.class, AE2Advancements::onPlayerDisconnect);
-        plugin.getLogger().at(Level.INFO).log("AE2: %d Erfolge geladen", registry.size());
+        plugin.getLogger().at(Level.INFO).log("AE2: loaded %d achievements", registry.size());
     }
 
     /** Unterbefehl {@code erfolge} (Übersicht; {@code erfolge reset} für Admins) – in {@code AE2Command} einhängen. */
@@ -93,7 +93,7 @@ public final class AE2Advancements {
         } catch (RuntimeException e) {
             HytaleLogger l = logger;
             if (l != null) {
-                l.at(Level.WARNING).withCause(e).log("AE2-Erfolge: Netzprüfung in %s fehlgeschlagen", nets.world().getName());
+                l.at(Level.WARNING).withCause(e).log("AE2 achievements: network check in %s failed", nets.world().getName());
             }
         }
     }

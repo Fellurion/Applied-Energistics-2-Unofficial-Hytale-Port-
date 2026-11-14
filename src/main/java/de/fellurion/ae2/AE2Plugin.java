@@ -53,6 +53,12 @@ public final class AE2Plugin extends JavaPlugin {
         // ME-Logik, Rezeptdaten, Befehle
         HytaleBridge.setup(this);
 
-        getLogger().at(Level.INFO).log("Applied Energistics 2 (Hytale-Portierung von Fellurion) geladen");
+        getLogger().at(Level.INFO).log("Applied Energistics 2 (Hytale port by Fellurion) loaded");
+    }
+
+    @Override
+    protected void shutdown() {
+        de.fellurion.ae2.hytale.lang.AE2Language.shutdown();
+        super.shutdown();
     }
 }

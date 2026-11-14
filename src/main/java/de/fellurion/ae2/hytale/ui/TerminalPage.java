@@ -125,8 +125,8 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
             }
         });
         Player player = store.getComponent(ref, Player.getComponentType());
-        String lang = playerRef.getLanguage();
-        return new TerminalView.Viewer(ref, store, player, playerRef, lang == null ? "en-US" : lang, sections);
+        String lang = de.fellurion.ae2.hytale.lang.AE2Language.of(playerRef);
+        return new TerminalView.Viewer(ref, store, player, playerRef, lang, sections);
     }
 
     /** AE2-Stil: max. 4 Zeichen (appeng.util.ReadableNumberConverter). */

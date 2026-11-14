@@ -140,7 +140,7 @@ final class AccessStore {
             }
         } catch (IOException | RuntimeException e) {
             // Kaputte Datei: leer weiterarbeiten (= nur der Besitzer), die Datei bleibt bis zur nächsten Änderung
-            warn.accept("AE2-Zugriffsliste nicht lesbar: " + f, e);
+            warn.accept("AE2: could not read access list: " + f, e);
         }
         return l;
     }
@@ -162,7 +162,7 @@ final class AccessStore {
         try {
             JsonFiles.write(f, root);
         } catch (IOException | RuntimeException e) {
-            warn.accept("AE2-Zugriffsliste nicht speicherbar: " + f, e);
+            warn.accept("AE2: could not save access list: " + f, e);
         }
     }
 }

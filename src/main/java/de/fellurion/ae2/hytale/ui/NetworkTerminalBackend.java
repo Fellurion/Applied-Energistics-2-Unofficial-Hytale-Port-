@@ -127,7 +127,7 @@ public final class NetworkTerminalBackend implements TerminalBackend {
         if (s == null || !s.online()) {
             return "";
         }
-        return s.types() + " Typen · " + TerminalTexts.formatAmount(s.items()) + " Items";
+        return s.types() + " types · " + TerminalTexts.formatAmount(s.items()) + " Items";
     }
 
     @Override

@@ -64,7 +64,7 @@ public final class ItemCatalog {
             }
             return new String(in.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new IllegalStateException("ae2data/" + name + " nicht lesbar", e);
+            throw new IllegalStateException("ae2data/" + name + " is not readable", e);
         }
     }
 

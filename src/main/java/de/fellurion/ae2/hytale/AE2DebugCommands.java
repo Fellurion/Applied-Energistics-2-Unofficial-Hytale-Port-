@@ -52,17 +52,18 @@ final class AE2DebugCommands {
 
         PosCommand(String name, String desc) {
             super(name, desc);
-            this.pos = withRequiredArg("x y z", "Position", ArgTypes.RELATIVE_BLOCK_POSITION);
+            this.pos = withRequiredArg("x y z", "ae2cmd.arg.position", ArgTypes.RELATIVE_BLOCK_POSITION);
             requirePermission("ae2.admin");
         }
 
         @Override
         protected final void execute(@Nonnull CommandContext ctx, @Nonnull World world, @Nonnull Store<EntityStore> store) {
             Vector3i p = ctx.get(pos).getBlockPosition(ctx, store);
-            ctx.sendMessage(Message.raw("[AE2] " + run(ctx, world, WorldNetworks.of(world), p.x, p.y, p.z)));
+            ctx.sendMessage(run(ctx, world, WorldNetworks.of(world), p.x, p.y, p.z));
         }
 
-        abstract String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z);
+        /** Ergebnis als übersetzte Meldung ({@code ae2cmd.*}). */
+        abstract Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z);
 
         static Grid grid(WorldNetworks nets, int x, int y, int z) {
             WorldNetworks.Node n = nets.node(x, y, z);
@@ -75,20 +76,20 @@ final class AE2DebugCommands {
         private final RequiredArg<String> item;
 
         SetSlot() {
-            super("setslot", "Item in einen Block-Slot legen");
-            slot = withRequiredArg("slot", "Slot", ArgTypes.INTEGER);
-            item = withRequiredArg("itemId", "Item", ArgTypes.STRING);
+            super("setslot", "ae2cmd.setslot.desc");
+            slot = withRequiredArg("slot", "ae2cmd.arg.slot", ArgTypes.INTEGER);
+            item = withRequiredArg("itemId", "ae2cmd.arg.item", ArgTypes.STRING);
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             ItemContainer c = BlockAccess.container(world, x, y, z);
             String id = ctx.get(item);
             if (c == null || Item.getAssetMap().getAsset(id) == null) {
-                return "Kein Container oder unbekanntes Item";
+                return Message.translation("ae2cmd.noContainerOrItem");
             }
             c.setItemStackForSlot((short) (int) ctx.get(slot), new ItemStack(id, 1));
-            return id + " -> Slot " + ctx.get(slot);
+            return Message.translation("ae2cmd.setslot.done").param("item", id).param("slot", ctx.get(slot));
         }
     }
 
@@ -97,25 +98,25 @@ final class AE2DebugCommands {
         private final RequiredArg<String> item;
 
         Pattern() {
-            super("pattern", "Rezept als Pattern kodieren und in einen Slot legen");
-            slot = withRequiredArg("slot", "Slot", ArgTypes.INTEGER);
-            item = withRequiredArg("itemId", "Ergebnis-Item", ArgTypes.STRING);
+            super("pattern", "ae2cmd.pattern.desc");
+            slot = withRequiredArg("slot", "ae2cmd.arg.slot", ArgTypes.INTEGER);
+            item = withRequiredArg("itemId", "ae2cmd.arg.result", ArgTypes.STRING);
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             ItemContainer c = BlockAccess.container(world, x, y, z);
             List<HytaleRecipes.Option> opts = HytaleRecipes.recipesFor(ctx.get(item));
             if (c == null || opts.isEmpty()) {
-                return "Kein Container oder kein Rezept für " + ctx.get(item);
+                return Message.translation("ae2cmd.pattern.noRecipe").param("item", ctx.get(item));
             }
             AEItemKey key = HytaleRecipes.encode(opts.getFirst());
             if (key == null) {
-                return "Rezept nicht kodierbar: " + opts.getFirst().id();
+                return Message.translation("ae2cmd.pattern.notEncodable").param("recipe", opts.getFirst().id());
             }
             c.setItemStackForSlot((short) (int) ctx.get(slot), ItemKeys.toStack(key, 1));
-            return "Pattern (" + (opts.getFirst().processing() ? "Processing" : "Crafting") + ", Rezept "
-                    + opts.getFirst().id() + ") -> Slot " + ctx.get(slot);
+            return Message.translation("ae2cmd.pattern.done").param("type", opts.getFirst().processing() ? "Processing" : "Crafting")
+                    .param("recipe", opts.getFirst().id()).param("slot", ctx.get(slot));
         }
     }
 
@@ -124,20 +125,20 @@ final class AE2DebugCommands {
         private final RequiredArg<Integer> amount;
 
         Insert() {
-            super("insert", "Items ins ME-Netz einlagern (kreativ)");
-            item = withRequiredArg("itemId", "Item", ArgTypes.STRING);
-            amount = withRequiredArg("amount", "Menge", ArgTypes.INTEGER);
+            super("insert", "ae2cmd.insert.desc");
+            item = withRequiredArg("itemId", "ae2cmd.arg.item", ArgTypes.STRING);
+            amount = withRequiredArg("amount", "ae2cmd.arg.amount", ArgTypes.INTEGER);
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             Grid grid = grid(nets, x, y, z);
             if (grid == null || Item.getAssetMap().getAsset(ctx.get(item)) == null) {
-                return "Kein Netz oder unbekanntes Item";
+                return Message.translation("ae2cmd.noNetworkOrItem");
             }
             long in = grid.getStorageService().getInventory().insert(AEItemKey.of(ctx.get(item)), ctx.get(amount),
                     Actionable.MODULATE, IActionSource.empty());
-            return in + "× " + ctx.get(item) + " eingelagert";
+            return Message.translation("ae2cmd.insert.done").param("amount", in).param("item", ctx.get(item));
         }
     }
 
@@ -146,38 +147,39 @@ final class AE2DebugCommands {
         private final RequiredArg<Integer> amount;
 
         Craft() {
-            super("craft", "Crafting-Auftrag berechnen und starten");
-            item = withRequiredArg("itemId", "Item", ArgTypes.STRING);
-            amount = withRequiredArg("amount", "Menge", ArgTypes.INTEGER);
+            super("craft", "ae2cmd.craft.desc");
+            item = withRequiredArg("itemId", "ae2cmd.arg.item", ArgTypes.STRING);
+            amount = withRequiredArg("amount", "ae2cmd.arg.amount", ArgTypes.INTEGER);
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             Grid grid = grid(nets, x, y, z);
             if (grid == null) {
-                return "Kein Netz";
+                return Message.translation("ae2cmd.noNetwork");
             }
             CraftingPlan plan = grid.getCraftingService().calculate(IActionSource.empty(), AEItemKey.of(ctx.get(item)),
                     ctx.get(amount), CalculationStrategy.REPORT_MISSING_ITEMS);
             if (plan == null) {
-                return "Nicht herstellbar (kein Pattern)";
+                return Message.translation("ae2cmd.craft.notCraftable");
             }
             if (plan.simulation()) {
-                return "Fehlend: " + plan.missingItems();
+                return Message.translation("ae2cmd.craft.missing").param("items", String.valueOf(plan.missingItems()));
             }
             CraftingSubmitResult r = grid.getCraftingService().submitJob(plan, null, null, true, IActionSource.empty());
-            return r.successful() ? "Gestartet (" + plan.bytes() + " Bytes)" : "Fehler: " + r.errorCode();
+            return r.successful() ? Message.translation("ae2cmd.craft.started").param("bytes", plan.bytes())
+                    : Message.translation("ae2cmd.craft.error").param("error", String.valueOf(r.errorCode()));
         }
     }
 
     /** Hält den Chunk an der Position geladen (wie ein Spieler daneben); Grundlage für Tests ohne Client. */
     static final class KeepLoaded extends PosCommand {
         KeepLoaded() {
-            super("keeploaded", "Chunk an der Position geladen halten");
+            super("keeploaded", "ae2cmd.keeploaded.desc");
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             long idx = com.hypixel.hytale.math.util.ChunkUtil.indexChunkFromBlock(x, z);
             world.getChunkStore().getChunkReferenceAsync(idx).thenAccept(ref -> world.execute(() -> {
                 var wc = world.getChunkStore().getChunkComponent(idx,
@@ -186,7 +188,7 @@ final class AE2DebugCommands {
                     wc.addKeepLoaded();
                 }
             }));
-            return "Chunk bei " + x + " " + z + " bleibt geladen";
+            return Message.translation("ae2cmd.keeploaded.done").param("x", x).param("z", z);
         }
     }
 
@@ -194,40 +196,44 @@ final class AE2DebugCommands {
         private final RequiredArg<String> item;
 
         Count() {
-            super("count", "Menge eines Items im ME-Netz");
-            item = withRequiredArg("itemId", "Item", ArgTypes.STRING);
+            super("count", "ae2cmd.count.desc");
+            item = withRequiredArg("itemId", "ae2cmd.arg.item", ArgTypes.STRING);
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             Grid grid = grid(nets, x, y, z);
             if (grid == null) {
-                return "Kein Netz";
+                return Message.translation("ae2cmd.noNetwork");
             }
-            return ctx.get(item) + ": " + grid.getStorageService().getCachedInventory().get(AEItemKey.of(ctx.get(item)));
+            return Message.translation("ae2cmd.count.done").param("item", ctx.get(item))
+                    .param("amount", grid.getStorageService().getCachedInventory().get(AEItemKey.of(ctx.get(item))));
         }
     }
 
     static final class Cpus extends PosCommand {
         Cpus() {
-            super("cpus", "Crafting-CPUs anzeigen");
+            super("cpus", "ae2cmd.cpus.desc");
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             Grid grid = grid(nets, x, y, z);
             if (grid == null) {
-                return "Kein Netz";
+                return Message.translation("ae2cmd.noNetwork");
             }
-            StringBuilder sb = new StringBuilder(grid.getCraftingService().getCpus().size() + " CPUs");
+            Message out = Message.translation("ae2cmd.cpus.header").param("count", grid.getCraftingService().getCpus().size())
+                    .param("craftable", grid.getCraftingService().getCraftables(k -> true).size());
             int i = 1;
             for (CraftingCpuCluster cpu : grid.getCraftingService().getCpus()) {
                 var job = cpu.getJobStatus();
-                sb.append(String.format(Locale.ROOT, " | CPU%d %d Bytes %s", i++, cpu.getAvailableStorage(),
-                        job == null ? "frei" : job.crafting() + " " + job.progress() + "/" + job.totalItems()));
+                Message jobText = job == null ? Message.translation("ae2cmd.cpus.idle")
+                        : Message.translation("ae2cmd.cpus.job").param("item", String.valueOf(job.crafting()))
+                        .param("progress", job.progress()).param("total", job.totalItems());
+                out.insert(Message.raw("\n")).insert(Message.translation("ae2cmd.cpus.cpu").param("index", i++)
+                        .param("bytes", cpu.getAvailableStorage()).param("job", jobText));
             }
-            sb.append(" | Craftbar: ").append(grid.getCraftingService().getCraftables(k -> true).size());
-            return sb.toString();
+            return out;
         }
     }
 
@@ -241,17 +247,17 @@ final class AE2DebugCommands {
         private final RequiredArg<Integer> seconds;
 
         Stress() {
-            super("stress", "Lasttest: Items rein/raus je Tick");
-            types = withRequiredArg("types", "Anzahl Item-Typen", ArgTypes.INTEGER);
-            ops = withRequiredArg("ops", "Operationen je Tick", ArgTypes.INTEGER);
-            seconds = withRequiredArg("seconds", "Dauer in Sekunden", ArgTypes.INTEGER);
+            super("stress", "ae2cmd.stress.desc");
+            types = withRequiredArg("types", "ae2cmd.arg.types", ArgTypes.INTEGER);
+            ops = withRequiredArg("ops", "ae2cmd.arg.ops", ArgTypes.INTEGER);
+            seconds = withRequiredArg("seconds", "ae2cmd.arg.seconds", ArgTypes.INTEGER);
         }
 
         @Override
-        String run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
             Grid grid = grid(nets, x, y, z);
             if (grid == null) {
-                return "Kein Netz";
+                return Message.translation("ae2cmd.noNetwork");
             }
             var inv = grid.getStorageService().getInventory();
             java.util.List<AEItemKey> keys = new java.util.ArrayList<>();
@@ -269,7 +275,7 @@ final class AE2DebugCommands {
                 }
             }
             if (keys.isEmpty()) {
-                return "Kein Platz im Netz (Zellen?)";
+                return Message.translation("ae2cmd.stress.noSpace");
             }
             int perTick = ctx.get(ops);
             long[] left = {ctx.get(seconds) * 20L};
@@ -289,7 +295,8 @@ final class AE2DebugCommands {
                 }
                 return true;
             });
-            return keys.size() + " Typen eingelagert, Last läuft " + ctx.get(seconds) + " s mit " + perTick + " Ops/Tick";
+            return Message.translation("ae2cmd.stress.started").param("types", keys.size()).param("seconds", ctx.get(seconds))
+                    .param("ops", perTick);
         }
     }
 }

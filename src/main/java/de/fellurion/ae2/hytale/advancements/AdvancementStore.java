@@ -58,7 +58,7 @@ final class AdvancementStore {
             JsonObject root = JsonParser.parseString(Files.readString(f, StandardCharsets.UTF_8)).getAsJsonObject();
             return PlayerAdvancements.fromJson(root);
         } catch (IOException | RuntimeException e) {
-            logger.at(Level.WARNING).withCause(e).log("AE2-Erfolge von %s nicht lesbar (%s) – starte leer", player, f);
+            logger.at(Level.WARNING).withCause(e).log("AE2: could not read achievements of %s (%s) – starting empty", player, f);
             return new PlayerAdvancements();
         }
     }
@@ -78,7 +78,7 @@ final class AdvancementStore {
                     Files.move(tmp, f, StandardCopyOption.REPLACE_EXISTING);
                 }
             } catch (IOException e) {
-                logger.at(Level.WARNING).withCause(e).log("AE2-Erfolge von %s nicht speicherbar (%s)", player, f);
+                logger.at(Level.WARNING).withCause(e).log("AE2: could not save achievements of %s (%s)", player, f);
             }
         }
     }

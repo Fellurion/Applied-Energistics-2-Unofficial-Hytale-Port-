@@ -90,11 +90,11 @@ public final class AE2Security {
             plugin.getChunkStoreRegistry().registerSystem(new OwnerPlacedSystem(AE2BlockComponent.getComponentType()));
         } catch (RuntimeException | LinkageError e) {
             // Ohne das System gilt jeder Block als Altbestand: Besitzer kommt beim ersten Bedarf aus PlacedBy (ohne Zeit)
-            log.at(Level.WARNING).withCause(e).log("AE2: Besitzer-Eintrag beim Platzieren nicht verfügbar");
+            log.at(Level.WARNING).withCause(e).log("AE2: recording the owner on placement is not available");
         }
         plugin.getEventRegistry().registerGlobal(PlayerReadyEvent.class, AE2Security::onPlayerReady);
         plugin.getEventRegistry().registerGlobal(PlayerDisconnectEvent.class, AE2Security::onPlayerDisconnect);
-        log.at(Level.INFO).log("AE2: Zugriffsschutz aktiv (Listen in %s)", dir);
+        log.at(Level.INFO).log("AE2: access protection enabled (lists in %s)", dir);
     }
 
     private static void onPlayerReady(PlayerReadyEvent event) {
@@ -412,7 +412,7 @@ public final class AE2Security {
         } catch (RuntimeException e) {
             HytaleLogger l = logger;
             if (l != null) {
-                l.at(Level.FINE).withCause(e).log("AE2: Fenster nach Zugriffsentzug nicht geschlossen");
+                l.at(Level.FINE).withCause(e).log("AE2: could not close window after access was revoked");
             }
         }
     }
