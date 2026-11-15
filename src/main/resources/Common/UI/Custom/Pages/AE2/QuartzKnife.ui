@@ -1,0 +1,95 @@
+$C = "../../Common.ui";
+
+// Schneidmesser (AE2: QuartzKnifeScreen): einen Namen eingeben und aus einem Metallbarren eine Namenspresse
+// schneiden. Der Barren kommt aus dem Inventar des Spielers; welcher, zeigt #BarText. Alles rechnet der Server
+// (KnifePage.java).
+
+@LabelStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+@TextStyle = (FontSize: 13, TextColor: #d3d6db, VerticalAlignment: Center, Wrap: true);
+@OkStyle = (FontSize: 13, TextColor: #9ec47a, VerticalAlignment: Center, Wrap: true);
+@ErrorStyle = (FontSize: 13, TextColor: #e0796b, VerticalAlignment: Center, Wrap: true);
+@HintStyle = (FontSize: 12, TextColor: #5a6a7a, VerticalAlignment: Start, Wrap: true);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 560, Height: 380);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Name Press";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 16, Vertical: 10);
+
+    Label #NameLabel { Text: ""; Anchor: (Height: 24); Style: @LabelStyle; }
+
+    Group {
+      Anchor: (Height: 44);
+      LayoutMode: Left;
+
+      $C.@TextField #NameInput {
+        @Anchor = (Top: 3);
+        FlexWeight: 1;
+        MaxLength: 32;
+        PlaceholderText: %ae2tools.knife.placeholder;
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@TextButton #Make {
+        @Anchor = (Width: 230);
+        Text: "";
+      }
+    }
+
+    Group { Anchor: (Height: 10); }
+
+    // Der Barren, den das Schneiden verbraucht
+    Group {
+      Anchor: (Height: 52);
+      LayoutMode: Left;
+
+      Group {
+        Anchor: (Width: 52, Height: 52);
+        Background: #1a2530;
+        Padding: 2;
+
+        ItemSlot #BarIcon {
+          Anchor: (Full: 0);
+          ShowQualityBackground: true;
+          ShowQuantity: false;
+        }
+      }
+
+      Label #BarText {
+        Text: "";
+        FlexWeight: 1;
+        Padding: (Left: 12);
+        Style: @TextStyle;
+      }
+    }
+
+    Group { Anchor: (Height: 8); }
+
+    // Meldung der letzten Aktion: Erfolg (#Status) oder Fehler (#StatusError), nie beide
+    Group {
+      Anchor: (Height: 40);
+
+      Label #Status { Text: ""; Anchor: (Full: 0); Style: @OkStyle; }
+      Label #StatusError { Text: ""; Anchor: (Full: 0); Style: @ErrorStyle; Visible: false; }
+    }
+
+    Group { Anchor: (Height: 6); }
+
+    Label #Hint { Text: ""; FlexWeight: 1; Style: @HintStyle; }
+  }
+}
+
+$C.@BackButton {}

@@ -1,0 +1,44 @@
+# Applied Energistics 2 – Quantennetzwerkbrücke (Quantentunnelring, Quantentunnelkammer)
+# Datei ae2quantum.lang -> Schlüsselpräfix 'ae2quantum.'
+
+hud.notFormed = Nicht gebildet
+hud.forming = Bildet sich …
+hud.reason.wrong_shape = Flaches 3×3 bauen: 8 Ringe um 1 Quantentunnelkammer
+hud.reason.touched = Weiterer Brückenblock berührt das Quadrat – Abstand lassen
+hud.reason.wrong_layout = Ein Block fehlt oder die Kammer ist nicht in der Mitte
+hud.hint.build = Aufrecht oder flach · beide Enden in derselben Welt
+hud.linked = Verbunden
+hud.waiting = Wartet auf die Gegenstelle
+hud.inUse = Frequenz schon vergeben
+hud.noSingularity = Keine Singularität
+hud.block = Block
+hud.block.link = Kammer · enthält die Singularität
+hud.block.edge = Ring · nimmt Kabel an
+hud.block.corner = Eck-Ring · nimmt keine Kabel an
+hud.frequency = Frequenz
+hud.frequency.none = –
+hud.link = Verbindung
+hud.link.linked = mit der anderen Brücke verbunden
+hud.link.linkedAt = zur Brücke bei {x} {y} {z}
+hud.link.waiting = Gegenstelle nicht geladen oder nicht gefunden
+hud.link.inUse = zwei andere Brücken nutzen die Frequenz schon
+hud.link.noSingularity = braucht eine verschränkte Singularität
+hud.link.unentangled = diese Singularität ist nicht verschränkt
+hud.power = Strom
+hud.power.on = an · die Brücke verbraucht {usage} AE/t
+hud.power.off = keiner · die Brücke braucht {usage} AE/t
+hud.hint.loaded = Beide Enden müssen geladen und in derselben Welt sein
+hud.hint.stack = {count} Singularitäten hier – eine gehört zur Gegenstelle
+
+cmd.desc = Quantennetzwerkbrücke (Admin)
+cmd.singularity.desc = Eine Singularität mit einer Frequenz in eine Quantentunnelkammer legen (0 leert den Slot)
+cmd.info.desc = Zustand der Quantennetzwerkbrücke zeigen, zu der ein Block gehört
+cmd.arg.frequency = Frequenz als ganze Zahl, 0 leert den Slot
+cmd.noLink = [AE2] Keine Quantentunnelkammer bei {x} {y} {z}
+cmd.noBridge = [AE2] Kein Block einer Quantennetzwerkbrücke bei {x} {y} {z}
+cmd.badFrequency = [AE2] {value} ist keine Frequenz (ganze Zahl erwartet)
+cmd.singularity.set = [AE2] Quantentunnelkammer bei {x} {y} {z} enthält jetzt eine Singularität der Frequenz {frequency}
+cmd.singularity.cleared = [AE2] Quantentunnelkammer bei {x} {y} {z} geleert
+cmd.singularity.failed = [AE2] Die Quantentunnelkammer bei {x} {y} {z} hat die Singularität nicht angenommen (Frequenz {frequency})
+cmd.info.unformed = [AE2] Quantennetzwerkbrücke · {block} · nicht gebildet ({reason}) · Frequenz {frequency} · Netz {blocks} Blöcke
+cmd.info.formed = [AE2] Quantennetzwerkbrücke · {block} · gebildet um {center} · Frequenz {frequency} · Platz {side} · {state} · Gegenstelle {other} · Netz {blocks} Blöcke · {power} · offene Seiten {sides}

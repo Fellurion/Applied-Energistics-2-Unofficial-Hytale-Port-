@@ -25,6 +25,12 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import de.fellurion.ae2.core.stacks.AEFluidKey;
+import de.fellurion.ae2.hytale.fluid.FluidConfig;
+import de.fellurion.ae2.hytale.fluid.FluidContainers;
+import de.fellurion.ae2.hytale.fluid.FluidText;
+import de.fellurion.ae2.hytale.fluid.FluidTransfers;
+import de.fellurion.ae2.hytale.fluid.FluidTypes;
 import de.fellurion.ae2.hytale.setsys.SetSysItems;
 
 import javax.annotation.Nullable;
@@ -46,6 +52,12 @@ import java.util.function.Supplier;
  * Inventarfeld lagert den Stapel ein (Rechtsklick: ein Item). Ziehen aus dem Inventar auf das Netz-Gitter lagert ein,
  * Ziehen aus dem Netz-Gitter auf ein Inventarfeld entnimmt dorthin.
  *
+ * <p><b>Flüssigkeiten</b> stehen wie in AE2 im selben Gitter (Menge in Eimern), lassen sich aber nicht als Item
+ * entnehmen. AE2s Regel für den gehaltenen Behälter gilt hier für das Inventar daneben: Klick auf eine Flüssigkeit
+ * füllt einen leeren Behälter aus dem Inventar (ersatzweise einen, der im Netz lagert), Rechtsklick auf einen
+ * gefüllten Behälter im Inventar leert ihn ins Netz – Linksklick lagert ihn weiterhin als Item ein. Umgefüllt wird
+ * immer ein ganzer Behälter oder nichts ({@link FluidTransfers}).
+ *
  * <p><b>Keine Dupes, kein Verlust:</b> Das Netz-Gitter zeigt nur Anzeige-Kopien. Sein Fenster (für die Abschnittsnummer,
  * die der Client zum Ziehen braucht) hängt an einem immer leeren Behälter mit {@link FilterType#DENY_ALL}; was dennoch
  * hineingerät, wird sofort eingelagert bzw. zurückgegeben ({@link #newDropContainer}). Jede Bewegung rechnet der
@@ -56,6 +68,9 @@ import java.util.function.Supplier;
  * <p><b>Zugriffsschutz:</b> Ohne Zugriff ({@link TerminalBackend#accessDeniedText}) zeigt die Ansicht nur, wem das Netz
  * gehört; jede Aktion am Netz prüft vorher {@link TerminalBackend#checkAccess}. Besitzer und Admins sehen den Knopf
  * „Zugriff“ ({@link #A_ACCESS}, Zugriffsliste in {@code security.AccessPage}).
+ *
+ * <p><b>Crafting-Terminal:</b> Mit {@link Layout#craftColumns()} &gt; 0 gehört das Herstellen ({@link CraftingPanel})
+ * zur Ansicht; das Dokument muss dann dessen Elemente enthalten ({@code CraftingTerminal*.ui}).
  */
 public final class TerminalView {
 
@@ -120,18 +135,39 @@ public final class TerminalView {
     /**
      * Aufteilung der Seite.
      *
-     * @param rows      Zeilen des Netz-Gitters (je {@value #COLUMNS} Felder)
-     * @param amountRow Dokument einer Zeile Mengenangaben über dem Gitter
+     * @param rows         Zeilen des Netz-Gitters (je {@value #COLUMNS} Felder)
+     * @param amountRow    Dokument einer Zeile Mengenangaben über dem Gitter
+     * @param craftColumns Rezepte je Zeile im Herstellen-Bereich des Crafting-Terminals; 0 = ME-Terminal ohne Herstellen
      */
-    public record Layout(int rows, String amountRow) {
+    public record Layout(int rows, String amountRow, int craftColumns) {
+
+        /** ME-Terminal ohne Herstellen. */
+        public Layout(int rows, String amountRow) {
+            this(rows, amountRow, 0);
+        }
+
         public int pageSize() {
             return rows * COLUMNS;
         }
+
+        public boolean crafting() {
+            return craftColumns > 0;
+        }
     }
 
-    /** Ein Ereignis der Seite, unabhängig davon, ob es aus der eigenen Seite oder der FTCore-Schale kommt. */
+    /**
+     * Ein Ereignis der Seite, unabhängig davon, ob es aus der eigenen Seite oder der FTCore-Schale kommt.
+     *
+     * @param craftSearch Text der Rezeptsuche des Crafting-Terminals ({@link CraftingPanel#F_SEARCH})
+     */
     public record Event(String action, @Nullable String search, @Nullable String grid, int slot, int sourceSection,
-                        int sourceSlot, int quantity, int button, @Nullable String itemId) {
+                        int sourceSlot, int quantity, int button, @Nullable String itemId,
+                        @Nullable String craftSearch) {
+
+        public Event(String action, @Nullable String search, @Nullable String grid, int slot, int sourceSection,
+                     int sourceSlot, int quantity, int button, @Nullable String itemId) {
+            this(action, search, grid, slot, sourceSection, sourceSlot, quantity, button, itemId, null);
+        }
     }
 
     /**
@@ -145,6 +181,9 @@ public final class TerminalView {
 
     private final Layout layout;
     private final String titleKey;
+    /** Herstellen-Bereich des Crafting-Terminals; null im ME-Terminal. */
+    @Nullable
+    private final CraftingPanel crafting;
     private String search = "";
     private SortMode sort = SortMode.AMOUNT;
     private int page;
@@ -161,6 +200,7 @@ public final class TerminalView {
     public TerminalView(Layout layout, String titleKey) {
         this.layout = layout;
         this.titleKey = titleKey;
+        this.crafting = layout.crafting() ? new CraftingPanel(layout.craftColumns()) : null;
     }
 
     // ------------------------------------------------------------------ Aufbau
@@ -179,7 +219,10 @@ public final class TerminalView {
         cmd.set("#AE2Cpus.Text", TerminalTexts.tr(l, "ae2ui.terminal.craftingStatus"));
         cmd.set("#AE2Cpus.Visible", backend.hasCraftingStatus());
         cmd.set("#AE2CraftMode.Visible", backend.hasCraftingStatus());
-        cmd.set("#AE2Hint.Text", TerminalTexts.tr(l, "ae2ui.terminal.hint"));
+        if (crafting == null) {
+            // Im Crafting-Terminal steht an dieser Stelle das Herstellen; die Bedienung erklären dort die Tooltips
+            cmd.set("#AE2Hint.Text", TerminalTexts.tr(l, "ae2ui.terminal.hint"));
+        }
         cmd.set("#AE2InvHeader.Text", TerminalTexts.tr(l, "ae2ui.terminal.inventory"));
         cmd.set("#AE2HotbarHeader.Text", TerminalTexts.tr(l, "ae2ui.terminal.hotbar"));
         cmd.set("#AE2BackpackHeader.Text", TerminalTexts.tr(l, "ae2ui.terminal.backpack"));
@@ -202,6 +245,9 @@ public final class TerminalView {
         for (int r = 0; r < layout.rows(); r++) {
             cmd.append("#AE2NetAmounts", layout.amountRow());
         }
+        if (crafting != null) {
+            crafting.build(cmd, evt, base, l);
+        }
         fillUpdate(cmd, backend, v);
     }
 
@@ -220,8 +266,12 @@ public final class TerminalView {
 
     /** Aktualisiert Netzinhalt, Status und Inventar (ohne Dokument und Bindungen neu zu schicken). */
     public void fillUpdate(UICommandBuilder cmd, TerminalBackend backend, Viewer v) {
-        fillNetwork(cmd, backend, v.locale());
+        List<TerminalBackend.Entry> entries = fillNetwork(cmd, backend, v.locale());
         fillBags(cmd, v);
+        if (crafting != null) {
+            // entries ist null, wenn das Netz offline ist oder der Zugriff fehlt
+            crafting.fill(cmd, entries == null ? List.of() : entries, entries != null, v);
+        }
     }
 
     private static List<String> allGrids() {
@@ -231,12 +281,16 @@ public final class TerminalView {
         return g;
     }
 
-    private void fillNetwork(UICommandBuilder cmd, TerminalBackend backend, String l) {
+    /** @return alle Einträge des Netzes (ungefiltert); null, wenn es offline ist oder der Zugriff fehlt */
+    @Nullable
+    private List<TerminalBackend.Entry> fillNetwork(UICommandBuilder cmd, TerminalBackend backend, String l) {
         shownRevision = backend.revision();
         // Kein Zugriff (fremdes Netz, Zugriff entzogen): nichts zeigen außer dem Hinweis, wem es gehört
         String denied = backend.accessDeniedText(l);
         boolean online = denied == null && backend.isOnline();
-        List<TerminalBackend.Entry> all = online ? filterAndSort(backend.entries(), l) : List.of();
+        List<TerminalBackend.Entry> entries = online ? backend.entries() : null;
+        // Flüssigkeiten stehen im selben Gitter, zählen aber nicht zu den Items (Rückgabewert: nur Items)
+        List<TerminalBackend.Entry> all = online ? filterAndSort(entries, backend.fluids(), l) : List.of();
         int size = layout.pageSize();
         int pages = Math.max(1, (all.size() + size - 1) / size);
         page = Math.max(0, Math.min(page, pages - 1));
@@ -255,7 +309,10 @@ public final class TerminalView {
                     "stored", TerminalTexts.formatAmount((long) st.storedPower()),
                     "max", TerminalTexts.formatAmount((long) st.maxPower()),
                     "usage", String.format(Locale.ROOT, "%.1f", st.avgUsage())));
-            cmd.set("#AE2Storage.Text", TerminalTexts.tr(l, "ae2ui.terminal.storage",
+            cmd.set("#AE2Storage.Text", st.fluid() > 0 ? TerminalTexts.tr(l, "ae2fluid.terminal.storage",
+                    "types", Integer.toString(st.types()), "items", TerminalTexts.formatAmount(st.items()),
+                    "fluid", FluidText.full(st.fluid(), l))
+                    : TerminalTexts.tr(l, "ae2ui.terminal.storage",
                     "types", Integer.toString(st.types()), "items", TerminalTexts.formatAmount(st.items())));
         } else {
             cmd.set("#AE2Status.Text", TerminalTexts.tr(l, "ae2ui.terminal.status.offline"));
@@ -275,7 +332,17 @@ public final class TerminalView {
             ItemGridSlot slot = new ItemGridSlot();
             String cell = "#AE2NetAmounts[" + (i / COLUMNS) + "] ";
             int c = i % COLUMNS;
-            if (i < shown.size()) {
+            if (i < shown.size() && shown.get(i).fluid()) {
+                // Flüssigkeit: Anzeige-Item ohne Stückzahl, Menge in Eimern. Anklickbar wie jeder Eintrag; ein Zug
+                // aus dem Gitter bewirkt nichts (siehe extractToSlot) – als Item gibt es sie nicht.
+                TerminalBackend.Entry e = shown.get(i);
+                slot.setItemStack(TerminalTexts.displayStack(e.display(), 1));
+                slot.setDescription(TerminalTexts.entryDescription(e, l));
+                slot.setActivatable(true);
+                cmd.set(cell + "#A" + c + ".Text", FluidText.slot(e.amount()));
+                cmd.set(cell + "#S" + c + ".Visible", false);
+                cmd.set(cell + "#K" + c + ".Visible", false);
+            } else if (i < shown.size()) {
                 TerminalBackend.Entry e = shown.get(i);
                 int qty = (int) Math.max(1, Math.min(e.amount(), TerminalTexts.maxStack(e.display())));
                 slot.setItemStack(TerminalTexts.displayStack(e.display(), qty));
@@ -294,6 +361,7 @@ public final class TerminalView {
             slots[i] = slot;
         }
         cmd.set(NET_GRID + ".Slots", slots);
+        return entries;
     }
 
     private void fillBags(UICommandBuilder cmd, Viewer v) {
@@ -316,6 +384,10 @@ public final class TerminalView {
                 if (!ItemStack.isEmpty(stack)) {
                     slot.setItemStack(TerminalTexts.displayStack(stack, stack.getQuantity()));
                     String d = TerminalTexts.slotDescription(stack, v.locale());
+                    String fluidHint = TerminalTexts.containerHint(stack, v.locale());
+                    if (!fluidHint.isEmpty()) {
+                        d = d.isEmpty() ? fluidHint : d + "\n\n" + fluidHint;
+                    }
                     if (!d.isEmpty()) {
                         slot.setDescription(d);
                     }
@@ -327,27 +399,40 @@ public final class TerminalView {
         }
     }
 
-    private List<TerminalBackend.Entry> filterAndSort(List<TerminalBackend.Entry> entries, String l) {
+    /** Kennung für Suche und Sortierung: die Item-Id bzw. die Kennung der Flüssigkeit. */
+    private static String entryId(TerminalBackend.Entry e) {
+        return e.fluid() && e.fluidId() != null ? e.fluidId() : e.display().getItemId();
+    }
+
+    /** Menge in Anzeige-Einheiten (Items: Stück, Flüssigkeiten: Eimer) – danach sortiert AE2 ({@code Repo}). */
+    private static double units(TerminalBackend.Entry e) {
+        return e.fluid() ? e.amount() / (double) AEFluidKey.AMOUNT_BUCKET : e.amount();
+    }
+
+    private List<TerminalBackend.Entry> filterAndSort(List<TerminalBackend.Entry> entries,
+                                                      List<TerminalBackend.Entry> fluids, String l) {
         String q = search == null ? "" : search.trim().toLowerCase(Locale.ROOT);
-        List<TerminalBackend.Entry> out = new ArrayList<>(entries.size());
-        for (TerminalBackend.Entry e : entries) {
-            String id = e.display().getItemId();
-            if (q.isEmpty() || matches(q, id, TerminalTexts.itemName(l, id))) {
-                out.add(e);
+        List<TerminalBackend.Entry> out = new ArrayList<>(entries.size() + fluids.size());
+        for (List<TerminalBackend.Entry> list : List.of(entries, fluids)) {
+            for (TerminalBackend.Entry e : list) {
+                if (q.isEmpty() || matches(q, entryId(e), TerminalTexts.entryName(e, l))) {
+                    out.add(e);
+                }
             }
         }
-        Comparator<TerminalBackend.Entry> byId = Comparator.comparing(e -> e.display().getItemId());
+        Comparator<TerminalBackend.Entry> byId = Comparator.comparing(TerminalView::entryId);
         Comparator<TerminalBackend.Entry> byKey = byId.thenComparing(TerminalBackend.Entry::key);
         out.sort(switch (sort) {
-            case AMOUNT -> Comparator.comparingLong(TerminalBackend.Entry::amount).reversed().thenComparing(byKey);
+            case AMOUNT -> Comparator.comparingDouble(TerminalView::units).reversed().thenComparing(byKey);
             case NAME -> Comparator.comparing((TerminalBackend.Entry e) ->
-                    TerminalTexts.itemName(l, e.display().getItemId()).toLowerCase(Locale.ROOT)).thenComparing(byKey);
+                    TerminalTexts.entryName(e, l).toLowerCase(Locale.ROOT)).thenComparing(byKey);
             case ID -> byKey;
         });
         return out;
     }
 
-    static boolean matches(String query, String itemId, String name) {
+    /** Passt der (klein geschriebene) Suchtext zum Namen, zur Item-Id oder zur Id mit Leerzeichen statt Unterstrichen? */
+    public static boolean matches(String query, String itemId, String name) {
         String id = itemId.toLowerCase(Locale.ROOT);
         return name.toLowerCase(Locale.ROOT).contains(query) || id.contains(query)
                 || id.replace('_', ' ').contains(query);
@@ -374,11 +459,26 @@ public final class TerminalView {
                 continue;
             }
             for (short s = 0; s < c.getCapacity(); s++) {
-                ItemStack stack = c.getItemStack(s);
-                h = 31 * h + (stack == null ? 0 : stack.hashCode());
+                h = 31 * h + stackHash(c.getItemStack(s));
             }
         }
         return h;
+    }
+
+    /**
+     * Kennzahl eines Inventarfelds. Items mit Akku zählen ohne ihre Metadaten: Ein offenes Wireless Terminal bzw.
+     * eine offene tragbare Zelle schreibt etwa jede Sekunde ihren Verbrauch ins Item, und davon soll sich die Ansicht
+     * nicht jedes Mal neu zeichnen (die Schale baute dabei das Dokument neu auf). Ändert sich sonst etwas an einem
+     * solchen Item, geschieht das über eine Aktion der Ansicht – die zeichnet ohnehin neu.
+     */
+    static int stackHash(@Nullable ItemStack stack) {
+        if (stack == null) {
+            return 0;
+        }
+        if (de.fellurion.ae2.hytale.items.PoweredItems.isPowered(stack.getItemId())) {
+            return 31 * stack.getItemId().hashCode() + stack.getQuantity();
+        }
+        return stack.hashCode();
     }
 
     // ------------------------------------------------------------------ Ereignisse
@@ -391,10 +491,22 @@ public final class TerminalView {
         if (NEEDS_ACCESS.contains(e.action()) && !backend.checkAccess(v.playerRef())) {
             return Result.UPDATE;
         }
+        if (CraftingPanel.handles(e.action())) {
+            if (crafting == null) {
+                return Result.NONE;
+            }
+            // Herstellen entnimmt aus dem Netz: Zugriff wie bei jeder anderen Aktion am Netz prüfen
+            if (CraftingPanel.needsAccess(e.action()) && !backend.checkAccess(v.playerRef())) {
+                return Result.UPDATE;
+            }
+            return crafting.handle(e, backend, v);
+        }
         switch (e.action()) {
             case A_ACCESS -> {
+                boolean craftingTerminal = crafting != null;
                 return v.player() != null && backend.openAccess(v.player(), v.playerRef(), v.ref(), v.store(),
-                        v.locale(), (p, pr, r, s) -> TerminalOpener.open(p, pr, r, s, titleKey, backend))
+                        v.locale(), (p, pr, r, s) -> TerminalOpener.open(p, pr, r, s, titleKey, backend,
+                                craftingTerminal))
                         ? Result.PAGE_OPENED : Result.NONE;
             }
             case A_SEARCH -> {
@@ -455,6 +567,14 @@ public final class TerminalView {
             if (entry == null) {
                 return Result.NONE;
             }
+            if (entry.fluid()) {
+                // AE2: Klick auf eine Flüssigkeit füllt den gehaltenen Behälter – hier einen aus dem Inventar
+                fillContainer(entry, backend, v);
+                // ein Zug beginnt mit einem Klick: das folgende Ablegen desselben Felds zählt nicht noch einmal
+                lastTakeSlot = e.slot();
+                lastTakeTime = System.currentTimeMillis();
+                return Result.UPDATE;
+            }
             boolean craft = entry.craftable() && (entry.amount() <= 0 || craftMode || e.button() == BUTTON_MIDDLE);
             if (craft) {
                 return v.player() != null && backend.requestCraft(entry.key(), v.player(), v.playerRef(), v.ref(), v.store())
@@ -476,8 +596,130 @@ public final class TerminalView {
         if (c == null || e.slot() < 0 || e.slot() >= c.getCapacity()) {
             return Result.NONE;
         }
+        if (e.button() == BUTTON_RIGHT && FluidContainers.contentOf(c.getItemStack((short) e.slot())) != null) {
+            // AE2: Rechtsklick mit einem gefüllten Behälter leert ihn ins Netz (Linksklick lagert das Item ein)
+            emptyContainer(c, (short) e.slot(), backend, v);
+            return Result.UPDATE;
+        }
         storeSlot(backend, v, c, (short) e.slot(), e.button() == BUTTON_RIGHT ? 1 : Integer.MAX_VALUE);
         return Result.UPDATE;
+    }
+
+    // ------------------------------------------------------------------ Flüssigkeiten
+
+    /** Das Lager des Terminals als Gegenstelle zum Umfüllen (bezahlt wie in AE2 1 AE je 125 mB). */
+    public static FluidTransfers.Endpoint fluidEndpoint(TerminalBackend backend) {
+        return new FluidTransfers.Endpoint() {
+            @Override
+            public long insert(AEFluidKey what, long amount, boolean simulate) {
+                return backend.insertFluid(what.fluidId(), amount, simulate);
+            }
+
+            @Override
+            public long extract(AEFluidKey what, long amount, boolean simulate) {
+                return backend.extractFluid(TerminalBackend.fluidKey(what.fluidId()), amount, simulate);
+            }
+        };
+    }
+
+    private static void tellFluid(Viewer v, String key, boolean warning, Object... params) {
+        FluidText.tell(v.playerRef(), com.hypixel.hytale.server.core.Message.raw(TerminalTexts.tr(v.locale(), key, params)),
+                warning);
+    }
+
+    /**
+     * Füllt einen leeren Behälter mit der angeklickten Flüssigkeit (AE2: {@code MEStorageMenu.tryFillContainerItem}):
+     * den ersten passenden aus Schnellleiste, Lager oder Rucksack; hat der Spieler keinen, wird wie in AE2 einer aus
+     * dem Netz genommen. Flüssigkeiten ohne Behälter-Item (im Spiel alles außer Wasser) lassen sich so nicht
+     * entnehmen.
+     */
+    private void fillContainer(TerminalBackend.Entry entry, TerminalBackend backend, Viewer v) {
+        String fluidId = entry.fluidId();
+        if (!backend.isOnline() || fluidId == null || entry.amount() <= 0) {
+            return;
+        }
+        String name = FluidTypes.name(v.locale(), fluidId);
+        FluidConfig.ContainerSpec spec = FluidContainers.forFluid(fluidId);
+        if (spec == null) {
+            tellFluid(v, "ae2fluid.terminal.noContainer", true, "fluid", name);
+            return;
+        }
+        AEFluidKey key = AEFluidKey.of(fluidId);
+        FluidTransfers.Endpoint network = fluidEndpoint(backend);
+        for (String grid : List.of(HOTBAR_GRID, STORAGE_GRID, BACKPACK_GRID)) {
+            ItemContainer c = bagContainer(v, grid);
+            short slot = c == null ? -1 : FluidTransfers.findEmptyContainer(c, fluidId);
+            if (slot >= 0) {
+                reportFill(v, FluidTransfers.fill(c, slot, key, network, rest -> giveToInventory(backend, v, rest)), name);
+                return;
+            }
+        }
+        // Kein leerer Behälter im Inventar: einen aus dem Netz nehmen – aber nur, wenn er sich auch füllen lässt
+        TerminalBackend.Entry stored = null;
+        for (TerminalBackend.Entry e : backend.entries()) {
+            if (e.amount() > 0 && FluidContainers.emptyFor(e.display(), fluidId) != null) {
+                stored = e;
+                break;
+            }
+        }
+        if (stored == null) {
+            tellFluid(v, "ae2fluid.terminal.needContainer", true, "container",
+                    TerminalTexts.itemName(v.locale(), spec.emptyItem()), "fluid", name);
+            return;
+        }
+        if (network.extract(key, spec.amount(), true) < spec.amount()) {
+            reportFill(v, FluidTransfers.Result.NOT_ENOUGH, name);
+            return;
+        }
+        ItemStack taken = backend.extract(stored.key(), 1);
+        if (ItemStack.isEmpty(taken)) {
+            return;
+        }
+        SimpleItemContainer hand = new SimpleItemContainer((short) 1);
+        hand.setItemStackForSlot((short) 0, taken, false);
+        FluidTransfers.Result result = FluidTransfers.fill(hand, (short) 0, key, network,
+                rest -> giveToInventory(backend, v, rest));
+        ItemStack left = hand.getItemStack((short) 0);
+        if (!ItemStack.isEmpty(left)) {
+            hand.removeItemStackFromSlot((short) 0, false);
+            if (result == FluidTransfers.Result.DONE) {
+                giveToInventory(backend, v, left); // der gefüllte Behälter
+            } else {
+                // nicht gefüllt: der leere Behälter geht zurück ins Netz, der Rest zum Spieler
+                long back;
+                try {
+                    back = backend.insert(left);
+                } catch (RuntimeException ex) {
+                    back = 0;
+                }
+                if (back < left.getQuantity()) {
+                    giveToPlayer(v.ref(), v.store(), left.withQuantity((int) (left.getQuantity() - back)));
+                }
+            }
+        }
+        reportFill(v, result, name);
+    }
+
+    private static void reportFill(Viewer v, FluidTransfers.Result result, String fluidName) {
+        if (result == FluidTransfers.Result.NOT_ENOUGH) {
+            tellFluid(v, "ae2fluid.terminal.notEnough", true, "fluid", fluidName);
+        }
+    }
+
+    /**
+     * Leert den gefüllten Behälter im Inventarfeld ins Netz (AE2: {@code AEBaseMenu.handleEmptyHeldItem}); nimmt das
+     * Netz die Flüssigkeit nicht ganz an, bleibt der Behälter, wie er ist.
+     */
+    private static void emptyContainer(ItemContainer container, short slot, TerminalBackend backend, Viewer v) {
+        if (!backend.isOnline()) {
+            return;
+        }
+        FluidContainers.Content content = FluidContainers.contentOf(container.getItemStack(slot));
+        FluidTransfers.Result result = FluidTransfers.empty(container, slot, fluidEndpoint(backend),
+                rest -> giveToPlayer(v.ref(), v.store(), rest));
+        if (result == FluidTransfers.Result.NO_ROOM && content != null) {
+            tellFluid(v, "ae2fluid.terminal.noRoom", true, "fluid", FluidTypes.name(v.locale(), content.fluid().fluidId()));
+        }
     }
 
     private Result drop(Event e, TerminalBackend backend, Viewer v) {
@@ -501,6 +743,9 @@ public final class TerminalView {
             ItemContainer src = ownContainer(v, e.sourceSection());
             if (src == null || e.sourceSlot() >= src.getCapacity()) {
                 return Result.NONE;
+            }
+            if (foreignDrag(e, src)) {
+                return Result.UPDATE;
             }
             storeSlot(backend, v, src, (short) e.sourceSlot(), e.quantity() > 0 ? e.quantity() : Integer.MAX_VALUE);
             return Result.UPDATE;
@@ -526,9 +771,25 @@ public final class TerminalView {
         if (ItemStack.isEmpty(moving)) {
             return Result.NONE;
         }
+        if (foreignDrag(e, src)) {
+            return Result.UPDATE;
+        }
         int qty = Math.max(1, Math.min(e.quantity() > 0 ? e.quantity() : moving.getQuantity(), moving.getQuantity()));
         InventoryUtils.moveItem(v.ref(), e.sourceSection(), e.sourceSlot(), qty, targetSection, e.slot(), v.store());
         return Result.UPDATE;
+    }
+
+    /**
+     * Crafting-Terminal: Die Rezeptliste ist ein Gitter ohne Fenster und reine Anzeige. Zieht jemand ein Rezept auf
+     * ein anderes Gitter, darf das nie als Zug aus dem Inventar gelten – auch dann nicht, wenn der Client dafür einen
+     * Abschnitt des Spielers nennen sollte. Ein echter Zug nennt das Item, das im Quellfeld liegt.
+     */
+    private boolean foreignDrag(Event e, ItemContainer src) {
+        if (crafting == null || e.itemId() == null || e.sourceSlot() < 0 || e.sourceSlot() >= src.getCapacity()) {
+            return false;
+        }
+        ItemStack there = src.getItemStack((short) e.sourceSlot());
+        return ItemStack.isEmpty(there) || !e.itemId().equals(there.getItemId());
     }
 
     /** Entnimmt den gezogenen Netz-Eintrag in das Zielfeld (Rest ins Inventar, notfalls zurück ins Netz). */
@@ -537,8 +798,8 @@ public final class TerminalView {
             return;
         }
         TerminalBackend.Entry entry = shown.get(e.sourceSlot());
-        if (entry.amount() <= 0) {
-            return;
+        if (entry.amount() <= 0 || entry.fluid()) {
+            return; // Flüssigkeiten gibt es nicht als Item
         }
         int max = TerminalTexts.maxStack(entry.display());
         int want = Math.max(1, Math.min(e.quantity() > 0 ? e.quantity() : max, max));
@@ -636,7 +897,7 @@ public final class TerminalView {
         }
         if (itemId != null) {
             for (TerminalBackend.Entry e : shown) {
-                if (itemId.equals(e.display().getItemId())) {
+                if (!e.fluid() && itemId.equals(e.display().getItemId())) {
                     return e;
                 }
             }

@@ -30,6 +30,37 @@ terminal.tooltip.craftable = Craftable
 terminal.tooltip.takeHint = Left click: stack · right click: 1 · drag into your inventory
 terminal.tooltip.craftHint = Click to request crafting
 
+craftterm.search = Search recipe…
+craftterm.stack = Stack
+craftterm.max = Max
+craftterm.filter.all = Show: all recipes
+craftterm.filter.craftable = Show: craftable now
+craftterm.noRecipes = No recipes available.
+craftterm.noMatch = No recipe matches the search.
+craftterm.noneCraftable = Nothing can be crafted from the network and your inventory right now.
+craftterm.choose = Choose a recipe. Ingredients come from the ME network first, then from your inventory.
+craftterm.selected = {item} ×{amount} · {bench} · up to {max}× possible
+craftterm.selectedMissing = {item} ×{amount} · {bench} · ingredients missing
+craftterm.crafted = Crafted {amount}× {item}.
+craftterm.craftedPartial = Crafted {amount}× {item} – not enough ingredients for more.
+craftterm.missing = Missing: {items}
+craftterm.noPower = The ME network cannot hand out the ingredients right now (not enough energy?).
+craftterm.failed = Crafting failed – nothing was used up.
+craftterm.denied = Crafting this recipe is not allowed here.
+craftterm.locked = You cannot craft this recipe (any more).
+craftterm.bench.Fieldcraft = Pocket crafting
+craftterm.bench.Workbench = Workbench
+craftterm.bench.AE2_Workbench = Energistics Workbench
+craftterm.tooltip.bench = Recipe from: {bench}
+craftterm.tooltip.ingredient = {amount}× {item}
+craftterm.tooltip.any = Any: {type}
+craftterm.tooltip.needed = Needed: {amount}
+craftterm.tooltip.network = In the ME network: {amount}
+craftterm.tooltip.inventory = In your inventory: {amount}
+craftterm.tooltip.missing = Missing: {amount}
+craftterm.tooltip.autocraft = The network can craft this (request it in the grid above).
+craftterm.tooltip.select = Click to select this recipe
+
 workbench.noCell = No cell inserted
 workbench.addHeld = Add held item
 workbench.addInventory = Add inventory
@@ -57,3 +88,6 @@ cell.upgrades = {count} upgrade card(s)
 cell.entry = {amount} {item}
 cell.more = … and {count} more
 cell.creative = Creative: {types} types, infinite
+
+# Powered items (battery)
+power.stored = Stored energy: {stored} / {max} AE ({percent}%)

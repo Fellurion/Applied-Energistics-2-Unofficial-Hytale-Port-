@@ -36,8 +36,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class FtCoreTerminals {
 
     static final String TAB_ID = "ae2.terminal";
+    /** So lange nach dem letzten Tastendruck in einem Suchfeld zeichnet sich der Reiter nicht von selbst neu. */
+    static final long TYPING_PAUSE_MS = 1500L;
     static final String CONTENT = "Pages/AE2/TerminalShell.ui";
+    static final String CRAFTING_CONTENT = "Pages/AE2/CraftingTerminalShell.ui";
     static final TerminalView.Layout LAYOUT = new TerminalView.Layout(7, "Pages/AE2/TerminalShellAmountRow.ui");
+    /** Crafting-Terminal: 4 Netz-Zeilen, darunter das Herstellen mit 10 Rezepten je Zeile. */
+    static final TerminalView.Layout CRAFTING_LAYOUT = new TerminalView.Layout(4,
+            "Pages/AE2/TerminalShellAmountRow.ui", 10);
 
     /** Offene Terminal-Sitzungen je Spieler. */
     static final Map<UUID, Session> SESSIONS = new ConcurrentHashMap<>();
@@ -56,12 +62,29 @@ public final class FtCoreTerminals {
         final SimpleItemContainer dropContainer;
         /** Stand, zu dem zuletzt ein Neuzeichnen angestoßen wurde (gegen Dauer-Neuzeichnen in anderen Reitern). */
         long lastSnapshot = Long.MIN_VALUE;
+        /**
+         * Bis dahin nicht von selbst neu zeichnen: Der Spieler tippt gerade in ein Suchfeld. Das Neuzeichnen der
+         * Schale baut das Dokument neu auf und nähme dem Feld den Fokus – in einem Netz, in dem Maschinen laufen,
+         * alle halbe Sekunde. Jeder Tastendruck schickt ohnehin den aktuellen Stand.
+         */
+        long typingUntil;
+        /**
+         * true, solange die Schale für diese Sitzung gerade geöffnet wird: Schließt dabei eine ältere Schale, gilt
+         * deren Abmeldung nicht dieser Sitzung.
+         */
+        boolean opening;
 
-        Session(PlayerRef playerRef, TerminalBackend backend, String titleKey) {
+        Session(PlayerRef playerRef, TerminalBackend backend, String titleKey, boolean crafting) {
             this.playerRef = playerRef;
             this.backend = backend;
-            this.view = new TerminalView(LAYOUT, titleKey);
+            this.view = new TerminalView(crafting ? CRAFTING_LAYOUT : LAYOUT, titleKey);
+            // Immer so groß wie das größte Gitter: die Schale meldet das Fenster mit fester Feldzahl an
             this.dropContainer = TerminalView.newDropContainer(LAYOUT.pageSize(), () -> backend, playerRef);
+        }
+
+        /** Dokument des Reiters: ME-Terminal oder ME-Crafting-Terminal. */
+        String content() {
+            return view.layout().crafting() ? CRAFTING_CONTENT : CONTENT;
         }
     }
 
@@ -83,19 +106,26 @@ public final class FtCoreTerminals {
     /**
      * Öffnet die Schale mit dem Terminal vorn.
      *
+     * @param crafting true = ME-Crafting-Terminal (mit Herstellen)
      * @return false, wenn die Schale nicht geöffnet werden konnte (dann eigene Seite verwenden)
      */
     public static boolean open(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
-                               String titleKey, TerminalBackend backend) {
+                               String titleKey, TerminalBackend backend, boolean crafting) {
         UUID id = playerRef.getUuid();
-        Session session = new Session(playerRef, backend, titleKey);
-        SESSIONS.put(id, session);
+        Session session = new Session(playerRef, backend, titleKey, crafting);
+        Session old = SESSIONS.put(id, session);
+        if (old != null && old.backend != backend) {
+            closed(old);
+        }
         boolean opened;
+        session.opening = true;
         try {
             opened = ShellAccess.open(player, playerRef, ref, store, TAB_ID);
         } catch (RuntimeException e) {
             SESSIONS.remove(id, session);
             throw e;
+        } finally {
+            session.opening = false;
         }
         if (!opened) {
             SESSIONS.remove(id, session);
@@ -105,10 +135,11 @@ public final class FtCoreTerminals {
 
     /** Vom Netz-Tick (Welt-Thread): zeichnet die Schale neu, wenn sich Netz oder Inventar geändert haben. */
     public static void refreshOpen() {
+        long now = System.currentTimeMillis();
         for (Map.Entry<UUID, Session> e : SESSIONS.entrySet()) {
             Session s = e.getValue();
             Ref<EntityStore> ref = s.playerRef.getReference();
-            if (ref == null || !ref.isValid()) {
+            if (ref == null || !ref.isValid() || now < s.typingUntil) {
                 continue;
             }
             Store<EntityStore> store = ref.getStore();
@@ -135,6 +166,18 @@ public final class FtCoreTerminals {
 
     /** Spieler hat den Server verlassen. */
     public static void forget(UUID playerId) {
-        SESSIONS.remove(playerId);
+        closed(SESSIONS.remove(playerId));
+    }
+
+    /** Meldet dem Backend einer beendeten Sitzung, dass seine Ansicht zu ist (Terminals in einem Item). */
+    static void closed(@javax.annotation.Nullable Session session) {
+        if (session == null) {
+            return;
+        }
+        try {
+            session.backend.onClose();
+        } catch (RuntimeException ignored) {
+            // das Schließen der Schale darf nie am Backend scheitern
+        }
     }
 }

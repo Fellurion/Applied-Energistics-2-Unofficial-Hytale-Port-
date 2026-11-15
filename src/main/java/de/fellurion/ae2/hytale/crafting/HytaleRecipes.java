@@ -102,9 +102,11 @@ public final class HytaleRecipes {
             List<GenericStack> in = new ArrayList<>();
             for (MaterialQuantity mq : inputs) {
                 AEItemKey k = keyFor(mq);
-                if (k != null) {
-                    in.add(new GenericStack(k, Math.max(1, mq.getQuantity())));
+                if (k == null) {
+                    // Zutat nicht abbildbar: kein Pattern, statt eines, dem eine Zutat fehlt (der Auftrag hinge fest)
+                    return null;
                 }
+                in.add(new GenericStack(k, Math.max(1, mq.getQuantity())));
             }
             List<GenericStack> out = new ArrayList<>();
             MaterialQuantity[] outputs = r.getOutputs();
@@ -128,9 +130,11 @@ public final class HytaleRecipes {
                 return null; // Zutat (z. B. Tag) nicht abbildbar
             }
             List<AEItemKey> alt = new ArrayList<>();
-            if (mq.getResourceTypeId() != null) {
+            if (mq.getItemId() == null && mq.getResourceTypeId() != null) {
                 for (String id : resourceIndex().getOrDefault(mq.getResourceTypeId(), List.of())) {
-                    alt.add(AEItemKey.of(id));
+                    if (!mq.isItemExcluded(id)) {
+                        alt.add(AEItemKey.of(id));
+                    }
                 }
                 anySubstitute |= alt.size() > 1;
             }
@@ -167,7 +171,11 @@ public final class HytaleRecipes {
         return outputs;
     }
 
-    /** Schlüssel einer Zutat: festes Item oder erstes Item des Ressourcentyps. */
+    /**
+     * Schlüssel einer Zutat: festes Item oder erstes Item des Ressourcentyps. Wie Hytale selbst
+     * ({@code CraftingRecipe#applyOutputExclusions}) zählen die Ergebnisse des Rezepts nicht als Zutat – sonst
+     * stellte ein Pattern ein Item aus sich selbst her.
+     */
     @Nullable
     private static AEItemKey keyFor(MaterialQuantity mq) {
         if (mq == null) {
@@ -177,8 +185,11 @@ public final class HytaleRecipes {
             return AEItemKey.of(mq.getItemId());
         }
         if (mq.getResourceTypeId() != null) {
-            List<String> items = resourceIndex().getOrDefault(mq.getResourceTypeId(), List.of());
-            return items.isEmpty() ? null : AEItemKey.of(items.getFirst());
+            for (String id : resourceIndex().getOrDefault(mq.getResourceTypeId(), List.of())) {
+                if (!mq.isItemExcluded(id)) {
+                    return AEItemKey.of(id);
+                }
+            }
         }
         return null;
     }

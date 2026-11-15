@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.asset.type.blocktype.config.RotationTuple;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.modules.block.components.ItemContainerBlock;
+import com.hypixel.hytale.server.core.universe.world.SetBlockSettings;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.BlockOperations;
 import com.hypixel.hytale.server.core.universe.world.chunk.section.BlockSection;
@@ -132,6 +133,76 @@ public final class BlockAccess {
     @Nullable
     public static <T extends Component<ChunkStore>> T component(ComponentType<ChunkStore, T> type, World world, int x, int y, int z) {
         return BlockModule.getComponent(type, world, x, y, z);
+    }
+
+    /** Block-Id (Asset-Key) an der Position; null, wenn der Chunk nicht geladen ist; {@code "Empty"} für Luft. */
+    @Nullable
+    public static String blockKey(World world, int x, int y, int z) {
+        BlockSection bs = section(world, x, y, z);
+        if (bs == null) {
+            return null;
+        }
+        int id = bs.get(x, y, z);
+        if (id == 0) {
+            return EMPTY;
+        }
+        BlockType bt = BlockType.getAssetMap().getAsset(id);
+        return bt == null ? null : bt.getId();
+    }
+
+    /** Asset-Key von Luft. */
+    public static final String EMPTY = "Empty";
+
+    /** Ohne Partikel, Ton und Drops (für erzeugte Strukturen und Wachstum). */
+    public static final int QUIET = SetBlockSettings.NO_SEND_PARTICLES | SetBlockSettings.NO_SEND_AUDIO
+            | SetBlockSettings.NO_DROP_ITEMS;
+
+    /**
+     * Setzt einen Block (mit Block-Entity, falls der Blocktyp eine hat). {@code "Empty"} = Luft.
+     *
+     * @param rotation Rotationsindex ({@link #rotationFacing}), 0 = unrotiert
+     * @param settings {@link SetBlockSettings}, z. B. {@link #QUIET}
+     * @return true, wenn sich der Block geändert hat
+     */
+    public static boolean setBlock(World world, int x, int y, int z, String blockKey, int rotation, int settings) {
+        int id = EMPTY.equals(blockKey) ? 0 : BlockType.getAssetMap().getIndexOrDefault(blockKey, Integer.MIN_VALUE);
+        BlockType type = id == Integer.MIN_VALUE ? null : BlockType.getAssetMap().getAsset(id);
+        if (type == null) {
+            return false;
+        }
+        ChunkStore cs = world.getChunkStore();
+        Ref<ChunkStore> sec = cs.getChunkSectionReferenceAtBlock(x, y, z);
+        if (sec == null || !sec.isValid()) {
+            return false;
+        }
+        return BlockOperations.setBlock(cs, sec, x, y, z, id, type, rotation, 0, settings);
+    }
+
+    /**
+     * Rotationsindex, mit dem ein Modell, das unrotiert nach {@code defaultFront} zeigt, nach {@code target} zeigt
+     * (Umkehrung von {@link #facing}).
+     */
+    public static int rotationFacing(Dir target, Dir defaultFront) {
+        int key = target.ordinal() * 6 + defaultFront.ordinal();
+        int cached = ROTATION_CACHE[key];
+        if (cached >= 0) {
+            return cached;
+        }
+        int found = 0;
+        for (RotationTuple rt : RotationTuple.VALUES) {
+            if (rt != null && facing(rt.index(), defaultFront) == target) {
+                found = rt.index();
+                break;
+            }
+        }
+        ROTATION_CACHE[key] = found;
+        return found;
+    }
+
+    private static final int[] ROTATION_CACHE = new int[36];
+
+    static {
+        java.util.Arrays.fill(ROTATION_CACHE, -1);
     }
 
     /** Item-Container eines Blocks (Truhe, AE2-Maschine, ...) oder null. */

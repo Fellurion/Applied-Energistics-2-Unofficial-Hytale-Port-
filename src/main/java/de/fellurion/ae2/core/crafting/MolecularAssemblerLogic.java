@@ -183,7 +183,8 @@ public final class MolecularAssemblerLogic implements PatternProviderTarget, IGr
 
     /**
      * Deviation from AE2 (which serializes the block entity): the Hytale side saves the running plan when the
-     * chunk stops ticking, so the crafting job resumes instead of getting stuck.
+     * chunk stops ticking, so the crafting job resumes instead of getting stuck. The installed upgrade cards are part
+     * of the state ({@code upgrades.writeToNBT}).
      */
     public String saveState() {
         var map = new java.util.LinkedHashMap<String, Object>();
@@ -207,12 +208,16 @@ public final class MolecularAssemblerLogic implements PatternProviderTarget, IGr
             pending.add(PatternHelper.stackToJson(s));
         }
         map.put("pending", pending);
+        map.put("upgrades", upgrades.toItemIds());
         return de.fellurion.ae2.core.util.MiniJson.write(map);
     }
 
     /** Restores {@link #saveState()}; the return target is set again via {@link #setReturnTarget}. */
     public void loadState(String json) {
         var map = de.fellurion.ae2.core.util.MiniJson.parseObject(json);
+        if (map.containsKey("upgrades")) { // absent in states saved before cards could be installed
+            upgrades.fromItemIds(de.fellurion.ae2.core.util.MiniJson.getList(map, "upgrades"));
+        }
         plan = null;
         heldInputs = null;
         pendingOutput.clear();

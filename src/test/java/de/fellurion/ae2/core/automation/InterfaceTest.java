@@ -116,6 +116,24 @@ class InterfaceTest extends AutomationTestBase {
     }
 
     @Test
+    void storageListenerSeesEveryStorageChange() {
+        setUp();
+        var seen = new java.util.ArrayList<Long>();
+        iface.setStorageListener(() -> seen.add(iface.getStorage().getAmount(0)));
+        iface.getConfig().setStack(0, new GenericStack(STONE, 32));
+        assertTrue(seen.isEmpty(), "config changes are not storage changes");
+        world.tick(5);
+        assertEquals(java.util.List.of(32L), seen, "stocking");
+        iface.getStorage().extract(0, STONE, 12, de.fellurion.ae2.core.config.Actionable.MODULATE);
+        assertEquals(java.util.List.of(32L, 20L), seen, "external access (the listener runs before replanning)");
+        assertTrue(iface.hasWorkToDo());
+        world.tick(5);
+        assertEquals(java.util.List.of(32L, 20L, 32L), seen, "restocked");
+        iface.getStorage().extract(0, STONE, 5, de.fellurion.ae2.core.config.Actionable.SIMULATE);
+        assertEquals(3, seen.size(), "simulation changes nothing");
+    }
+
+    @Test
     void interfaceStateRoundTripsThroughJson() {
         setUp();
         iface.getConfig().setStack(0, new GenericStack(STONE, 12));

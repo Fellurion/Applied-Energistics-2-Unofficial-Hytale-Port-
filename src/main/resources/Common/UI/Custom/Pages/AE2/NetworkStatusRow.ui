@@ -1,0 +1,49 @@
+// Eine Geräteart im Netzwerkstatus: Icon, Anzahl und Name, Grundverbrauch; darunter in Rot, wenn den Geräten der
+// Kanal fehlt (AE2 führt sie dann als eigene Gruppe).
+Group {
+  Anchor: (Height: 62);
+  Padding: (Vertical: 3);
+
+  Group #Card {
+    Anchor: (Full: 0);
+    LayoutMode: Left;
+    Background: #1c2835;
+    Padding: (Horizontal: 8, Vertical: 4);
+
+    Group {
+      Anchor: (Width: 48, Height: 48);
+      Background: #1a2530;
+      Padding: 2;
+
+      ItemSlot #Icon {
+        Anchor: (Full: 0);
+        ShowQualityBackground: true;
+        ShowQuantity: false;
+      }
+    }
+
+    Group {
+      FlexWeight: 1;
+      LayoutMode: Top;
+      Padding: (Left: 12, Top: 2);
+
+      Label #Name {
+        Anchor: (Height: 24);
+        Style: (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+        Text: "";
+      }
+
+      Label #Detail {
+        Anchor: (Height: 20);
+        Style: (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center);
+        Text: "";
+      }
+    }
+
+    Label #NoChannel {
+      Anchor: (Width: 200);
+      Style: (FontSize: 13, TextColor: #e0796b, RenderBold: true, VerticalAlignment: Center, HorizontalAlignment: End);
+      Text: "";
+    }
+  }
+}

@@ -15,6 +15,7 @@ import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.ui.builder.UIEventBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import de.fellurion.ae2.hytale.ui.CraftingPanel;
 import de.fellurion.ae2.hytale.ui.TerminalTexts;
 import de.fellurion.ae2.hytale.ui.TerminalView;
 import de.fellurion.ftcore.FTCorePlugin;
@@ -30,7 +31,8 @@ import java.util.Map;
 
 /**
  * Reiter „ME-Terminal“ der FTCore-Schale: Netzinhalt des benutzten Terminals links, Lager/Schnellleiste/Rucksack
- * rechts, Ziehen &amp; Ablegen zwischen beiden (Logik in {@link TerminalView}).
+ * rechts, Ziehen &amp; Ablegen zwischen beiden (Logik in {@link TerminalView}). Ein ME-Crafting-Terminal zeigt im
+ * selben Reiter zusätzlich das Herstellen ({@link CraftingPanel}).
  *
  * <p>Sichtbar nur mit offener Terminal-Sitzung (also nach Benutzen eines Terminal-Blocks); über {@code /ft} oder die
  * Inventar-Taste erscheint er nicht. Suche, Sortierung, Klicks und Ablegen schicken nur den geänderten Inhalt an den
@@ -65,7 +67,7 @@ final class TerminalShellTab implements ShellTab {
     @Nonnull
     public List<String> eventFields() {
         // Zieh-Felder unter denselben Namen wie FTCores InventoryDrag (Zahlen mit '#'), dazu Suche, Maustaste, Item
-        return List.of(TerminalView.F_SEARCH, TerminalView.F_GRID, TerminalView.F_ITEM,
+        return List.of(TerminalView.F_SEARCH, CraftingPanel.F_SEARCH, TerminalView.F_GRID, TerminalView.F_ITEM,
                 TerminalView.F_SLOT + ShellEventData.NUMBER, TerminalView.F_SOURCE_SECTION + ShellEventData.NUMBER,
                 TerminalView.F_SOURCE_SLOT + ShellEventData.NUMBER, TerminalView.F_QUANTITY + ShellEventData.NUMBER,
                 TerminalView.F_BUTTON + ShellEventData.NUMBER);
@@ -73,8 +75,8 @@ final class TerminalShellTab implements ShellTab {
 
     @Override
     public void build(@Nonnull ShellContext context, @Nonnull UICommandBuilder cmd, @Nonnull UIEventBuilder evt) {
-        cmd.append("#ContentArea", FtCoreTerminals.CONTENT);
         FtCoreTerminals.Session s = FtCoreTerminals.SESSIONS.get(context.playerRef().getUuid());
+        cmd.append("#ContentArea", s == null ? FtCoreTerminals.CONTENT : s.content());
         Ref<EntityStore> ref = context.ref();
         if (s == null || ref == null || !ref.isValid()) {
             cmd.set("#AE2Empty.Visible", true);
@@ -103,7 +105,12 @@ final class TerminalShellTab implements ShellTab {
                 data.get(TerminalView.F_GRID), data.getInt(TerminalView.F_SLOT, -1),
                 data.getInt(TerminalView.F_SOURCE_SECTION, Integer.MIN_VALUE),
                 data.getInt(TerminalView.F_SOURCE_SLOT, -1), data.getInt(TerminalView.F_QUANTITY, 0),
-                data.getInt(TerminalView.F_BUTTON, 0), data.get(TerminalView.F_ITEM));
+                data.getInt(TerminalView.F_BUTTON, 0), data.get(TerminalView.F_ITEM),
+                data.get(CraftingPanel.F_SEARCH));
+        if (TerminalView.A_SEARCH.equals(action) || CraftingPanel.A_SEARCH.equals(action)) {
+            // Solange getippt wird, baut refreshOpen die Schale nicht neu auf (das Suchfeld verlöre den Fokus)
+            s.typingUntil = System.currentTimeMillis() + FtCoreTerminals.TYPING_PAUSE_MS;
+        }
         Player player = store.getComponent(ref, Player.getComponentType());
         TerminalView.Viewer v = viewer(s, ref, store, player, context.locale());
         if (s.view.handle(e, s.backend, v) == TerminalView.Result.UPDATE && player != null) {
@@ -115,7 +122,13 @@ final class TerminalShellTab implements ShellTab {
     @Override
     public void onShellClosed(@Nonnull ShellContext context, @Nonnull Ref<EntityStore> ref,
                               @Nonnull Store<EntityStore> store) {
-        FtCoreTerminals.SESSIONS.remove(context.playerRef().getUuid());
+        FtCoreTerminals.Session s = FtCoreTerminals.SESSIONS.get(context.playerRef().getUuid());
+        if (s == null || s.opening) {
+            // eine ältere Schale schließt, weil gerade eine neue Sitzung öffnet: die neue bleibt
+            return;
+        }
+        FtCoreTerminals.SESSIONS.remove(context.playerRef().getUuid(), s);
+        FtCoreTerminals.closed(s);
     }
 
     /** Schickt nur den geänderten Inhalt an die offene Schale (Dokument und Bindungen bleiben stehen). */

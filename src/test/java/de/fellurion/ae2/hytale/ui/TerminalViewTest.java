@@ -42,4 +42,34 @@ class TerminalViewTest {
         // TerminalPage selbst lässt sich ohne laufenden Server nicht laden (Hytale-Logger)
         assertEquals(63, new TerminalView.Layout(7, "Pages/AE2/TerminalAmountRow.ui").pageSize());
     }
+
+    @Test
+    void craftingTerminalHatWenigerNetzZeilenUndHerstellen() {
+        TerminalView.Layout terminal = new TerminalView.Layout(7, "Pages/AE2/TerminalAmountRow.ui");
+        TerminalView.Layout crafting = new TerminalView.Layout(4, "Pages/AE2/TerminalAmountRow.ui", 9);
+        assertFalse(terminal.crafting());
+        assertTrue(crafting.crafting());
+        assertEquals(36, crafting.pageSize());
+    }
+
+    @Test
+    void herstellenPrueftZugriffNurBeimEntnehmen() {
+        // Alle Aktionen des Herstellens laufen über CraftingPanel …
+        for (String action : new String[]{CraftingPanel.A_SEARCH, CraftingPanel.A_FILTER, CraftingPanel.A_PREV,
+                CraftingPanel.A_NEXT, CraftingPanel.A_SELECT, CraftingPanel.A_X1, CraftingPanel.A_X10,
+                CraftingPanel.A_STACK, CraftingPanel.A_MAX}) {
+            assertTrue(CraftingPanel.handles(action), action);
+        }
+        // … die des ME-Terminals nicht
+        assertFalse(CraftingPanel.handles(TerminalView.A_CLICK));
+        assertFalse(CraftingPanel.handles(TerminalView.A_CRAFT_MODE));
+        assertFalse(CraftingPanel.handles(null));
+        // Wer herstellt, entnimmt aus dem Netz: dafür gilt der Zugriffsschutz, fürs Blättern und Suchen nicht
+        for (String action : new String[]{CraftingPanel.A_X1, CraftingPanel.A_X10, CraftingPanel.A_STACK,
+                CraftingPanel.A_MAX}) {
+            assertTrue(CraftingPanel.needsAccess(action), action);
+        }
+        assertFalse(CraftingPanel.needsAccess(CraftingPanel.A_SEARCH));
+        assertFalse(CraftingPanel.needsAccess(CraftingPanel.A_SELECT));
+    }
 }

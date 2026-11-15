@@ -1,0 +1,68 @@
+{
+  "TranslationProperties": {
+    "Name": "ae2guide.item.name",
+    "Description": "ae2guide.item.description"
+  },
+  "Icon": "Icons/Items/AE2Tools/AE2_Basics_Book.png",
+  "Categories": [
+    "AE2.Tools"
+  ],
+  "Quality": "Uncommon",
+  "MaxStack": 1,
+  "Model": "Items/Weapons/Spellbook/Grimoire.blockymodel",
+  "Texture": "Items/AE2/Book/AE2_Basics_Book_Texture.png",
+  "Scale": 1.2,
+  "PlayerAnimationsId": "Spellbook",
+  "IconProperties": {
+    "Scale": 0.745,
+    "Translation": [
+      -7.8,
+      -7.8
+    ],
+    "Rotation": [
+      45,
+      90,
+      0
+    ]
+  },
+  "Interactions": {
+    "Primary": "AE2_Open_Book",
+    "Secondary": "AE2_Open_Book"
+  },
+  "DroppedItemAnimation": "Items/Animations/Dropped/Dropped_Diagonal_Left.blockyanim",
+  "Tags": {
+    "Type": [
+      "Tool"
+    ],
+    "Family": [
+      "AE2"
+    ],
+    "AE2": [
+      "Guide"
+    ]
+  },
+  "ItemSoundSetId": "ISS_Weapons_Books",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 4
+      },
+      {
+        "ItemId": "Ingredient_Hide_Light",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Workbench",
+        "Categories": [
+          "Workbench_Tinkering"
+        ]
+      }
+    ],
+    "OutputQuantity": 1,
+    "TimeSeconds": 1
+  }
+}

@@ -30,6 +30,9 @@ import de.fellurion.ae2.core.storage.IActionSource;
 import de.fellurion.ae2.core.storage.StorageHelper;
 import de.fellurion.ae2.hytale.ItemKeys;
 import de.fellurion.ae2.hytale.WorldNetworks;
+import de.fellurion.ae2.hytale.lang.AE2Language;
+import de.fellurion.ae2.hytale.ui.TerminalTexts;
+import de.fellurion.ae2.hytale.ui.TerminalView;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -82,7 +85,7 @@ public final class PatternEncodingPage extends InteractiveCustomUIPage<PatternEn
 
     private void fill(UICommandBuilder cmd, UIEventBuilder evt, Store<EntityStore> store, Ref<EntityStore> ref) {
         // Suchergebnisse
-        results = search(search);
+        results = search(search, AE2Language.of(playerRef));
         cmd.set("#ResultsHeader.Text", Message.translation("ae2craft.encode.results").param("count", Integer.toString(results.size())));
         cmd.clear("#Results");
         for (int i = 0; i < results.size(); i++) {
@@ -100,7 +103,7 @@ public final class PatternEncodingPage extends InteractiveCustomUIPage<PatternEn
         if (selected == null) {
             cmd.set("#TargetName.Text", Message.translation("ae2craft.encode.chooseItem"));
             cmd.set("#BlankInfo.Text", blankInfo(store, ref));
-            cmd.set("#Status.Text", status);
+            cmd.set("#Status.TextSpans", status); // Meldung: TextSpans (eine Meldung in .Text bringt den Client zum Absturz)
             return;
         }
         cmd.set("#TargetIcon.ItemId", selected);
@@ -139,7 +142,7 @@ public final class PatternEncodingPage extends InteractiveCustomUIPage<PatternEn
         if (recipes.isEmpty()) {
             status = Message.translation("ae2craft.encode.noRecipe");
         }
-        cmd.set("#Status.Text", status);
+        cmd.set("#Status.TextSpans", status); // Meldung: TextSpans (eine Meldung in .Text bringt den Client zum Absturz)
     }
 
     private static String itemNameKey(String itemId) {
@@ -150,14 +153,18 @@ public final class PatternEncodingPage extends InteractiveCustomUIPage<PatternEn
         return itemId;
     }
 
-    private static List<String> search(String query) {
-        String q = query == null ? "" : query.trim().toLowerCase(Locale.ROOT).replace(' ', '_');
+    /**
+     * Items mit Rezept, die zum Suchtext passen: nach dem Namen in der AE2-Sprache des Spielers oder der Item-Id
+     * (wie im ME-Terminal; vorher fand die Suche nur Ids, deutsche Namen also gar nicht).
+     */
+    private static List<String> search(String query, String locale) {
+        String q = query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
         List<String> out = new ArrayList<>();
         if (q.length() < 2) {
             return out;
         }
         for (String id : HytaleRecipes.craftableOutputs()) {
-            if (id.toLowerCase(Locale.ROOT).contains(q)) {
+            if (TerminalView.matches(q, id, TerminalTexts.itemName(locale, id))) {
                 out.add(id);
                 if (out.size() >= MAX_RESULTS) {
                     break;
@@ -233,29 +240,37 @@ public final class PatternEncodingPage extends InteractiveCustomUIPage<PatternEn
             ItemContainer c = inv.getInventory();
             for (short s = 0; s < c.getCapacity(); s++) {
                 ItemStack st = c.getItemStack(s);
-                if (st != null && !st.isEmpty() && BLANK.equals(st.getItemId())) {
-                    c.removeItemStackFromSlot(s, 1);
+                // Nur wenn das leere Pattern wirklich entnommen wurde (gesperrte Felder liefern sonst ein Gratis-Pattern)
+                if (st != null && !st.isEmpty() && BLANK.equals(st.getItemId())
+                        && c.removeItemStackFromSlot(s, 1).succeeded()) {
                     return true;
                 }
             }
         }
         Grid grid = CraftingAccess.grid(nets, x, y, z);
         if (grid != null && CraftingAccess.active(nets, x, y, z)) {
-            return StorageHelper.poweredExtraction(grid.getEnergyService(), grid.getStorageService().getInventory(),
-                    AEItemKey.of(BLANK), 1, IActionSource.ofPlayer(playerRef.getUuid())) == 1;
+            boolean taken = StorageHelper.poweredExtraction(grid.getEnergyService(),
+                    grid.getStorageService().getInventory(), AEItemKey.of(BLANK), 1,
+                    IActionSource.ofPlayer(playerRef.getUuid())) == 1;
+            if (taken) {
+                // sonst zeigte „Leere Patterns: … im Netz“ bis zum nächsten Tick noch die alte Zahl
+                grid.getStorageService().invalidateCache();
+            }
+            return taken;
         }
         return false;
     }
 
+    /** Schnellleiste, Lager und Rucksack (leere Patterns im Rucksack zählen und werden verbraucht wie die übrigen). */
     private static List<InventoryComponent> inventories(Store<EntityStore> store, Ref<EntityStore> ref) {
         List<InventoryComponent> out = new ArrayList<>();
         InventoryComponent.Hotbar h = store.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
         InventoryComponent.Storage s = store.getComponent(ref, InventoryComponent.Storage.getComponentType());
-        if (h != null) {
-            out.add(h);
-        }
-        if (s != null) {
-            out.add(s);
+        InventoryComponent.Backpack b = store.getComponent(ref, InventoryComponent.Backpack.getComponentType());
+        for (InventoryComponent c : new InventoryComponent[]{h, s, b}) {
+            if (c != null && c.getInventory() != null) {
+                out.add(c);
+            }
         }
         return out;
     }

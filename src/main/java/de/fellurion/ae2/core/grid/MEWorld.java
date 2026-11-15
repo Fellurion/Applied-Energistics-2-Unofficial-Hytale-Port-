@@ -32,6 +32,15 @@ import java.util.function.Function;
  * are compatible ({@link AEColor#isCompatibleWith}). Connected nodes always share one {@link Grid}; grids are merged
  * when a connection joins two grids and split when a removal disconnects them.
  * <p>
+ * Two additions serve parts that are more than one node between neighbours:
+ * <ul>
+ * <li>{@link #addSecondaryNode}: a block may own a second node (AE2: the "outer" node of ME P2P tunnels, quartz fibers
+ * and toggle buses) that exposes other sides than the main node and belongs to a grid of its own.</li>
+ * <li>{@link #addVirtualConnection}: a connection between any two nodes, adjacent or not (AE2:
+ * {@code GridHelper.createConnection(a, b)}). It carries up to 32 channels, survives {@link #refreshConnections},
+ * merges the two grids and splits them again when it is removed.</li>
+ * </ul>
+ * <p>
  * Replaces AE2's {@code GridHelper}, {@code InWorldGridNode.findInWorldConnections}, {@code GridConnection.create},
  * {@code GridPropagator}, {@code GridSplitDetector} and {@code TickHandler}'s grid ticking. Deviation: AE2 keeps the
  * grid of the "pivot" side on a split; here the component containing a controller (else the largest) keeps it.
@@ -40,6 +49,9 @@ import java.util.function.Function;
  */
 public final class MEWorld {
     private final Map<Long, GridNode> nodes = new HashMap<>();
+    /** Second node of a block (same position as its main node), see {@link #addSecondaryNode}. */
+    private final Map<Long, GridNode> secondaryNodes = new HashMap<>();
+    private final ArrayDeque<Runnable> endOfTickTasks = new ArrayDeque<>();
     private final Set<Grid> grids = new LinkedHashSet<>();
     private final List<IGridNodeListener> listeners = new ArrayList<>();
     private final List<Function<Grid, IGridService>> serviceFactories = new ArrayList<>();
@@ -115,7 +127,61 @@ public final class MEWorld {
         }
         var node = new GridNode(this, pos, type, facing, color, owner, extraServices);
         nodes.put(pos, node);
+        attach(node);
+        return node;
+    }
 
+    /**
+     * Creates the second node of the block at {@code pos} (AE2: the "outer" node of {@code MEP2PTunnelPart},
+     * {@code QuartzFiberPart} and {@code ToggleBusPart}). It connects to neighbours like any node, on the sides its
+     * type exposes for {@code facing} - use a type that exposes other sides than the block's main node, e.g.
+     * {@link NodeType.SideRule#FRONT_ONLY} next to a main node with {@code BACK_ONLY}. Where both would expose the
+     * same side, neighbours connect to the main node.
+     * <p>
+     * The two nodes of a block are not connected to each other and normally end up in different grids; join them
+     * with {@link #addVirtualConnection} if they should form one network (toggle bus).
+     * <p>
+     * Unlike a main node, a secondary node does not take services from its owner: it has exactly the services in
+     * {@code services}. {@code owner} only identifies it ({@link GridNode#getOwner()}).
+     * <p>
+     * The node is removed by {@link #removeSecondaryNode} and, at the latest, together with the main node by
+     * {@link #removeNode(long)}. {@link #updateNode} re-orients it together with the main node.
+     *
+     * @param services services by interface (may be null)
+     * @throws IllegalStateException if the position already has a secondary node
+     */
+    public GridNode addSecondaryNode(long pos, NodeType type, Direction facing, AEColor color, Object owner,
+            Map<Class<?>, Object> services) {
+        if (secondaryNodes.containsKey(pos)) {
+            throw new IllegalStateException("A secondary grid node already exists at " + BlockPos.toString(pos));
+        }
+        var node = new GridNode(this, pos, type, facing, color, owner, services, true);
+        secondaryNodes.put(pos, node);
+        attach(node);
+        return node;
+    }
+
+    /** The secondary node of the block at {@code pos}, or null. */
+    public GridNode getSecondaryNode(long pos) {
+        return secondaryNodes.get(pos);
+    }
+
+    public Collection<GridNode> getSecondaryNodes() {
+        return Collections.unmodifiableCollection(secondaryNodes.values());
+    }
+
+    /** Removes the secondary node at {@code pos}. No-op if there is none. */
+    public GridNode removeSecondaryNode(long pos) {
+        var node = secondaryNodes.remove(pos);
+        if (node != null) {
+            detach(node);
+        }
+        return node;
+    }
+
+    /** Gives a new node its own grid and connects it to its neighbours. */
+    private void attach(GridNode node) {
+        long pos = node.getPos();
         var grid = new Grid(this);
         grids.add(grid);
         grid.add(node, 0);
@@ -123,7 +189,10 @@ public final class MEWorld {
         var changed = new LinkedHashSet<GridNode>();
         changed.add(node);
         for (var dir : node.getExposedSides()) {
-            var other = nodes.get(BlockPos.offset(pos, dir));
+            if (exposedNode(pos, dir) != node) {
+                continue; // the block's main node owns this side
+            }
+            var other = exposedNode(BlockPos.offset(pos, dir), dir.getOpposite());
             if (other != null && shouldConnect(node, dir, other)) {
                 connect(node, other, dir);
                 changed.add(other);
@@ -140,20 +209,48 @@ public final class MEWorld {
         for (var n : changed) {
             n.notifyStatusChange(NodeState.CONNECTIONS);
         }
-        return node;
     }
 
-    /** Removes the node at {@code pos} (block broken or chunk unloaded). No-op if there is none. */
+    /**
+     * The node of the block at {@code pos} that is connectable on {@code side}: the main node if it exposes that
+     * side, else the secondary node if it does (AE2: {@code GridHelper.getExposedNode}).
+     */
+    private GridNode exposedNode(long pos, Direction side) {
+        var main = nodes.get(pos);
+        if (main != null && main.isExposedOnSide(side)) {
+            return main;
+        }
+        var secondary = secondaryNodes.get(pos);
+        if (secondary != null && secondary.isExposedOnSide(side)) {
+            return secondary;
+        }
+        return null;
+    }
+
+    /**
+     * Removes the node at {@code pos} (block broken or chunk unloaded), and with it the block's secondary node. No-op
+     * if there is none.
+     */
     public GridNode removeNode(long pos) {
+        removeSecondaryNode(pos);
         var node = nodes.remove(pos);
         if (node == null) {
             return null;
         }
+        detach(node);
+        return node;
+    }
+
+    /** Takes a node that was already unregistered out of its grid, dropping all its connections. */
+    private void detach(GridNode node) {
         var neighbours = new ArrayList<GridNode>();
         for (var c : List.copyOf(node.connections)) {
             var other = c.getOtherSide(node);
             other.connections.remove(c);
-            neighbours.add(other);
+            c.destroyed = true;
+            if (!neighbours.contains(other)) {
+                neighbours.add(other);
+            }
         }
         node.connections.clear();
 
@@ -175,9 +272,10 @@ public final class MEWorld {
             l.onNodeRemoved(node);
         }
         for (var n : neighbours) {
-            n.notifyStatusChange(NodeState.CONNECTIONS);
+            if (!n.removed) {
+                n.notifyStatusChange(NodeState.CONNECTIONS);
+            }
         }
-        return node;
     }
 
     public GridNode removeNode(int x, int y, int z) {
@@ -186,34 +284,53 @@ public final class MEWorld {
 
     /**
      * Updates the facing and/or color of a node and re-evaluates its connections (e.g. after rotating a part or
-     * coloring a cable).
+     * coloring a cable). A secondary node of the same block is re-oriented with it.
      */
     public void updateNode(long pos, Direction facing, AEColor color) {
         var node = nodes.get(pos);
         if (node == null) {
             return;
         }
+        var secondary = secondaryNodes.get(pos);
         node.setOrientation(facing, color);
+        if (secondary != null) {
+            // Both first: the main node must not grab the side the secondary node is about to give up
+            secondary.setOrientation(facing, color);
+            refreshConnections(secondary);
+        }
         refreshConnections(node);
     }
 
-    /** Re-evaluates the connections of the node at {@code pos}. */
+    /**
+     * Re-evaluates the in-world connections of {@code node} (main or secondary). Virtual connections are kept.
+     */
     public void refreshConnections(GridNode node) {
+        if (node.removed) {
+            return;
+        }
         var changed = new LinkedHashSet<GridNode>();
         var lost = new ArrayList<GridNode>();
         for (var c : List.copyOf(node.connections)) {
+            if (!c.isInWorld()) {
+                continue;
+            }
             var dir = c.getDirection(node);
             var other = c.getOtherSide(node);
-            if (!shouldConnect(node, dir, other)) {
+            if (!shouldConnect(node, dir, other) || exposedNode(node.getPos(), dir) != node
+                    || exposedNode(other.getPos(), dir.getOpposite()) != other) {
                 node.connections.remove(c);
                 other.connections.remove(c);
+                c.destroyed = true;
                 lost.add(other);
                 changed.add(other);
                 changed.add(node);
             }
         }
         for (var dir : Direction.values()) {
-            var other = nodes.get(BlockPos.offset(node.getPos(), dir));
+            if (exposedNode(node.getPos(), dir) != node) {
+                continue;
+            }
+            var other = exposedNode(BlockPos.offset(node.getPos(), dir), dir.getOpposite());
             if (other != null && !node.hasConnection(other) && shouldConnect(node, dir, other)) {
                 connect(node, other, dir);
                 changed.add(node);
@@ -231,6 +348,26 @@ public final class MEWorld {
         }
     }
 
+    /**
+     * Replaces the sides {@code node} is connectable on, whatever its node type says, and re-evaluates its in-world
+     * connections (AE2: {@code IManagedGridNode.setExposedOnSides}). For blocks whose connectable sides depend on
+     * their state, e.g. the blocks of a quantum network bridge. {@code null} gives the node the sides of its type
+     * again. Virtual connections are kept.
+     * <p>
+     * Do not call this from inside a machine tick ({@code IGridTickable}) or a node listener: grids merge and split.
+     * Defer it with {@link #runAtEndOfTick}.
+     */
+    public void setExposedSides(GridNode node, Set<Direction> sides) {
+        if (node.removed || node.getWorld() != this) {
+            return;
+        }
+        var before = Set.copyOf(node.getExposedSides());
+        node.setExposedSidesOverride(sides);
+        if (!before.equals(node.getExposedSides())) {
+            refreshConnections(node);
+        }
+    }
+
     private static boolean shouldConnect(GridNode a, Direction dirFromA, GridNode b) {
         return !a.removed && !b.removed
                 && a.isExposedOnSide(dirFromA)
@@ -238,7 +375,7 @@ public final class MEWorld {
                 && a.getGridColor().isCompatibleWith(b.getGridColor());
     }
 
-    private void connect(GridNode a, GridNode b, Direction fromAtoB) {
+    private GridConnection connect(GridNode a, GridNode b, Direction fromAtoB) {
         var connection = new GridConnection(a, b, fromAtoB);
         if (a.grid != b.grid) {
             merge(a.grid, b.grid);
@@ -246,6 +383,74 @@ public final class MEWorld {
         a.connections.add(connection);
         b.connections.add(connection);
         a.grid.getPathingService().controllersChanged();
+        return connection;
+    }
+
+    /**
+     * Connects two nodes regardless of their position (AE2: {@code GridHelper.createConnection(a, b)}, a
+     * {@code GridConnection} without direction). The connection behaves like a cable between them: both grids merge,
+     * and it carries as many channels as its two end nodes allow, at most 32 - give both nodes
+     * {@link GridFlag#DENSE_CAPACITY} for a dense link (ME P2P tunnel, quantum bridge).
+     * <p>
+     * The connection is kept by {@link #refreshConnections} / {@link #updateNode}, is not shown in
+     * {@link GridNode#getConnectionMask()} and is not persisted: whoever created it creates it again after a reload.
+     * It ends with {@link #removeVirtualConnection} or when one of its nodes is removed
+     * ({@link GridConnection#isDestroyed()}).
+     * <p>
+     * Do not call this from inside a machine tick ({@code IGridTickable}) or a node listener: grids merge. Defer it
+     * with {@link #runAtEndOfTick}.
+     *
+     * @return the new connection
+     * @throws IllegalArgumentException if a node is removed, belongs to another world or both are the same node
+     * @throws IllegalStateException    if the two nodes are already connected ({@link GridNode#hasConnection})
+     */
+    public GridConnection addVirtualConnection(GridNode a, GridNode b) {
+        if (a == null || b == null || a == b) {
+            throw new IllegalArgumentException("A virtual connection needs two different nodes");
+        }
+        if (a.removed || b.removed || a.getWorld() != this || b.getWorld() != this) {
+            throw new IllegalArgumentException("Cannot connect " + a + " and " + b + ": not in this world");
+        }
+        if (a.hasConnection(b)) {
+            throw new IllegalStateException("Connection between " + a + " and " + b + " already exists");
+        }
+        var connection = connect(a, b, null);
+        a.notifyStatusChange(NodeState.CONNECTIONS);
+        b.notifyStatusChange(NodeState.CONNECTIONS);
+        return connection;
+    }
+
+    /**
+     * Removes a connection created by {@link #addVirtualConnection} (AE2: {@code IGridConnection.destroy}); the grid
+     * splits if nothing else joins the two sides. No-op if the connection is already destroyed.
+     *
+     * @throws IllegalArgumentException for an in-world connection (those follow the blocks)
+     */
+    public void removeVirtualConnection(GridConnection connection) {
+        if (connection == null || connection.destroyed) {
+            return;
+        }
+        if (connection.isInWorld()) {
+            throw new IllegalArgumentException("Not a virtual connection: " + connection);
+        }
+        var a = connection.a();
+        var b = connection.b();
+        a.connections.remove(connection);
+        b.connections.remove(connection);
+        connection.destroyed = true;
+        var grid = a.grid;
+        grid.getPathingService().controllersChanged();
+        checkSplit(grid, List.of(a, b));
+        a.notifyStatusChange(NodeState.CONNECTIONS);
+        b.notifyStatusChange(NodeState.CONNECTIONS);
+    }
+
+    /**
+     * Runs {@code task} after all grids finished the current tick (or the next one, if no tick is running): the place
+     * for topology changes requested by a ticking machine. Port of AE2's {@code TickHandler.addCallable}.
+     */
+    public void runAtEndOfTick(Runnable task) {
+        endOfTickTasks.add(task);
     }
 
     private void merge(Grid gridA, Grid gridB) {
@@ -337,7 +542,7 @@ public final class MEWorld {
     /**
      * Ticks all grids. Order per tick (as AE2's {@code TickHandler}): start-of-tick for all grids (tick counter,
      * passive generators), then the adaptive machine ticks of all grids, then end-of-tick services (channels, energy
-     * drain, storage watchers, crafting CPUs).
+     * drain, storage watchers, crafting CPUs), then the tasks of {@link #runAtEndOfTick}.
      */
     public void tick() {
         currentTick++;
@@ -356,6 +561,10 @@ public final class MEWorld {
             if (grids.contains(g)) {
                 g.onServerEndTick();
             }
+        }
+        // Tasks queued while they run wait for the next tick
+        for (int i = endOfTickTasks.size(); i > 0; i--) {
+            endOfTickTasks.poll().run();
         }
     }
 

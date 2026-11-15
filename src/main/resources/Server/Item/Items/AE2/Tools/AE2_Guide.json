@@ -34,5 +34,9 @@
       "Guide"
     ]
   },
-  "ItemSoundSetId": "ISS_Items_Paper"
+  "ItemSoundSetId": "ISS_Items_Paper",
+  "Interactions": {
+    "Primary": "AE2_Open_Book",
+    "Secondary": "AE2_Open_Book"
+  }
 }

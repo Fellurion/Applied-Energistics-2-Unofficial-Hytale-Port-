@@ -1,0 +1,54 @@
+# Applied Energistics 2 – ME-IO-Port (Einstellungen, Blockinfo beim Anschauen, Testbefehle)
+# Datei ae2ioport.lang -> Schlüsselpräfix 'ae2ioport.'
+
+setting.operation.empty = Richtung: Zelle ins Netz
+setting.operation.fill = Richtung: Netz in die Zelle
+setting.fullness.empty = Auswurf: wenn leer
+setting.fullness.half = Auswurf: wenn fertig
+setting.fullness.full = Auswurf: wenn voll
+setting.redstone.ignore = Signal: immer aktiv
+setting.redstone.low_signal = Signal: aktiv ohne Signal
+setting.redstone.high_signal = Signal: aktiv mit Signal
+
+note.slots = Benutze den IO-Port ungeduckt, um seine Zellenplätze zu öffnen: Die ersten sechs nehmen Speicherzellen auf, fertige Zellen erscheinen in den letzten sechs.
+
+hud.direction = Richtung
+hud.direction.empty = Zelle ins Netz
+hud.direction.fill = Netz in die Zelle
+hud.move = Auswurf
+hud.move.empty = wenn leer
+hud.move.half = wenn fertig
+hud.move.full = wenn voll
+hud.cells = Zellen
+hud.cells.value = {waiting} warten · {done} fertig
+hud.signal = Signal
+hud.signal.ignore = immer aktiv
+hud.signal.low_signal = aktiv ohne Signal
+hud.signal.high_signal = aktiv mit Signal
+hud.signal.paused = pausiert
+hud.hint = Geduckt benutzen: Einstellungen und Upgrade-Karten
+
+cmd.desc = ME-IO-Port: Testbefehle
+cmd.state.desc = Einstellungen, Karten und Zelleninhalte eines IO-Ports anzeigen
+cmd.set.desc = Einstellung eines IO-Ports ändern
+cmd.card.desc = Upgrade-Karte in einen IO-Port einbauen
+cmd.cell.desc = Speicherzelle mit Inhalt in einen Platz eines IO-Ports legen
+cmd.signal.desc = AE2-Signal an einer Position an- oder abschalten
+cmd.drops.desc = Herumliegende Items um eine Position auflisten
+cmd.arg.setting = operation, fullness oder redstone
+cmd.arg.value = Neuer Wert
+cmd.arg.card = Item der Upgrade-Karte
+cmd.arg.cell = Item der Speicherzelle
+cmd.arg.state = on oder off
+cmd.none = [AE2] Kein IO-Port bei {x} {y} {z}
+cmd.state = [AE2] IO-Port: operation={operation} fullness={fullness} redstone={redstone} powered={powered} enabled={enabled} active={active} sleeping={sleeping} rate={rate} cards={cards} network={network}
+cmd.state.slot = [AE2]   slot {slot}: {item} stored={stored} types={types}
+cmd.set.done = [AE2] {setting} = {value}
+cmd.set.unknown = [AE2] Unbekannte Einstellung oder unbekannter Wert: {setting} {value}
+cmd.card.done = [AE2] {card} eingebaut
+cmd.card.refused = [AE2] {card} lässt sich nicht einbauen
+cmd.cell.done = [AE2] {cell} mit {amount} {item} -> Slot {slot}
+cmd.cell.refused = [AE2] Unbekanntes Item, keine Speicherzelle, oder der Platz nimmt sie nicht an
+cmd.signal.done = [AE2] Signal bei {x} {y} {z}: {state}
+cmd.drops = [AE2] {count} herumliegende Item-Stapel um {x} {y} {z}
+cmd.drops.item = [AE2]   drop: {amount} {item} stored={stored}

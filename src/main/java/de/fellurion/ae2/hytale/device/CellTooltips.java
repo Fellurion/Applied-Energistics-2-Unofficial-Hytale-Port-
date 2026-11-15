@@ -14,9 +14,12 @@ import de.fellurion.ae2.core.cells.CellDefinition;
 import de.fellurion.ae2.core.cells.CellItemData;
 import de.fellurion.ae2.core.cells.StorageCell;
 import de.fellurion.ae2.core.cells.StorageCells;
+import de.fellurion.ae2.core.stacks.AEFluidKey;
 import de.fellurion.ae2.core.stacks.AEItemKey;
 import de.fellurion.ae2.core.stacks.AEKey;
 import de.fellurion.ae2.hytale.ItemKeys;
+import de.fellurion.ae2.hytale.fluid.FluidText;
+import de.fellurion.ae2.hytale.fluid.FluidTypes;
 import de.fellurion.ae2.hytale.ui.TerminalTexts;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
@@ -28,7 +31,8 @@ import java.util.Map;
 
 /**
  * Tooltip gefüllter Speicherzellen wie in AE2: „1.024 / 4.096 Bytes genutzt“, „12 / 63 Typen“, Partition und die
- * größten Inhalte. Steht als {@link ItemDisplayMetadata}-Beschreibung am Item (unter der normalen Beschreibung).
+ * größten Inhalte – bei Fluid-Zellen die Flüssigkeiten mit ihrer Menge in Eimern. Steht als
+ * {@link ItemDisplayMetadata}-Beschreibung am Item (unter der normalen Beschreibung).
  *
  * <p>Leere, unkonfigurierte Zellen bekommen keinen Tooltip, damit sie sich weiter mit neuen Zellen stapeln.
  */
@@ -84,7 +88,9 @@ public final class CellTooltips {
         ItemDisplayMetadata old = stack.getFromMetadataOrNull(ItemDisplayMetadata.KEYED_CODEC);
         Message name = old == null ? null : old.getName();
         Message block = describe(stack.getItemId(), data, liveCell);
-        if (block == null) {
+        // Zusatzzeilen anderer Bereiche (Ladung tragbarer Zellen ...)
+        Message extra = de.fellurion.ae2.hytale.items.ItemTooltips.extra(stack);
+        if (block == null && extra == null) {
             return name == null ? null : new ItemDisplayMetadata(name, null);
         }
         Message description = Message.empty();
@@ -93,7 +99,15 @@ public final class CellTooltips {
             description.insert(base);
             description.insert(Message.raw("\n\n"));
         }
-        description.insert(block);
+        if (block != null) {
+            description.insert(block);
+            if (extra != null) {
+                description.insert(Message.raw("\n"));
+            }
+        }
+        if (extra != null) {
+            description.insert(extra);
+        }
         return new ItemDisplayMetadata(name, description);
     }
 
@@ -135,8 +149,10 @@ public final class CellTooltips {
         top.sort((a, c) -> Long.compare(c.getValue(), a.getValue()));
         for (int i = 0; i < Math.min(PREVIEW, top.size()); i++) {
             Map.Entry<AEKey, Long> e = top.get(i);
+            // Flüssigkeiten in Eimern („12.5 B“), Items als Stückzahl
             lines.add(Message.translation("ae2ui.cell.entry")
-                    .param("amount", TerminalTexts.formatAmount(e.getValue()))
+                    .param("amount", e.getKey() instanceof AEFluidKey ? FluidText.full(e.getValue(), null)
+                            : TerminalTexts.formatAmount(e.getValue()))
                     .param("item", itemName(e.getKey())));
         }
         if (top.size() > PREVIEW) {
@@ -159,6 +175,9 @@ public final class CellTooltips {
                 return item.getTranslationMessage();
             }
             return Message.raw(ik.itemId());
+        }
+        if (key instanceof AEFluidKey fk) {
+            return FluidTypes.nameMessage(fk.fluidId());
         }
         return Message.raw(key.toString());
     }

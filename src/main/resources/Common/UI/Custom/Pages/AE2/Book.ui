@@ -1,0 +1,66 @@
+$C = "../../Common.ui";
+$B = "BookTheme.ui";
+
+// Buch „AE2 Basics“: aufgeschlagenes Buch mit zwei Seiten. Den Inhalt der Seiten hängt der Code aus
+// Bausteinen an (BookHeading, BookText, BookPicture, BookRecipe, BookLink); jede Seite ist 400 x 540 groß.
+$C.@PageOverlay {}
+
+Group #Book {
+  Anchor: (Width: 1000, Height: 660);
+  Background: (TexturePath: "BookTextures/Book.png");
+
+  Group #LeftPage {
+    Anchor: (Left: 70, Top: 48, Width: 400, Height: 540);
+    LayoutMode: Top;
+  }
+
+  Group #RightPage {
+    Anchor: (Left: 530, Top: 48, Width: 400, Height: 540);
+    LayoutMode: Top;
+  }
+
+  Label #LeftNumber {
+    Anchor: (Left: 70, Top: 594, Width: 400, Height: 20);
+    Style: $B.@PageNumberStyle;
+    Text: "";
+  }
+
+  Label #RightNumber {
+    Anchor: (Left: 530, Top: 594, Width: 400, Height: 20);
+    Style: $B.@PageNumberStyle;
+    Text: "";
+  }
+
+  TextButton #Contents {
+    Anchor: (Left: 400, Top: 592, Width: 200, Height: 26);
+    Style: $B.@LinkStyle;
+    Text: "";
+  }
+
+  Button #Prev {
+    Anchor: (Left: 18, Top: 580, Width: 48, Height: 48);
+    Style: (
+      Default: (Background: "BookTextures/ArrowLeft.png"),
+      Hovered: (Background: "BookTextures/ArrowLeftHovered.png"),
+      Pressed: (Background: "BookTextures/ArrowLeftPressed.png")
+    );
+  }
+
+  Button #Next {
+    Anchor: (Left: 934, Top: 580, Width: 48, Height: 48);
+    Style: (
+      Default: (Background: "BookTextures/ArrowRight.png"),
+      Hovered: (Background: "BookTextures/ArrowRightHovered.png"),
+      Pressed: (Background: "BookTextures/ArrowRightPressed.png")
+    );
+  }
+
+  Button #Close {
+    Anchor: (Width: 32, Height: 32, Top: -8, Right: -8);
+    Style: (
+      Default: (Background: "../../Common/ContainerCloseButton.png"),
+      Hovered: (Background: "../../Common/ContainerCloseButtonHovered.png"),
+      Pressed: (Background: "../../Common/ContainerCloseButtonPressed.png")
+    );
+  }
+}

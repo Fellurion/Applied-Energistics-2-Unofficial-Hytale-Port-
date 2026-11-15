@@ -15,6 +15,7 @@ import de.fellurion.ae2.core.grid.IActionHost;
 import de.fellurion.ae2.core.grid.IGridNodeListener;
 import de.fellurion.ae2.core.storage.IStorageMounts;
 import de.fellurion.ae2.core.storage.IStorageProvider;
+import de.fellurion.ae2.core.storage.MEStorage;
 
 import java.util.function.IntConsumer;
 
@@ -65,6 +66,15 @@ public class CellHostLogic implements IStorageProvider, IGridNodeListener, IActi
 
     public StorageCell getCell(int slot) {
         return cells[slot];
+    }
+
+    /**
+     * The inventory of a slot as it is mounted into the network (the cell behind its status watcher), or null if the
+     * slot is empty. Port of {@code IChestOrDrive.getCellInventory}: the ME chest's own terminal works on this
+     * inventory, so its LED follows what the player does.
+     */
+    public MEStorage getCellInventory(int slot) {
+        return watchers[slot];
     }
 
     /** Sets or clears (null) the cell in a slot and remounts. Persist the old cell before removing it! */

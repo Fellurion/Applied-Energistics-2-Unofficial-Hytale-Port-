@@ -1,0 +1,18 @@
+# Applied Energistics 2 – meteorites (impact event, compass)
+incoming.title = Meteorite incoming!
+incoming.subtitle = Look up …
+landed = A meteorite has landed at {x} / {z}.
+burnedUp = The meteorite burned up in the air.
+compass.marker = Meteorite
+compass.none = No meteorite in range.
+reject.unloaded = The terrain there is not loaded.
+reject.water = There is water.
+reject.touched = Players have built or mined there.
+reject.oldTerrain = The terrain is older than AE2 (build protection "strict").
+reject.spawn = Too close to the world spawn.
+reject.players = Too close to a player.
+reject.meteorite = There is already a meteorite.
+reject.building = Something is built there.
+reject.home = Too close to a bed or home.
+reject.claim = The area is protected (claim).
+reject.busy = An impact is already in progress.

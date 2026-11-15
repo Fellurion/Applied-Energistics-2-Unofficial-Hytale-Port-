@@ -1,0 +1,44 @@
+# Applied Energistics 2 – Quantum Network Bridge (Quantum Ring, Quantum Link Chamber)
+# File ae2quantum.lang -> key prefix 'ae2quantum.'
+
+hud.notFormed = Not formed
+hud.forming = Forming …
+hud.reason.wrong_shape = Build a flat 3×3: 8 Quantum Rings around 1 Link Chamber
+hud.reason.touched = Another bridge block touches the square – leave a gap
+hud.reason.wrong_layout = A block is missing or the Link Chamber is off-centre
+hud.hint.build = Upright or flat · both ends in the same world
+hud.linked = Linked
+hud.waiting = Waiting for the other side
+hud.inUse = Frequency already in use
+hud.noSingularity = No singularity
+hud.block = Block
+hud.block.link = Link Chamber · holds the singularity
+hud.block.edge = Ring · connects to cables
+hud.block.corner = Corner ring · does not connect to cables
+hud.frequency = Frequency
+hud.frequency.none = –
+hud.link = Link
+hud.link.linked = connected to the other bridge
+hud.link.linkedAt = connected to the bridge at {x} {y} {z}
+hud.link.waiting = other side not loaded or not found
+hud.link.inUse = two other bridges already use this frequency
+hud.link.noSingularity = needs an entangled singularity in the Link Chamber
+hud.link.unentangled = this singularity is not entangled
+hud.power = Power
+hud.power.on = on · the bridge draws {usage} AE/t
+hud.power.off = none · the bridge needs {usage} AE/t
+hud.hint.loaded = Both ends must be loaded and in the same world
+hud.hint.stack = {count} singularities inside – one is for the other bridge
+
+cmd.desc = Quantum Network Bridge (admin)
+cmd.singularity.desc = Put a singularity with a frequency into a Link Chamber (0 empties the slot)
+cmd.info.desc = Show the state of the quantum bridge a block belongs to
+cmd.arg.frequency = Frequency as a whole number, 0 to empty the slot
+cmd.noLink = [AE2] No Quantum Link Chamber at {x} {y} {z}
+cmd.noBridge = [AE2] No quantum bridge block at {x} {y} {z}
+cmd.badFrequency = [AE2] {value} is not a frequency (whole number expected)
+cmd.singularity.set = [AE2] Link Chamber at {x} {y} {z} now holds a singularity of frequency {frequency}
+cmd.singularity.cleared = [AE2] Link Chamber at {x} {y} {z} emptied
+cmd.singularity.failed = [AE2] The Link Chamber at {x} {y} {z} did not take the singularity (frequency {frequency})
+cmd.info.unformed = [AE2] Quantum bridge · {block} · not formed ({reason}) · frequency {frequency} · network {blocks} blocks
+cmd.info.formed = [AE2] Quantum bridge · {block} · formed around {center} · frequency {frequency} · place {side} · {state} · other side {other} · network {blocks} blocks · {power} · open sides {sides}

@@ -219,6 +219,42 @@ public final class CellHostDevice implements Device {
     }
 
     /**
+     * Nimmt die Zelle aus {@code slot} heraus (ME-Truhe: „Zelle entnehmen“). Ihr Inhalt steht vollständig im
+     * zurückgegebenen Item – wie bei einer Zelle, die jemand über das Slot-Fenster aus einem Laufwerk nimmt –, der
+     * Platz ist danach leer und die Zelle aus dem Netz. Leeren und Herausgeben sind ein Schritt: Genau der Stapel,
+     * der im Platz lag, verlässt ihn; wer ihn bekommt, muss ihn unterbringen.
+     *
+     * @return der entnommene Stapel; null, wenn der Platz leer ist oder sich nicht leeren lässt (dann ist nichts
+     *         geschehen)
+     */
+    @Nullable
+    public ItemStack takeCell(int slot) {
+        ItemContainer c = container;
+        if (c == null || busy || slot < 0 || slot >= slots.length || slot >= c.getCapacity()) {
+            return null;
+        }
+        sync(); // ausstehende Änderungen ins Item; danach kennt das Gerät genau den Stapel, der im Platz liegt
+        ItemStack inside = c.getItemStack((short) slot);
+        if (ItemStack.isEmpty(inside)) {
+            return null;
+        }
+        Slot s = slots[slot];
+        ItemStack out = inside;
+        if (s.cell != null && s.data != null && s.known == inside) {
+            // die Zelle verlässt den Platz: Inhalt und Tooltip stehen danach vollständig im Item
+            s.cell.persist();
+            out = CellTooltips.write(inside, s.data, s.cell, true);
+        }
+        // Genau diesen Stapel herausnehmen (am Slot-Filter vorbei); liegt etwas anderes dort, geschieht nichts.
+        // Das Container-Ereignis meldet die Zelle dabei sofort aus dem Netz ab.
+        if (!c.removeItemStackFromSlot((short) slot, inside, inside.getQuantity(), true, false).succeeded()) {
+            return null;
+        }
+        sync();
+        return out;
+    }
+
+    /**
      * Drive: Zellen nach vorne rücken (Slot 0..n-1), damit die sichtbaren Schächte ({@code Cells_<n>}) genau
      * der Belegung entsprechen. AE2 lässt Lücken zu; in Hytale gibt es dafür keine Darstellung.
      */

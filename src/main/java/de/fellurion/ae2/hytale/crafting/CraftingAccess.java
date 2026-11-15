@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** Einstieg ins Autocrafting für Terminals und Blöcke (Craft-Anfrage, Status, Pattern-Kodierung). */
+/** Einstieg ins Autocrafting für Terminals und Blöcke (Craft-Anfrage, Status, Pattern-Kodierung und -Zugriff). */
 public final class CraftingAccess {
 
     private CraftingAccess() {
@@ -103,5 +103,11 @@ public final class CraftingAccess {
     public static void openPatternEncoding(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
                                            WorldNetworks nets, int x, int y, int z) {
         player.getPageManager().openCustomPage(ref, store, new PatternEncodingPage(playerRef, nets, x, y, z));
+    }
+
+    /** Öffnet das Pattern-Zugriffsterminal (alle Pattern Provider des Netzes aus der Ferne bedienen). */
+    public static void openPatternAccess(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
+                                         WorldNetworks nets, int x, int y, int z) {
+        player.getPageManager().openCustomPage(ref, store, new PatternAccessPage(playerRef, nets, x, y, z));
     }
 }

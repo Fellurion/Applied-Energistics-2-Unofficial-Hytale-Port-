@@ -8,6 +8,8 @@
 package de.fellurion.ae2.core.crafting;
 
 import de.fellurion.ae2.core.config.Actionable;
+import de.fellurion.ae2.core.config.Enums.LockCraftingMode;
+import de.fellurion.ae2.core.config.Enums.YesNo;
 import de.fellurion.ae2.core.config.TickRates;
 import de.fellurion.ae2.core.grid.GridNode;
 import de.fellurion.ae2.core.grid.IActionHost;
@@ -28,6 +30,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 /**
@@ -41,13 +44,23 @@ import java.util.function.Supplier;
  * <li>Blocking mode: skip targets that still contain any pattern input.</li>
  * <li>Results come back into the {@linkplain #getReturnInventory() return inventory} (machines/integration insert
  * there) and are injected into the network on the next ticks (the CPU intercepts awaited results).</li>
+ * <li>Settings as in AE2: blocking mode, {@link LockCraftingMode lock crafting mode} and whether the provider is listed
+ * in pattern access terminals ({@link #isShownInAccessTerminal()}).</li>
  * </ul>
  * Deviations: the push targets are supplied by the integration ({@link #setTargetSupplier}) instead of scanning
- * adjacent block entities; redstone-based crafting locks and pattern access terminal grouping are not ported; the
- * "lock until result" mode is supported.
+ * adjacent block entities; the redstone signal for the lock modes comes from {@link #setRedstoneSupplier} (no signal
+ * unless the integration supplies one), and the integration calls {@link #updateRedstoneState()} when it may have
+ * changed; pattern access terminal grouping is not ported. AE2 remembers the side the send list goes to
+ * ({@code sendDirection}); here the target itself is remembered, and where it is not known (after a reload, after
+ * {@link #onTargetsChanged()}) the rest of the send list goes to the first current target that takes items.
  */
 public class PatternProviderLogic implements ICraftingProvider, IGridTickable, IGridNodeListener, IActionHost {
     public static final int DEFAULT_PATTERN_SLOTS = 9;
+
+    /** What releases a pending crafting lock (AE2: {@code UnlockCraftingEvent}). */
+    private enum UnlockCraftingEvent {
+        REDSTONE_POWER, RESULT, REDSTONE_PULSE
+    }
 
     private final List<IPatternDetails> patterns = new ArrayList<>();
     /** Inputs of all patterns, secondary dropped (for blocking mode). */
@@ -58,7 +71,11 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
     private Supplier<List<PatternProviderTarget>> targetSupplier = List::of;
     private int priority;
     private boolean blocking;
-    private boolean lockUntilResult;
+    private boolean showInAccessTerminal = true;
+    private LockCraftingMode lockMode = LockCraftingMode.NONE;
+    private YesNo redstoneState = YesNo.UNDECIDED;
+    private BooleanSupplier redstoneSupplier = () -> false;
+    private UnlockCraftingEvent unlockEvent;
     private GenericStack unlockStack;
     private int roundRobinIndex = 0;
     private GridNode node;
@@ -68,6 +85,18 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
     /** Supplies the current push targets (adjacent containers / machines, excluding other providers/interfaces). */
     public void setTargetSupplier(Supplier<List<PatternProviderTarget>> supplier) {
         this.targetSupplier = supplier == null ? List::of : supplier;
+    }
+
+    /**
+     * The push targets are no longer the ones they were (a provider that only pushes to its front was re-oriented):
+     * what is still on the send list goes to the first target there is now, as after a reload - never on into a
+     * block the provider no longer faces. Without a target the send list waits.
+     */
+    public void onTargetsChanged() {
+        sendTarget = null;
+        if (!sendList.isEmpty() && node != null) {
+            node.alert();
+        }
     }
 
     public void setChangeListener(Runnable listener) {
@@ -126,17 +155,100 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
         saveChanges();
     }
 
-    /** AE2 {@code LockCraftingMode.LOCK_UNTIL_RESULT}: after a push, wait until the primary output came back. */
-    public void setLockUntilResult(boolean lock) {
-        this.lockUntilResult = lock;
-        if (!lock) {
-            unlockStack = null;
-        }
+    /** AE2 setting {@code PATTERN_ACCESS_TERMINAL}: whether pattern access terminals list this provider (default yes). */
+    public boolean isShownInAccessTerminal() {
+        return showInAccessTerminal;
+    }
+
+    public void setShownInAccessTerminal(boolean show) {
+        this.showInAccessTerminal = show;
         saveChanges();
     }
 
+    public LockCraftingMode getLockCraftingMode() {
+        return lockMode;
+    }
+
+    /** AE2 setting {@code LOCK_CRAFTING_MODE}; changing it releases a pending lock. */
+    public void setLockCraftingMode(LockCraftingMode mode) {
+        this.lockMode = mode == null ? LockCraftingMode.NONE : mode;
+        this.redstoneState = YesNo.UNDECIDED;
+        this.unlockEvent = null;
+        this.unlockStack = null;
+        saveChanges();
+    }
+
+    /** Shortcut for {@link LockCraftingMode#LOCK_UNTIL_RESULT} / {@link LockCraftingMode#NONE}. */
+    public void setLockUntilResult(boolean lock) {
+        setLockCraftingMode(lock ? LockCraftingMode.LOCK_UNTIL_RESULT : LockCraftingMode.NONE);
+    }
+
+    /**
+     * Supplies whether the provider currently receives a redstone signal ({@code Level.hasNeighborSignal}). The value
+     * is cached until {@link #updateRedstoneState()}.
+     */
+    public void setRedstoneSupplier(BooleanSupplier supplier) {
+        this.redstoneSupplier = supplier == null ? () -> false : supplier;
+        this.redstoneState = YesNo.UNDECIDED;
+    }
+
+    /** Call when the redstone signal at the provider may have changed (AE2: neighbor update). */
+    public void updateRedstoneState() {
+        // If we're waiting for a pulse, update immediately
+        if (unlockEvent == UnlockCraftingEvent.REDSTONE_POWER && getRedstoneState()) {
+            unlockEvent = null; // Unlocked!
+            saveChanges();
+        } else if (unlockEvent == UnlockCraftingEvent.REDSTONE_PULSE && !getRedstoneState()) {
+            unlockEvent = UnlockCraftingEvent.REDSTONE_POWER; // Wait for re-power
+            redstoneState = YesNo.UNDECIDED; // Need to re-check signal on next update
+            saveChanges();
+        } else {
+            // Otherwise, just reset back to undecided
+            redstoneState = YesNo.UNDECIDED;
+        }
+    }
+
+    private boolean getRedstoneState() {
+        if (redstoneState == YesNo.UNDECIDED) {
+            redstoneState = redstoneSupplier.getAsBoolean() ? YesNo.YES : YesNo.NO;
+        }
+        return redstoneState == YesNo.YES;
+    }
+
+    public void resetCraftingLock() {
+        if (unlockEvent != null) {
+            unlockEvent = null;
+            unlockStack = null;
+            saveChanges();
+        }
+    }
+
+    /**
+     * Gets if the crafting lock is in effect and why.
+     *
+     * @return {@link LockCraftingMode#NONE} if the lock isn't in effect
+     */
+    public LockCraftingMode getCraftingLockedReason() {
+        if (lockMode == LockCraftingMode.LOCK_WHILE_LOW && !getRedstoneState()) {
+            // Crafting locked by redstone signal
+            return LockCraftingMode.LOCK_WHILE_LOW;
+        } else if (lockMode == LockCraftingMode.LOCK_WHILE_HIGH && getRedstoneState()) {
+            return LockCraftingMode.LOCK_WHILE_HIGH;
+        } else if (unlockEvent != null) {
+            // Crafting locked by waiting for unlock event
+            return unlockEvent == UnlockCraftingEvent.RESULT ? LockCraftingMode.LOCK_UNTIL_RESULT
+                    : LockCraftingMode.LOCK_UNTIL_PULSE;
+        }
+        return LockCraftingMode.NONE;
+    }
+
     public boolean isCraftingLocked() {
-        return unlockStack != null;
+        return getCraftingLockedReason() != LockCraftingMode.NONE;
+    }
+
+    /** @return null if {@link #getCraftingLockedReason()} is not {@link LockCraftingMode#LOCK_UNTIL_RESULT}. */
+    public GenericStack getUnlockStack() {
+        return unlockStack;
     }
 
     public ReturnInventory getReturnInventory() {
@@ -213,9 +325,24 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
     }
 
     private void onPushPatternSuccess(IPatternDetails pattern) {
-        unlockStack = null;
-        if (lockUntilResult) {
-            unlockStack = pattern.getPrimaryOutput();
+        resetCraftingLock();
+        switch (lockMode) {
+            case LOCK_UNTIL_PULSE -> {
+                if (getRedstoneState()) {
+                    // Already have signal, wait for no signal before switching to REDSTONE_POWER
+                    unlockEvent = UnlockCraftingEvent.REDSTONE_PULSE;
+                } else {
+                    // No signal, wait for signal
+                    unlockEvent = UnlockCraftingEvent.REDSTONE_POWER;
+                }
+                redstoneState = YesNo.UNDECIDED; // Check redstone state again next update
+            }
+            case LOCK_UNTIL_RESULT -> {
+                unlockEvent = UnlockCraftingEvent.RESULT;
+                unlockStack = pattern.getPrimaryOutput();
+            }
+            default -> {
+            }
         }
         saveChanges();
     }
@@ -242,7 +369,19 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
 
     private boolean sendStacksOut() {
         if (sendTarget == null) {
-            return false;
+            if (sendList.isEmpty()) {
+                return false;
+            }
+            // After a reload or a re-orientation: the first target that takes items (not a machine that takes plans)
+            for (var target : targetSupplier.get()) {
+                if (target != null && !target.acceptsPlans()) {
+                    sendTarget = target;
+                    break;
+                }
+            }
+            if (sendTarget == null) {
+                return false;
+            }
         }
         boolean didSomething = false;
         for (var it = sendList.listIterator(); it.hasNext();) {
@@ -281,9 +420,20 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
     }
 
     private void onStackReturnedToNetwork(GenericStack stack) {
-        if (unlockStack != null && unlockStack.what().equals(stack.what())) {
+        if (unlockEvent != UnlockCraftingEvent.RESULT) {
+            return; // If we're not waiting for the result, we don't care
+        }
+        if (unlockStack == null) {
+            // Actually an error state...
+            unlockEvent = null;
+        } else if (unlockStack.what().equals(stack.what())) {
             var remaining = unlockStack.amount() - stack.amount();
-            unlockStack = remaining <= 0 ? null : new GenericStack(unlockStack.what(), remaining);
+            if (remaining <= 0) {
+                unlockEvent = null;
+                unlockStack = null;
+            } else {
+                unlockStack = new GenericStack(unlockStack.what(), remaining);
+            }
         }
     }
 
@@ -348,11 +498,20 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
         if (blocking) {
             m.put("blocking", true);
         }
-        if (lockUntilResult) {
-            m.put("lockResult", true);
+        if (!showInAccessTerminal) {
+            m.put("hidden", true);
         }
-        if (unlockStack != null) {
+        if (lockMode != LockCraftingMode.NONE) {
+            m.put("lockMode", lockMode.name());
+        }
+        // AE2 stores the unlock event as a byte: 1 redstone power, 2 result, 3 redstone pulse
+        if (unlockEvent == UnlockCraftingEvent.REDSTONE_POWER) {
+            m.put("unlockEvent", 1);
+        } else if (unlockEvent == UnlockCraftingEvent.RESULT && unlockStack != null) {
+            m.put("unlockEvent", 2);
             m.put("unlock", PatternHelper.stackToJson(unlockStack));
+        } else if (unlockEvent == UnlockCraftingEvent.REDSTONE_PULSE) {
+            m.put("unlockEvent", 3);
         }
         if (!sendList.isEmpty()) {
             m.put("send", PatternHelper.stacksToJson(sendList));
@@ -371,23 +530,39 @@ public class PatternProviderLogic implements ICraftingProvider, IGridTickable, I
         var m = MiniJson.parseObject(json);
         priority = MiniJson.getInt(m, "priority", 0);
         blocking = MiniJson.getBool(m, "blocking", false);
-        lockUntilResult = MiniJson.getBool(m, "lockResult", false);
+        showInAccessTerminal = !MiniJson.getBool(m, "hidden", false);
+        // "lockResult" is the format written before all lock modes were ported
+        lockMode = MiniJson.getEnum(m, "lockMode", LockCraftingMode.class, MiniJson.getBool(m, "lockResult", false)
+                ? LockCraftingMode.LOCK_UNTIL_RESULT : LockCraftingMode.NONE);
+        redstoneState = YesNo.UNDECIDED;
         unlockStack = PatternHelper.stackFromJson(m.get("unlock"));
+        unlockEvent = switch (MiniJson.getInt(m, "unlockEvent", unlockStack != null ? 2 : 0)) {
+            case 1 -> UnlockCraftingEvent.REDSTONE_POWER;
+            case 2 -> UnlockCraftingEvent.RESULT;
+            case 3 -> UnlockCraftingEvent.REDSTONE_PULSE;
+            default -> null;
+        };
+        if (unlockEvent != UnlockCraftingEvent.RESULT) {
+            unlockStack = null;
+        }
         sendList.clear();
         for (var s : PatternHelper.stacksFromJson(MiniJson.getList(m, "send"))) {
             if (s != null) {
                 sendList.add(s);
             }
         }
-        if (!sendList.isEmpty()) {
-            var targets = targetSupplier.get();
-            sendTarget = targets.isEmpty() ? null : targets.getFirst();
-        }
+        // The target of a loaded send list is looked up when it is next sent out: at this point the integration may
+        // not have set the target supplier yet, and the neighbours may not be loaded
+        sendTarget = null;
         returnInv.clear();
         for (var s : PatternHelper.stacksFromJson(MiniJson.getList(m, "ret"))) {
             if (s != null) {
                 returnInv.insert(s.what(), s.amount(), Actionable.MODULATE);
             }
+        }
+        // Loaded into a node that is already in the grid (and asleep, it had nothing to do): wake it up
+        if (node != null && hasWorkToDo()) {
+            node.alert();
         }
     }
 

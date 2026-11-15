@@ -76,6 +76,23 @@ public final class HytaleSlots implements SlotAccess {
 
     @Override
     public boolean isItemValid(int slot, SimpleStack stack) {
-        return validator.test(slot, stack);
+        if (!validator.test(slot, stack)) {
+            return false;
+        }
+        if (stack == null || slot < 0 || slot >= size) {
+            return true;
+        }
+        // Auch der Slot-Filter des Containers entscheidet (z. B. nimmt ein Drive nur Zellen): sonst würde set()
+        // stillschweigend scheitern und das Item wäre verloren.
+        try {
+            short s = (short) (offset + slot);
+            ItemStack current = container.getItemStack(s);
+            if (current != null && !current.isEmpty()) {
+                return true; // belegter Slot: ob gestapelt werden kann, prüft der Kern über get()
+            }
+            return container.canAddItemStackToSlot(s, ItemKeys.toStack(stack.key(), 1), false, true);
+        } catch (RuntimeException e) {
+            return true;
+        }
     }
 }

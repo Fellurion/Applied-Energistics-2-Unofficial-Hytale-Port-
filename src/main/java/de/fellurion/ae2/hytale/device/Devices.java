@@ -14,11 +14,32 @@ import de.fellurion.ae2.hytale.BlockAccess;
 import de.fellurion.ae2.hytale.WorldNetworks;
 
 import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /** Erzeugt je {@code Kind} den passenden Geräte-Adapter. */
 public final class Devices {
 
+    /** Erzeugt das Gerät eines Blocks; null = dieser Block bekommt kein Gerät. */
+    @FunctionalInterface
+    public interface Factory {
+        @Nullable
+        Device create(WorldNetworks nets, WorldNetworks.Node node);
+    }
+
+    private static final Map<String, Factory> FACTORIES = new ConcurrentHashMap<>();
+
     private Devices() {
+    }
+
+    /**
+     * Meldet das Gerät einer Block-Art an (einmal beim Plugin-Start, aus dem {@code setup} des jeweiligen Bereichs).
+     * Angemeldete Arten haben Vorrang vor den fest eingebauten.
+     */
+    public static void register(String kind, Factory factory) {
+        if (FACTORIES.putIfAbsent(kind, factory) != null) {
+            throw new IllegalStateException("AE2: device for kind '" + kind + "' registered twice");
+        }
     }
 
     /** Lädt Rezeptdaten für Maschinen (einmal beim Plugin-Start). */
@@ -29,6 +50,10 @@ public final class Devices {
     @Nullable
     public static Device create(WorldNetworks nets, WorldNetworks.Node node) {
         String kind = node.kind();
+        Factory registered = FACTORIES.get(kind);
+        if (registered != null) {
+            return registered.create(nets, node);
+        }
         return switch (kind) {
             case "drive" -> new CellHostDevice(CellHostLogic.drive());
             case "me_chest" -> new CellHostDevice(CellHostLogic.meChest());
@@ -38,6 +63,7 @@ public final class Devices {
             case "crystal_resonance_generator" -> owner(new CrystalResonanceGeneratorLogic());
             case "inscriber", "charger", "vibration_chamber", "condenser" -> new MachineDevice(kind).prepare(nets, node);
             case "import_bus", "export_bus", "storage_bus" -> new BusDevice(kind);
+            case "interface" -> new InterfaceDevice(node.item() != null && node.item().part());
             case GlassDevice.KIND -> new GlassDevice();
             case "cell_workbench" -> cellsOnly(nets, node);
             case "crank" -> new CrankDevice();
@@ -45,6 +71,8 @@ public final class Devices {
             case "molecular_assembler" -> new CraftingDevices.MolecularAssembler();
             case "crafting_unit", "crafting_accelerator", "crafting_storage", "crafting_monitor" ->
                     new CraftingDevices.CraftingUnit(kind, node.comp.bytes());
+            case "budding_quartz" -> new GrowthDevices.Budding(node.comp.grade());
+            case "growth_accelerator" -> new GrowthDevices.GrowthAccelerator();
             default -> null;
         };
     }

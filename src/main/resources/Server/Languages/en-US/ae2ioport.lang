@@ -1,0 +1,54 @@
+# Applied Energistics 2 – ME IO Port (settings, block info while looking at it, test commands)
+# File ae2ioport.lang -> key prefix 'ae2ioport.'
+
+setting.operation.empty = Direction: cell to network
+setting.operation.fill = Direction: network to cell
+setting.fullness.empty = Move out: when empty
+setting.fullness.half = Move out: when work is done
+setting.fullness.full = Move out: when full
+setting.redstone.ignore = Signal: always active
+setting.redstone.low_signal = Signal: active without signal
+setting.redstone.high_signal = Signal: active with signal
+
+note.slots = Use the IO Port without sneaking to open its cell slots: the first six take storage cells, finished cells appear in the last six.
+
+hud.direction = Direction
+hud.direction.empty = Cell to network
+hud.direction.fill = Network to cell
+hud.move = Move out
+hud.move.empty = when empty
+hud.move.half = when work is done
+hud.move.full = when full
+hud.cells = Cells
+hud.cells.value = {waiting} waiting · {done} done
+hud.signal = Signal
+hud.signal.ignore = always active
+hud.signal.low_signal = active without signal
+hud.signal.high_signal = active with signal
+hud.signal.paused = paused
+hud.hint = Sneak + use: settings and upgrade cards
+
+cmd.desc = ME IO Port: test commands
+cmd.state.desc = Show settings, cards and cell contents of an IO Port
+cmd.set.desc = Change a setting of an IO Port
+cmd.card.desc = Install an upgrade card in an IO Port
+cmd.cell.desc = Put a storage cell with contents into a slot of an IO Port
+cmd.signal.desc = Switch the AE2 signal at a position on or off
+cmd.drops.desc = List the items lying around a position
+cmd.arg.setting = operation, fullness or redstone
+cmd.arg.value = New value
+cmd.arg.card = Upgrade card item
+cmd.arg.cell = Storage cell item
+cmd.arg.state = on or off
+cmd.none = [AE2] No IO Port at {x} {y} {z}
+cmd.state = [AE2] IO Port: operation={operation} fullness={fullness} redstone={redstone} powered={powered} enabled={enabled} active={active} sleeping={sleeping} rate={rate} cards={cards} network={network}
+cmd.state.slot = [AE2]   slot {slot}: {item} stored={stored} types={types}
+cmd.set.done = [AE2] {setting} = {value}
+cmd.set.unknown = [AE2] Unknown setting or value: {setting} {value}
+cmd.card.done = [AE2] Installed {card}
+cmd.card.refused = [AE2] {card} cannot be installed
+cmd.cell.done = [AE2] {cell} with {amount} {item} -> slot {slot}
+cmd.cell.refused = [AE2] Unknown item, no storage cell, or the slot does not accept it
+cmd.signal.done = [AE2] Signal at {x} {y} {z}: {state}
+cmd.drops = [AE2] {count} item stacks lying around {x} {y} {z}
+cmd.drops.item = [AE2]   drop: {amount} {item} stored={stored}

@@ -1,0 +1,18 @@
+# Applied Energistics 2 – Meteoriten (Einschlag-Ereignis, Kompass)
+incoming.title = Meteorit im Anflug!
+incoming.subtitle = Schau nach oben …
+landed = Ein Meteorit ist bei {x} / {z} eingeschlagen.
+burnedUp = Der Meteorit ist in der Luft verglüht.
+compass.marker = Meteorit
+compass.none = Kein Meteorit in Reichweite.
+reject.unloaded = Das Gelände dort ist nicht geladen.
+reject.water = Dort ist Wasser.
+reject.touched = Dort haben Spieler gebaut oder abgebaut.
+reject.oldTerrain = Das Gelände stammt aus der Zeit vor AE2 (Bauschutz „strict“).
+reject.spawn = Zu nah am Welt-Spawn.
+reject.players = Zu nah an einem Spieler.
+reject.meteorite = Dort liegt schon ein Meteorit.
+reject.building = Dort steht etwas Gebautes.
+reject.home = Zu nah an einem Bett oder Zuhause.
+reject.claim = Das Gebiet ist geschützt (Claim).
+reject.busy = Es läuft schon ein Einschlag.

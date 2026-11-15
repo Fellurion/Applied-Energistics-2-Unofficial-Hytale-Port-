@@ -33,12 +33,24 @@ public final class NetworkStorage implements MEStorage {
     private final NavigableMap<Integer, List<MEStorage>> priorityInventory = new TreeMap<>((a, b) -> Integer.compare(b, a));
     private final List<MEStorage> secondPassInventories = new ArrayList<>();
     private List<Object[]> queuedOperations;
+    private long changeCount;
+
+    /**
+     * Counts everything that changed the content seen through this storage: mounts, unmounts and every insert or
+     * extract that actually moved something. Not in AE2; lets {@link StorageService} skip rebuilding its snapshot
+     * while nothing happened. Storages that change behind the network's back (a chest behind a storage bus) are not
+     * counted.
+     */
+    public long getChangeCount() {
+        return changeCount;
+    }
 
     public void mount(int priority, MEStorage inventory) {
         if (mountsInUse) {
             queue(new Object[] { Boolean.TRUE, priority, inventory });
         } else {
             priorityInventory.computeIfAbsent(priority, k -> new ArrayList<>()).add(inventory);
+            changeCount++;
         }
     }
 
@@ -46,6 +58,7 @@ public final class NetworkStorage implements MEStorage {
         if (mountsInUse) {
             queue(new Object[] { Boolean.FALSE, 0, inventory });
         } else {
+            changeCount++;
             var it = priorityInventory.entrySet().iterator();
             while (it.hasNext()) {
                 var list = it.next().getValue();
@@ -126,6 +139,9 @@ public final class NetworkStorage implements MEStorage {
             mountsInUse = false;
         }
         flushQueuedOperations();
+        if (type == Actionable.MODULATE && remaining != amount) {
+            changeCount++;
+        }
         return amount - remaining;
     }
 
@@ -151,6 +167,9 @@ public final class NetworkStorage implements MEStorage {
             mountsInUse = false;
         }
         flushQueuedOperations();
+        if (mode == Actionable.MODULATE && extracted != 0) {
+            changeCount++;
+        }
         return extracted;
     }
 

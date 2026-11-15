@@ -1,0 +1,20 @@
+$B = "BookTheme.ui";
+
+// Titelseite: großer Titel und Untertitel.
+Group {
+  Anchor: (Height: 110);
+  LayoutMode: Top;
+  Padding: (Top: 12);
+
+  Label #Title {
+    Anchor: (Height: 50);
+    Style: $B.@TitleStyle;
+    Text: "";
+  }
+
+  Label #Subtitle {
+    Anchor: (Height: 40);
+    Style: $B.@SubtitleStyle;
+    Text: "";
+  }
+}

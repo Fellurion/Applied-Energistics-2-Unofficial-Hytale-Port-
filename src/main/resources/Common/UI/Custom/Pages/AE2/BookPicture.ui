@@ -1,0 +1,153 @@
+$B = "BookTheme.ui";
+
+// Bilder: bis zu fünf Items im Rahmen mit Namen darunter. #Pad schiebt die Reihe in die Mitte (Breite per Code).
+Group {
+  Anchor: (Height: 112);
+  LayoutMode: Left;
+  Padding: (Top: 4);
+
+  Group #Pad {
+    Anchor: (Width: 0);
+  }
+
+  Group #Cell0 {
+    Anchor: (Width: 80);
+    LayoutMode: Top;
+    Visible: false;
+
+    Group {
+      Anchor: (Height: 70);
+      Padding: (Horizontal: 6, Top: 2, Bottom: 2);
+
+      Group {
+        Anchor: (Full: 0);
+        Background: $B.@FrameBackground;
+        Padding: 6;
+
+        ItemSlot #Icon0 {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Label #Caption0 {
+      Anchor: (Height: 34);
+      Style: $B.@CaptionStyle;
+      Text: "";
+    }
+  }
+  Group #Cell1 {
+    Anchor: (Width: 80);
+    LayoutMode: Top;
+    Visible: false;
+
+    Group {
+      Anchor: (Height: 70);
+      Padding: (Horizontal: 6, Top: 2, Bottom: 2);
+
+      Group {
+        Anchor: (Full: 0);
+        Background: $B.@FrameBackground;
+        Padding: 6;
+
+        ItemSlot #Icon1 {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Label #Caption1 {
+      Anchor: (Height: 34);
+      Style: $B.@CaptionStyle;
+      Text: "";
+    }
+  }
+  Group #Cell2 {
+    Anchor: (Width: 80);
+    LayoutMode: Top;
+    Visible: false;
+
+    Group {
+      Anchor: (Height: 70);
+      Padding: (Horizontal: 6, Top: 2, Bottom: 2);
+
+      Group {
+        Anchor: (Full: 0);
+        Background: $B.@FrameBackground;
+        Padding: 6;
+
+        ItemSlot #Icon2 {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Label #Caption2 {
+      Anchor: (Height: 34);
+      Style: $B.@CaptionStyle;
+      Text: "";
+    }
+  }
+  Group #Cell3 {
+    Anchor: (Width: 80);
+    LayoutMode: Top;
+    Visible: false;
+
+    Group {
+      Anchor: (Height: 70);
+      Padding: (Horizontal: 6, Top: 2, Bottom: 2);
+
+      Group {
+        Anchor: (Full: 0);
+        Background: $B.@FrameBackground;
+        Padding: 6;
+
+        ItemSlot #Icon3 {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Label #Caption3 {
+      Anchor: (Height: 34);
+      Style: $B.@CaptionStyle;
+      Text: "";
+    }
+  }
+  Group #Cell4 {
+    Anchor: (Width: 80);
+    LayoutMode: Top;
+    Visible: false;
+
+    Group {
+      Anchor: (Height: 70);
+      Padding: (Horizontal: 6, Top: 2, Bottom: 2);
+
+      Group {
+        Anchor: (Full: 0);
+        Background: $B.@FrameBackground;
+        Padding: 6;
+
+        ItemSlot #Icon4 {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Label #Caption4 {
+      Anchor: (Height: 34);
+      Style: $B.@CaptionStyle;
+      Text: "";
+    }
+  }
+}

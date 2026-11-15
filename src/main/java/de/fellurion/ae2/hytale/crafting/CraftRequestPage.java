@@ -79,11 +79,11 @@ public final class CraftRequestPage extends InteractiveCustomUIPage<CraftRequest
         cmd.set("#Start.Visible", plan != null && !plan.simulation());
         cmd.clear("#Plan");
         if (plan == null) {
-            cmd.set("#PlanInfo.Text", info);
+            cmd.set("#PlanInfo.TextSpans", info); // Meldung: TextSpans (eine Meldung in .Text bringt den Client zum Absturz)
             cmd.set("#MissingHeader.Text", "");
             return;
         }
-        cmd.set("#PlanInfo.Text", Message.translation("ae2craft.request.planInfo")
+        cmd.set("#PlanInfo.TextSpans", Message.translation("ae2craft.request.planInfo")
                 .param("bytes", TerminalPage.formatAmount(plan.bytes()))
                 .param("output", TerminalPage.formatAmount(plan.finalOutput().amount())));
         KeyCounter shown = plan.simulation() ? plan.missingItems() : plan.usedItems();
@@ -157,7 +157,13 @@ public final class CraftRequestPage extends InteractiveCustomUIPage<CraftRequest
 
     private boolean start() {
         Grid grid = CraftingAccess.grid(nets, x, y, z);
-        if (grid == null || plan == null || plan.simulation()) {
+        if (grid == null || !CraftingAccess.active(nets, x, y, z)) {
+            // Terminal hat inzwischen Strom oder Kanal verloren: nicht stumm scheitern
+            plan = null;
+            info = Message.translation("ae2craft.request.offline");
+            return false;
+        }
+        if (plan == null || plan.simulation()) {
             return false;
         }
         CraftingSubmitResult result = grid.getCraftingService().submitJob(plan, null, null, true, source());

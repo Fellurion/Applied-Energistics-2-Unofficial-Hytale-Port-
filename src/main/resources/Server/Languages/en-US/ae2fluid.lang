@@ -1,0 +1,81 @@
+# Applied Energistics 2 – fluids in the ME network (terminal, Sky Stone Tank, filters, test commands)
+# File ae2fluid.lang -> key prefix 'ae2fluid.'
+
+fluid.Water_Source = Water
+fluid.Lava_Source = Lava
+fluid.Poison_Source = Poison
+fluid.Slime_Source = Slime
+fluid.Slime_Red_Source = Red Slime
+fluid.Tar_Source = Tar
+fluid.Tar_Void_Source = Void Tar
+
+terminal.storage = {types} types · {items} items · {fluid} of fluids
+terminal.tooltip.fluid = Fluid: {fluid}
+terminal.tooltip.stored = In the ME network: {amount} ({mb} mB)
+terminal.tooltip.fillHint = Click: fill a {container} – an empty one from your inventory, otherwise one stored in the network
+terminal.tooltip.noContainer = No container holds this fluid. It enters and leaves the network through tanks and planes.
+terminal.tooltip.emptyHint = Right click: empty {amount} of {fluid} into the ME network · left click: store the container as an item
+terminal.noContainer = No container holds {fluid}. It leaves the network through tanks and planes.
+terminal.needContainer = You need an empty {container} to take out {fluid}.
+terminal.notEnough = The network cannot hand out a full container of {fluid} right now.
+terminal.noRoom = The network cannot store {fluid} right now (no room in a fluid storage cell, or not enough energy).
+
+tank.content = {fluid}: {amount}
+tank.empty = The tank is empty.
+tank.full = The tank has no room for a full container.
+tank.otherFluid = The tank already holds {fluid}.
+tank.notEnough = The tank holds less than a full container.
+tank.noContainer = No container holds {fluid}. Put a bus on the tank to move it.
+tank.mainHand = Hold the container in your main hand.
+
+hud.fluid = Fluid
+hud.none = empty
+hud.amount = Amount
+hud.hint = Use with a bucket to fill or empty it
+
+config.hint = Fluids: select a bucket, then right click a filter slot. A filled bucket sets its fluid, an empty one the first fluid; every further right click switches to the next fluid.
+config.tip.fluid = Fluid: {fluid}
+config.noOther = Every fluid is already in the filter.
+
+cmd.desc = Fluids in the ME network: test commands
+cmd.list.desc = List the fluids the ME network can store
+cmd.insert.desc = Put a fluid into the ME network (creative)
+cmd.extract.desc = Take a fluid out of the ME network (creative)
+cmd.count.desc = Amount of a fluid in the ME network
+cmd.cells.desc = Show bytes, types and contents of the cells in an ME Drive or ME Chest
+cmd.tank.desc = Show the content of a Sky Stone Tank
+cmd.fill.desc = Fill a Sky Stone Tank
+cmd.drain.desc = Drain a Sky Stone Tank
+cmd.filter.desc = Put a fluid into a filter slot of a device
+cmd.terminal.desc = Show the fluids a terminal at this position lists
+cmd.bucket.desc = Fill or empty a bucket at the terminal of this network (probe slot instead of a player)
+cmd.moveslot.desc = Move a stack between two block containers (test helper)
+cmd.arg.target = Target position
+cmd.world.desc = Show, remove or set the fluid at a position of the world (test helper)
+cmd.arg.world = get, none or a fluid id of the game
+cmd.arg.fluid = Fluid id, e.g. Water_Source
+cmd.arg.amount = Amount in mB (1000 = one bucket)
+cmd.arg.filter = Fluid id, next or clear
+cmd.arg.mode = fill or empty
+cmd.unknown = [AE2] Unknown or not storable fluid: {fluid}
+cmd.noTank = [AE2] No Sky Stone Tank at {x} {y} {z}
+cmd.noCells = [AE2] No ME Drive or ME Chest at {x} {y} {z}
+cmd.list = [AE2] {count} storable fluids
+cmd.list.entry = [AE2]   {fluid} icon={icon} container={container}
+cmd.insert.done = [AE2] Stored {amount} mB {fluid}
+cmd.extract.done = [AE2] Extracted {amount} mB {fluid}
+cmd.count.done = [AE2] {fluid}: {amount} mB
+cmd.cells.slot = [AE2]   slot {slot}: {item} bytes={used}/{total} types={types}/{maxTypes} content={content}
+cmd.cells.none = [AE2] No cells inserted
+cmd.tank = [AE2] Tank: fluid={fluid} amount={amount} capacity={capacity}
+cmd.fill.done = [AE2] Tank accepted {amount} mB {fluid}
+cmd.drain.done = [AE2] Tank gave {amount} mB {fluid}
+cmd.filter.none = [AE2] No device with a filter at {x} {y} {z}
+cmd.filter.done = [AE2] Filter slot {slot}: {result} key={key}
+cmd.terminal = [AE2] Terminal: online={online} items={items} itemTotal={itemTotal} fluidTotal={fluidTotal} fluids={fluids}
+cmd.bucket.none = [AE2] No container item for {fluid}
+cmd.bucket.done = [AE2] Bucket {mode}: {result} slot={slot} overflow={overflow}
+cmd.moveslot.failed = [AE2] Could not move the stack
+cmd.moveslot.done = [AE2] Moved {item} to slot {slot}
+cmd.world.unloaded = [AE2] This position is not loaded
+cmd.world = [AE2] Fluid at {x} {y} {z}: {fluid} level={level} storableSource={source}

@@ -1,0 +1,81 @@
+# Applied Energistics 2 – Flüssigkeiten im ME-Netz (Terminal, Sky Stone Tank, Filter, Testbefehle)
+# Datei ae2fluid.lang -> Schlüsselpräfix 'ae2fluid.'
+
+fluid.Water_Source = Wasser
+fluid.Lava_Source = Lava
+fluid.Poison_Source = Gift
+fluid.Slime_Source = Schleim
+fluid.Slime_Red_Source = Roter Schleim
+fluid.Tar_Source = Teer
+fluid.Tar_Void_Source = Leerenteer
+
+terminal.storage = {types} Typen · {items} Items · {fluid} Flüssigkeit
+terminal.tooltip.fluid = Flüssigkeit: {fluid}
+terminal.tooltip.stored = Im ME-Netz: {amount} ({mb} mB)
+terminal.tooltip.fillHint = Klick: {container} füllen – einen leeren aus deinem Inventar, sonst einen aus dem Netz
+terminal.tooltip.noContainer = Für diese Flüssigkeit gibt es keinen Behälter. Sie kommt über Tanks und Planes ins Netz und wieder heraus.
+terminal.tooltip.emptyHint = Rechtsklick: {amount} {fluid} ins ME-Netz leeren · Linksklick: den Behälter als Item einlagern
+terminal.noContainer = Für {fluid} gibt es keinen Behälter. Aus dem Netz kommt es über Tanks und Planes.
+terminal.needContainer = Du brauchst einen leeren Behälter ({container}), um {fluid} zu entnehmen.
+terminal.notEnough = Das Netz kann gerade keinen vollen Behälter {fluid} abgeben.
+terminal.noRoom = Das Netz kann {fluid} gerade nicht lagern (kein Platz in einer Fluid-Speicherzelle oder zu wenig Energie).
+
+tank.content = {fluid}: {amount}
+tank.empty = Der Tank ist leer.
+tank.full = Im Tank ist kein Platz für einen vollen Behälter.
+tank.otherFluid = Im Tank ist schon {fluid}.
+tank.notEnough = Im Tank ist weniger als ein voller Behälter.
+tank.noContainer = Für {fluid} gibt es keinen Behälter. Setze einen Bus an den Tank, um es zu bewegen.
+tank.mainHand = Halte den Behälter in der Haupthand.
+
+hud.fluid = Flüssigkeit
+hud.none = leer
+hud.amount = Menge
+hud.hint = Mit einem Eimer benutzen: füllen oder leeren
+
+config.hint = Flüssigkeiten: Eimer auswählen, dann Rechtsklick auf einen Filterplatz. Ein voller Eimer setzt seine Flüssigkeit, ein leerer die erste; jeder weitere Rechtsklick schaltet zur nächsten Flüssigkeit.
+config.tip.fluid = Flüssigkeit: {fluid}
+config.noOther = Alle Flüssigkeiten stehen schon im Filter.
+
+cmd.desc = Flüssigkeiten im ME-Netz: Testbefehle
+cmd.list.desc = Die Flüssigkeiten auflisten, die das ME-Netz lagern kann
+cmd.insert.desc = Flüssigkeit ins ME-Netz einlagern (kreativ)
+cmd.extract.desc = Flüssigkeit aus dem ME-Netz entnehmen (kreativ)
+cmd.count.desc = Menge einer Flüssigkeit im ME-Netz
+cmd.cells.desc = Bytes, Typen und Inhalt der Zellen eines ME-Laufwerks oder einer ME-Truhe zeigen
+cmd.tank.desc = Inhalt eines Sky Stone Tank zeigen
+cmd.fill.desc = Einen Sky Stone Tank füllen
+cmd.drain.desc = Einen Sky Stone Tank leeren
+cmd.filter.desc = Flüssigkeit in einen Filterplatz eines Geräts legen
+cmd.terminal.desc = Zeigen, welche Flüssigkeiten ein Terminal an dieser Stelle auflistet
+cmd.bucket.desc = Einen Eimer am Terminal dieses Netzes füllen oder leeren (Probe-Feld statt eines Spielers)
+cmd.moveslot.desc = Einen Stapel zwischen zwei Block-Containern verschieben (Testhilfe)
+cmd.arg.target = Zielposition
+cmd.world.desc = Die Flüssigkeit an einer Stelle der Welt zeigen, entfernen oder setzen (Testhilfe)
+cmd.arg.world = get, none oder eine Flüssigkeit des Spiels
+cmd.arg.fluid = Kennung der Flüssigkeit, z. B. Water_Source
+cmd.arg.amount = Menge in mB (1000 = ein Eimer)
+cmd.arg.filter = Kennung der Flüssigkeit, next oder clear
+cmd.arg.mode = fill oder empty
+cmd.unknown = [AE2] Unbekannte oder nicht lagerbare Flüssigkeit: {fluid}
+cmd.noTank = [AE2] Kein Sky Stone Tank bei {x} {y} {z}
+cmd.noCells = [AE2] Kein ME-Laufwerk und keine ME-Truhe bei {x} {y} {z}
+cmd.list = [AE2] {count} lagerbare Flüssigkeiten
+cmd.list.entry = [AE2]   {fluid} icon={icon} container={container}
+cmd.insert.done = [AE2] {amount} mB {fluid} eingelagert
+cmd.extract.done = [AE2] {amount} mB {fluid} entnommen
+cmd.count.done = [AE2] {fluid}: {amount} mB
+cmd.cells.slot = [AE2]   slot {slot}: {item} bytes={used}/{total} types={types}/{maxTypes} content={content}
+cmd.cells.none = [AE2] Keine Zellen eingelegt
+cmd.tank = [AE2] Tank: fluid={fluid} amount={amount} capacity={capacity}
+cmd.fill.done = [AE2] Tank hat {amount} mB {fluid} angenommen
+cmd.drain.done = [AE2] Tank hat {amount} mB {fluid} abgegeben
+cmd.filter.none = [AE2] Kein Gerät mit Filter bei {x} {y} {z}
+cmd.filter.done = [AE2] Filterplatz {slot}: {result} key={key}
+cmd.terminal = [AE2] Terminal: online={online} items={items} itemTotal={itemTotal} fluidTotal={fluidTotal} fluids={fluids}
+cmd.bucket.none = [AE2] Kein Behälter-Item für {fluid}
+cmd.bucket.done = [AE2] Eimer {mode}: {result} slot={slot} overflow={overflow}
+cmd.moveslot.failed = [AE2] Der Stapel ließ sich nicht verschieben
+cmd.moveslot.done = [AE2] {item} nach Platz {slot} verschoben
+cmd.world.unloaded = [AE2] Diese Stelle ist nicht geladen
+cmd.world = [AE2] Flüssigkeit bei {x} {y} {z}: {fluid} level={level} storableSource={source}

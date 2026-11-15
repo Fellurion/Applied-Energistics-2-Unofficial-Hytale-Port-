@@ -123,6 +123,8 @@ public final class WorldNetworks {
     private final Long2ObjectOpenHashMap<Node> nodes = new Long2ObjectOpenHashMap<>();
     private final List<Node> pending = new ArrayList<>();
     private long tickCount;
+    /** Noch nicht in AE2-Ticks umgesetzte Zeit dieser Welt (siehe {@link AE2TickSystem}). */
+    float pendingTickSeconds;
     /** Zählt jede An-/Abmeldung von AE2-Blöcken (z. B. für verbundenes Quarzglas). */
     private long topologyVersion;
 
@@ -192,6 +194,11 @@ public final class WorldNetworks {
 
     private void detach(Node n, boolean broken) {
         topologyVersion++;
+        if (broken && "mysterious_cube".equals(n.kind())) {
+            // Der Meteoriten-Kompass zeigt nur auf Meteoriten, in denen der Cube noch liegt
+            de.fellurion.ae2.hytale.meteorite.MeteoriteRegistry.of(world.getName()).cubeRemoved(n.x(), n.y(), n.z());
+            de.fellurion.ae2.hytale.meteorite.CubeDrops.onRemoved(world, n.x(), n.y(), n.z());
+        }
         if (n.device != null) {
             try {
                 n.device.onRemoved(this, n, broken);
@@ -226,7 +233,10 @@ public final class WorldNetworks {
             n.device = Devices.create(this, n);
             String kind = n.kind();
             if (NodeType.isNetworked(kind)) {
-                NodeType type = nodeType(n);
+                NodeType type = n.device == null ? null : n.device.nodeType(this, n);
+                if (type == null) {
+                    type = nodeType(n);
+                }
                 AEColor color = NetKindsColor.of(n.comp);
                 n.gridNode = me.addNode(BlockPos(n), type, toCore(n.facing), color, n.device == null ? null : n.device.owner());
             }
@@ -265,6 +275,36 @@ public final class WorldNetworks {
     @Nullable
     static Direction toCore(@Nullable Dir d) {
         return d == null ? null : Direction.valueOf(d.name());
+    }
+
+    /**
+     * Der Block bei x/y/z wurde gedreht (Schraubenschlüssel): liest die Ausrichtung neu, zieht die Verbindungen im
+     * Kern nach ({@link MEWorld#updateNode}) und sagt es dem Gerät ({@link Device#onRotated}). Block-Entity, Gerät
+     * und GridNode bleiben dieselben – nichts wird ab- und wieder angemeldet.
+     *
+     * @return false, wenn dort kein AE2-Block angemeldet ist
+     */
+    public boolean nodeRotated(int x, int y, int z) {
+        Node n = node(x, y, z);
+        if (n == null) {
+            return false;
+        }
+        if (pending.contains(n)) {
+            return true; // noch nicht im Kern angelegt: attachPending liest die neue Rotation ohnehin
+        }
+        Dir before = n.facing;
+        n.facing = resolveFacing(n);
+        if (n.facing == before) {
+            return true;
+        }
+        topologyVersion++;
+        if (n.gridNode != null) {
+            me.updateNode(BlockPos(n), toCore(n.facing), NetKindsColor.of(n.comp));
+        }
+        if (n.device != null) {
+            n.device.onRotated(this, n);
+        }
+        return true;
     }
 
     // ------------------------------------------------------------------ Takt

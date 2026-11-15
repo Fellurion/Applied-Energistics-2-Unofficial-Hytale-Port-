@@ -1,0 +1,13 @@
+$B = "BookTheme.ui";
+
+// Zwischenüberschrift (z. B. eine Gruppe von Rezepten).
+Group {
+  Anchor: (Height: 28);
+  Padding: (Top: 6);
+
+  Label #Text {
+    Anchor: (Full: 0);
+    Style: $B.@SubheadingStyle;
+    Text: "";
+  }
+}

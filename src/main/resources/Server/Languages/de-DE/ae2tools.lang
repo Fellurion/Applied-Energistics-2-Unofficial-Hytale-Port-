@@ -1,0 +1,86 @@
+# Applied Energistics 2 – Handwerkzeuge: Quarz-Schraubenschlüssel, Network Tool, Speicherkarte, Quarzmeißel, Namensdruck
+# Datei ae2tools.lang -> Schlüsselpräfix 'ae2tools.'
+
+wrench.notRotatable = Dieser Block lässt sich nicht drehen.
+wrench.denied = Das geht hier nicht.
+
+card.saved = Aktuelle Gerätekonfiguration auf die Speicherkarte kopiert.
+card.loaded = Gerätekonfiguration von der Speicherkarte geladen.
+card.invalid = Die Konfiguration stammt von einem unpassenden Gerät und wurde nicht geladen.
+card.partial = Konfiguration teilweise geladen: {parts}.
+card.failed = Die Konfiguration ließ sich auf dieses Gerät nicht übertragen.
+card.cleared = Speicherkarte gelöscht.
+card.missingUpgrades = Nicht genug {card}, um die Upgrades wiederherzustellen (es fehlen {count}).
+card.part.upgrades = Upgrades
+card.part.settings = Einstellungen
+card.part.priority = Priorität
+card.part.config_inv = Filter
+card.tooltip.source = Enthält: {source}
+
+status.title = Netzwerkstatus
+status.energy = Gespeicherte Energie: {stored} / {max} AE
+status.input = Einspeisung: {rate} AE/t
+status.usage = Verbrauch: {rate} AE/t
+status.channels = Belegte Kanäle: {channels} · Kanalverbrauch: {rate} AE/t
+status.machines = Geräte nach Art ({count})
+status.row.name = {count} × {name}
+status.row.idle = Grundverbrauch: {rate} AE/t
+status.row.generates = Grundverbrauch: {rate} AE/t · erzeugt bis zu {generation} AE/t
+status.row.missingChannel = Kein Kanal
+
+toolbox.title = Netzwerksonde
+toolbox.header = Werkzeugkiste – Upgrade-Karten ({used}/{slots} Plätze)
+toolbox.inventory = Dein Inventar
+toolbox.hint = Klicke eine Upgrade-Karte im Inventar an, um den Stapel in die Werkzeugkiste zu legen. Klicke einen Stapel in der Werkzeugkiste an, um ihn zurückzunehmen. Rechtsklick mit der Sonde auf einen Block eines ME-Netzes zeigt den Netzwerkstatus.
+toolbox.tip.take = Klick: herausnehmen
+toolbox.tip.store = Klick: in die Werkzeugkiste legen
+toolbox.msg.onlyCards = In die Werkzeugkiste passen nur Upgrade-Karten.
+toolbox.msg.full = Die Werkzeugkiste ist voll.
+toolbox.msg.stored = {amount} × {item} eingelegt.
+toolbox.msg.taken = {amount} × {item} entnommen.
+toolbox.msg.inventoryFull = Dein Inventar ist voll.
+toolbox.msg.failed = Das hat nicht geklappt – bitte noch einmal versuchen.
+toolbox.tooltip.header = Werkzeugkiste:
+toolbox.tooltip.entry = {count} × {item}
+
+knife.title = Namensdruck
+knife.label = Name für die Gravur
+knife.placeholder = Namen eingeben
+knife.make = Namensdruck schneiden
+knife.bar.uses = Verbraucht 1 × {item} aus deinem Inventar (du hast {count}).
+knife.bar.none = Du brauchst einen Metallbarren (Eisen, Kupfer oder Gold) im Inventar.
+knife.hint = Lege den Namensdruck in den oberen oder unteren Platz einer Gravurmaschine: Er benennt das Item im mittleren Platz um. Zwei Drucke ergeben beide Namen.
+knife.msg.noName = Gib zuerst einen Namen ein.
+knife.msg.blunt = Der Meißel ist abgenutzt.
+knife.msg.made = Namensdruck „{name}“ geschnitten.
+knife.msg.failed = Das hat nicht geklappt – bitte noch einmal versuchen.
+press.tooltip.name = Gravur: {name}
+
+cmd.desc = Handwerkzeuge: Testbefehle für Admins (drehen, abbauen, Einstellungen kopieren)
+cmd.rotate.desc = Einen AE2-Block drehen wie mit dem Schraubenschlüssel
+cmd.dismantle.desc = Einen AE2-Block abbauen wie mit dem Schraubenschlüssel (fällt am Block)
+cmd.copy.desc = Einstellungen eines Geräts auf ein anderes kopieren wie mit der Speicherkarte
+cmd.filter.desc = Einen Filterplatz eines Geräts setzen
+cmd.setting.desc = Eine Einstellung eines Geräts über ihren AE2-Namen setzen
+cmd.card.desc = Eine Upgrade-Karte in ein Gerät einbauen
+cmd.show.desc = Ausrichtung, Ziel und Einstellungen eines Geräts zeigen
+cmd.status.desc = Die Zahlen des Netzwerkstatus der Netzwerksonde zeigen
+cmd.press.desc = Einen Namensdruck mit Namen in einen Block-Platz legen
+cmd.slot.desc = Das Item in einem Block-Platz samt Namen zeigen
+cmd.takecell.desc = Die Zelle aus einer ME-Truhe nehmen und in einen anderen Behälter legen
+cmd.arg.from = Quellposition
+cmd.arg.to = Zielposition
+cmd.arg.name = Name
+cmd.arg.value = Wert
+cmd.none = [AE2] Kein AE2-Gerät bei {x} {y} {z}
+cmd.rotate.done = [AE2] {block} gedreht: {result}, Ausrichtung {facing}
+cmd.dismantle.done = [AE2] Abbau von {block}: {result}, Drops: {drops}
+cmd.copy.done = [AE2] Kopie {type}: {result}, Teile: {parts}
+cmd.filter.done = [AE2] Filterplatz {slot}: {result}
+cmd.setting.done = [AE2] Einstellung {name}={value}: {result}
+cmd.card.done = [AE2] Karte {card}: {result}
+cmd.show.done = [AE2] {block} kind={kind} facing={facing} online={online} target={target} card={payload}
+cmd.status.done = [AE2] Energie {stored}/{max} AE, rein {input}, Verbrauch {usage}, Kanäle {channels} ({power} AE/t), Geräte: {machines}
+cmd.press.done = [AE2] Namensdruck „{name}“ in Platz {slot}: {result}
+cmd.slot.done = [AE2] Platz {slot}: {amount} {item}, Name: {name}
+cmd.takecell.done = [AE2] Zelle entnehmen: {result}, Item {item}

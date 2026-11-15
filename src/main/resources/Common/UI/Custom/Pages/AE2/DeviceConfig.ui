@@ -1,0 +1,388 @@
+$C = "../../Common.ui";
+
+// Konfiguration eines AE2-Geräts mit Filter oder ohne Geisterplätze: ME-Import-, -Export- und -Storage-Bus (AE2:
+// IOBusScreen / StorageBusScreen), Maschinen, Level Emitter … – jedes Gerät, das ui.ConfigHost ist.
+//
+// Links der Filter (Geisterplätze: zeigen nur, welches Item gemeint ist) und darunter die Upgrade-Karten (echte
+// Items). In der Mitte die Einstellungen des Geräts – die Knöpfe #Setting0..#Setting4 beschriftet und zeigt
+// DeviceConfigPage.java je nach Gerät und eingebauten Karten –, darunter ein Zahlenwert und die Priorität. Rechts das
+// Inventar des Spielers: Klick wählt ein Item, ein Klick auf einen Filterplatz legt es dort ab, ein Klick auf einen
+// Kartenplatz baut die gewählte Karte ein. Klick auf einen belegten Platz leert ihn bzw. nimmt die Karte heraus;
+// Rechtsklick im Inventar legt das Item direkt in den ersten freien Platz. Alles rechnet der Server.
+//
+// Abschnitte, die ein Gerät nicht hat, blendet der Server aus: #FilterBox, #UpgradeBox, #NumberBox, #PriorityBox
+// (die Höhe eines Kastens ist die Summe seiner Zeilen). Hat ein Gerät weniger als 55 Filterplätze, setzt der Server
+// die Höhe von #Filter und #FilterBox auf die nötigen Zeilen.
+//
+// Feldgröße 48 mit Abstand 2; ein Feld belegt damit 50 Punkte.
+
+@GridStyle = (
+  SlotSize: 48,
+  SlotIconSize: 40,
+  SlotSpacing: 2,
+  SlotBackground: "../../Common/BlockSelectorSlotBackground.png"
+);
+
+@InfoStyle = (FontSize: 14, TextColor: #7caacc, VerticalAlignment: Center);
+@HeaderStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+@ValueStyle = (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+@TextStyle = (FontSize: 13, TextColor: #d3d6db, VerticalAlignment: Center, Wrap: true);
+@OkStyle = (FontSize: 13, TextColor: #9ec47a, VerticalAlignment: Center, Wrap: true);
+@ErrorStyle = (FontSize: 13, TextColor: #e0796b, VerticalAlignment: Center, Wrap: true);
+@HintStyle = (FontSize: 12, TextColor: #5a6a7a, VerticalAlignment: Start, Wrap: true);
+@NumberStyle = (FontSize: 14, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center, Wrap: true);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 1040, Height: 700);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "ME Bus";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Left;
+    Padding: (Horizontal: 10, Vertical: 8);
+
+    // Links: Filter und Upgrade-Karten
+    Group #LeftCol {
+      Anchor: (Width: 456);
+      LayoutMode: Top;
+
+      Label #Info { Text: ""; Anchor: (Height: 24); Style: @InfoStyle; }
+
+      // Filter: 26 + 350 + 6 + 44 + 8 + 1 + 6
+      Group #FilterBox {
+        Anchor: (Height: 441);
+        LayoutMode: Top;
+
+        Label #FilterHeader { Text: ""; Anchor: (Height: 26); Style: @HeaderStyle; }
+
+        ItemGrid #Filter {
+          Anchor: (Width: 450, Height: 350);
+          SlotsPerRow: 9;
+          AreItemsDraggable: true;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: false;
+          Style: @GridStyle;
+        }
+
+        Group { Anchor: (Height: 6); }
+
+        Group {
+          Anchor: (Height: 44);
+          LayoutMode: Left;
+
+          $C.@SecondaryTextButton #ClearFilter {
+            @Anchor = (Width: 190);
+            Text: "";
+          }
+
+          Group { Anchor: (Width: 8); }
+
+          // Zusatzknopf des Geräts (Storage-Bus: „Filter aus Inhalt“)
+          $C.@SecondaryTextButton #Action {
+            @Anchor = (Width: 250);
+            Text: "";
+            Visible: false;
+          }
+        }
+
+        Group { Anchor: (Height: 8); }
+        Group { Anchor: (Height: 1); Background: #2b3a4a; }
+        Group { Anchor: (Height: 6); }
+      }
+
+      // Upgrade-Karten: 24 + 50 + 40
+      Group #UpgradeBox {
+        Anchor: (Height: 114);
+        LayoutMode: Top;
+
+        Label #UpgradeHeader { Text: ""; Anchor: (Height: 24); Style: @HeaderStyle; }
+
+        ItemGrid #Upgrades {
+          Anchor: (Width: 250, Height: 50);
+          SlotsPerRow: 5;
+          AreItemsDraggable: true;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: false;
+          Style: @GridStyle;
+        }
+
+        Label #UpgradeInfo { Text: ""; Anchor: (Top: 4, Height: 36); Style: @HintStyle; }
+      }
+    }
+
+    Group { Anchor: (Width: 12); }
+
+    // Mitte: Einstellungen, Zahlenwert und Priorität
+    Group #MidCol {
+      Anchor: (Width: 230);
+      LayoutMode: Top;
+
+      Label #SettingsHeader { Text: ""; Anchor: (Height: 24); Style: @HeaderStyle; }
+
+      Label #NoSettings { Text: ""; Anchor: (Height: 60); Style: @HintStyle; Visible: false; }
+
+      $C.@SecondaryTextButton #Setting0 {
+        @Anchor = (Width: 230, Top: 4);
+        Text: "";
+        Visible: false;
+      }
+
+      $C.@SecondaryTextButton #Setting1 {
+        @Anchor = (Width: 230, Top: 4);
+        Text: "";
+        Visible: false;
+      }
+
+      $C.@SecondaryTextButton #Setting2 {
+        @Anchor = (Width: 230, Top: 4);
+        Text: "";
+        Visible: false;
+      }
+
+      $C.@SecondaryTextButton #Setting3 {
+        @Anchor = (Width: 230, Top: 4);
+        Text: "";
+        Visible: false;
+      }
+
+      $C.@SecondaryTextButton #Setting4 {
+        @Anchor = (Width: 230, Top: 4);
+        Text: "";
+        Visible: false;
+      }
+
+      // Zahlenwert des Geräts (Schwelle eines Level Emitters …); Beschriftung und Schrittweiten setzt der Server
+      Group #NumberBox {
+        Anchor: (Height: 166);
+        LayoutMode: Top;
+        Visible: false;
+
+        Group { Anchor: (Height: 10); }
+
+        Label #NumberLabel { Text: ""; Anchor: (Height: 40); Style: @NumberStyle; }
+
+        Group {
+          Anchor: (Height: 36);
+          LayoutMode: Left;
+
+          $C.@SmallSecondaryTextButton #NumM2 {
+            @Anchor = (Width: 74);
+            @Text = "-100";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #NumM1 {
+            @Anchor = (Width: 74);
+            @Text = "-10";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #NumM0 {
+            @Anchor = (Width: 74);
+            @Text = "-1";
+          }
+        }
+
+        Group {
+          Anchor: (Height: 36);
+          LayoutMode: Left;
+
+          $C.@SmallSecondaryTextButton #NumP2 {
+            @Anchor = (Width: 74);
+            @Text = "+100";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #NumP1 {
+            @Anchor = (Width: 74);
+            @Text = "+10";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #NumP0 {
+            @Anchor = (Width: 74);
+            @Text = "+1";
+          }
+        }
+
+        Group { Anchor: (Height: 4); }
+
+        Group {
+          Anchor: (Height: 40);
+          LayoutMode: Left;
+
+          $C.@NumberField #NumValue {
+            @Anchor = (Width: 120);
+            Format: (
+              MaxDecimalPlaces: 0,
+              Step: 1
+            );
+            Value: 0;
+          }
+
+          Group { Anchor: (Width: 6); }
+
+          $C.@SmallSecondaryTextButton #NumSet {
+            @Anchor = (Width: 104, Top: 3);
+            @Text = "";
+          }
+        }
+      }
+
+      Group { FlexWeight: 1; }
+
+      // Priorität (Storage-Bus, Pattern Provider …)
+      Group #PriorityBox {
+        Anchor: (Height: 176);
+        LayoutMode: Top;
+        Visible: false;
+
+        Group { Anchor: (Height: 1); Background: #2b3a4a; }
+        Group { Anchor: (Height: 6); }
+
+        Label #PriorityLabel { Text: ""; Anchor: (Height: 26); Style: @ValueStyle; }
+
+        Group {
+          Anchor: (Height: 36);
+          LayoutMode: Left;
+
+          $C.@SmallSecondaryTextButton #PrioM100 {
+            @Anchor = (Width: 74);
+            @Text = "-100";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #PrioM10 {
+            @Anchor = (Width: 74);
+            @Text = "-10";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #PrioM1 {
+            @Anchor = (Width: 74);
+            @Text = "-1";
+          }
+        }
+
+        Group {
+          Anchor: (Height: 36);
+          LayoutMode: Left;
+
+          $C.@SmallSecondaryTextButton #PrioP100 {
+            @Anchor = (Width: 74);
+            @Text = "+100";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #PrioP10 {
+            @Anchor = (Width: 74);
+            @Text = "+10";
+          }
+
+          Group { Anchor: (Width: 4); }
+
+          $C.@SmallSecondaryTextButton #PrioP1 {
+            @Anchor = (Width: 74);
+            @Text = "+1";
+          }
+        }
+
+        Group { Anchor: (Height: 4); }
+
+        Group {
+          Anchor: (Height: 40);
+          LayoutMode: Left;
+
+          $C.@NumberField #PrioValue {
+            @Anchor = (Width: 120);
+            Format: (
+              MaxDecimalPlaces: 0,
+              Step: 1
+            );
+            Value: 0;
+          }
+
+          Group { Anchor: (Width: 6); }
+
+          $C.@SmallSecondaryTextButton #PrioSet {
+            @Anchor = (Width: 104, Top: 3);
+            @Text = "";
+          }
+        }
+      }
+    }
+
+    Group { Anchor: (Width: 12); }
+
+    // Rechts: Inventar des Spielers, Auswahl und Meldungen
+    Group #RightCol {
+      Anchor: (Width: 306);
+      LayoutMode: Top;
+
+      Label #InvHeader { Text: ""; Anchor: (Height: 24); Style: @HeaderStyle; }
+
+      ItemGrid #Inventory {
+        Anchor: (Width: 300, Height: 400);
+        SlotsPerRow: 6;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+
+      Group { Anchor: (Height: 8); }
+      Group { Anchor: (Height: 1); Background: #2b3a4a; }
+      Group { Anchor: (Height: 8); }
+
+      Group {
+        Anchor: (Height: 50);
+        LayoutMode: Left;
+
+        ItemGrid #SelectedIcon {
+          Anchor: (Width: 50, Height: 50);
+          SlotsPerRow: 1;
+          AreItemsDraggable: false;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: false;
+          Style: @GridStyle;
+        }
+
+        Group { Anchor: (Width: 8); }
+
+        Label #SelectedText { Text: ""; FlexWeight: 1; Style: @TextStyle; }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      // Meldung der letzten Aktion: Erfolg (#Status) oder Fehler (#StatusError), nie beide
+      Group {
+        Anchor: (Height: 44);
+
+        Label #Status { Text: ""; Anchor: (Full: 0); Style: @OkStyle; }
+        Label #StatusError { Text: ""; Anchor: (Full: 0); Style: @ErrorStyle; Visible: false; }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Label #Hint { Text: ""; FlexWeight: 1; Style: @HintStyle; }
+    }
+  }
+}
+
+$C.@BackButton {}

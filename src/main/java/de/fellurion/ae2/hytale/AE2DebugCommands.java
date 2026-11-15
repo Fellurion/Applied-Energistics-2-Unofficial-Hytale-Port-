@@ -299,4 +299,61 @@ final class AE2DebugCommands {
                     .param("ops", perTick);
         }
     }
+
+    /** {@code /ae2 grow x y z ticks}: lässt einen Budding-Quarz-Block sofort {@code ticks} Zufallsticks erleben. */
+    static final class Grow extends PosCommand {
+        private final RequiredArg<Integer> ticks;
+
+        Grow() {
+            super("grow", "ae2cmd.grow.desc");
+            ticks = withRequiredArg("ticks", "ae2cmd.arg.ticks", ArgTypes.INTEGER);
+        }
+
+        @Override
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+            int done = 0;
+            for (int i = 0; i < Math.min(10_000, ctx.get(ticks)); i++) {
+                // der Block kann sich abnutzen und wird dann ersetzt: jedes Mal neu nachschlagen
+                WorldNetworks.Node node = nets.node(x, y, z);
+                if (node == null || !(node.device() instanceof de.fellurion.ae2.hytale.device.GrowthDevices.Budding budding)) {
+                    break;
+                }
+                budding.randomTick(nets, node);
+                done++;
+            }
+            return Message.translation(done == 0 ? "ae2cmd.grow.none" : "ae2cmd.grow.done").param("ticks", done);
+        }
+    }
+
+    /**
+     * {@code /ae2 drops x y z}: zeigt, was der Block dort beim Abbauen im Abenteuer-Modus fallen lässt. Im
+     * Creative-Modus droppt Hytale grundsätzlich nichts – damit lässt sich eine Drop-Liste trotzdem prüfen.
+     */
+    static final class DropsOf extends PosCommand {
+        DropsOf() {
+            super("drops", "ae2cmd.drops.desc");
+        }
+
+        @Override
+        Message run(CommandContext ctx, World world, WorldNetworks nets, int x, int y, int z) {
+            var type = BlockAccess.blockType(world, x, y, z);
+            if (type == null) {
+                return Message.translation("ae2cmd.drops.none");
+            }
+            var gathering = type.getGathering();
+            var breaking = gathering == null ? null : gathering.getBreaking();
+            List<ItemStack> drops = com.hypixel.hytale.server.core.modules.interaction.BlockHarvestUtils.getDrops(type,
+                    breaking == null ? 1 : Math.max(1, breaking.getQuantity()),
+                    breaking == null ? null : breaking.getItemId(), breaking == null ? null : breaking.getDropListId());
+            StringBuilder sb = new StringBuilder();
+            for (ItemStack drop : drops) {
+                if (!sb.isEmpty()) {
+                    sb.append(", ");
+                }
+                sb.append(drop.getQuantity()).append(' ').append(drop.getItemId());
+            }
+            return Message.translation(drops.isEmpty() ? "ae2cmd.drops.nothing" : "ae2cmd.drops.list")
+                    .param("block", type.getId()).param("drops", sb.toString());
+        }
+    }
 }

@@ -31,13 +31,18 @@ import java.util.Set;
  * <ul>
  * <li>{@link #getInventory()}: the live network storage; insert/extract here (use {@link StorageHelper} for powered
  * operations as AE2 does for terminals, buses and interfaces).</li>
- * <li>{@link #getCachedInventory()}: snapshot of all stacks, rebuilt at the end of every tick if any watcher exists,
- * otherwise lazily on access.</li>
+ * <li>{@link #getCachedInventory()}: snapshot of all stacks, rebuilt lazily on access; while any watcher exists
+ * also at the end of every tick in which the network storage changed.</li>
  * <li>Watchers ({@link #createWatcher}) receive {@code onStackChange(key, newAmount)} at the end of a tick for each
  * watched key whose amount changed. Terminals should use {@code setWatchAll(true)}.</li>
  * </ul>
  * Addition: storage providers are remounted automatically when their node's online state changes (AE2 does this in
  * each provider's node listener).
+ * <p>
+ * Deviation: AE2 rebuilds the snapshot every tick as long as there is a watcher. Here the rebuild is skipped while
+ * nothing went through the network storage ({@link NetworkStorage#getChangeCount()}, {@link #invalidateCache()});
+ * changes behind the network's back (the content of a chest behind a storage bus) reach the watchers with the next
+ * regular rebuild, at most {@link #WATCHER_REFRESH_TICKS} ticks later, or as soon as someone reads the snapshot.
  */
 public final class StorageService implements IGridService {
     private final Map<GridNode, ProviderState> nodeProviders = new IdentityHashMap<>();
@@ -45,7 +50,15 @@ public final class StorageService implements IGridService {
     private final NetworkStorage storage = new NetworkStorage();
     private final KeyCounter cachedAvailableStacks = new KeyCounter();
     private final Map<AEKey, Long> cachedAvailableAmounts = new HashMap<>();
+    /** With watchers the snapshot is rebuilt at least this often, to catch changes that bypass the network. */
+    public static final int WATCHER_REFRESH_TICKS = 20;
+
     private boolean cachedStacksNeedUpdate = true;
+    /** The snapshot was not rebuilt at the end of the last tick: a reader gets a fresh one. */
+    private boolean cachedStacksMayBeStale;
+    private long cacheUpdateCount;
+    private long seenChangeCount;
+    private int ticksSinceUpdate;
     private final Map<GridNode, Watcher> nodeWatchers = new IdentityHashMap<>();
     private final Set<Watcher> watchers = new LinkedHashSet<>();
 
@@ -53,13 +66,21 @@ public final class StorageService implements IGridService {
     public void onServerEndTick() {
         if (watchers.isEmpty()) {
             cachedStacksNeedUpdate = true; // lazily rebuild
-        } else {
+        } else if (cachedStacksNeedUpdate || storage.getChangeCount() != seenChangeCount
+                || ++ticksSinceUpdate >= WATCHER_REFRESH_TICKS) {
+            // rebuild the cache to notify listeners
             updateCachedStacks();
+        } else {
+            cachedStacksMayBeStale = true;
         }
     }
 
     private void updateCachedStacks() {
         cachedStacksNeedUpdate = false;
+        cachedStacksMayBeStale = false;
+        ticksSinceUpdate = 0;
+        seenChangeCount = storage.getChangeCount();
+        cacheUpdateCount++;
         cachedAvailableStacks.clear();
         storage.getAvailableStacks(cachedAvailableStacks);
         cachedAvailableStacks.removeEmptySubmaps();
@@ -140,10 +161,18 @@ public final class StorageService implements IGridService {
 
     /** Cached snapshot of all available stacks (do not modify). */
     public KeyCounter getCachedInventory() {
-        if (cachedStacksNeedUpdate) {
+        if (cachedStacksNeedUpdate || cachedStacksMayBeStale) {
             updateCachedStacks();
         }
         return cachedAvailableStacks;
+    }
+
+    /**
+     * Counts the rebuilds of the cached snapshot. All {@code onStackChange} calls of one rebuild see the same value,
+     * so a watcher that rescans the whole snapshot can do it once per rebuild.
+     */
+    public long getCacheUpdateCount() {
+        return cacheUpdateCount;
     }
 
     /** Forces the cache to be rebuilt on next access. */

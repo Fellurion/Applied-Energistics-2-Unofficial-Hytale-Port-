@@ -30,6 +30,37 @@ terminal.tooltip.craftable = Herstellbar
 terminal.tooltip.takeHint = Linksklick: Stapel · Rechtsklick: 1 · ins Inventar ziehen
 terminal.tooltip.craftHint = Klicken, um die Herstellung anzufordern
 
+craftterm.search = Rezept suchen…
+craftterm.stack = Stapel
+craftterm.max = Max
+craftterm.filter.all = Anzeige: alle Rezepte
+craftterm.filter.craftable = Anzeige: jetzt herstellbar
+craftterm.noRecipes = Keine Rezepte verfügbar.
+craftterm.noMatch = Kein Rezept passt zur Suche.
+craftterm.noneCraftable = Aus dem Netz und deinem Inventar lässt sich gerade nichts herstellen.
+craftterm.choose = Wähle ein Rezept. Die Zutaten kommen zuerst aus dem ME-Netz, dann aus deinem Inventar.
+craftterm.selected = {item} ×{amount} · {bench} · bis zu {max}× möglich
+craftterm.selectedMissing = {item} ×{amount} · {bench} · Zutaten fehlen
+craftterm.crafted = {amount}× {item} hergestellt.
+craftterm.craftedPartial = {amount}× {item} hergestellt – für mehr fehlen Zutaten.
+craftterm.missing = Es fehlt: {items}
+craftterm.noPower = Das ME-Netz kann die Zutaten gerade nicht ausgeben (zu wenig Energie?).
+craftterm.failed = Herstellen fehlgeschlagen – es wurde nichts verbraucht.
+craftterm.denied = Dieses Rezept darf hier nicht hergestellt werden.
+craftterm.locked = Dieses Rezept kannst du nicht (mehr) herstellen.
+craftterm.bench.Fieldcraft = Taschenwerkbank
+craftterm.bench.Workbench = Werkbank
+craftterm.bench.AE2_Workbench = Energistik-Werkbank
+craftterm.tooltip.bench = Rezept von: {bench}
+craftterm.tooltip.ingredient = {amount}× {item}
+craftterm.tooltip.any = Beliebig: {type}
+craftterm.tooltip.needed = Benötigt: {amount}
+craftterm.tooltip.network = Im ME-Netz: {amount}
+craftterm.tooltip.inventory = Im Inventar: {amount}
+craftterm.tooltip.missing = Es fehlen: {amount}
+craftterm.tooltip.autocraft = Das Netz kann das herstellen (oben im Gitter anfordern).
+craftterm.tooltip.select = Klicken, um dieses Rezept zu wählen
+
 workbench.noCell = Keine Zelle eingelegt
 workbench.addHeld = Gehaltenes hinzufügen
 workbench.addInventory = Inventar hinzufügen
@@ -57,3 +88,6 @@ cell.upgrades = {count} Upgrade-Karte(n)
 cell.entry = {amount} {item}
 cell.more = … und {count} weitere
 cell.creative = Kreativ: {types} Typen unendlich
+
+# Powered items (battery)
+power.stored = Gespeicherte Energie: {stored} / {max} AE ({percent} %)

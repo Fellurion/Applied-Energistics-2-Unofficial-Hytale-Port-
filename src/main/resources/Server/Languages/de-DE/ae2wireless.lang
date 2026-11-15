@@ -1,0 +1,59 @@
+# Applied Energistics 2 – Wireless Access Point, Wireless Terminals, tragbare Zellen
+# Datei ae2wireless.lang -> Schlüsselpräfix 'ae2wireless.'
+
+tooltip.linked = Verknüpft
+tooltip.unlinked = Nicht verknüpft
+
+msg.linked = Drahtlose Konsole mit diesem Zugangspunkt verknüpft.
+msg.connected = Verbunden.
+msg.notLinked = Diese Konsole ist nicht verknüpft. Klicke damit rechts auf einen drahtlosen ME-Zugangspunkt, um sie zu verknüpfen.
+msg.networkNotFound = Das verknüpfte Netz wurde nicht gefunden. Der Zugangspunkt wurde abgebaut oder ist nicht geladen.
+msg.outOfRange = Außer Reichweite.
+msg.outOfPower = Keine Energie. Lade das Item in einem Ladegerät auf.
+msg.networkOffline = Das verknüpfte ME-Netz ist offline (kein Strom oder kein Kanal).
+msg.noAccess = Du hast keinen Zugriff mehr auf dieses ME-Netz.
+msg.itemGone = Die Konsole wurde geschlossen, weil ihr Item nicht mehr in deinem Inventar liegt.
+
+hud.range = Reichweite
+hud.rangeValue = {range} m
+hud.boosters = Verstärker
+hud.usage = Energieverbrauch
+hud.usageValue = {usage} AE/t
+
+workbench.itemHint = Karte in die Hand nehmen und „Karte einsetzen“ drücken, Klick auf eine Karte nimmt sie heraus. Schleichen und benutzen öffnet den Slot.
+
+cmd.arg.position = Position
+cmd.arg.slot = Slot
+cmd.arg.itemId = Item
+cmd.arg.amount = Menge
+cmd.arg.index = Nummer der Karte
+cmd.arg.ticks = Ticks
+cmd.arg.ax = Access Point x
+cmd.arg.ay = Access Point y
+cmd.arg.az = Access Point z
+cmd.arg.px = Halter x
+cmd.arg.py = Halter y
+cmd.arg.pz = Halter z
+cmd.slot.desc = Item in einem Block-Slot anzeigen (Energie, Karten, Verknüpfung, Zelleninhalt)
+cmd.putslot.desc = Mehrere Items in einen Block-Slot legen
+cmd.card.desc = Upgrade-Karte in das Item eines Block-Slots einbauen
+cmd.uncard.desc = Upgrade-Karte aus dem Item eines Block-Slots ausbauen
+cmd.charge.desc = Akku des Items in einem Block-Slot laden
+cmd.wap.desc = Reichweite und Energieverbrauch eines Wireless Access Points anzeigen
+cmd.wlink.desc = Wireless Terminal in einem Block-Slot mit einem Access Point verknüpfen
+cmd.wterm.desc = Wireless Terminal in einem Block-Slot für einen Standort prüfen
+cmd.pcell.desc = Tragbare Zelle in einem Block-Slot prüfen
+cmd.chest.desc = Items über das Terminal einer ME Chest bewegen
+cmd.noContainerOrItem = [AE2] Dort gibt es keinen Behälter, Slot oder passendes Item
+cmd.slot.empty = [AE2] Slot {slot} ist leer
+cmd.slot.info = [AE2] Slot {slot}: {item} x{count} · Energie {stored}/{max} AE · Laderate {rate} AE/t · Karten [{cards}] · Verknüpfung [{link}] · Zelle Typen/Items {cell} · Tooltip: {tooltip}
+cmd.putslot.done = [AE2] {amount} x {item} in Slot {slot} gelegt
+cmd.putslot.refused = [AE2] Slot {slot} nimmt {amount} x {item} nicht an
+cmd.card.refused = [AE2] {item} nimmt {card} nicht an
+cmd.wap.none = [AE2] Dort steht kein Wireless Access Point
+cmd.wap.info = [AE2] Access Point: Booster {boosters} · Reichweite {range} m · Verbrauch {drain} AE/t (Knoten {nodeDrain}) · aktiv {active} · Kennung {linkId} · Blickanzeige: {hud}
+cmd.wlink.refused = [AE2] Verknüpfen nicht möglich: kein verknüpfbares Item oder kein Access Point
+cmd.wterm.status = [AE2] Wireless Terminal: {status}
+cmd.wterm.result = [AE2] Wireless Terminal: {status} · Access Point aktiv {apActive} · Entfernung {distance} · Verbrauch {drain} AE/t · bewegt {moved} · im Netz {inNetwork} · danach {after} · Energie {stored} AE
+cmd.pcell.result = [AE2] Tragbare Zelle: {status} · bewegt {moved} · in der Zelle {inCell} · danach {after} · Energie {stored} AE
+cmd.chest.result = [AE2] ME Chest: online {online} · bewegt {moved} · in der Zelle {inCell} · Zelle {types} Typen / {items} Items · im Netz {inNetwork}

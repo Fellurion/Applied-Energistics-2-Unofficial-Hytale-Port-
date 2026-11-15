@@ -1,0 +1,118 @@
+$B = "BookTheme.ui";
+
+// Ein Inscriber-Rezept: oben / Mitte / unten, Pfeil, Ergebnis; rechts daneben die Namen.
+Group {
+  Anchor: (Height: 108);
+  Padding: (Top: 4, Bottom: 4);
+
+  Group {
+    Anchor: (Full: 0);
+    LayoutMode: Left;
+    Background: $B.@PanelBackground;
+    Padding: (Full: 6);
+
+    Group {
+      Anchor: (Width: 36);
+      LayoutMode: Top;
+
+      Group {
+        Anchor: (Height: 30, Width: 30);
+        Background: $B.@FrameBackground;
+        Padding: 3;
+
+        ItemSlot #Top {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+
+      Group { Anchor: (Height: 2); }
+
+      Group {
+        Anchor: (Height: 30, Width: 30);
+        Background: $B.@FrameBackground;
+        Padding: 3;
+
+        ItemSlot #Middle {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+
+      Group { Anchor: (Height: 2); }
+
+      Group {
+        Anchor: (Height: 30, Width: 30);
+        Background: $B.@FrameBackground;
+        Padding: 3;
+
+        ItemSlot #Bottom {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: false;
+        }
+      }
+    }
+
+    Label {
+      Anchor: (Width: 30);
+      Style: $B.@ArrowStyle;
+      Text: ">";
+    }
+
+    Group {
+      Anchor: (Width: 56);
+      Padding: (Top: 18, Bottom: 18);
+
+      Group {
+        Anchor: (Full: 0);
+        Background: $B.@FrameBackground;
+        Padding: 5;
+
+        ItemSlot #Output {
+          Anchor: (Full: 0);
+          ShowQualityBackground: false;
+          ShowQuantity: true;
+        }
+      }
+    }
+
+    Group {
+      FlexWeight: 1;
+      LayoutMode: Top;
+      Padding: (Left: 10, Top: 2);
+
+      Label #Name {
+        Anchor: (Height: 20);
+        Style: $B.@RecipeNameStyle;
+        Text: "";
+      }
+
+      Label #Line1 {
+        Anchor: (Height: 16);
+        Style: $B.@RecipeLineStyle;
+        Text: "";
+      }
+
+      Label #Line2 {
+        Anchor: (Height: 16);
+        Style: $B.@RecipeLineStyle;
+        Text: "";
+      }
+
+      Label #Line3 {
+        Anchor: (Height: 16);
+        Style: $B.@RecipeLineStyle;
+        Text: "";
+      }
+
+      Label #Note {
+        Anchor: (Height: 16);
+        Style: $B.@RecipeLineStyle;
+        Text: "";
+      }
+    }
+  }
+}

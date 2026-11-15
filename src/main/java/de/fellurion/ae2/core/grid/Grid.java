@@ -10,6 +10,7 @@ package de.fellurion.ae2.core.grid;
 import de.fellurion.ae2.core.crafting.CraftingService;
 import de.fellurion.ae2.core.energy.EnergyService;
 import de.fellurion.ae2.core.grid.ticking.TickManager;
+import de.fellurion.ae2.core.p2p.P2PService;
 import de.fellurion.ae2.core.storage.StorageService;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.Set;
  * <p>
  * Grids are created, merged and split automatically by {@link MEWorld} when nodes are added or removed. Services (in
  * AE2 registration order): {@link TickManager}, {@link PathingService}, {@link EnergyService},
- * {@link StorageService}, {@link CraftingService}, plus any {@link IGridService} registered via
+ * {@link StorageService}, {@link CraftingService}, {@link P2PService}, plus any {@link IGridService} registered via
  * {@link MEWorld#addServiceFactory}.
  */
 public final class Grid {
@@ -34,6 +35,7 @@ public final class Grid {
     private final EnergyService energyService;
     private final StorageService storageService;
     private final CraftingService craftingService;
+    private final P2PService p2pService;
     private final List<IGridService> extraServices = new ArrayList<>();
     private final List<IGridService> services = new ArrayList<>();
 
@@ -47,6 +49,8 @@ public final class Grid {
         services.add(energyService);
         services.add(storageService);
         services.add(craftingService);
+        this.p2pService = new P2PService(this);
+        services.add(p2pService);
         for (var f : world.serviceFactories()) {
             var s = f.apply(this);
             extraServices.add(s);
@@ -81,7 +85,10 @@ public final class Grid {
         return list;
     }
 
-    /** All nodes whose owner is an instance of the given class (AE2 {@code getMachines}). */
+    /**
+     * All nodes whose owner is an instance of the given class (AE2 {@code getMachines}). A secondary node counts with
+     * the owner it was created with.
+     */
     public <T> List<T> getMachines(Class<T> ownerClass) {
         var list = new ArrayList<T>();
         for (var n : nodes) {
@@ -112,6 +119,11 @@ public final class Grid {
         return craftingService;
     }
 
+    /** The P2P tunnels of this grid by frequency. */
+    public P2PService getP2PService() {
+        return p2pService;
+    }
+
     /** Returns an extra service registered through {@link MEWorld#addServiceFactory}. */
     public <T extends IGridService> T getService(Class<T> type) {
         for (var s : extraServices) {
@@ -135,6 +147,7 @@ public final class Grid {
         energyService.addNode(node, bufferedEnergy);
         storageService.addNode(node);
         craftingService.addNode(node);
+        p2pService.addNode(node);
         for (var s : extraServices) {
             s.addNode(node);
         }
@@ -145,6 +158,7 @@ public final class Grid {
         for (var s : extraServices) {
             s.removeNode(node);
         }
+        p2pService.removeNode(node);
         craftingService.removeNode(node);
         storageService.removeNode(node);
         double share = energyService.removeNodeReturningShare(node);

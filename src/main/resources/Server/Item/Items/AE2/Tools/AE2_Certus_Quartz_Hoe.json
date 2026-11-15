@@ -4,23 +4,23 @@
     "Name": "ae2.items.AE2_Certus_Quartz_Hoe.name",
     "Description": "ae2.items.AE2_Certus_Quartz_Hoe.description"
   },
-  "Icon": "Icons/ItemsGenerated/AE2_Certus_Quartz_Hoe.png",
+  "Icon": "Icons/Items/AE2Tools/AE2_Certus_Quartz_Hoe.png",
   "Categories": [
     "AE2.Tools"
   ],
   "MaxStack": 1,
-  "Model": "Items/AE2/Flat_Item.blockymodel",
-  "Texture": "Items/AE2/Textures/AE2_Certus_Quartz_Hoe.png",
+  "Model": "Items/Tools/Hoe/Thorium.blockymodel",
+  "Texture": "Items/AE2/Tools/AE2_Certus_Quartz_Hoe_Texture.png",
   "IconProperties": {
-    "Scale": 1.0,
+    "Scale": 0.45,
     "Rotation": [
-      0,
-      0,
+      45,
+      300,
       0
     ],
     "Translation": [
-      0,
-      -16
+      28.2,
+      -25.2
     ]
   },
   "MaxDurability": 300,

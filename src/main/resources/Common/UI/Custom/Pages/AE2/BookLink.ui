@@ -1,0 +1,19 @@
+$B = "BookTheme.ui";
+
+// Eintrag im Inhaltsverzeichnis: Kapitel und Seitenzahl, anklickbar.
+Group {
+  Anchor: (Height: 30);
+  LayoutMode: Left;
+
+  TextButton #Link {
+    FlexWeight: 1;
+    Style: $B.@LinkStyle;
+    Text: "";
+  }
+
+  Label #Page {
+    Anchor: (Width: 40);
+    Style: $B.@SmallStyle;
+    Text: "";
+  }
+}

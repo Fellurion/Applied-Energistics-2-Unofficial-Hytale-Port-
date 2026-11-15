@@ -24,6 +24,7 @@ import de.fellurion.ae2.core.inv.SlotInventories;
 import de.fellurion.ae2.core.util.MiniJson;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -39,12 +40,20 @@ import java.util.Objects;
  * say ~116 / 20).</li>
  * <li>{@link InscriberRecipe.ProcessType#PRESS} consumes the plates, {@code INSCRIBE} keeps them.</li>
  * <li>Changing the item type in an input slot resets the progress (count changes don't).</li>
+ * <li>Settings as in AE2: {@linkplain #setSeparateSides separate sides} (which slots automation reaches from which
+ * side, {@link #getExposedInventory}), {@linkplain #setAutoExport auto export} (the output is pushed into adjacent
+ * inventories) and the {@linkplain #setInputCapacity input capacity} (1, 4 or 64 items per input slot).</li>
+ * <li>Name press: with an {@code AE2_Name_Press} as plate (top and/or bottom, no other plate) the middle item is
+ * renamed instead of processed by a recipe; the presses are kept ({@link InscriberRecipes#findNamePressRecipe},
+ * {@link InscriberRecipes#namePressResult}).</li>
  * </ul>
  * Register the logic as owner of an {@code inscriber} node ({@code NodeType.INSCRIBER}); it must be a grid node even
  * when only powered by a crank. Call {@link #onInventoryChanged()} whenever the container changes.
  * <p>
- * Deviations: auto-export, "separate sides" exposure and the name press are not ported (automation access rules are
- * available through {@link #canInsert}/{@link #canExtract}).
+ * Deviations: item names are not known to the core - the name of a press and the renamed item come from the
+ * integration's {@link InscriberRecipes.NameHandler}; without one the name press does nothing. The adjacent
+ * inventories for auto export are supplied by the integration ({@link #setExportTargets}); the input capacity limits
+ * what automation inserts through {@link #getExposedInventory} (a slot window of the integration may ignore it).
  */
 public final class InscriberLogic implements IGridTickable, IGridNodeListener {
     public static final int SLOT_TOP = 0;
@@ -54,6 +63,22 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
     public static final int MAX_PROCESSING_STEPS = 200;
     public static final double MAX_POWER = 1600;
     public static final String ITEM_ID = "AE2_Inscriber";
+    /** AE2 {@code InscriberInputCapacity}: ONE, FOUR, SIXTY_FOUR. */
+    public static final int[] INPUT_CAPACITIES = {1, 4, 64};
+
+    /** The side of the inscriber automation accesses it from (relative to the block's orientation). */
+    public enum Side {
+        TOP, BOTTOM, SIDE
+    }
+
+    /** Supplies the inventories next to the inscriber for auto export. */
+    @FunctionalInterface
+    public interface ExportTargets {
+        /**
+         * @param sidesOnly true in separate-sides mode: only the four sides, not the inventories above and below
+         */
+        List<SlotAccess> get(boolean sidesOnly);
+    }
 
     private final SlotAccess inv;
     private final InscriberRecipes recipes;
@@ -63,6 +88,9 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
     private boolean smash;
     private int finalStep;
     private int inputCapacity = 64;
+    private boolean separateSides;
+    private boolean autoExport;
+    private ExportTargets exportTargets = sidesOnly -> List.of();
     private InscriberRecipe cachedTask;
     private final SimpleStack[] lastStacks = new SimpleStack[3];
     private GridNode node;
@@ -109,7 +137,36 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
     }
 
     public void setInputCapacity(int capacity) {
-        this.inputCapacity = capacity;
+        this.inputCapacity = Math.max(1, capacity);
+    }
+
+    public int getInputCapacity() {
+        return inputCapacity;
+    }
+
+    /** AE2 setting {@code INSCRIBER_SEPARATE_SIDES}: automation reaches the plates only from above and below. */
+    public boolean isSeparateSides() {
+        return separateSides;
+    }
+
+    public void setSeparateSides(boolean separateSides) {
+        this.separateSides = separateSides;
+    }
+
+    /** AE2 setting {@code AUTO_EXPORT}: push the output into adjacent inventories. */
+    public boolean isAutoExport() {
+        return autoExport;
+    }
+
+    public void setAutoExport(boolean autoExport) {
+        this.autoExport = autoExport;
+        if (node != null) {
+            node.wake();
+        }
+    }
+
+    public void setExportTargets(ExportTargets targets) {
+        this.exportTargets = targets == null ? sidesOnly -> List.of() : targets;
     }
 
     public int getProcessingTime() {
@@ -174,8 +231,9 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
     }
 
     private boolean outputFits(InscriberRecipe task) {
-        var out = task.output().toStack();
-        return SlotInventories.insertIntoSlot(inv, SLOT_OUTPUT, out.key(), out.count(), true) == out.count();
+        var out = resultOf(task);
+        return out != null
+                && SlotInventories.insertIntoSlot(inv, SLOT_OUTPUT, out.key(), out.count(), true) == out.count();
     }
 
     private boolean hasCraftWork() {
@@ -188,9 +246,13 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
         return smash;
     }
 
+    private boolean hasAutoExportWork() {
+        return autoExport && inv.get(SLOT_OUTPUT) != null;
+    }
+
     @Override
     public TickingRequest getTickingRequest(GridNode node) {
-        return new TickingRequest(TickRates.Inscriber, !hasCraftWork());
+        return new TickingRequest(TickRates.Inscriber, !hasAutoExportWork() && !hasCraftWork());
     }
 
     @Override
@@ -201,8 +263,8 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
             if (finalStep == 8) {
                 var out = getTask();
                 if (out != null) {
-                    var output = out.output().toStack();
-                    if (outputFits(out)) {
+                    var output = resultOf(out);
+                    if (output != null && outputFits(out)) {
                         SlotInventories.insertIntoSlot(inv, SLOT_OUTPUT, output.key(), output.count(), false);
                         processingTime = 0;
                         if (out.mode() == InscriberRecipe.ProcessType.PRESS) {
@@ -256,7 +318,45 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
         }
 
         fireStateIfChanged();
-        return hasCraftWork() ? TickRateModulation.URGENT : TickRateModulation.SLEEP;
+        if (pushOutResult()) {
+            return TickRateModulation.URGENT;
+        }
+        return hasCraftWork() ? TickRateModulation.URGENT
+                : hasAutoExportWork() ? TickRateModulation.SLOWER : TickRateModulation.SLEEP;
+    }
+
+    /**
+     * Auto export: moves the output (up to 64 items) into the first adjacent inventory that takes any of it.
+     *
+     * @return true if something was pushed, false otherwise
+     */
+    private boolean pushOutResult() {
+        if (!hasAutoExportWork()) {
+            return false;
+        }
+        for (var target : exportTargets.get(separateSides)) {
+            var out = inv.get(SLOT_OUTPUT);
+            if (out == null) {
+                return false;
+            }
+            if (target == null) {
+                continue;
+            }
+            int fits = (int) SlotInventories.insert(target, out.key(), Math.min(64, out.count()), true);
+            if (fits <= 0) {
+                continue;
+            }
+            // take first, then insert: every item is in exactly one place; what the target refuses after all goes back
+            int taken = SlotInventories.extractFromSlot(inv, SLOT_OUTPUT, fits, false);
+            int pushed = (int) SlotInventories.insert(target, out.key(), taken, false);
+            if (pushed < taken) {
+                SlotInventories.insertIntoSlot(inv, SLOT_OUTPUT, out.key(), taken - pushed, false);
+            }
+            if (pushed > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void fireStateIfChanged() {
@@ -282,9 +382,80 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
         return isItemValid(slot, stack);
     }
 
-    /** Automation extract rule: only from the output slot. */
+    /**
+     * Automation extract rule ({@code AutomationFilter}): always from the output slot; from the plate slots only in
+     * separate-sides mode and not while smashing; never from the middle input.
+     */
     public boolean canExtract(int slot) {
-        return slot == SLOT_OUTPUT;
+        if (slot == SLOT_OUTPUT) {
+            return true; // Can always extract from output slot
+        }
+        if (smash) {
+            return false;
+        }
+        // Can only extract from top and bottom in separated sides mode
+        return separateSides && (slot == SLOT_TOP || slot == SLOT_BOTTOM);
+    }
+
+    /**
+     * Which slots automation sees from a side ({@code getExposedInventoryForSide}): all four unless the sides are
+     * separated – then the top plate from above, the bottom plate from below, input and output from the sides.
+     */
+    public boolean isExposed(Side side, int slot) {
+        if (!separateSides) {
+            return slot >= SLOT_TOP && slot <= SLOT_OUTPUT;
+        }
+        return switch (side) {
+            case TOP -> slot == SLOT_TOP;
+            case BOTTOM -> slot == SLOT_BOTTOM;
+            case SIDE -> slot == SLOT_MIDDLE || slot == SLOT_OUTPUT;
+        };
+    }
+
+    /** Extraction rule for automation at a side: {@link #isExposed} and {@link #canExtract(int)}. */
+    public boolean canExtract(Side side, int slot) {
+        return isExposed(side, slot) && canExtract(slot);
+    }
+
+    /**
+     * The inventory automation (buses, pattern providers) sees from a side: the exposed slots with the insert rule
+     * {@link #canInsert} and the input capacity as slot limit. Slots that are not exposed look empty and accept
+     * nothing. Extraction additionally needs {@link #canExtract(Side, int)}. The view follows setting changes.
+     */
+    public SlotAccess getExposedInventory(Side side) {
+        Objects.requireNonNull(side);
+        return new SlotAccess() {
+            @Override
+            public int size() {
+                return SLOT_OUTPUT + 1;
+            }
+
+            @Override
+            public SimpleStack get(int slot) {
+                return isExposed(side, slot) ? inv.get(slot) : null;
+            }
+
+            @Override
+            public void set(int slot, SimpleStack stack) {
+                if (isExposed(side, slot)) {
+                    inv.set(slot, stack);
+                }
+            }
+
+            @Override
+            public int getMaxStackSize(int slot, String itemId) {
+                // 0 also keeps automation from stacking onto the output or onto anything while smashing
+                if (!isExposed(side, slot) || slot == SLOT_OUTPUT || smash) {
+                    return 0;
+                }
+                return Math.min(inv.getMaxStackSize(slot, itemId), getSlotLimit(slot));
+            }
+
+            @Override
+            public boolean isItemValid(int slot, SimpleStack stack) {
+                return isExposed(side, slot) && canInsert(slot, stack) && inv.isItemValid(slot, stack);
+            }
+        };
     }
 
     public String saveState() {
@@ -294,6 +465,8 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
         map.put("step", finalStep);
         map.put("power", buffer.getAECurrentPower());
         map.put("capacity", inputCapacity);
+        map.put("separateSides", separateSides);
+        map.put("autoExport", autoExport);
         map.put("upgrades", upgrades.toItemIds());
         return MiniJson.write(map);
     }
@@ -308,10 +481,38 @@ public final class InscriberLogic implements IGridTickable, IGridNodeListener {
         smash = MiniJson.getBool(map, "smash", false);
         finalStep = MiniJson.getInt(map, "step", 0);
         buffer.setAECurrentPower(MiniJson.getDouble(map, "power", 0));
-        inputCapacity = MiniJson.getInt(map, "capacity", 64);
+        inputCapacity = Math.max(1, MiniJson.getInt(map, "capacity", 64));
+        separateSides = MiniJson.getBool(map, "separateSides", false);
+        autoExport = MiniJson.getBool(map, "autoExport", false);
         for (int i = 0; i < 3; i++) {
             lastStacks[i] = inv.get(i);
         }
         cachedTask = null;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------
+    // Name press (AE2: InscriberRecipes.makeNamePressRecipe)
+
+    /** The name press job {@link #namedResult} was computed for. */
+    private InscriberRecipe namedTask;
+    private SimpleStack namedResult;
+
+    /**
+     * The stack a task produces. A recipe produces its fixed output. The name press job
+     * ({@link InscriberRecipes#findNamePressRecipe}) produces the middle item itself, with all its metadata, under
+     * the name of the press(es); it is computed once per job, which is replaced whenever an input item changes.
+     *
+     * @return the result, or null if a name press job has nothing to rename (never a stripped copy of the input)
+     */
+    private SimpleStack resultOf(InscriberRecipe task) {
+        if (!InscriberRecipes.isNamePressRecipe(task)) {
+            return task.output().toStack();
+        }
+        if (task != namedTask) {
+            namedResult = InscriberRecipes.namePressResult(inv.get(SLOT_MIDDLE), inv.get(SLOT_TOP),
+                    inv.get(SLOT_BOTTOM));
+            namedTask = task;
+        }
+        return namedResult;
     }
 }

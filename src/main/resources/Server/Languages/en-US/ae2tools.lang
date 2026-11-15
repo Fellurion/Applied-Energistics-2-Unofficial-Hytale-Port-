@@ -1,0 +1,86 @@
+# Applied Energistics 2 – hand tools: quartz wrenches, Network Tool, Memory Card, cutting knives, Name Press
+# File ae2tools.lang -> key prefix 'ae2tools.'
+
+wrench.notRotatable = This block cannot be rotated.
+wrench.denied = You cannot do that here.
+
+card.saved = Copied current device configuration to memory card.
+card.loaded = Loaded device configuration from memory card.
+card.invalid = Could not load configuration from an incompatible device.
+card.partial = Partially loaded configuration: {parts}.
+card.failed = The configuration could not be applied to this device.
+card.cleared = Memory card cleared.
+card.missingUpgrades = Not enough {card} to restore upgrades (missing {count}).
+card.part.upgrades = Upgrades
+card.part.settings = Settings
+card.part.priority = Priority
+card.part.config_inv = Filter
+card.tooltip.source = Holds: {source}
+
+status.title = Network Status
+status.energy = Stored energy: {stored} / {max} AE
+status.input = Power input: {rate} AE/t
+status.usage = Power usage: {rate} AE/t
+status.channels = Channels in use: {channels} · channel power: {rate} AE/t
+status.machines = Machines by type ({count})
+status.row.name = {count} × {name}
+status.row.idle = Idle power: {rate} AE/t
+status.row.generates = Idle power: {rate} AE/t · generates up to {generation} AE/t
+status.row.missingChannel = Missing channel
+
+toolbox.title = Network Tool
+toolbox.header = Toolbox – upgrade cards ({used}/{slots} slots)
+toolbox.inventory = Your inventory
+toolbox.hint = Click an upgrade card in your inventory to put the stack into the toolbox. Click a stack in the toolbox to take it back. Right click the tool on a block of an ME network to see the network status.
+toolbox.tip.take = Click: take out
+toolbox.tip.store = Click: put into the toolbox
+toolbox.msg.onlyCards = Only upgrade cards fit into the toolbox.
+toolbox.msg.full = The toolbox is full.
+toolbox.msg.stored = Stored {amount} × {item}.
+toolbox.msg.taken = Took {amount} × {item}.
+toolbox.msg.inventoryFull = Your inventory is full.
+toolbox.msg.failed = That did not work – please try again.
+toolbox.tooltip.header = Toolbox:
+toolbox.tooltip.entry = {count} × {item}
+
+knife.title = Name Press
+knife.label = Name to inscribe
+knife.placeholder = Type a name
+knife.make = Cut Name Press
+knife.bar.uses = Uses 1 × {item} from your inventory (you have {count}).
+knife.bar.none = You need a metal bar (iron, copper or gold) in your inventory.
+knife.hint = Put the Name Press into the top or bottom slot of an Inscriber: it renames the item in the middle slot. Two presses give both names.
+knife.msg.noName = Type a name first.
+knife.msg.blunt = The knife is worn out.
+knife.msg.made = Name Press "{name}" cut.
+knife.msg.failed = That did not work – please try again.
+press.tooltip.name = Inscribed: {name}
+
+cmd.desc = Hand tools: admin test commands (rotate, dismantle, copy settings)
+cmd.rotate.desc = Rotate an AE2 block like the wrench
+cmd.dismantle.desc = Dismantle an AE2 block like the wrench (drops at the block)
+cmd.copy.desc = Copy the settings of one device to another like the memory card
+cmd.filter.desc = Set a filter slot of a device
+cmd.setting.desc = Set one setting of a device by its AE2 name
+cmd.card.desc = Install an upgrade card in a device
+cmd.show.desc = Show facing, target and settings of a device
+cmd.status.desc = Show the network status numbers of the Network Tool
+cmd.press.desc = Put a Name Press with a name into a block slot
+cmd.slot.desc = Show the item in a block slot with its name
+cmd.takecell.desc = Take the cell out of an ME Chest and put it into another container
+cmd.arg.from = Source position
+cmd.arg.to = Target position
+cmd.arg.name = Name
+cmd.arg.value = Value
+cmd.none = [AE2] No AE2 device at {x} {y} {z}
+cmd.rotate.done = [AE2] {block} rotated: {result}, facing {facing}
+cmd.dismantle.done = [AE2] Dismantle {block}: {result}, drops: {drops}
+cmd.copy.done = [AE2] Copy {type}: {result}, parts: {parts}
+cmd.filter.done = [AE2] Filter slot {slot}: {result}
+cmd.setting.done = [AE2] Setting {name}={value}: {result}
+cmd.card.done = [AE2] Card {card}: {result}
+cmd.show.done = [AE2] {block} kind={kind} facing={facing} online={online} target={target} card={payload}
+cmd.status.done = [AE2] energy {stored}/{max} AE, in {input}, use {usage}, channels {channels} ({power} AE/t), machines: {machines}
+cmd.press.done = [AE2] Name Press "{name}" in slot {slot}: {result}
+cmd.slot.done = [AE2] Slot {slot}: {amount} {item}, name: {name}
+cmd.takecell.done = [AE2] Take cell: {result}, item {item}

@@ -1,0 +1,68 @@
+# Applied Energistics 2 – the book "AE2 Basics"
+# File ae2guide.lang -> key prefix 'ae2guide.'
+
+item.name = AE2 Basics
+item.description = A handbook for getting started with Applied Energistics 2: every step and all Inscriber recipes, with pictures. Right or left click to open it.
+
+book.title = AE2 Basics
+book.subtitle = Your first steps with Applied Energistics 2
+book.intro = Store thousands of items in a few blocks and let your base craft for you. This book takes you from the first workbench to your first ME network. Pick a chapter on the right or turn the pages with the arrows below.
+book.contents = Contents
+book.contentsButton = Contents
+
+workbench.title = The Energistics Workbench
+workbench.text1 = Every AE2 recipe is crafted at the Energistics Workbench. You build it at a normal Workbench, in the Tinkering category.
+workbench.text2 = You need 8 iron bars, 6 copper bars, 4 white crystals and 4 tree trunks. Place it somewhere central – you will come back to it all the time.
+
+meteorite.title = Meteorites
+meteorite.text1 = AE2 has no ores. Certus quartz, sky stone and the four inscriber presses come from meteorites: craters with a body of sky stone and a small chamber in the middle. Charge an iron bar in the Charger to get a Meteorite Compass – it points to the nearest meteorite.
+meteorite.text2 = Mine the Mysterious Cube in the middle of the meteorite: it drops all four presses. You only need each press once – the Inscriber keeps it and can copy it.
+meteorite.text3 = Meteorites only appear in terrain that was generated after the mod was installed. For older worlds the Energistics Workbench has fallback recipes for the presses, sky stone and certus quartz.
+
+quartz.title = Growing Certus Quartz
+quartz.text1 = Budding certus quartz from a meteorite grows buds on all free sides: small, medium and large buds, then a cluster. Mine the cluster for certus quartz crystals; smaller buds only drop dust. Flawed, chipped and damaged budding quartz wear out while growing, flawless budding quartz lasts forever – so do not break it.
+quartz.text2 = A powered Growth Accelerator next to the budding quartz makes it grow much faster. Certus Quartz Dust comes from the Inscriber and is smelted into Silicon in a furnace.
+
+charger.title = The Charger
+charger.text1 = Put a certus quartz crystal into the Charger to turn it into a Charged Certus Quartz Crystal. The Charger needs power: connect it to an ME network or place a Crank on it and turn it by hand.
+charger.text2 = The Charger also fills the batteries of the Wireless Terminal, portable cells and the powered tools.
+
+fluix.title = Fluix Crystals
+fluix.text1 = Throw a Charged Certus Quartz Crystal, a red crystal and a white crystal together into water. After a few seconds they turn into two Fluix Crystals – the material of cables and most ME devices.
+fluix.text2 = The same way a Charged Certus Quartz Crystal and Certus Quartz Dust grow into two new certus crystals, and a quartz block becomes budding quartz again.
+
+inscriber.title = The Inscriber
+inscriber.text1 = The Inscriber has three slots: a press on top, the material in the middle and a press or a second material at the bottom. Power it with a Crank or from the network. Sneak and use it to install Acceleration Cards.
+inscriber.text2 = Processors are made in three steps: press a printed circuit with its press, press Printed Silicon with the Silicon Press, then put both together with a red crystal in the middle.
+inscriber.text3 = Presses stay in the Inscriber and are never used up. With a press on top and an iron bar in the middle the Inscriber makes a copy of the press.
+inscriber.text4 = Right click with a Cutting Knife to cut a Name Press. In the top or bottom slot of the Inscriber it gives the item in the middle a new name.
+inscriber.top = Top: {item}
+inscriber.middle = Middle: {item}
+inscriber.bottom = Bottom: {item}
+inscriber.kept = The press stays in the Inscriber
+inscriber.consumed = Everything is used up
+inscriber.noPress = No press needed
+inscriber.group.circuits = Printed circuits
+inscriber.group.processors = Processors
+inscriber.group.dusts = Dusts
+inscriber.group.presses = Copying presses
+inscriber.group.other = Other recipes
+inscriber.group.name = Renaming items
+
+power.title = Power
+power.text1 = ME networks run on AE energy. The Vibration Chamber burns fuel such as wood or charcoal, the Crystal Resonance Generator produces a little energy all the time without fuel.
+power.text2 = Energy Cells store energy for your network. Look at any AE2 block to see the energy, channels and usage of its network.
+
+network.title = Your first ME network
+network.text1 = Place an ME Drive, put a storage cell into it and connect an ME Terminal with cables. Cables connect to their neighbours on their own; coloured cables only connect to the same colour or fluix.
+network.text2 = Open the terminal to store and take items. Everything in the drive's cells shows up there, and the cell tooltip tells you how full a cell is.
+network.text3 = Without a controller a network can use 8 channels. For more devices build an ME Controller; normal cables carry 8 channels, dense cables 32.
+
+autocrafting.title = Autocrafting
+autocrafting.text1 = The Pattern Encoding Terminal turns a recipe and a Blank Pattern into an encoded pattern. Put the pattern into a Pattern Provider next to a Molecular Assembler or a machine.
+autocrafting.text2 = Build a Crafting CPU from crafting units and crafting storage. Then you can request any item with a pattern in the terminal, and the network crafts it for you.
+
+tips.title = Tips
+tips.text1 = Sneak and use a machine, bus or Pattern Provider to install upgrade cards and change its settings.
+tips.text2 = The Wrench rotates devices and dismantles them when you sneak, the Network Tool shows the status of a network, and the Memory Card copies settings from one device to another.
+tips.text3 = Every AE2 item explains in its description what it does. Type /ae2 language de to switch AE2 to German.

@@ -60,6 +60,186 @@
               "Weight": 1
             }
           ]
+        },
+        "L1": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#111"
+          }
+        },
+        "L2": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#222"
+          }
+        },
+        "L3": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#333"
+          }
+        },
+        "L4": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#444"
+          }
+        },
+        "L5": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#555"
+          }
+        },
+        "L6": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#666"
+          }
+        },
+        "L7": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#777"
+          }
+        },
+        "L8": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#888"
+          }
+        },
+        "L9": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#999"
+          }
+        },
+        "L10": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#aaa"
+          }
+        },
+        "L11": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#bbb"
+          }
+        },
+        "L12": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#ccc"
+          }
+        },
+        "L13": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#ddd"
+          }
+        },
+        "L14": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#eee"
+          }
+        },
+        "L15": {
+          "CustomModel": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online.blockymodel",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/AE2/Models/AE2_Light_P2P_Tunnel_Online_Texture.png",
+              "Weight": 1
+            }
+          ],
+          "Light": {
+            "Color": "#fff"
+          }
         }
       }
     },

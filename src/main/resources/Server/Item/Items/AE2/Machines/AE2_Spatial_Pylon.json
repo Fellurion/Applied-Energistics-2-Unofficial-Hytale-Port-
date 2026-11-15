@@ -61,6 +61,34 @@
     },
     "Interactions": {
       "Use": "AE2_Use_Block"
+    },
+    "State": {
+      "Definitions": {
+        "Formed": {
+          "Textures": [
+            {
+              "All": "Blocks/AE2/Textures/AE2_Spatial_Pylon_Formed.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Powered": {
+          "Textures": [
+            {
+              "All": "Blocks/AE2/Textures/AE2_Spatial_Pylon_Powered.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Online": {
+          "Textures": [
+            {
+              "All": "Blocks/AE2/Textures/AE2_Spatial_Pylon_Online.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
     }
   },
   "Recipe": {

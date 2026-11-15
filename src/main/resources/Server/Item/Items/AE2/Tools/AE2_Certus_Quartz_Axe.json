@@ -4,25 +4,13 @@
     "Name": "ae2.items.AE2_Certus_Quartz_Axe.name",
     "Description": "ae2.items.AE2_Certus_Quartz_Axe.description"
   },
-  "Icon": "Icons/ItemsGenerated/AE2_Certus_Quartz_Axe.png",
+  "Icon": "Icons/Items/AE2Tools/AE2_Certus_Quartz_Axe.png",
   "Categories": [
     "AE2.Tools"
   ],
   "MaxStack": 1,
-  "Model": "Items/AE2/Flat_Item.blockymodel",
-  "Texture": "Items/AE2/Textures/AE2_Certus_Quartz_Axe.png",
-  "IconProperties": {
-    "Scale": 1.0,
-    "Rotation": [
-      0,
-      0,
-      0
-    ],
-    "Translation": [
-      0,
-      -16
-    ]
-  },
+  "Model": "Items/Tools/Hatchet/Thorium.blockymodel",
+  "Texture": "Items/AE2/Tools/AE2_Certus_Quartz_Axe_Texture.png",
   "MaxDurability": 500,
   "Tags": {
     "Type": [

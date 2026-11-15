@@ -4,25 +4,13 @@
     "Name": "ae2.items.AE2_Fluix_Shovel.name",
     "Description": "ae2.items.AE2_Fluix_Shovel.description"
   },
-  "Icon": "Icons/ItemsGenerated/AE2_Fluix_Shovel.png",
+  "Icon": "Icons/Items/AE2Tools/AE2_Fluix_Shovel.png",
   "Categories": [
     "AE2.Tools"
   ],
   "MaxStack": 1,
-  "Model": "Items/AE2/Flat_Item.blockymodel",
-  "Texture": "Items/AE2/Textures/AE2_Fluix_Shovel.png",
-  "IconProperties": {
-    "Scale": 1.0,
-    "Rotation": [
-      0,
-      0,
-      0
-    ],
-    "Translation": [
-      0,
-      -16
-    ]
-  },
+  "Model": "Items/Tools/Shovel/Thorium.blockymodel",
+  "Texture": "Items/AE2/Tools/AE2_Fluix_Shovel_Texture.png",
   "MaxDurability": 750,
   "Tags": {
     "Type": [

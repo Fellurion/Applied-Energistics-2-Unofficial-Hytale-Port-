@@ -4,6 +4,11 @@
  */
 package de.fellurion.ae2.core.stacks;
 
+import de.fellurion.ae2.core.util.ReadableNumberConverter;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * The kind of resource an {@link AEKey} describes.
  * <p>
@@ -68,6 +73,48 @@ public enum AEKeyType {
     /** Unit symbol for display, or null. */
     public String getUnitSymbol() {
         return unitSymbol;
+    }
+
+    /**
+     * Formats an amount of this key type (items: pieces, fluids: mB) like AE2 does. Fluids are written in buckets:
+     * {@code FULL} gives "1.5 B", {@code SLOT} "1.5" (at most four characters, see {@link ReadableNumberConverter}).
+     * <p>
+     * Port of {@code AEKeyType.formatAmount}. Deviation: the full amount uses {@link Locale#ROOT}; pass the reader's
+     * locale to {@link #formatAmount(long, AmountFormat, Locale)} for grouping and decimal separators in their
+     * language.
+     */
+    public String formatAmount(long amount, AmountFormat format) {
+        return formatAmount(amount, format, Locale.ROOT);
+    }
+
+    /** As {@link #formatAmount(long, AmountFormat)}; {@code locale} is used for the full amount only. */
+    public String formatAmount(long amount, AmountFormat format, Locale locale) {
+        return switch (format) {
+            case FULL -> formatFullAmount(amount, locale);
+            case SLOT -> formatShortAmount(amount, 4);
+            case SLOT_LARGE_FONT -> formatShortAmount(amount, 3);
+        };
+    }
+
+    private String formatFullAmount(long amount, Locale locale) {
+        var result = new StringBuilder();
+        var numbers = NumberFormat.getNumberInstance(locale == null ? Locale.ROOT : locale);
+        if (amountPerUnit > 1) {
+            result.append(numbers.format(amount / (double) amountPerUnit));
+        } else {
+            result.append(numbers.format(amount));
+        }
+        if (unitSymbol != null) {
+            result.append(' ').append(unitSymbol);
+        }
+        return result.toString();
+    }
+
+    private String formatShortAmount(long amount, int maxWidth) {
+        if (amountPerUnit > 1) {
+            return ReadableNumberConverter.format(amount / (double) amountPerUnit, maxWidth);
+        }
+        return ReadableNumberConverter.format(amount, maxWidth);
     }
 
     /**

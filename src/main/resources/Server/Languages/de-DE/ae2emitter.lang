@@ -1,0 +1,108 @@
+# Applied Energistics 2 – Füllstandsemitter, Quarzlichtsensor, Speicher- und Konversionsmonitor, Signal
+# Datei ae2emitter.lang -> Schlüsselpräfix 'ae2emitter.'
+
+# --- Einstellungsseite der Emitter
+filter = Beobachtetes Item ({used}/{slots}) – leer: alle Items zählen
+threshold.items = Schwelle: {value}
+threshold.energy = Schwelle: {value} AE
+setting.level.high_signal = Signal: ab der Schwelle
+setting.level.low_signal = Signal: unter der Schwelle
+setting.energy.high_signal = Signal: ab der Schwelle
+setting.energy.low_signal = Signal: unter der Schwelle
+setting.craft.no = Signal: solange das Item hergestellt wird
+setting.craft.yes = Signal: um das Item herzustellen
+info.level = {item}: {amount} von {threshold}
+info.energy = Energie: {amount} von {threshold} AE
+info.crafting = {item}: Crafting-Aufträge
+watch.all = Alle Items
+value.above = mehr als {threshold}
+signal.on = Signal an
+signal.off = Signal aus
+note.item = Blöcke neben dem Emitter erhalten das Signal, zum Beispiel ein Bus mit Redstone-Karte. Eine Fuzzy-Karte zählt alle Varianten des Items, eine Crafting-Karte reagiert auf Crafting-Aufträge statt auf die Menge.
+note.all = Ohne Item zählt der Emitter alles zusammen, was im Netz liegt.
+note.energy = Vergleicht die im Netz gespeicherte Energie mit der Schwelle. Blöcke neben dem Emitter erhalten das Signal.
+note.whileCrafting = Crafting-Karte: Das Signal ist an, solange eine Crafting-CPU auf dieses Item wartet (ohne Item: auf irgendetwas).
+note.craftVia = Crafting-Karte: Das Item lässt sich zum Herstellen anfordern. Solange ein Auftrag darauf wartet, ist das Signal an – was es einschaltet, muss das Item ins Netz liefern.
+hint.emitter = Klicke oben ein Item an, um es auszuwählen, dann den Itemplatz oder den Kartenplatz. Rechtsklick fügt es direkt hinzu. Klick auf einen belegten Platz leert ihn bzw. nimmt die Karte heraus.
+
+# --- Busse mit Redstone-Karte
+bus.signalOn = Redstone-Karte: Dieser Bus erhält ein Signal von einem Block daneben.
+bus.signalOff = Redstone-Karte: kein Signal. Füllstandsemitter und Quarzlichtsensoren neben diesem Bus senden eines.
+
+# --- Blickanzeige
+hud.watching = Beobachtet
+hud.amount = Menge
+hud.amountOf = {amount} / {threshold}
+hud.energy = Energie
+hud.energyOf = {amount} / {threshold} AE
+hud.mode = Signal wenn
+hud.mode.above = ab der Schwelle
+hud.mode.below = unter der Schwelle
+hud.mode.whileCrafting = das Item hergestellt wird
+hud.mode.craftVia = ein Auftrag das Item anfordert
+hud.signal = Signal
+hud.on = an
+hud.off = aus
+hud.item = Item
+hud.noItem = keines
+hud.craftable = herstellbar
+hud.lock = Sperre
+hud.locked = gesperrt
+hud.unlocked = entsperrt
+hud.light = Licht
+hud.lightOf = {light} / {max}
+hud.lightUnknown = noch nicht gemessen
+hud.hint.storage = Benutzen: gehaltenes Item zeigen (leere Hand leert) · geduckt: sperren
+hud.hint.storageLocked = Geduckt benutzen: entsperren
+hud.hint.conversion = Benutzen: gehaltenes Item zeigen oder einlagern · geduckt: sperren
+hud.hint.conversionLocked = Benutzen: gehaltenen Stapel einlagern · leere Hand: Stapel entnehmen
+hud.hint.conversionSneak = Geduckt benutzen: alles einlagern (Item in der Hand) oder entsperren
+
+# --- Monitore
+monitor.offline = Der Monitor ist offline – kein Strom oder kein Kanal.
+monitor.locked = Der Monitor ist jetzt gesperrt.
+monitor.unlocked = Der Monitor ist jetzt entsperrt.
+monitor.isLocked = Der Monitor ist gesperrt. Geduckt benutzen entsperrt ihn.
+monitor.inserted = {amount}× {item} eingelagert.
+monitor.insertFailed = {item} ließ sich nicht einlagern – kein Platz oder keine Energie im Netz.
+monitor.extracted = {amount}× {item} entnommen.
+monitor.extractFailed = Es ließ sich kein {item} aus dem Netz entnehmen.
+
+# --- Befehle (/ae2 …, Admin)
+cmd.yes = ja
+cmd.no = nein
+cmd.emitter.desc = Zeigt den Zustand eines Füllstandsemitters
+cmd.emitterset.desc = Setzt Item, Schwelle, Modus, Crafting oder Fuzzy eines Füllstandsemitters
+cmd.installcard.desc = Baut eine Upgrade-Karte in ein Gerät ein
+cmd.busmode.desc = Setzt den Signalmodus eines Import- oder Export-Bus
+cmd.signal.desc = Zeigt, ob ein Block das AE2-Signal sendet oder erhält
+cmd.light.desc = Zeigt die Helligkeit an einer Position
+cmd.monitor.desc = Zeigt den Zustand eines Speicher- oder Konversionsmonitors
+cmd.monitorset.desc = Setzt Item oder Sperre eines Monitors
+cmd.monitorinsert.desc = Lagert Items über einen Konversionsmonitor ein
+cmd.monitorextract.desc = Entnimmt das gezeigte Item über einen Konversionsmonitor
+cmd.monitordisplay.desc = Schaltet die Anzeige der Monitore in der Welt ein oder aus
+cmd.arg.setting = Einstellung
+cmd.arg.value = Wert
+cmd.arg.card = Item der Upgrade-Karte
+cmd.arg.mode = Signalmodus
+cmd.arg.onOff = on oder off
+cmd.noEmitter = [AE2] An dieser Position steht kein Füllstandsemitter.
+cmd.noMonitor = [AE2] An dieser Position steht kein Monitor.
+cmd.noConversionMonitor = [AE2] An dieser Position steht kein Konversionsmonitor.
+cmd.noBus = [AE2] An dieser Position steht kein Import- oder Export-Bus.
+cmd.noCardSlots = [AE2] Dieser Block nimmt keine Upgrade-Karten.
+cmd.badValue = [AE2] Diese Einstellung oder dieser Wert ist hier nicht gültig.
+cmd.unknownItem = [AE2] Unbekanntes Item: {item}
+cmd.emitter.state = [AE2] Emitter · beobachtet {what} · Wert {value} · Schwelle {threshold} · Modus {mode} · Karten {cards} · aktiv {active} · sendet {emitting}
+cmd.cardInstalled = [AE2] {card} eingebaut · Karten {cards}
+cmd.cardRejected = [AE2] {card} passt nicht oder es ist kein Kartenplatz frei.
+cmd.busmode.done = [AE2] Signalmodus des Bus {mode} · Redstone-Karte {card}
+cmd.signal.state = [AE2] Signal bei {x} {y} {z} · sendet {emitting} · angesteuert {powered}
+cmd.light.state = [AE2] Licht bei {x} {y} {z}: {light}
+cmd.light.detector = [AE2] Lichtsensor · Licht {light} · gemessen {measured} · sendet {emitting}
+cmd.monitor.state = [AE2] Monitor · Item {item} · Menge {amount} · gesperrt {locked} · aktiv {active} · Anzeige {display} bei {at} · Anzeige-Entities {entities} · Monitore mit Anzeige {expected}
+cmd.monitor.count = [AE2] Anzeige-Entities {entities} · Monitore mit Anzeige {expected}
+cmd.monitor.moved = [AE2] {amount}× {item} bewegt
+cmd.monitordisplay.on = [AE2] Monitore zeigen ihr Item in der Welt.
+cmd.monitordisplay.off = [AE2] Monitore zeigen ihr Item nicht mehr in der Welt.

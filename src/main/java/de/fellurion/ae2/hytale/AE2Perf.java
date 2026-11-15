@@ -20,7 +20,8 @@ public final class AE2Perf {
 
     /** Phasen eines AE2-Ticks in {@link WorldNetworks#tick()}. */
     public enum Phase {
-        ATTACH("attach"), DEVICES("devices"), CORE("core"), ADVANCEMENTS("advancements"), AFTER("after"), UI("ui");
+        ATTACH("attach"), DEVICES("devices"), CORE("core"), ADVANCEMENTS("advancements"), AFTER("after"), UI("ui"),
+        METEORITES("meteorites");
 
         /** Übersetzungsschlüssel {@code ae2cmd.perf.phase.<key>}. */
         final String key;
@@ -70,6 +71,13 @@ public final class AE2Perf {
             detailTicks--;
             detailMeasured++;
         }
+    }
+
+    /** Rechnet Arbeit nach dem Netz-Takt (Meteoriten) dem zuletzt gemessenen Tick zu. */
+    void addAfterTick(Phase p, long nanos) {
+        int last = (cursor + WINDOW - 1) % WINDOW;
+        samples[p.ordinal()][last] += nanos;
+        totals[last] += nanos;
     }
 
     boolean detail() {

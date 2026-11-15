@@ -1,0 +1,62 @@
+# Applied Energistics 2 – ME-Annihilationsfeld und ME-Formationsfeld
+# Datei ae2plane.lang -> Schlüsselpräfix 'ae2plane.'
+
+filter.normal = Filter ({used}/{slots}) – leer: setzt alles
+filter.inverted = Sperrliste ({used}/{slots}) – setzt alles andere
+
+setting.place.yes = Eingelagertes: als Block setzen
+setting.place.no = Eingelagertes: als Item auswerfen
+
+info.front = Davor: {block}
+info.offline = Offline – kein Strom oder kein Kanal
+front.none = nichts
+front.unloaded = nicht geladen
+
+hint.place = Gesetzt werden nur Blöcke, einer nach dem anderen und nur an eine freie Stelle. Alles andere bleibt im Netz. Eine Flüssigkeit wird je vollem Eimer als Quellblock gesetzt.
+hint.drop = Was das Feld erreicht, wirft es vor sich aus, höchstens einen Stapel auf einmal.
+
+hud.front = Davor
+hud.skyDust = freier Himmel – erzeugt Sky Stone Dust
+hud.mode = Modus
+hud.place = setzt Blöcke
+hud.drop = wirft Items aus
+hud.filter = Filter
+hud.filterEmpty = alles
+hud.filterUsed = {used} von {slots}
+hud.filterInverted = alles außer {used} (von {slots})
+hud.priority = Priorität
+
+cmd.desc = Annihilations- und Formationsfelder prüfen und einstellen
+cmd.info.desc = Zeigt den Zustand eines Felds
+cmd.filter.desc = Setzt einen Filterplatz eines Formationsfelds (none leert ihn)
+cmd.mode.desc = Formationsfeld: Blöcke setzen oder Items auswerfen
+cmd.priority.desc = Setzt die Priorität eines Formationsfelds
+cmd.card.desc = Baut eine Upgrade-Karte in ein Formationsfeld ein
+cmd.items.desc = Zählt die Items, die um eine Stelle herumliegen
+cmd.drop.desc = Lässt ein Item an einer Stelle fallen
+cmd.arg.mode = block oder item
+cmd.arg.priority = Priorität
+cmd.arg.radius = Radius in Blöcken
+cmd.noPlane = [AE2] Kein Annihilations- oder Formationsfeld an dieser Stelle
+cmd.noFormationPlane = [AE2] Kein Formationsfeld an dieser Stelle
+cmd.state.online = online
+cmd.state.offline = offline
+cmd.info.annihilation = [AE2] Annihilationsfeld · zeigt nach {facing} · davor ({x} {y} {z}): {block} · {state} · Takt: {ticking} · Items davor: {items} · erzeugt: {generating}
+cmd.info.formation = [AE2] Formationsfeld · zeigt nach {facing} · davor ({x} {y} {z}): {block} · {state} · Modus: {mode} · Priorität: {priority} · Filter ({slots} Plätze): [{filter}] · Karten: [{cards}]
+cmd.filter.invalid = [AE2] Unbekanntes Item oder Platz außerhalb von 0 bis {slots} − 1
+cmd.filter.done = [AE2] Filterplatz {slot}: {item}
+cmd.filter.cleared = [AE2] Filterplatz {slot} geleert
+cmd.mode.invalid = [AE2] Modus muss block oder item sein
+cmd.mode.done = [AE2] Modus: {mode}
+cmd.priority.done = [AE2] Priorität: {priority}
+cmd.card.refused = [AE2] {item} passt nicht (mehr)
+cmd.card.done = [AE2] {item} eingebaut · Filterplätze: {slots}
+cmd.items.done = [AE2] Herumliegende Items: {entities} Stapel, {amount} Items [{list}]
+cmd.drop.invalid = [AE2] Unbekanntes Item oder Menge unter 1
+cmd.drop.done = [AE2] {amount} {item} fallen gelassen
+cmd.place.desc = Setzt ein Feld, das in eine Richtung zeigt
+cmd.arg.type = annihilation oder formation
+cmd.arg.direction = up, down, north, south, east oder west
+cmd.place.invalid = [AE2] Typ muss annihilation oder formation sein, Richtung up, down, north, south, east oder west
+cmd.place.done = [AE2] {item} gesetzt, zeigt nach {direction}
+cmd.place.failed = [AE2] {item} ließ sich nicht nach {direction} setzen (Chunk nicht geladen?)

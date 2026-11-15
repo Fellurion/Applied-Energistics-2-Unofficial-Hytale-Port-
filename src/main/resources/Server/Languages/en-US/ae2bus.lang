@@ -1,0 +1,126 @@
+# Applied Energistics 2 – configuration page of devices (buses, ME Interface, machines …), priority
+# File ae2bus.lang -> key prefix 'ae2bus.'
+
+info.target = Connected to: {block}
+info.noTarget = No inventory in front of this bus.
+info.offline = Offline – no power or no channel
+info.online = Online
+info.exposesStock = Storage buses in front see this stock.
+info.exposesNetwork = Storage buses in front see the whole network.
+info.condenser = Stored matter: {stored} / {capacity} · {required} per item
+info.condenserTrash = Stored matter: {stored} / {capacity} · items are destroyed
+info.chamber = up to {rate} AE/t · fuel efficiency {efficiency} %
+info.locked = Crafting locked
+info.lockedResult = Crafting locked – waiting for {amount}× {item}
+
+filter.import = Filter ({used}/{slots}) – empty: imports everything
+filter.importInverted = Blacklist ({used}/{slots}) – imports everything else
+filter.export = Items to export ({used}/{slots}) – empty: exports nothing
+filter.storage = Filter ({used}/{slots}) – empty: accepts everything
+filter.storageInverted = Blacklist ({used}/{slots}) – accepts everything else
+filter.interface = Stock to keep ready ({used}/{slots})
+filter.clear = Clear filter
+filter.clearStock = Clear stock list
+filter.partition = Filter from contents
+
+upgrades.header = Upgrade cards ({count}/{max})
+upgrades.fits = Fits: {cards}
+upgrades.card = {card} ×{max}
+
+settings.header = Settings
+settings.none = More settings appear once the matching upgrade card is installed.
+setting.redstone.ignore = Signal: always active
+setting.redstone.low_signal = Signal: active without signal
+setting.redstone.high_signal = Signal: active with signal
+setting.redstone.signal_pulse = Signal: once per pulse
+setting.scheduling.default = Order: first to last
+setting.scheduling.roundrobin = Order: round robin
+setting.scheduling.random = Order: random
+setting.craftOnly.yes = Craft only: yes
+setting.craftOnly.no = Craft only: no
+setting.access.read_write = Access: insert and extract
+setting.access.read = Access: extract only
+setting.access.write = Access: insert only
+setting.storageFilter.extractable_only = Shows: extractable only
+setting.storageFilter.none = Shows: everything
+setting.filterOnExtract.yes = Filter when extracting: yes
+setting.filterOnExtract.no = Filter when extracting: no
+setting.separateSides.yes = Automation: sides separated
+setting.separateSides.no = Automation: any side
+setting.autoExport.yes = Auto export: on
+setting.autoExport.no = Auto export: off
+setting.inputCapacity = Input slots hold: {count}
+setting.condenser.trash = Output: destroy items
+setting.condenser.matter_balls = Output: matter balls
+setting.condenser.singularity = Output: singularities
+setting.blocking.yes = Blocking mode: on
+setting.blocking.no = Blocking mode: off
+setting.lock.none = Lock: never
+setting.lock.lock_until_pulse = Lock: until signal pulse
+setting.lock.lock_while_high = Lock: while signal
+setting.lock.lock_while_low = Lock: without signal
+setting.lock.lock_until_result = Lock: until result returns
+setting.accessTerminal.yes = Access terminal: shown
+setting.accessTerminal.no = Access terminal: hidden
+
+priority.title = Priority
+priority.value = Priority: {value}
+priority.set = Set
+priority.takeCell = Take out cell
+priority.hint = Items are stored in the storage with the highest priority first and taken from the one with the lowest priority first. Sneak and use an ME Drive or ME Chest to open this page.
+
+amount.none = Click a stocked slot to change its amount.
+amount.slot = Slot {slot}: {amount}× {item}
+storage.header = Stored items – click takes a stack
+
+inventory.header = Your inventory
+selected.item = Selected: {item}
+selected.held = In your hand: {item}
+selected.none = Select an item above or hold one in your hand.
+
+tip.filter = Click to remove from the filter
+tip.stock = Click: change the amount · right click: remove
+tip.card = Click to take the card out
+tip.storage = Click to take this stack
+
+msg.set = {item} added.
+msg.duplicate = {item} is already in the filter.
+msg.full = No free slot. Each Capacity Card adds nine more.
+msg.fullStock = All nine slots are in use.
+msg.fullPlain = No free slot.
+msg.nothing = Select an item first.
+msg.cleared = Slot cleared.
+msg.clearedAll = All slots cleared.
+msg.partitioned = Filter set to {count} item types from the connected inventory.
+msg.partitionEmpty = The connected inventory is empty – filter cleared.
+msg.noTarget = No inventory is connected.
+msg.cardInserted = {card} installed.
+msg.cardRemoved = {card} taken out.
+msg.cardHidden = {card} taken out – {count} filter slot(s) beyond the remaining capacity were cleared.
+msg.notACard = Select an upgrade card first.
+msg.cardUnsupported = {card} does not fit this device.
+msg.cardMax = No more than {max}× {card} fit.
+msg.cardNoSlot = All card slots are in use.
+msg.inventoryFull = Your inventory is full.
+msg.taken = Took {amount}× {item}.
+msg.stored = Put in {amount}× {item}.
+msg.slotRejects = This slot does not accept that item.
+msg.failed = That did not work – nothing was changed.
+
+hint.bus = Click an item above to select it, then click a filter slot or a card slot. Right click adds it directly. Click a filled slot to clear it or to take the card out.
+hint.interface = Click an item above to select it, then click an empty stock slot, card slot or storage slot. Right click adds it directly. Stored items that are not on the stock list go back into the network.
+hint.cards = Click an upgrade card above to select it, then click a card slot. Right click installs it directly. Click an installed card to take it out.
+hint.settings = Click a setting to switch it to its next value.
+hint.lockSignal = The signal comes from an AE2 signal source next to this block, for example a Level Emitter.
+hint.inscriber = Automation at the sides: with separated sides, buses reach the plates only from above and below. The input slot size applies to automation, not to the slot window.
+
+hud.crouch = Sneak + use: upgrades and settings
+hud.crouchSettings = Sneak + use: settings
+
+# /ae2 config (admin): what a device offers to the configuration page
+cmd.desc = Shows or changes the configuration of an AE2 device (testing)
+cmd.op = show, setting, card, slot, priority or number
+cmd.value = Value for the operation, - for none
+cmd.none = [AE2] No configurable device at {x} {y} {z}
+cmd.failed = [AE2] Not possible for this device
+cmd.state = [AE2] {block}: {info} · filter {slots} · cards {cards} · settings: {settings} · priority {priority} · number {number} · sneak-open {crouch}

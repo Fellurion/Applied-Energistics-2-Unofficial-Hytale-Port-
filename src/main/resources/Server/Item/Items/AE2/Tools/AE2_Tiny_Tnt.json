@@ -23,7 +23,8 @@
   },
   "Tags": {
     "Type": [
-      "Tool"
+      "Tool",
+      "Explosive"
     ],
     "Family": [
       "AE2"
@@ -62,6 +63,83 @@
     },
     "Interactions": {
       "Use": "AE2_Use_Block"
+    },
+    "InteractionHint": "ae2gadget.tnt.hint",
+    "ExplosionConfig": {
+      "SoundEventId": "SFX_Explosion_Boomshroom_Barrel",
+      "Particles": [
+        {
+          "SystemId": "Explosion_Small"
+        }
+      ],
+      "DamageEntities": true,
+      "DamageBlocks": true,
+      "DetonateExplosiveBlocks": true,
+      "BlockDamageRadius": 2,
+      "BlockDamageFalloff": 1.0,
+      "BlockDropChance": 1.0,
+      "EntityDamage": 6.0,
+      "EntityDamageRadius": 2.0,
+      "EntityDamageFalloff": 0.0,
+      "ItemTool": {
+        "Specs": [
+          {
+            "GatherType": "SoftBlocks",
+            "Power": 10
+          },
+          {
+            "GatherType": "Soils",
+            "Power": 4
+          },
+          {
+            "GatherType": "Branches",
+            "Power": 4
+          },
+          {
+            "GatherType": "Cloths",
+            "Power": 4
+          },
+          {
+            "GatherType": "Woods",
+            "Power": 2.5
+          },
+          {
+            "GatherType": "Rocks",
+            "Power": 2.5
+          },
+          {
+            "GatherType": "Benches",
+            "Power": 2.5
+          }
+        ]
+      }
+    },
+    "ExplosionReactionState": "Exploding",
+    "State": {
+      "Definitions": {
+        "Exploding": {
+          "InteractionHint": "",
+          "Light": {
+            "Color": "#f80"
+          },
+          "Particles": [
+            {
+              "SystemId": "Fuse_Bomb",
+              "PositionOffset": {
+                "Y": 0.5
+              }
+            }
+          ],
+          "AmbientSoundEventId": "SFX_Bomb_Fuse",
+          "BlockEntity": {
+            "Components": {
+              "AE2_Block": {
+                "Kind": "tiny_tnt"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "Recipe": {

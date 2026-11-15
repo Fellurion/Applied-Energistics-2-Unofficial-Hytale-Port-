@@ -1,0 +1,13 @@
+$B = "BookTheme.ui";
+
+// Absatz. Die Höhe setzt der Code passend zur Textlänge.
+Group {
+  Anchor: (Height: 40);
+  Padding: (Top: 4);
+
+  Label #Text {
+    Anchor: (Full: 0);
+    Style: $B.@TextStyle;
+    Text: "";
+  }
+}

@@ -1,0 +1,59 @@
+# Applied Energistics 2 – wireless access point, wireless terminals, portable cells
+# File ae2wireless.lang -> key prefix 'ae2wireless.'
+
+tooltip.linked = Linked
+tooltip.unlinked = Unlinked
+
+msg.linked = Wireless terminal linked to this access point.
+msg.connected = Connected.
+msg.notLinked = This terminal is not linked. Right-click an ME Wireless Access Point with it to link it.
+msg.networkNotFound = The linked network cannot be found. The access point was removed or is not loaded.
+msg.outOfRange = Wireless out of range.
+msg.outOfPower = Out of power. Charge the item in a Charger.
+msg.networkOffline = The linked ME network is offline (no power or no channel).
+msg.noAccess = You no longer have access to this ME network.
+msg.itemGone = The terminal was closed because its item is no longer in your inventory.
+
+hud.range = Range
+hud.rangeValue = {range} m
+hud.boosters = Boosters
+hud.usage = Energy usage
+hud.usageValue = {usage} AE/t
+
+workbench.itemHint = Hold a card and press "Insert card", click a card to take it out. Sneak and use the block to open its slot.
+
+cmd.arg.position = Position
+cmd.arg.slot = Slot
+cmd.arg.itemId = Item
+cmd.arg.amount = Amount
+cmd.arg.index = Card number
+cmd.arg.ticks = Ticks
+cmd.arg.ax = Access point x
+cmd.arg.ay = Access point y
+cmd.arg.az = Access point z
+cmd.arg.px = Holder x
+cmd.arg.py = Holder y
+cmd.arg.pz = Holder z
+cmd.slot.desc = Show the item in a block slot (energy, cards, link, cell content)
+cmd.putslot.desc = Put a number of items into a block slot
+cmd.card.desc = Install an upgrade card into the item in a block slot
+cmd.uncard.desc = Remove an upgrade card from the item in a block slot
+cmd.charge.desc = Charge the battery of the item in a block slot
+cmd.wap.desc = Show range and energy usage of a wireless access point
+cmd.wlink.desc = Link the wireless terminal in a block slot to an access point
+cmd.wterm.desc = Test the wireless terminal in a block slot for a holder position
+cmd.pcell.desc = Test the portable cell in a block slot
+cmd.chest.desc = Move items through the terminal of an ME Chest
+cmd.noContainerOrItem = [AE2] No container, slot or matching item there
+cmd.slot.empty = [AE2] Slot {slot} is empty
+cmd.slot.info = [AE2] Slot {slot}: {item} x{count} · energy {stored}/{max} AE · charge rate {rate} AE/t · cards [{cards}] · link [{link}] · cell types/items {cell} · tooltip: {tooltip}
+cmd.putslot.done = [AE2] Put {amount} x {item} into slot {slot}
+cmd.putslot.refused = [AE2] Slot {slot} does not take {amount} x {item}
+cmd.card.refused = [AE2] {item} does not take {card}
+cmd.wap.none = [AE2] No wireless access point there
+cmd.wap.info = [AE2] Access point: boosters {boosters} · range {range} m · drain {drain} AE/t (node {nodeDrain}) · active {active} · link id {linkId} · HUD: {hud}
+cmd.wlink.refused = [AE2] Cannot link: no linkable item or no access point
+cmd.wterm.status = [AE2] Wireless terminal: {status}
+cmd.wterm.result = [AE2] Wireless terminal: {status} · access point active {apActive} · distance {distance} · drain {drain} AE/t · moved {moved} · in network {inNetwork} · after {after} · energy {stored} AE
+cmd.pcell.result = [AE2] Portable cell: {status} · moved {moved} · in cell {inCell} · after {after} · energy {stored} AE
+cmd.chest.result = [AE2] ME Chest: online {online} · moved {moved} · in cell {inCell} · cell {types} types / {items} items · in network {inNetwork}

@@ -4,11 +4,22 @@
  */
 package de.fellurion.ae2.hytale.ui;
 
+import com.hypixel.hytale.protocol.BoolParamValue;
+import com.hypixel.hytale.protocol.DoubleParamValue;
+import com.hypixel.hytale.protocol.FormattedMessage;
+import com.hypixel.hytale.protocol.IntParamValue;
+import com.hypixel.hytale.protocol.LongParamValue;
+import com.hypixel.hytale.protocol.ParamValue;
+import com.hypixel.hytale.protocol.StringParamValue;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
 import com.hypixel.hytale.server.core.asset.type.item.config.metadata.ItemDisplayMetadata;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.i18n.I18nModule;
+import de.fellurion.ae2.hytale.fluid.FluidConfig;
+import de.fellurion.ae2.hytale.fluid.FluidContainers;
+import de.fellurion.ae2.hytale.fluid.FluidText;
+import de.fellurion.ae2.hytale.fluid.FluidTypes;
 import de.fellurion.ae2.hytale.setsys.SetSysItems;
 
 import javax.annotation.Nullable;
@@ -33,6 +44,7 @@ public final class TerminalTexts {
     static final String COLOR_INFO = "#9ec47a";
     static final String COLOR_SOUL = "#b06cff";
     static final String COLOR_MUTED = "#868a85";
+    static final String COLOR_BAD = "#e0796b";
 
     private static final Map<String, Map<String, String>> NAMES = new ConcurrentHashMap<>();
 
@@ -115,8 +127,48 @@ public final class TerminalTexts {
         return "";
     }
 
+    /** Anzeigename eines Netz-Eintrags (Item oder Flüssigkeit) für Suche und Sortierung. */
+    public static String entryName(TerminalBackend.Entry e, String locale) {
+        return e.fluid() && e.fluidId() != null ? FluidTypes.name(locale, e.fluidId())
+                : itemName(locale, e.display().getItemId());
+    }
+
+    /**
+     * Beschreibung einer Flüssigkeit im Netz: Name, Menge in Eimern und wie man sie abfüllt (AE2: Klick mit einem
+     * Behälter füllt ihn) – oder dass es für sie keinen Behälter gibt.
+     */
+    public static String fluidDescription(TerminalBackend.Entry e, String locale) {
+        String fluidId = e.fluidId() == null ? "" : e.fluidId();
+        StringBuilder sb = new StringBuilder();
+        line(sb, COLOR_INFO, tr(locale, "ae2fluid.terminal.tooltip.fluid", "fluid", FluidTypes.name(locale, fluidId)));
+        line(sb, COLOR_INFO, tr(locale, "ae2fluid.terminal.tooltip.stored", "amount", FluidText.full(e.amount(), locale),
+                "mb", grouped(e.amount(), locale)));
+        FluidConfig.ContainerSpec container = FluidContainers.forFluid(fluidId);
+        line(sb, COLOR_MUTED, container == null ? tr(locale, "ae2fluid.terminal.tooltip.noContainer")
+                : tr(locale, "ae2fluid.terminal.tooltip.fillHint", "container", itemName(locale, container.emptyItem())));
+        return sb.toString();
+    }
+
+    /**
+     * Zusatzzeile für einen gefüllten Behälter im Inventar (AE2: Rechtsklick mit dem Behälter leert ihn ins Netz);
+     * leer, wenn {@code stack} kein gefüllter Behälter ist.
+     */
+    public static String containerHint(ItemStack stack, String locale) {
+        FluidContainers.Content content = FluidContainers.contentOf(stack);
+        if (content == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        line(sb, COLOR_MUTED, tr(locale, "ae2fluid.terminal.tooltip.emptyHint", "fluid",
+                FluidTypes.name(locale, content.fluid().fluidId()), "amount", FluidText.full(content.amount(), locale)));
+        return sb.toString();
+    }
+
     /** Beschreibung eines Netz-Eintrags: Item-Beschreibung, darunter Menge, Seelenbund und Herstellbarkeit. */
     public static String entryDescription(TerminalBackend.Entry e, String locale) {
+        if (e.fluid()) {
+            return fluidDescription(e, locale);
+        }
         StringBuilder sb = new StringBuilder(itemDescription(e.display(), locale));
         StringBuilder extra = new StringBuilder();
         if (e.amount() > 0) {
@@ -151,7 +203,7 @@ public final class TerminalTexts {
         return sb.toString();
     }
 
-    private static void line(StringBuilder sb, String color, String text) {
+    static void line(StringBuilder sb, String color, String text) {
         if (!sb.isEmpty() && sb.charAt(sb.length() - 1) != '\n') {
             sb.append('\n');
         }
@@ -213,7 +265,7 @@ public final class TerminalTexts {
         } else if (message.getMessageId() != null) {
             I18nModule i18n = I18nModule.get();
             String t = i18n == null ? null : i18n.getMessage(locale, message.getMessageId());
-            sb.append(t == null ? message.getMessageId() : t);
+            sb.append(withParams(t == null ? message.getMessageId() : t, message, locale, depth));
         }
         for (Message child : message.getChildren()) {
             append(sb, child, locale, depth + 1);
@@ -221,5 +273,42 @@ public final class TerminalTexts {
         if (color != null) {
             sb.append("</color>");
         }
+    }
+
+    /**
+     * Setzt die Platzhalter einer übersetzten Nachricht ein ({@code {used}}, {@code {item}} …) – so, wie es sonst der
+     * Client tut. Der Tooltip einer Zelle („{used} von {total} Bytes“, ihre Inhalte) besteht aus solchen Nachrichten.
+     */
+    private static String withParams(String text, Message message, String locale, int depth) {
+        FormattedMessage f = text.indexOf('{') < 0 ? null : message.getFormattedMessage();
+        if (f == null) {
+            return text;
+        }
+        if (f.params != null) {
+            for (Map.Entry<String, ParamValue> e : f.params.entrySet()) {
+                text = text.replace("{" + e.getKey() + "}", paramText(e.getValue()));
+            }
+        }
+        if (f.messageParams != null) {
+            for (Map.Entry<String, FormattedMessage> e : f.messageParams.entrySet()) {
+                StringBuilder sub = new StringBuilder();
+                if (e.getValue() != null) {
+                    append(sub, new Message(e.getValue()), locale, depth + 1);
+                }
+                text = text.replace("{" + e.getKey() + "}", sub);
+            }
+        }
+        return text;
+    }
+
+    private static String paramText(@Nullable ParamValue value) {
+        return switch (value) {
+            case StringParamValue v -> v.value == null ? "" : v.value;
+            case IntParamValue v -> Integer.toString(v.value);
+            case LongParamValue v -> Long.toString(v.value);
+            case DoubleParamValue v -> Double.toString(v.value);
+            case BoolParamValue v -> Boolean.toString(v.value);
+            case null, default -> "";
+        };
     }
 }

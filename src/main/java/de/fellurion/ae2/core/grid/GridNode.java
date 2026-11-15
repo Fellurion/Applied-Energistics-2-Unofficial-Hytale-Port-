@@ -27,8 +27,13 @@ import java.util.Set;
  * Services: the node's {@linkplain #getOwner() owner} object provides services simply by implementing the service
  * interfaces ({@code IStorageProvider}, {@code IGridTickable}, {@code IAEPowerStorage},
  * {@code IPassiveEnergyGenerator}, {@code IStorageWatcherNode}, {@code ICraftingProvider}, {@link IGridMultiblock},
- * {@link IGridNodeListener}, ...). Additional service objects can be registered with {@link #addService} before the
- * node is added to the world (AE2: {@code IManagedGridNode.addService}).
+ * {@link IGridNodeListener}, ...). Additional service objects are passed to {@link MEWorld#addNode(long, NodeType,
+ * Direction, AEColor, Object, Map)} (AE2: {@code IManagedGridNode.addService}).
+ * <p>
+ * A block may own a second node ({@link #isSecondary()}, AE2: the "outer" node of ME P2P tunnels, quartz fibers and
+ * toggle buses), created with {@link MEWorld#addSecondaryNode}. It shares the position of the block's main node,
+ * exposes other sides and is a grid member of its own, usually in another grid. Its owner only identifies it: a
+ * secondary node has exactly the services that were passed explicitly.
  */
 public final class GridNode implements IPathItem {
     private final MEWorld world;
@@ -36,9 +41,12 @@ public final class GridNode implements IPathItem {
     private final NodeType type;
     private final Object owner;
     private final Map<Class<?>, Object> extraServices;
+    private final boolean secondary;
     private Direction facing;
     private AEColor color;
     private Set<Direction> exposedSides;
+    /** Sides set through {@link MEWorld#setExposedSides}; null = the sides of the node type. */
+    private Set<Direction> exposedSidesOverride;
     private double idlePowerUsage;
     double previousDraw;
     Grid grid;
@@ -54,6 +62,12 @@ public final class GridNode implements IPathItem {
 
     GridNode(MEWorld world, long pos, NodeType type, Direction facing, AEColor color, Object owner,
             Map<Class<?>, Object> extraServices) {
+        this(world, pos, type, facing, color, owner, extraServices, false);
+    }
+
+    GridNode(MEWorld world, long pos, NodeType type, Direction facing, AEColor color, Object owner,
+            Map<Class<?>, Object> extraServices, boolean secondary) {
+        this.secondary = secondary;
         this.world = world;
         this.pos = pos;
         this.type = type;
@@ -91,6 +105,14 @@ public final class GridNode implements IPathItem {
         return owner;
     }
 
+    /**
+     * True for the second node of a block ({@link MEWorld#addSecondaryNode}); false for the node that
+     * {@link MEWorld#getNode(long)} returns for its position.
+     */
+    public boolean isSecondary() {
+        return secondary;
+    }
+
     /** The grid this node belongs to; null after removal. */
     public Grid getGrid() {
         return grid;
@@ -103,7 +125,17 @@ public final class GridNode implements IPathItem {
     void setOrientation(Direction facing, AEColor color) {
         this.facing = facing;
         this.color = color == null ? AEColor.TRANSPARENT : color;
-        this.exposedSides = type.exposedSides(facing);
+        this.exposedSides = exposedSidesOverride != null ? exposedSidesOverride : type.exposedSides(facing);
+    }
+
+    /** See {@link MEWorld#setExposedSides}. */
+    void setExposedSidesOverride(Set<Direction> sides) {
+        if (sides == null) {
+            this.exposedSidesOverride = null;
+        } else {
+            this.exposedSidesOverride = sides.isEmpty() ? EnumSet.noneOf(Direction.class) : EnumSet.copyOf(sides);
+        }
+        this.exposedSides = exposedSidesOverride != null ? exposedSidesOverride : type.exposedSides(facing);
     }
 
     public boolean isExposedOnSide(Direction side) {
@@ -115,10 +147,11 @@ public final class GridNode implements IPathItem {
     }
 
     /**
-     * Returns a service of this node: the owner if it implements {@code type}, else an extra service.
+     * Returns a service of this node: the owner if it implements {@code type}, else an extra service. Secondary
+     * nodes only have extra services.
      */
     public <T> T getService(Class<T> serviceType) {
-        if (serviceType.isInstance(owner)) {
+        if (!secondary && serviceType.isInstance(owner)) {
             return serviceType.cast(owner);
         }
         var s = extraServices.get(serviceType);
@@ -196,37 +229,55 @@ public final class GridNode implements IPathItem {
         return false;
     }
 
+    /** The in-world connection on the given side, or null. */
     public GridConnection getConnection(Direction side) {
         for (var c : connections) {
-            if (c.getDirection(this) == side) {
+            if (c.isInWorld() && c.getDirection(this) == side) {
                 return c;
             }
         }
         return null;
     }
 
+    /** The virtual connection to {@code other}, or null. */
+    public GridConnection getVirtualConnection(GridNode other) {
+        for (var c : connections) {
+            if (!c.isInWorld() && (c.a() == other || c.b() == other)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /** Sides with an in-world connection (virtual connections have no side). */
     public Set<Direction> getConnectedSides() {
         var result = EnumSet.noneOf(Direction.class);
         for (var c : connections) {
-            result.add(c.getDirection(this));
+            if (c.isInWorld()) {
+                result.add(c.getDirection(this));
+            }
         }
         return result;
     }
 
-    /** 6-bit cable shape mask (bit0 = +X ... bit5 = −Z). */
+    /** 6-bit cable shape mask (bit0 = +X ... bit5 = −Z) of the in-world connections. */
     public int getConnectionMask() {
         int m = 0;
         for (var c : connections) {
-            m |= c.getDirection(this).bit();
+            if (c.isInWorld()) {
+                m |= c.getDirection(this).bit();
+            }
         }
         return m;
     }
 
-    /** Channels carried per connected side (for smart cable visuals). */
+    /** Channels carried per connected side (for smart cable visuals); virtual connections are left out. */
     public Map<Direction, Integer> getChannelsPerSide() {
         var map = new EnumMap<Direction, Integer>(Direction.class);
         for (var c : connections) {
-            map.put(c.getDirection(this), c.getUsedChannels());
+            if (c.isInWorld()) {
+                map.put(c.getDirection(this), c.getUsedChannels());
+            }
         }
         return map;
     }
@@ -380,7 +431,7 @@ public final class GridNode implements IPathItem {
 
     @Override
     public String toString() {
-        return "GridNode[" + type.kind() + (type.cableType() != null ? "/" + type.cableType().id : "") + " @ "
-                + BlockPos.toString(pos) + "]";
+        return "GridNode[" + type.kind() + (type.cableType() != null ? "/" + type.cableType().id : "")
+                + (secondary ? "/outer" : "") + " @ " + BlockPos.toString(pos) + "]";
     }
 }

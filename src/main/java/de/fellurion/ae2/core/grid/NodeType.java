@@ -23,6 +23,11 @@ import java.util.Set;
  * <p>
  * Deviation: in Minecraft parts live on a cable bus; in Hytale they are separate directional blocks which connect only
  * on their back side ({@link SideRule#BACK_ONLY}). Use {@link #forPart(String)} for them.
+ * <p>
+ * Parts with two grid nodes (AE2: main node + "outer" node: ME P2P tunnel, quartz fiber, toggle bus) use the
+ * {@code *_MAIN} / {@code *_OUTER} types below: the main node connects on the back, the outer node - a
+ * {@linkplain MEWorld#addSecondaryNode secondary node} of the same block - on the front
+ * ({@link SideRule#FRONT_ONLY}).
  *
  * @param kind       the block {@code Kind} string ("controller", "drive", "cable", ...)
  * @param flags      grid flags
@@ -43,7 +48,9 @@ public record NodeType(String kind, Set<GridFlag> flags, double idlePower, SideR
         BACK_ONLY,
         /** Front and back (growth accelerator, toggle bus, quartz fiber). */
         FRONT_AND_BACK,
-        NONE;
+        NONE,
+        /** Only the facing side: outer (secondary) node of ME P2P tunnels, quartz fibers and toggle buses. */
+        FRONT_ONLY;
 
         public Set<Direction> sides(Direction facing) {
             if (facing == null && this != NONE) {
@@ -55,6 +62,7 @@ public record NodeType(String kind, Set<GridFlag> flags, double idlePower, SideR
                 case BACK_ONLY -> EnumSet.of(facing.getOpposite());
                 case FRONT_AND_BACK -> EnumSet.of(facing, facing.getOpposite());
                 case NONE -> EnumSet.noneOf(Direction.class);
+                case FRONT_ONLY -> EnumSet.of(facing);
             };
         }
     }
@@ -149,9 +157,11 @@ public record NodeType(String kind, Set<GridFlag> flags, double idlePower, SideR
     public static final NodeType CRAFTING_TERMINAL = reg("crafting_terminal", 0.5, B, RC);
     public static final NodeType PATTERN_ENCODING_TERMINAL = reg("pattern_encoding_terminal", 0.5, B, RC);
     public static final NodeType PATTERN_ACCESS_TERMINAL = reg("pattern_access_terminal", 0.5, B, RC);
-    public static final NodeType LEVEL_EMITTER = reg("level_emitter", 1.0, B, RC);
-    public static final NodeType ENERGY_LEVEL_EMITTER = reg("energy_level_emitter", 1.0, B, RC);
-    public static final NodeType STORAGE_MONITOR = reg("storage_monitor", 0.5, B, RC);
+    /** Level emitters need no channel ({@code AbstractLevelEmitterPart}: {@code getMainNode().setFlags()}). */
+    public static final NodeType LEVEL_EMITTER = reg("level_emitter", 1.0, B);
+    public static final NodeType ENERGY_LEVEL_EMITTER = reg("energy_level_emitter", 1.0, B);
+    /** Storage monitor: no channel, 1/16 AE/t ({@code AbstractReportingPart} without {@code requireChannel}). */
+    public static final NodeType STORAGE_MONITOR = reg("storage_monitor", 1.0 / 16.0, B);
     public static final NodeType CONVERSION_MONITOR = reg("conversion_monitor", 0.5, B, RC);
     public static final NodeType ANNIHILATION_PLANE = reg("annihilation_plane", 1.0, B, RC);
     public static final NodeType FORMATION_PLANE = reg("formation_plane", 1.0, B, RC);
@@ -163,6 +173,32 @@ public record NodeType(String kind, Set<GridFlag> flags, double idlePower, SideR
             GridFlag.CANNOT_CARRY);
     /** Illuminated panels: 1/16 AE/t, no channel. */
     public static final NodeType PANEL = reg("panel", 1.0 / 16.0, B);
+
+    // Parts with two nodes (main node on the back, outer node on the front). They are not registered by kind:
+    // forBlock("p2p_tunnel" / "quartz_fiber" / "toggle_bus") keeps returning the single-node types above.
+
+    /**
+     * Main node of an ME P2P tunnel ({@code MEP2PTunnelPart}): sits on the carrying network, needs one channel there
+     * and may not be routed through another tunnel (COMPRESSED_CHANNEL); 2 AE/t.
+     */
+    public static final NodeType P2P_TUNNEL_ME = P2P_TUNNEL
+            .withFlags(GridFlag.REQUIRE_CHANNEL, GridFlag.COMPRESSED_CHANNEL).withIdlePower(2.0);
+    /**
+     * Outer node of an ME P2P tunnel: the end of the tunnelled network, carries 32 channels, tunnels behind it get no
+     * channel (CANNOT_CARRY_COMPRESSED). 1 AE/t, the default idle power of an AE2 grid node that sets none.
+     */
+    public static final NodeType P2P_TUNNEL_ME_OUTER = new NodeType("p2p_tunnel",
+            EnumSet.of(GridFlag.DENSE_CAPACITY, GridFlag.CANNOT_CARRY_COMPRESSED), 1.0, SideRule.FRONT_ONLY, false,
+            null);
+    /** Quartz fiber ({@code QuartzFiberPart}): two unconnected nodes, 0 AE/t, no channels. */
+    public static final NodeType QUARTZ_FIBER_MAIN = QUARTZ_FIBER.withSideRule(SideRule.BACK_ONLY);
+    public static final NodeType QUARTZ_FIBER_OUTER = QUARTZ_FIBER.withSideRule(SideRule.FRONT_ONLY);
+    /** Toggle bus ({@code ToggleBusPart}): two nodes joined by a switchable connection, 0 AE/t, PREFERRED. */
+    public static final NodeType TOGGLE_BUS_MAIN = TOGGLE_BUS.withSideRule(SideRule.BACK_ONLY);
+    public static final NodeType TOGGLE_BUS_OUTER = TOGGLE_BUS.withSideRule(SideRule.FRONT_ONLY);
+    /** Inverted toggle bus ({@code InvertedToggleBusPart}): like the toggle bus but without flags. */
+    public static final NodeType INVERTED_TOGGLE_BUS_MAIN = INVERTED_TOGGLE_BUS.withSideRule(SideRule.BACK_ONLY);
+    public static final NodeType INVERTED_TOGGLE_BUS_OUTER = INVERTED_TOGGLE_BUS.withSideRule(SideRule.FRONT_ONLY);
 
     private static final Map<CableType, NodeType> CABLES = new HashMap<>();
 

@@ -46,7 +46,8 @@
     "Gathering": {
       "Breaking": {
         "GatherType": "Rocks",
-        "DropList": "Empty"
+        "ItemId": "AE2_Certus_Quartz_Dust",
+        "Quantity": 1
       }
     },
     "Light": {

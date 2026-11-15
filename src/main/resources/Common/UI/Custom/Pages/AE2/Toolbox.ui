@@ -1,0 +1,91 @@
+$C = "../../Common.ui";
+
+// Werkzeugkiste des Network Tools (AE2: NetworkToolScreen): neun Plätze für Upgrade-Karten, die im Werkzeug bleiben.
+// Links die Kiste, rechts das Inventar des Spielers. Ein Klick auf eine Karte im Inventar legt den Stapel in die
+// Kiste, ein Klick auf einen Stapel in der Kiste holt ihn zurück. Alles rechnet der Server (ToolboxPage.java).
+//
+// Feldgröße 48 mit Abstand 2 wie in DeviceConfig.ui; ein Feld belegt damit 50 Punkte.
+
+@GridStyle = (
+  SlotSize: 48,
+  SlotIconSize: 40,
+  SlotSpacing: 2,
+  SlotBackground: "../../Common/BlockSelectorSlotBackground.png"
+);
+
+@HeaderStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+@OkStyle = (FontSize: 13, TextColor: #9ec47a, VerticalAlignment: Center, Wrap: true);
+@ErrorStyle = (FontSize: 13, TextColor: #e0796b, VerticalAlignment: Center, Wrap: true);
+@HintStyle = (FontSize: 12, TextColor: #5a6a7a, VerticalAlignment: Start, Wrap: true);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 640, Height: 560);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Network Tool";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Left;
+    Padding: (Horizontal: 10, Vertical: 8);
+
+    // Links: die Werkzeugkiste, Meldung und Hinweis
+    Group #LeftCol {
+      Anchor: (Width: 270);
+      LayoutMode: Top;
+
+      Label #BoxHeader { Text: ""; Anchor: (Height: 24); Style: @HeaderStyle; }
+
+      ItemGrid #Box {
+        Anchor: (Width: 150, Height: 150);
+        SlotsPerRow: 3;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+
+      Group { Anchor: (Height: 10); }
+
+      // Meldung der letzten Aktion: Erfolg (#Status) oder Fehler (#StatusError), nie beide
+      Group {
+        Anchor: (Height: 44);
+
+        Label #Status { Text: ""; Anchor: (Full: 0); Style: @OkStyle; }
+        Label #StatusError { Text: ""; Anchor: (Full: 0); Style: @ErrorStyle; Visible: false; }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Label #Hint { Text: ""; FlexWeight: 1; Style: @HintStyle; }
+    }
+
+    Group { Anchor: (Width: 12); }
+
+    // Rechts: Inventar des Spielers
+    Group #RightCol {
+      Anchor: (Width: 306);
+      LayoutMode: Top;
+
+      Label #InvHeader { Text: ""; Anchor: (Height: 24); Style: @HeaderStyle; }
+
+      ItemGrid #Inventory {
+        Anchor: (Width: 300, Height: 400);
+        SlotsPerRow: 6;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

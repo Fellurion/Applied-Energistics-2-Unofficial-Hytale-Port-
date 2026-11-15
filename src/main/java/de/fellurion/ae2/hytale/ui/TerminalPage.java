@@ -42,13 +42,19 @@ import java.util.function.Supplier;
  * <p>Ziehen &amp; Ablegen braucht – wie in FTCore – je Gitter ein geöffnetes Fenster: Der Client nennt beim Ablegen nur
  * Abschnitt und Feld, und auflösen kann der Server beides nur über die Fenster des Spielers. {@link #open} öffnet die
  * Seite deshalb mit Fenstern für Lager, Schnellleiste, Rucksack und den (immer leeren) Ablage-Behälter des Netzes.
+ *
+ * <p>Als ME-Crafting-Terminal ({@link #CRAFTING_LAYOUT}) zeigt die Seite weniger Netz-Zeilen und darunter das
+ * Herstellen ({@link CraftingPanel}).
  */
 public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayload> {
 
     private static final String PAGE = "Pages/AE2/Terminal.ui";
+    private static final String CRAFTING_PAGE = "Pages/AE2/CraftingTerminal.ui";
     private static final String AMOUNT_ROW = "Pages/AE2/TerminalAmountRow.ui";
     /** 9 × 7 Felder je Seite. */
     public static final TerminalView.Layout LAYOUT = new TerminalView.Layout(7, AMOUNT_ROW);
+    /** Crafting-Terminal: 9 × 4 Felder je Seite, darunter das Herstellen mit 9 Rezepten je Zeile. */
+    public static final TerminalView.Layout CRAFTING_LAYOUT = new TerminalView.Layout(4, AMOUNT_ROW, 9);
 
     /** Alle offenen Terminals, damit der Netz-Tick sie bei Änderungen aktualisieren kann. */
     private static final Set<TerminalPage> OPEN = ConcurrentHashMap.newKeySet();
@@ -59,9 +65,15 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
     private final Map<String, Window> windows = new LinkedHashMap<>();
 
     public TerminalPage(PlayerRef playerRef, Supplier<TerminalBackend> backendSupplier, String titleKey) {
+        this(playerRef, backendSupplier, titleKey, false);
+    }
+
+    /** @param crafting true = ME-Crafting-Terminal (mit Herstellen), false = ME-Terminal */
+    public TerminalPage(PlayerRef playerRef, Supplier<TerminalBackend> backendSupplier, String titleKey,
+                        boolean crafting) {
         super(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction, EventPayload.CODEC);
         this.backendSupplier = backendSupplier;
-        this.view = new TerminalView(LAYOUT, titleKey);
+        this.view = new TerminalView(crafting ? CRAFTING_LAYOUT : LAYOUT, titleKey);
     }
 
     /**
@@ -70,7 +82,13 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
      */
     public static void open(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
                             TerminalBackend backend, String titleKey) {
-        TerminalPage page = new TerminalPage(playerRef, () -> backend, titleKey);
+        open(player, playerRef, ref, store, backend, titleKey, false);
+    }
+
+    /** Wie {@link #open(Player, PlayerRef, Ref, Store, TerminalBackend, String)}; {@code crafting} = Crafting-Terminal. */
+    public static void open(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
+                            TerminalBackend backend, String titleKey, boolean crafting) {
+        TerminalPage page = new TerminalPage(playerRef, () -> backend, titleKey, crafting);
         List<Window> list = page.prepareWindows(ref, store);
         boolean withWindows = false;
         try {
@@ -99,7 +117,7 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
             }
         }
         windows.put(TerminalView.NET_GRID, new ContainerWindow(
-                TerminalView.newDropContainer(LAYOUT.pageSize(), backendSupplier, playerRef)));
+                TerminalView.newDropContainer(view.layout().pageSize(), backendSupplier, playerRef)));
         return new ArrayList<>(windows.values());
     }
 
@@ -109,7 +127,7 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
     public void build(@Nonnull Ref<EntityStore> ref, @Nonnull UICommandBuilder cmd, @Nonnull UIEventBuilder evt,
                       @Nonnull Store<EntityStore> store) {
         OPEN.add(this);
-        cmd.append(PAGE);
+        cmd.append(view.layout().crafting() ? CRAFTING_PAGE : PAGE);
         TerminalBackend backend = backendSupplier.get();
         if (backend == null) {
             return;
@@ -144,7 +162,7 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
         }
         TerminalView.Event e = new TerminalView.Event(data.action, data.search, data.grid, toInt(data.slot, -1),
                 toInt(data.sourceSection, Integer.MIN_VALUE), toInt(data.sourceSlot, -1), toInt(data.quantity, 0),
-                toInt(data.button, 0), data.itemId);
+                toInt(data.button, 0), data.itemId, data.craftSearch);
         if (view.handle(e, backend, viewer(ref, store)) == TerminalView.Result.UPDATE) {
             refresh();
         }
@@ -187,6 +205,14 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
     public void onDismiss(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store) {
         OPEN.remove(this);
         closeWindows(ref, store);
+        TerminalBackend backend = backendSupplier.get();
+        if (backend != null) {
+            try {
+                backend.onClose();
+            } catch (RuntimeException ignored) {
+                // das Schließen der Seite darf nie am Backend scheitern
+            }
+        }
         super.onDismiss(ref, store);
     }
 
@@ -230,6 +256,7 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
     public static final class EventPayload {
         String action;
         String search;
+        String craftSearch;
         String grid;
         String itemId;
         Double slot;
@@ -242,6 +269,8 @@ public class TerminalPage extends InteractiveCustomUIPage<TerminalPage.EventPayl
         public static final BuilderCodec<EventPayload> CODEC = BuilderCodec.builder(EventPayload.class, EventPayload::new)
                 .append(new KeyedCodec<>("Action", Codec.STRING), (o, v) -> o.action = v, o -> o.action).add()
                 .append(new KeyedCodec<>(TerminalView.F_SEARCH, Codec.STRING), (o, v) -> o.search = v, o -> o.search).add()
+                .append(new KeyedCodec<>(CraftingPanel.F_SEARCH, Codec.STRING), (o, v) -> o.craftSearch = v,
+                        o -> o.craftSearch).add()
                 .append(new KeyedCodec<>(TerminalView.F_GRID, Codec.STRING), (o, v) -> o.grid = v, o -> o.grid).add()
                 .append(new KeyedCodec<>(TerminalView.F_ITEM, Codec.STRING), (o, v) -> o.itemId = v, o -> o.itemId).add()
                 .append(new KeyedCodec<>(TerminalView.F_SLOT, Codec.DOUBLE), (o, v) -> o.slot = v, o -> o.slot).add()

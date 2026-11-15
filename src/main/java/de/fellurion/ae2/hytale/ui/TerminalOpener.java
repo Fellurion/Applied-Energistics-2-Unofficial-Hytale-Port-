@@ -57,28 +57,63 @@ public final class TerminalOpener {
         }
     }
 
-    /** Öffnet das Terminal für einen benutzten Block (Terminal, Crafting-/Pattern-Terminal, ME Chest). */
-    public static void open(AE2UseBlockInteraction.UseContext ctx, String titleKey, TerminalBackend backend) {
-        open(ctx.player(), ctx.playerRef(), ctx.playerEntity(), ctx.entityStore(), titleKey, backend);
+    /**
+     * Öffnet das Terminal für einen Klick mit einem Item in der Hand (Wireless Terminal, tragbare Zelle).
+     *
+     * @param crafting true = mit Herstellen (Wireless Crafting Terminal)
+     */
+    public static void open(de.fellurion.ae2.hytale.items.ItemUseContext ctx, String titleKey, TerminalBackend backend,
+                            boolean crafting) {
+        open(ctx.player(), ctx.playerRef(), ctx.playerEntity(), ctx.entityStore(), titleKey, backend, crafting);
     }
 
-    /** Öffnet das Terminal (FTCore-Schale, sonst eigene Seite). */
+    /** Öffnet das ME-Terminal für einen benutzten Block (Terminal, ME Chest). */
+    public static void open(AE2UseBlockInteraction.UseContext ctx, String titleKey, TerminalBackend backend) {
+        open(ctx, titleKey, backend, false);
+    }
+
+    /**
+     * Öffnet das Terminal für einen benutzten Block.
+     *
+     * @param crafting true = ME-Crafting-Terminal (Netzinhalt plus Herstellen), false = ME-Terminal
+     */
+    public static void open(AE2UseBlockInteraction.UseContext ctx, String titleKey, TerminalBackend backend,
+                            boolean crafting) {
+        open(ctx.player(), ctx.playerRef(), ctx.playerEntity(), ctx.entityStore(), titleKey, backend, crafting);
+    }
+
+    /** Öffnet das ME-Terminal (FTCore-Schale, sonst eigene Seite). */
     public static void open(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
                             String titleKey, TerminalBackend backend) {
+        open(player, playerRef, ref, store, titleKey, backend, false);
+    }
+
+    /** Öffnet das ME-Terminal bzw. mit {@code crafting} das ME-Crafting-Terminal (FTCore-Schale, sonst eigene Seite). */
+    public static void open(Player player, PlayerRef playerRef, Ref<EntityStore> ref, Store<EntityStore> store,
+                            String titleKey, TerminalBackend backend, boolean crafting) {
         // Zugriffsschutz: fremde Netze öffnen gar nicht erst (Meldung „Dieses ME-Netz gehört X“)
         if (!backend.checkAccess(playerRef)) {
             return;
         }
+        // Terminals in einem Item beginnen hier ihre Sitzung (Ladung, Reichweite); sie endet mit onClose
+        if (!backend.onOpen(playerRef)) {
+            return;
+        }
         if (ftcoreReady()) {
             try {
-                if (FtCoreTerminals.open(player, playerRef, ref, store, titleKey, backend)) {
+                if (FtCoreTerminals.open(player, playerRef, ref, store, titleKey, backend, crafting)) {
                     return;
                 }
             } catch (LinkageError | RuntimeException e) {
                 disableFtCore(e);
             }
         }
-        TerminalPage.open(player, playerRef, ref, store, backend, titleKey);
+        try {
+            TerminalPage.open(player, playerRef, ref, store, backend, titleKey, crafting);
+        } catch (RuntimeException e) {
+            backend.onClose();
+            throw e;
+        }
     }
 
     /** Vom Netz-Tick (Welt-Thread): aktualisiert Terminals in der FTCore-Schale. */

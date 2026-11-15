@@ -17,6 +17,8 @@ import de.fellurion.ae2.core.grid.MEWorld;
 import de.fellurion.ae2.core.grid.NodeType;
 import de.fellurion.ae2.core.inv.SimpleSlotAccess;
 import de.fellurion.ae2.core.inv.SimpleStack;
+import de.fellurion.ae2.core.inv.SlotInventories;
+import de.fellurion.ae2.core.stacks.AEItemKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -264,5 +266,154 @@ class InscriberLogicTest {
         assertEquals(320, copy.getBuffer().getAECurrentPower());
         assertEquals(4, copy.getSlotLimit(InscriberLogic.SLOT_MIDDLE));
         assertEquals(64, copy.getSlotLimit(InscriberLogic.SLOT_OUTPUT));
+        assertFalse(copy.isSeparateSides());
+        assertFalse(copy.isAutoExport());
+
+        logic.setSeparateSides(true);
+        logic.setAutoExport(true);
+        copy.loadState(logic.saveState());
+        assertTrue(copy.isSeparateSides());
+        assertTrue(copy.isAutoExport());
+        assertEquals(4, copy.getInputCapacity());
+    }
+
+    @Test
+    void automationSeesAllSlotsFromEverySideByDefault() {
+        var inv = new SimpleSlotAccess(4);
+        var logic = placeInscriber(inv);
+        var press = AEItemKey.of("AE2_Calculation_Processor_Press");
+        var crystal = AEItemKey.of("AE2_Certus_Quartz_Crystal");
+        for (var side : InscriberLogic.Side.values()) {
+            for (int slot = 0; slot < 4; slot++) {
+                assertTrue(logic.isExposed(side, slot));
+            }
+        }
+        var view = logic.getExposedInventory(InscriberLogic.Side.TOP);
+        assertEquals(4, view.size());
+        // only recipe ingredients are accepted, each in a slot it fits
+        assertEquals(0, SlotInventories.insert(view, AEItemKey.of("Rock_Stone"), 5, false));
+        assertEquals(1, SlotInventories.insert(view, press, 1, false));
+        assertEquals(SimpleStack.of("AE2_Calculation_Processor_Press", 1), inv.get(InscriberLogic.SLOT_TOP));
+        assertEquals(8, SlotInventories.insert(view, crystal, 8, false));
+        assertEquals(8, inv.get(InscriberLogic.SLOT_MIDDLE).count());
+        // never into the output slot, not even onto a matching stack
+        inv.set(InscriberLogic.SLOT_OUTPUT, SimpleStack.of("AE2_Printed_Calculation_Processor", 3));
+        assertEquals(0, SlotInventories.insertIntoSlot(view, InscriberLogic.SLOT_OUTPUT,
+                AEItemKey.of("AE2_Printed_Calculation_Processor"), 1, false));
+        // combined mode: only the output can be extracted
+        assertTrue(logic.canExtract(InscriberLogic.Side.SIDE, InscriberLogic.SLOT_OUTPUT));
+        assertFalse(logic.canExtract(InscriberLogic.Side.TOP, InscriberLogic.SLOT_TOP));
+        assertFalse(logic.canExtract(InscriberLogic.Side.SIDE, InscriberLogic.SLOT_MIDDLE));
+        assertFalse(logic.canExtract(InscriberLogic.Side.BOTTOM, InscriberLogic.SLOT_BOTTOM));
+    }
+
+    @Test
+    void separateSidesExposePlatesOnlyFromAboveAndBelow() {
+        var inv = new SimpleSlotAccess(4);
+        var logic = placeInscriber(inv);
+        logic.setSeparateSides(true);
+        var top = logic.getExposedInventory(InscriberLogic.Side.TOP);
+        var bottom = logic.getExposedInventory(InscriberLogic.Side.BOTTOM);
+        var side = logic.getExposedInventory(InscriberLogic.Side.SIDE);
+        var calc = AEItemKey.of("AE2_Printed_Calculation_Processor");
+        var silicon = AEItemKey.of("AE2_Printed_Silicon");
+        var redstone = AEItemKey.of("Ingredient_Crystal_Red");
+
+        // a plate offered at the side is refused, the same plate goes in from above
+        assertEquals(0, SlotInventories.insert(side, calc, 1, false));
+        assertEquals(1, SlotInventories.insert(top, calc, 1, false));
+        assertEquals(1, SlotInventories.insert(bottom, silicon, 1, false));
+        assertEquals(SimpleStack.of("AE2_Printed_Calculation_Processor", 1), inv.get(InscriberLogic.SLOT_TOP));
+        assertEquals(SimpleStack.of("AE2_Printed_Silicon", 1), inv.get(InscriberLogic.SLOT_BOTTOM));
+        // the middle input only from the sides
+        assertEquals(0, SlotInventories.insert(top, redstone, 1, false));
+        assertEquals(2, SlotInventories.insert(side, redstone, 2, false));
+        assertEquals(2, inv.get(InscriberLogic.SLOT_MIDDLE).count());
+        // each side only sees its own slots
+        assertNull(side.get(InscriberLogic.SLOT_TOP));
+        assertNull(top.get(InscriberLogic.SLOT_MIDDLE));
+        assertNotNull(top.get(InscriberLogic.SLOT_TOP));
+        assertNotNull(side.get(InscriberLogic.SLOT_MIDDLE));
+        // plates can be taken out again from their side, the middle input never
+        assertTrue(logic.canExtract(InscriberLogic.Side.TOP, InscriberLogic.SLOT_TOP));
+        assertTrue(logic.canExtract(InscriberLogic.Side.BOTTOM, InscriberLogic.SLOT_BOTTOM));
+        assertFalse(logic.canExtract(InscriberLogic.Side.SIDE, InscriberLogic.SLOT_TOP));
+        assertFalse(logic.canExtract(InscriberLogic.Side.TOP, InscriberLogic.SLOT_OUTPUT));
+        assertFalse(logic.canExtract(InscriberLogic.Side.SIDE, InscriberLogic.SLOT_MIDDLE));
+        assertTrue(logic.canExtract(InscriberLogic.Side.SIDE, InscriberLogic.SLOT_OUTPUT));
+
+        // while the press comes down nothing goes in and the plates stay
+        while (!logic.isSmash()) {
+            logic.tickingRequest(node(), 1);
+        }
+        assertEquals(0, SlotInventories.insert(side, redstone, 1, false));
+        assertEquals(0, SlotInventories.insert(top, calc, 1, true));
+        assertFalse(logic.canExtract(InscriberLogic.Side.TOP, InscriberLogic.SLOT_TOP));
+        assertTrue(logic.canExtract(InscriberLogic.Side.SIDE, InscriberLogic.SLOT_OUTPUT));
+    }
+
+    @Test
+    void inputCapacityLimitsWhatAutomationInserts() {
+        var inv = new SimpleSlotAccess(4);
+        var logic = placeInscriber(inv);
+        inv.set(InscriberLogic.SLOT_TOP, SimpleStack.of("AE2_Calculation_Processor_Press", 1));
+        var view = logic.getExposedInventory(InscriberLogic.Side.SIDE);
+        var crystal = AEItemKey.of("AE2_Certus_Quartz_Crystal");
+        logic.setInputCapacity(4);
+        assertEquals(4, SlotInventories.insert(view, crystal, 10, true));
+        assertEquals(4, SlotInventories.insert(view, crystal, 10, false));
+        assertEquals(0, SlotInventories.insert(view, crystal, 10, false), "slot is at its capacity");
+        logic.setInputCapacity(1);
+        assertEquals(0, SlotInventories.insert(view, crystal, 1, false));
+        logic.setInputCapacity(64);
+        assertEquals(60, SlotInventories.insert(view, crystal, 100, false));
+        assertEquals(64, inv.get(InscriberLogic.SLOT_MIDDLE).count());
+    }
+
+    @Test
+    void autoExportPushesTheOutputIntoAnAdjacentInventory() {
+        var inv = new SimpleSlotAccess(4);
+        var logic = placeInscriber(inv);
+        var chest = new SimpleSlotAccess(1);
+        boolean[] askedSidesOnly = {false};
+        logic.setExportTargets(sidesOnly -> {
+            askedSidesOnly[0] = sidesOnly;
+            return java.util.List.of(chest);
+        });
+        inv.set(InscriberLogic.SLOT_TOP, SimpleStack.of("AE2_Calculation_Processor_Press", 1));
+        inv.set(InscriberLogic.SLOT_MIDDLE, SimpleStack.of("AE2_Certus_Quartz_Crystal", 2));
+        logic.onInventoryChanged();
+
+        // off: the output stays in the inscriber and it goes to sleep when the inputs are used up
+        world.tick(400);
+        assertEquals(SimpleStack.of("AE2_Printed_Calculation_Processor", 2), inv.get(InscriberLogic.SLOT_OUTPUT));
+        assertNull(chest.get(0));
+        assertTrue(node().getGrid().getTickManager().isSleeping(node()));
+
+        // switching it on wakes the inscriber and moves the output
+        logic.setAutoExport(true);
+        world.tick(40);
+        assertNull(inv.get(InscriberLogic.SLOT_OUTPUT));
+        assertEquals(SimpleStack.of("AE2_Printed_Calculation_Processor", 2), chest.get(0));
+        assertFalse(askedSidesOnly[0]);
+        assertTrue(node().getGrid().getTickManager().isSleeping(node()), "nothing left to do");
+
+        // a full target keeps the output where it is; nothing is lost or duplicated
+        chest.set(0, SimpleStack.of("Rock_Stone", 64));
+        logic.setSeparateSides(true);
+        inv.set(InscriberLogic.SLOT_MIDDLE, SimpleStack.of("AE2_Certus_Quartz_Crystal", 1));
+        logic.onInventoryChanged();
+        world.tick(400);
+        assertEquals(SimpleStack.of("AE2_Printed_Calculation_Processor", 1), inv.get(InscriberLogic.SLOT_OUTPUT));
+        assertEquals(SimpleStack.of("Rock_Stone", 64), chest.get(0));
+        assertTrue(askedSidesOnly[0], "separate sides: not above and below");
+        // room again: only what fits moves
+        chest.set(0, SimpleStack.of("AE2_Printed_Calculation_Processor", 64));
+        world.tick(40);
+        assertEquals(1, inv.get(InscriberLogic.SLOT_OUTPUT).count());
+        chest.set(0, null);
+        world.tick(40);
+        assertNull(inv.get(InscriberLogic.SLOT_OUTPUT));
+        assertEquals(1, chest.get(0).count());
     }
 }

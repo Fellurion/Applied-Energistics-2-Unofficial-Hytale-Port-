@@ -1,0 +1,18 @@
+$B = "BookTheme.ui";
+
+// Überschrift eines Kapitels mit Linie darunter.
+Group {
+  Anchor: (Height: 44);
+  LayoutMode: Top;
+
+  Label #Text {
+    Anchor: (Height: 36);
+    Style: $B.@HeadingStyle;
+    Text: "";
+  }
+
+  Group {
+    Anchor: (Height: 2);
+    Background: $B.@DividerBackground;
+  }
+}

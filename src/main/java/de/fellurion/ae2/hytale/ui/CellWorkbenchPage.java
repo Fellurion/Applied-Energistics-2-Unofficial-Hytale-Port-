@@ -32,12 +32,19 @@ import de.fellurion.ae2.core.cells.StorageCells;
 import de.fellurion.ae2.core.cells.UpgradeCard;
 import de.fellurion.ae2.core.cells.UpgradeInventory;
 import de.fellurion.ae2.core.config.Enums.FuzzyMode;
+import de.fellurion.ae2.core.stacks.AEFluidKey;
 import de.fellurion.ae2.core.stacks.AEItemKey;
+import de.fellurion.ae2.core.stacks.AEKeyType;
 import de.fellurion.ae2.core.stacks.AEKey;
 import de.fellurion.ae2.hytale.BlockAccess;
 import de.fellurion.ae2.hytale.ItemKeys;
+import de.fellurion.ae2.hytale.fluid.FluidContainers;
+import de.fellurion.ae2.hytale.fluid.FluidTypes;
 import de.fellurion.ae2.hytale.WorldNetworks;
 import de.fellurion.ae2.hytale.device.CellHostDevice;
+import de.fellurion.ae2.hytale.items.ItemUpgrades;
+import de.fellurion.ae2.hytale.items.PoweredItems;
+import de.fellurion.ae2.hytale.wireless.HandheldUpgrades;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,6 +58,11 @@ import java.util.List;
  *   <li>„Zelleninhalt übernehmen" (AE2: Partition Storage), „Leeren"</li>
  *   <li>Upgrade-Karten einsetzen/entnehmen, Fuzzy-Modus</li>
  * </ul>
+ *
+ * <p>Abweichung von AE2: Die Werkbank nimmt auch die Items mit Kartenplätzen auf, die keine Zellen sind (Wireless
+ * Terminal, Wireless Crafting Terminal, Matter Cannon, Color Applicator – {@link HandheldUpgrades}), und zeigt für
+ * sie nur die Upgrade-Karten. AE2 setzt deren Karten im eigenen Fenster des Items ein; hier ist die Werkbank der eine
+ * Ort für alle Karten in Items.
  */
 public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkbenchPage.Payload> {
 
@@ -70,6 +82,11 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
         this.z = z;
     }
 
+    /** Passt dieses Item in die Werkbank? Speicherzellen und Items mit Kartenplätzen. */
+    public static boolean accepts(@Nullable String itemId) {
+        return itemId != null && (StorageCells.isCellItem(itemId) || HandheldUpgrades.accepts(itemId));
+    }
+
     // ------------------------------------------------------------------ Zelle lesen/schreiben
 
     @Nullable
@@ -84,7 +101,7 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
             return null;
         }
         ItemStack s = c.getItemStack((short) 0);
-        return s == null || s.isEmpty() || !StorageCells.isCellItem(s.getItemId()) ? null : s;
+        return s == null || s.isEmpty() || !accepts(s.getItemId()) ? null : s;
     }
 
     private static CellItemData data(ItemStack cell) {
@@ -96,7 +113,25 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
         if (c == null) {
             return;
         }
-        c.setItemStackForSlot((short) 0, de.fellurion.ae2.hytale.device.CellTooltips.write(cell, data, null));
+        ItemStack written = de.fellurion.ae2.hytale.device.CellTooltips.write(cell, data, null);
+        if (PoweredItems.isPowered(written.getItemId())) {
+            // tragbare Zelle: weniger Energiekarten = kleinerer Akku, überschüssige Ladung verfällt wie in AE2
+            written = PoweredItems.withStored(written, PoweredItems.stored(written));
+        }
+        c.setItemStackForSlot((short) 0, written);
+    }
+
+    /** Schreibt ein Item zurück, das keine Zelle ist – nur, wenn im Slot noch genau {@code before} liegt. */
+    private boolean writeItem(ItemStack before, ItemStack after) {
+        ItemContainer c = container();
+        if (c == null || c.getCapacity() < 1) {
+            return false;
+        }
+        ItemStack there = c.getItemStack((short) 0);
+        if (there == null || !(there == before || there.equals(before))) {
+            return false;
+        }
+        return c.setItemStackForSlot((short) 0, after).succeeded();
     }
 
     // ------------------------------------------------------------------ Aufbau
@@ -121,6 +156,15 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
         ItemStack cell = cellStack();
         cmd.clear("#Config");
         cmd.clear("#Upgrades");
+        // Items ohne Zelleninhalt (Wireless Terminal, Matter Cannon ...) zeigen nur ihre Upgrade-Karten
+        boolean handheld = cell != null && !StorageCells.isCellItem(cell.getItemId());
+        cmd.set("#ConfigHeader.Visible", !handheld);
+        cmd.set("#ConfigContainer.Visible", !handheld);
+        cmd.set("#ConfigButtons.Visible", !handheld);
+        if (handheld) {
+            fillHandheld(cmd, evt, cell);
+            return;
+        }
         if (cell == null) {
             cmd.set("#CellIcon.Visible", false);
             cmd.set("#CellName.Text", Message.translation("ae2ui.workbench.noCell"));
@@ -159,16 +203,21 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
                 .param("count", Integer.toString(config.size())).param("max", Integer.toString(MAX_CONFIG)));
 
         int i = 0;
-        for (AEKey key : config) {
-            if (!(key instanceof AEItemKey ik)) {
+        for (int at = 0; at < config.size(); at++) {
+            AEKey key = config.get(at);
+            // Flüssigkeiten (Partition einer Fluid-Zelle) zeigt ihr Anzeige-Item
+            String icon = key instanceof AEItemKey ik ? ik.itemId()
+                    : key instanceof AEFluidKey fk ? FluidTypes.iconItem(fk.fluidId()) : null;
+            if (icon == null) {
                 continue;
             }
             String sel = "#Config[" + i + "]";
             cmd.append("#Config", ENTRY);
-            cmd.set(sel + " #Icon.ItemId", ik.itemId());
+            cmd.set(sel + " #Icon.ItemId", icon);
             cmd.set(sel + " #Quantity.Text", creative ? "∞" : "");
+            // Index = Platz in der Konfiguration (nicht der Zähler der gezeigten Einträge)
             evt.addEventBinding(CustomUIEventBindingType.Activating, sel + " #Button",
-                    new EventData().append("Action", "RemoveConfig").append("Index", Integer.toString(i)), false);
+                    new EventData().append("Action", "RemoveConfig").append("Index", Integer.toString(at)), false);
             i++;
         }
 
@@ -194,6 +243,52 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
         }
     }
 
+    /** Item mit Kartenplätzen, das keine Zelle ist: Name, Ladung und die eingebauten Karten. */
+    private void fillHandheld(UICommandBuilder cmd, UIEventBuilder evt, ItemStack item) {
+        String id = item.getItemId();
+        cmd.set("#CellIcon.Visible", true);
+        cmd.set("#CellIcon.ItemId", id);
+        cmd.set("#CellName.Text", Message.translation("ae2.items." + id + ".name"));
+        double max = PoweredItems.capacity(item);
+        if (max > 0) {
+            double stored = Math.min(max, PoweredItems.stored(item));
+            cmd.set("#CellInfo.Text", Message.translation("ae2ui.power.stored")
+                    .param("stored", TerminalTexts.formatAmount((long) stored))
+                    .param("max", TerminalTexts.formatAmount((long) max))
+                    .param("percent", Integer.toString((int) Math.floor(stored * 100 / max))));
+        } else {
+            cmd.set("#CellInfo.Text", "");
+        }
+        cmd.set("#CellHint.Text", Message.translation("ae2wireless.workbench.itemHint"));
+        List<String> cards = ItemUpgrades.cards(item);
+        cmd.set("#UpgradeHeader.Text", Message.translation("ae2ui.workbench.upgradeHeader")
+                .param("count", Integer.toString(cards.size()))
+                .param("max", Integer.toString(HandheldUpgrades.slots(id))));
+        cmd.set("#InsertCard.Visible", true);
+        cmd.set("#FuzzyMode.Visible", false);
+        for (int c = 0; c < cards.size(); c++) {
+            String sel = "#Upgrades[" + c + "]";
+            cmd.append("#Upgrades", ENTRY);
+            cmd.set(sel + " #Icon.ItemId", cards.get(c));
+            cmd.set(sel + " #Quantity.Text", "");
+            evt.addEventBinding(CustomUIEventBindingType.Activating, sel + " #Button",
+                    new EventData().append("Action", "RemoveCard").append("Index", Integer.toString(c)), false);
+        }
+    }
+
+    /** Lagert die Zelle Flüssigkeiten? Dann besteht ihre Partition aus Flüssigkeiten statt Items. */
+    private static boolean fluidCell(ItemStack cell) {
+        CellDefinition def = CellDefinition.byItemId(cell.getItemId());
+        return def != null && def.keyType() == AEKeyType.FLUIDS;
+    }
+
+    /** Die Flüssigkeit in einem gefüllten Behälter-Item (Eimer), oder null. */
+    @Nullable
+    private static AEFluidKey fluidIn(@Nullable ItemStack stack) {
+        FluidContainers.Content content = FluidContainers.contentOf(stack);
+        return content == null ? null : content.fluid();
+    }
+
     // ------------------------------------------------------------------ Ereignisse
 
     @Override
@@ -207,11 +302,22 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
             refresh();
             return;
         }
+        if (!StorageCells.isCellItem(cell.getItemId())) {
+            handleHandheld(ref, store, cell, p);
+            refresh();
+            return;
+        }
         CellItemData data = data(cell);
         List<AEKey> config = new ArrayList<>(data.getConfigKeys());
         switch (p.action) {
             case "AddHeld" -> {
-                AEItemKey key = ItemKeys.of(InventoryComponent.getItemInHand(store, ref));
+                ItemStack held = InventoryComponent.getItemInHand(store, ref);
+                AEFluidKey fluid = fluidCell(cell) ? fluidIn(held) : null;
+                AEItemKey key = fluidCell(cell) ? null : ItemKeys.of(held);
+                if (fluid != null && !config.contains(fluid) && config.size() < MAX_CONFIG) {
+                    // Fluid-Zelle: die Flüssigkeit im gehaltenen Behälter (AE2: Rechtsklick mit dem Eimer)
+                    config.add(fluid);
+                }
                 if (key != null && !config.contains(key) && config.size() < MAX_CONFIG && !StorageCells.isCellItem(key.itemId())) {
                     config.add(key.nbt() == null ? key : AEItemKey.of(key.itemId()));
                 }
@@ -226,6 +332,13 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
                     }
                     ItemContainer c = inv.getInventory();
                     for (short s = 0; s < c.getCapacity() && config.size() < MAX_CONFIG; s++) {
+                        if (fluidCell(cell)) {
+                            AEFluidKey fluid = fluidIn(c.getItemStack(s));
+                            if (fluid != null && !config.contains(fluid)) {
+                                config.add(fluid);
+                            }
+                            continue;
+                        }
                         AEItemKey key = ItemKeys.of(c.getItemStack(s));
                         if (key != null && !StorageCells.isCellItem(key.itemId())) {
                             AEItemKey plain = AEItemKey.of(key.itemId());
@@ -273,6 +386,49 @@ public final class CellWorkbenchPage extends InteractiveCustomUIPage<CellWorkben
         }
         write(cell, data);
         refresh();
+    }
+
+    /**
+     * Karten eines Items, das keine Zelle ist: „Karte einsetzen“ nimmt die Karte aus der Hand, ein Klick auf eine
+     * eingebaute Karte gibt sie zurück. Jede Karte gibt es dabei genau einmal: Beim Einsetzen kommt sie zurück in
+     * die Hand, falls sich das Item nicht schreiben lässt (inzwischen entnommen); beim Entnehmen bekommt der Spieler
+     * sie erst, wenn das Item ohne sie geschrieben ist.
+     */
+    private void handleHandheld(Ref<EntityStore> ref, Store<EntityStore> store, ItemStack item, Payload p) {
+        switch (p.action) {
+            case "InsertCard" -> {
+                InventoryComponent.Hotbar hotbar = store.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
+                if (hotbar == null) {
+                    return;
+                }
+                short slot = hotbar.getActiveSlot();
+                if (slot < 0 || slot >= hotbar.getInventory().getCapacity()) {
+                    return;
+                }
+                ItemStack held = hotbar.getInventory().getItemStack(slot);
+                UpgradeCard card = ItemStack.isEmpty(held) ? null : UpgradeCard.byItemId(held.getItemId());
+                ItemStack upgraded = card == null ? null : HandheldUpgrades.insert(item, card);
+                if (upgraded == null) {
+                    return;
+                }
+                // erst die Karte aus der Hand nehmen; nur wenn das klappt, steckt sie danach im Item
+                if (!hotbar.getInventory().removeItemStackFromSlot(slot, 1, true, false).succeeded()) {
+                    return;
+                }
+                if (!writeItem(item, upgraded)) {
+                    give(ref, store, new ItemStack(card.itemId, 1));
+                }
+            }
+            case "RemoveCard" -> {
+                String[] removed = new String[1];
+                ItemStack stripped = HandheldUpgrades.remove(item, parse(p.index), removed);
+                if (stripped != null && removed[0] != null && writeItem(item, stripped)) {
+                    give(ref, store, new ItemStack(removed[0], 1));
+                }
+            }
+            default -> {
+            }
+        }
     }
 
     private void insertCard(Ref<EntityStore> ref, Store<EntityStore> store, ItemStack cell, CellItemData data) {

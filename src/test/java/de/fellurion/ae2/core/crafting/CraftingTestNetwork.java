@@ -147,7 +147,7 @@ final class CraftingTestNetwork {
             pushTicks.add(world.getCurrentTick());
         }
 
-        private void processAll() {
+        void processAll() {
             // 3 sticks + 1 plank -> fence
             while (received.get(STICK) >= 3 && received.get(PLANK) >= 1) {
                 received.remove(STICK, 3);

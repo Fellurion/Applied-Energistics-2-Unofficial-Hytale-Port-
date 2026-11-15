@@ -21,7 +21,9 @@ import java.util.Map;
  * <p>
  * Recipes may be "flipped": the top ingredient may be in the bottom slot and vice versa.
  * <p>
- * Deviation: the name press (renaming items) is not supported.
+ * The name press (renaming the middle item) is the one job that is no registered recipe, see
+ * {@link #findNamePressRecipe}. Item names live in the integration layer's metadata, so reading the name of a press
+ * and writing it to an item is delegated to a {@link NameHandler}; without one the name press does nothing.
  */
 public final class InscriberRecipes {
     private final List<InscriberRecipe> recipes = new ArrayList<>();
@@ -73,6 +75,10 @@ public final class InscriberRecipes {
         if (input == null) {
             return null;
         }
+        var namePress = findNamePressRecipe(input, plateA, plateB);
+        if (namePress != null) {
+            return namePress;
+        }
         for (var recipe : recipes) {
             boolean matchA = testOptional(recipe.top(), plateA) && testOptional(recipe.bottom(), plateB);
             boolean matchB = testOptional(recipe.top(), plateB) && testOptional(recipe.bottom(), plateA);
@@ -107,7 +113,7 @@ public final class InscriberRecipes {
 
     /**
      * Whether {@code stack} may be inserted into the given inscriber slot, considering the other slots. Port of
-     * {@code InscriberBlockEntity.BaseFilter.allowInsert} (without name press).
+     * {@code InscriberBlockEntity.BaseFilter.allowInsert}.
      *
      * @param slot   {@link InscriberLogic#SLOT_TOP}, {@link InscriberLogic#SLOT_MIDDLE} or
      *               {@link InscriberLogic#SLOT_BOTTOM}
@@ -118,6 +124,9 @@ public final class InscriberRecipes {
     public boolean allowInsert(int slot, SimpleStack stack, SimpleStack top, SimpleStack middle, SimpleStack bottom) {
         if (slot == InscriberLogic.SLOT_OUTPUT) {
             return true; // internal logic only; automation is blocked separately
+        }
+        if (allowInsertForNamePress(slot, stack, top, bottom)) {
+            return true;
         }
         if (slot == InscriberLogic.SLOT_BOTTOM) {
             bottom = stack;
@@ -148,5 +157,112 @@ public final class InscriberRecipes {
             }
         }
         return false;
+    }
+
+    // ------------------------------------------------------------------------------------------------------------
+    // Name press (AE2: InscriberRecipes.findRecipe with supportNamePress, makeNamePressRecipe, BaseFilter)
+
+    /** Item id of the name press. */
+    public static final String NAME_PRESS_ITEM_ID = "AE2_Name_Press";
+    /** Id of the recipe object {@link #findNamePressRecipe} creates. */
+    public static final String NAME_PRESS_RECIPE_ID = "ae2:name_press";
+
+    /**
+     * Item names for the name press. Implemented by the integration layer, which knows how a press stores its name
+     * and how an item carries a custom name.
+     */
+    public interface NameHandler {
+        /** The name inscribed on a name press, or null for a blank press. */
+        String nameOf(SimpleStack press);
+
+        /**
+         * A single item like {@code item} (same item, same other metadata, count 1) with the custom name
+         * {@code name}; {@code name == null} removes the custom name.
+         */
+        SimpleStack rename(SimpleStack item, String name);
+    }
+
+    private static volatile NameHandler nameHandler;
+
+    /** Enables the name press (null disables it again). */
+    public static void setNameHandler(NameHandler handler) {
+        nameHandler = handler;
+    }
+
+    public static boolean isNamePress(SimpleStack stack) {
+        return stack != null && stack.is(NAME_PRESS_ITEM_ID);
+    }
+
+    public static boolean isNamePressRecipe(InscriberRecipe recipe) {
+        return recipe != null && NAME_PRESS_RECIPE_ID.equals(recipe.id());
+    }
+
+    /** The presses of a name press job in AE2's order (first name, second name), or null if it is no such job. */
+    private static SimpleStack[] namePresses(SimpleStack plateA, SimpleStack plateB) {
+        boolean isNameA = isNamePress(plateA);
+        boolean isNameB = isNamePress(plateB);
+        if (isNameA && isNameB || isNameA && plateB == null) {
+            return new SimpleStack[] {plateA, plateB};
+        } else if (plateA == null && isNameB) {
+            return new SimpleStack[] {plateB, plateA};
+        }
+        return null;
+    }
+
+    /**
+     * Port of the name press branch of {@code InscriberRecipes.findRecipe}: with a name press on top and/or bottom
+     * (and nothing else there) the inscriber renames the middle item. The returned recipe keeps the presses
+     * ({@link InscriberRecipe.ProcessType#INSCRIBE}) and consumes one middle item; its {@code output()} only names
+     * the item, the real result with the item's metadata and the new name is {@link #namePressResult}.
+     *
+     * @return the job, or null if the plates are no name press combination or no {@link NameHandler} is set
+     */
+    public InscriberRecipe findNamePressRecipe(SimpleStack input, SimpleStack plateA, SimpleStack plateB) {
+        if (input == null || nameHandler == null) {
+            return null;
+        }
+        var presses = namePresses(plateA, plateB);
+        if (presses == null) {
+            return null;
+        }
+        return new InscriberRecipe(NAME_PRESS_RECIPE_ID, InscriberRecipe.ProcessType.INSCRIBE,
+                Ingredient.of(presses[0].itemId()), Ingredient.of(input.itemId()),
+                presses[1] == null ? null : Ingredient.of(presses[1].itemId()), Ingredient.of(input.itemId()));
+    }
+
+    /**
+     * Port of {@code InscriberRecipes.makeNamePressRecipe}: one middle item renamed to the name of the press, or to
+     * both names joined by a space when both plates are name presses. Blank presses remove the custom name.
+     *
+     * @return the renamed item (count 1), or null if this is no name press job
+     */
+    public static SimpleStack namePressResult(SimpleStack input, SimpleStack plateA, SimpleStack plateB) {
+        var handler = nameHandler;
+        var presses = namePresses(plateA, plateB);
+        if (input == null || handler == null || presses == null) {
+            return null;
+        }
+        String name = null;
+        for (var press : presses) {
+            String pressName = press == null ? null : handler.nameOf(press);
+            if (pressName != null) {
+                name = name == null ? pressName : name + " " + pressName;
+            }
+        }
+        return handler.rename(input, name);
+    }
+
+    /**
+     * The name press rules of {@code BaseFilter.allowInsert}: a name press always fits into the top and bottom slot,
+     * and with a name press there anything can be renamed.
+     */
+    private static boolean allowInsertForNamePress(int slot, SimpleStack stack, SimpleStack top, SimpleStack bottom) {
+        if (nameHandler == null) {
+            return false;
+        }
+        if (slot == InscriberLogic.SLOT_TOP || slot == InscriberLogic.SLOT_BOTTOM) {
+            return isNamePress(stack);
+        }
+        return slot == InscriberLogic.SLOT_MIDDLE && (isNamePress(top) || isNamePress(bottom));
     }
 }

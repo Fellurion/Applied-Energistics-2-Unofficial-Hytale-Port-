@@ -10,7 +10,13 @@ package de.fellurion.ae2.core.grid;
 import java.util.List;
 
 /**
- * A connection between two adjacent grid nodes. Port of {@code appeng.me.GridConnection}.
+ * A connection between two grid nodes. Port of {@code appeng.me.GridConnection}.
+ * <p>
+ * In-world connections join two adjacent nodes and are created and removed automatically by {@link MEWorld}.
+ * Virtual connections ({@link #isInWorld()} is false, AE2: {@code GridConnection.create(a, b, null)}) join two nodes
+ * regardless of their position; they are created with {@link MEWorld#addVirtualConnection} and live until
+ * {@link MEWorld#removeVirtualConnection} or until one of their nodes is removed. Every connection carries up to 32
+ * channels.
  * <p>
  * During channel calculation, side A is always the side closer to a controller.
  */
@@ -18,9 +24,10 @@ public final class GridConnection implements IPathItem {
     int usedChannels = 0;
     private int lastUsedChannels = 0;
     private GridNode sideA;
-    /** Direction from A to B. */
+    /** Direction from A to B, null for virtual connections. */
     private Direction fromAtoB;
     private GridNode sideB;
+    boolean destroyed;
 
     GridConnection(GridNode a, GridNode b, Direction fromAtoB) {
         this.sideA = a;
@@ -46,9 +53,22 @@ public final class GridConnection implements IPathItem {
         throw new IllegalArgumentException("The given grid node does not participate in this connection.");
     }
 
-    /** Direction from the given side towards the other side. */
+    /** Direction from the given side towards the other side; null for a virtual connection. */
     public Direction getDirection(GridNode side) {
+        if (fromAtoB == null) {
+            return null;
+        }
         return side == sideA ? fromAtoB : fromAtoB.getOpposite();
+    }
+
+    /** True for a connection between two adjacent blocks, false for a virtual one. */
+    public boolean isInWorld() {
+        return fromAtoB != null;
+    }
+
+    /** True once the connection was removed (explicitly, or because one of its nodes left the world). */
+    public boolean isDestroyed() {
+        return destroyed;
     }
 
     /** Channels carried by this connection after the last channel calculation. */
@@ -74,7 +94,9 @@ public final class GridConnection implements IPathItem {
             var tmp = sideA;
             sideA = sideB;
             sideB = tmp;
-            fromAtoB = fromAtoB.getOpposite();
+            if (fromAtoB != null) {
+                fromAtoB = fromAtoB.getOpposite();
+            }
         }
     }
 
@@ -121,6 +143,6 @@ public final class GridConnection implements IPathItem {
 
     @Override
     public String toString() {
-        return "GridConnection[" + sideA + " -> " + sideB + "]";
+        return "GridConnection[" + sideA + " -> " + sideB + (fromAtoB == null ? ", virtual]" : "]");
     }
 }

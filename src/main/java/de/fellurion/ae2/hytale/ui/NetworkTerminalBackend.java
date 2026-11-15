@@ -11,16 +11,22 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import de.fellurion.ae2.core.config.Actionable;
+import de.fellurion.ae2.core.config.PowerMultiplier;
+import de.fellurion.ae2.core.energy.IEnergySource;
 import de.fellurion.ae2.core.grid.Grid;
 import de.fellurion.ae2.core.grid.GridNode;
+import de.fellurion.ae2.core.stacks.AEFluidKey;
 import de.fellurion.ae2.core.stacks.AEItemKey;
 import de.fellurion.ae2.core.stacks.AEKey;
 import de.fellurion.ae2.core.stacks.KeyCounter;
 import de.fellurion.ae2.core.storage.IActionSource;
+import de.fellurion.ae2.core.storage.MEStorage;
 import de.fellurion.ae2.core.storage.StorageHelper;
 import de.fellurion.ae2.hytale.ItemKeys;
 import de.fellurion.ae2.hytale.WorldNetworks;
 import de.fellurion.ae2.hytale.crafting.CraftingAccess;
+import de.fellurion.ae2.hytale.fluid.FluidTypes;
 import de.fellurion.ae2.hytale.security.AE2Security;
 import de.fellurion.ae2.hytale.security.AccessPage;
 
@@ -34,13 +40,19 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Terminal-Zugriff auf das ME-Netz eines Terminal-/ME-Chest-Blocks (Energie wie in AE2: 1 AE pro Item).
- * Herstellbare Items (Pattern im Netz) erscheinen wie in AE2 auch mit Menge 0.
+ * Terminal-Zugriff auf das ME-Netz eines Terminal-Blocks (Energie wie in AE2: 1 AE pro Item, 1 AE je 125 mB
+ * Flüssigkeit). Herstellbare Items (Pattern im Netz) erscheinen wie in AE2 auch mit Menge 0. Flüssigkeiten des
+ * Lagers liefert {@link #fluids()}; bewegt werden sie mit {@link #extractFluid} und {@link #insertFluid}.
+ *
+ * <p>Abgeleitete Terminals tauschen aus, was AE2s {@code MEStorageMenu} vom Host bekommt: das Lager
+ * ({@link #storage}, {@link #available}), die Energiequelle ({@link #energy}) und wann das Terminal erreichbar ist
+ * ({@link #isOnline}) – etwa die ME Chest (nur ihre eigene Zelle) oder das Wireless Terminal (Akku des Items,
+ * Reichweite). Besitz, Zugriff und Autocrafting gelten immer für das Netz des Blocks bei x/y/z.
  */
-public final class NetworkTerminalBackend implements TerminalBackend {
+public class NetworkTerminalBackend implements TerminalBackend {
 
-    private final WorldNetworks nets;
-    private final int x, y, z;
+    protected final WorldNetworks nets;
+    protected final int x, y, z;
     private final Object player;
     private final Map<String, AEItemKey> keys = new HashMap<>();
 
@@ -93,15 +105,35 @@ public final class NetworkTerminalBackend implements TerminalBackend {
     // ------------------------------------------------------------------ Netz
 
     @Nullable
-    private GridNode node() {
+    protected final GridNode node() {
         WorldNetworks.Node n = nets.node(x, y, z);
         return n == null ? null : n.gridNode();
     }
 
     @Nullable
-    private Grid grid() {
+    protected final Grid grid() {
         GridNode g = node();
         return g == null ? null : g.getGrid();
+    }
+
+    /** Woraus Ein- und Auslagern bezahlt werden (AE2: {@code MEStorageMenu.energySource}); Standard: das Netz. */
+    protected IEnergySource energy(Grid grid) {
+        return grid.getEnergyService();
+    }
+
+    /** Das Lager hinter dem Terminal (AE2: {@code ITerminalHost.getInventory}); Standard: der ganze Netzinhalt. */
+    protected MEStorage storage(Grid grid) {
+        return grid.getStorageService().getInventory();
+    }
+
+    /** Momentaufnahme des Lagerinhalts (nur lesen); Standard: die des Netzes, einmal je Tick gebaut. */
+    protected KeyCounter available(Grid grid) {
+        return grid.getStorageService().getCachedInventory();
+    }
+
+    /** Wer handelt (für Kern-Aufrufe). */
+    protected final IActionSource source() {
+        return IActionSource.ofPlayer(player);
     }
 
     @Override
@@ -138,12 +170,18 @@ public final class NetworkTerminalBackend implements TerminalBackend {
             return new Status(false, 0, 0, 0, 0, 0);
         }
         var e = grid.getEnergyService();
-        KeyCounter inv = grid.getStorageService().getCachedInventory();
+        KeyCounter inv = available(grid);
         long total = 0;
+        long fluid = 0;
         for (KeyCounter.Entry entry : inv) {
-            total += entry.getLongValue();
+            if (entry.getKey() instanceof AEFluidKey) {
+                fluid += entry.getLongValue(); // mB, nicht mit Items zusammenzählen
+            } else {
+                total += entry.getLongValue();
+            }
         }
-        return new Status(true, e.getStoredPower(), e.getMaxStoredPower(), e.getAvgPowerUsage(), inv.size(), total);
+        return new Status(true, e.getStoredPower(), e.getMaxStoredPower(), e.getAvgPowerUsage(), inv.size(), total,
+                fluid);
     }
 
     @Override
@@ -155,7 +193,7 @@ public final class NetworkTerminalBackend implements TerminalBackend {
             return out;
         }
         Set<AEItemKey> craftables = craftables();
-        for (KeyCounter.Entry e : grid.getStorageService().getCachedInventory()) {
+        for (KeyCounter.Entry e : available(grid)) {
             if (e.getLongValue() <= 0 || !(e.getKey() instanceof AEItemKey key)) {
                 continue;
             }
@@ -183,7 +221,60 @@ public final class NetworkTerminalBackend implements TerminalBackend {
         return out;
     }
 
-    private Set<AEItemKey> craftables() {
+    @Override
+    public List<Entry> fluids() {
+        Grid grid = grid();
+        List<Entry> out = new ArrayList<>();
+        if (grid == null || !accessAllowed()) {
+            return out;
+        }
+        for (KeyCounter.Entry e : available(grid)) {
+            if (e.getLongValue() <= 0 || !(e.getKey() instanceof AEFluidKey key)) {
+                continue;
+            }
+            try {
+                out.add(Entry.ofFluid(TerminalBackend.fluidKey(key.fluidId()), key.fluidId(),
+                        FluidTypes.displayStack(key.fluidId()), e.getLongValue()));
+            } catch (RuntimeException ignored) {
+                // kein Item zum Anzeigen – nicht anzeigen
+            }
+        }
+        return out;
+    }
+
+    @Override
+    public long extractFluid(String keyId, long amount, boolean simulate) {
+        Grid grid = grid();
+        String fluidId = TerminalBackend.fluidIdOf(keyId);
+        // Zugriff bei jeder Aktion neu prüfen, wie bei Items
+        if (grid == null || fluidId == null || amount <= 0 || !isOnline() || !accessAllowed()) {
+            return 0;
+        }
+        long got = StorageHelper.poweredExtraction(energy(grid), storage(grid), AEFluidKey.of(fluidId), amount, source(),
+                simulate ? Actionable.SIMULATE : Actionable.MODULATE);
+        if (got > 0 && !simulate) {
+            changed(grid);
+        }
+        return got;
+    }
+
+    @Override
+    public long insertFluid(String fluidId, long amount, boolean simulate) {
+        Grid grid = grid();
+        AEFluidKey key = FluidTypes.key(fluidId); // nur lagerbare Flüssigkeiten
+        if (grid == null || key == null || amount <= 0 || !isOnline() || !accessAllowed()) {
+            return 0;
+        }
+        long inserted = StorageHelper.poweredInsert(energy(grid), storage(grid), key, amount, source(),
+                simulate ? Actionable.SIMULATE : Actionable.MODULATE);
+        if (inserted > 0 && !simulate) {
+            changed(grid);
+        }
+        return inserted;
+    }
+
+    /** Items, die das Terminal als herstellbar anbietet; Standard: alle mit Pattern im Netz. */
+    protected Set<AEItemKey> craftables() {
         try {
             return CraftingAccess.craftables(nets, x, y, z);
         } catch (RuntimeException e) {
@@ -199,8 +290,20 @@ public final class NetworkTerminalBackend implements TerminalBackend {
         if (grid == null || key == null || !isOnline() || !accessAllowed()) {
             return 0;
         }
-        return StorageHelper.poweredInsert(grid.getEnergyService(), grid.getStorageService().getInventory(), key,
-                stack.getQuantity(), IActionSource.ofPlayer(player));
+        long inserted = StorageHelper.poweredInsert(energy(grid), storage(grid), key, stack.getQuantity(), source());
+        if (inserted > 0) {
+            changed(grid);
+        }
+        return inserted;
+    }
+
+    /**
+     * Nach einer Aktion des Spielers: Die Momentaufnahme des Netzinhalts ({@code getCachedInventory}) entsteht nur
+     * einmal je Tick. Wurde sie in diesem Tick schon gelesen (Planung im Crafting-Terminal, regelmäßige
+     * Aktualisierung, Blickanzeige), zeigte das Terminal sonst bis zur nächsten Aktualisierung die alten Mengen.
+     */
+    private static void changed(Grid grid) {
+        grid.getStorageService().invalidateCache();
     }
 
     @Override
@@ -211,9 +314,36 @@ public final class NetworkTerminalBackend implements TerminalBackend {
         if (grid == null || key == null || amount <= 0 || !isOnline() || !accessAllowed()) {
             return null;
         }
-        long got = StorageHelper.poweredExtraction(grid.getEnergyService(), grid.getStorageService().getInventory(), key,
-                amount, IActionSource.ofPlayer(player));
+        long got = StorageHelper.poweredExtraction(energy(grid), storage(grid), key, amount, source());
+        if (got > 0) {
+            changed(grid);
+        }
         return got <= 0 ? null : ItemKeys.toStack(key, (int) got);
+    }
+
+    @Override
+    public boolean canExtract(Map<String, Long> amounts) {
+        Grid grid = grid();
+        if (grid == null || !isOnline() || !accessAllowed()) {
+            return false;
+        }
+        IActionSource src = source();
+        MEStorage storage = storage(grid);
+        double total = 0;
+        for (Map.Entry<String, Long> e : amounts.entrySet()) {
+            AEItemKey key = keys.get(e.getKey());
+            long amount = e.getValue() == null ? 0 : e.getValue();
+            if (amount <= 0) {
+                continue;
+            }
+            if (key == null || storage.extract(key, amount, Actionable.SIMULATE, src) < amount) {
+                return false;
+            }
+            total += amount / Math.max(1.0, key.getAmountPerOperation());
+        }
+        // Energie für alle Entnahmen zusammen (jede einzelne kostet wie im Terminal 1 AE je Item)
+        return total <= 0 || energy(grid).extractAEPower(total, Actionable.SIMULATE, PowerMultiplier.CONFIG)
+                >= total - 0.01;
     }
 
     @Override
@@ -227,7 +357,7 @@ public final class NetworkTerminalBackend implements TerminalBackend {
         if (!accessAllowed()) {
             return h * 0x9E3779B97F4A7C15L;
         }
-        for (KeyCounter.Entry e : grid.getStorageService().getCachedInventory()) {
+        for (KeyCounter.Entry e : available(grid)) {
             h += e.getKey().hashCode() * 31L + e.getLongValue();
         }
         // neue/entfernte Pattern ändern die Liste der herstellbaren Items

@@ -1,0 +1,31 @@
+// Farben und Stile des Buchs „AE2 Basics“ (Tinte auf Pergament). Texturpfade relativ zu dieser Datei.
+
+@Ink = #3a2a18;
+@InkSoft = #6b5236;
+@InkBlue = #23506e;
+@InkLink = #2b5f86;
+@InkLinkHover = #1b8fb5;
+
+@TitleStyle = LabelStyle(FontSize: 34, TextColor: #23506e, RenderBold: true, FontName: "Secondary", HorizontalAlignment: Center, VerticalAlignment: Center);
+@SubtitleStyle = LabelStyle(FontSize: 15, TextColor: #6b5236, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
+@HeadingStyle = LabelStyle(FontSize: 21, TextColor: #23506e, RenderBold: true, FontName: "Secondary", VerticalAlignment: Center);
+@SubheadingStyle = LabelStyle(FontSize: 15, TextColor: #3a2a18, RenderBold: true, VerticalAlignment: Center);
+@TextStyle = LabelStyle(FontSize: 14, TextColor: #3a2a18, Wrap: true);
+@CaptionStyle = LabelStyle(FontSize: 10, TextColor: #6b5236, HorizontalAlignment: Center, Wrap: true);
+@SmallStyle = LabelStyle(FontSize: 11, TextColor: #6b5236, VerticalAlignment: Center);
+@RecipeNameStyle = LabelStyle(FontSize: 13, TextColor: #3a2a18, RenderBold: true, VerticalAlignment: Center);
+@RecipeLineStyle = LabelStyle(FontSize: 11, TextColor: #6b5236, VerticalAlignment: Center);
+@PageNumberStyle = LabelStyle(FontSize: 12, TextColor: #6b5236, HorizontalAlignment: Center, VerticalAlignment: Center);
+@ArrowStyle = LabelStyle(FontSize: 22, TextColor: #6b5236, HorizontalAlignment: Center, VerticalAlignment: Center);
+
+@LinkLabel = LabelStyle(FontSize: 15, TextColor: #2b5f86, VerticalAlignment: Center);
+@LinkLabelHover = LabelStyle(FontSize: 15, TextColor: #1b8fb5, RenderBold: true, VerticalAlignment: Center);
+@LinkStyle = TextButtonStyle(
+  Default: (LabelStyle: @LinkLabel),
+  Hovered: (LabelStyle: @LinkLabelHover),
+  Pressed: (LabelStyle: @LinkLabelHover)
+);
+
+@FrameBackground = PatchStyle(TexturePath: "BookTextures/Frame.png", Border: 6);
+@PanelBackground = PatchStyle(TexturePath: "BookTextures/Panel.png", Border: 8);
+@DividerBackground = PatchStyle(TexturePath: "BookTextures/Divider.png", Border: 1);

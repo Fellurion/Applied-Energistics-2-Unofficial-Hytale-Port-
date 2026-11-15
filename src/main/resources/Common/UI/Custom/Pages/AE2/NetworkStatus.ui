@@ -1,0 +1,50 @@
+$C = "../../Common.ui";
+
+// Netzwerkstatus des Network Tools (AE2: NetworkStatusScreen): Energie, Kanäle und die Geräte des Netzes nach Art.
+// Nur Anzeige; Texte und Zeilen setzt NetworkStatusPage.java und frischt sie auf, solange die Seite offen ist.
+
+@InfoStyle = (FontSize: 14, TextColor: #d3d6db, VerticalAlignment: Center);
+@HeaderStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 820, Height: 620);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Network Status";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 12, Vertical: 8);
+
+    Label #Energy { Text: ""; Anchor: (Height: 24); Style: @InfoStyle; }
+    Label #Input { Text: ""; Anchor: (Height: 24); Style: @InfoStyle; }
+    Label #Usage { Text: ""; Anchor: (Height: 24); Style: @InfoStyle; }
+    Label #Channels { Text: ""; Anchor: (Height: 24); Style: @InfoStyle; }
+
+    Group { Anchor: (Height: 8); }
+    Group { Anchor: (Height: 1); Background: #2b3a4a; }
+    Group { Anchor: (Height: 6); }
+
+    Label #MachinesHeader { Text: ""; Anchor: (Height: 26); Style: @HeaderStyle; }
+
+    Group #MachineContainer {
+      FlexWeight: 1;
+      LayoutMode: TopScrolling;
+      ScrollbarStyle: $C.@DefaultScrollbarStyle;
+
+      Group #Machines {
+        LayoutMode: Top;
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

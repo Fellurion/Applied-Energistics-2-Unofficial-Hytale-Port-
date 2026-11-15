@@ -29,10 +29,9 @@ public final class CrankDevice implements Device {
     @Override
     public void tick(WorldNetworks nets, WorldNetworks.Node node) {
         if (logic.isTurning()) {
-            ICrankable target = target(nets, node);
-            if (target != null) {
-                logic.tick(target);
-            }
+            // Auch ohne Maschine dahinter dreht die Kurbel zu Ende (AE2: CrankBlockEntity.tick) – sonst bliebe sie
+            // nach dem Wegdrehen mitten in der Umdrehung stehen und nähme keine neue an
+            logic.tick(target(nets, node));
         }
     }
 
@@ -41,6 +40,9 @@ public final class CrankDevice implements Device {
         Dir front = node.facing() == null ? Dir.UP : node.facing();
         Dir back = front.opposite();
         WorldNetworks.Node t = nets.node(node.x() + back.dx, node.y() + back.dy, node.z() + back.dz);
+        if (t != null && t.device() instanceof GrowthDevices.GrowthAccelerator g) {
+            return g.crankable();
+        }
         return t != null && t.device() instanceof MachineDevice m ? m.crankable() : null;
     }
 }

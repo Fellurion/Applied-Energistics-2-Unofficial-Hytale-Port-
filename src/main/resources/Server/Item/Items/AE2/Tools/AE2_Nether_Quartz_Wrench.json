@@ -53,5 +53,8 @@
     ],
     "OutputQuantity": 1,
     "TimeSeconds": 1
+  },
+  "Interactions": {
+    "Secondary": "AE2_Use_Item"
   }
 }

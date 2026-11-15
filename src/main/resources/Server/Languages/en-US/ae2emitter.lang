@@ -1,0 +1,108 @@
+# Applied Energistics 2 – level emitters, light detecting fixture, storage and conversion monitor, signal
+# File ae2emitter.lang -> key prefix 'ae2emitter.'
+
+# --- settings page of the level emitters
+filter = Watched item ({used}/{slots}) – empty: all items count
+threshold.items = Threshold: {value}
+threshold.energy = Threshold: {value} AE
+setting.level.high_signal = Signal: at or above the threshold
+setting.level.low_signal = Signal: below the threshold
+setting.energy.high_signal = Signal: at or above the threshold
+setting.energy.low_signal = Signal: below the threshold
+setting.craft.no = Signal: while the item is being crafted
+setting.craft.yes = Signal: to craft the item
+info.level = {item}: {amount} of {threshold}
+info.energy = Energy: {amount} of {threshold} AE
+info.crafting = {item}: crafting requests
+watch.all = All items
+value.above = more than {threshold}
+signal.on = signal on
+signal.off = signal off
+note.item = Blocks next to the emitter receive the signal, for example a bus with a Redstone Card. A Fuzzy Card counts all variants of the item, a Crafting Card reacts to crafting jobs instead of the amount.
+note.all = Without an item the emitter adds up everything stored in the network.
+note.energy = Compares the energy stored in the network with the threshold. Blocks next to the emitter receive the signal.
+note.whileCrafting = Crafting Card: the signal is on while a crafting CPU waits for this item (without an item: for anything).
+note.craftVia = Crafting Card: the item can be requested for crafting. While a job waits for it the signal is on – whatever it switches on has to deliver the item into the network.
+hint.emitter = Click an item above to select it, then click the item slot or the card slot. Right click adds it directly. Click a filled slot to clear it or to take the card out.
+
+# --- buses with a Redstone Card
+bus.signalOn = Redstone Card: this bus receives a signal from a block next to it.
+bus.signalOff = Redstone Card: no signal. Level emitters and light detecting fixtures next to this bus send one.
+
+# --- look-at display
+hud.watching = Watching
+hud.amount = Amount
+hud.amountOf = {amount} / {threshold}
+hud.energy = Energy
+hud.energyOf = {amount} / {threshold} AE
+hud.mode = Signal when
+hud.mode.above = at or above the threshold
+hud.mode.below = below the threshold
+hud.mode.whileCrafting = the item is being crafted
+hud.mode.craftVia = a job requests the item
+hud.signal = Signal
+hud.on = on
+hud.off = off
+hud.item = Item
+hud.noItem = none
+hud.craftable = craftable
+hud.lock = Lock
+hud.locked = locked
+hud.unlocked = unlocked
+hud.light = Light
+hud.lightOf = {light} / {max}
+hud.lightUnknown = not measured yet
+hud.hint.storage = Use: show the held item (empty hand clears) · sneak + use: lock
+hud.hint.storageLocked = Sneak + use: unlock
+hud.hint.conversion = Use: show or store the held item · sneak + use: lock
+hud.hint.conversionLocked = Use: store the held stack · empty hand: take a stack
+hud.hint.conversionSneak = Sneak + use: store all (item in hand) or unlock
+
+# --- monitors
+monitor.offline = The monitor is offline – no power or no channel.
+monitor.locked = Monitor is now locked.
+monitor.unlocked = Monitor is now unlocked.
+monitor.isLocked = The monitor is locked. Sneak and use it to unlock it.
+monitor.inserted = Stored {amount}× {item}.
+monitor.insertFailed = {item} could not be stored – no room or no energy in the network.
+monitor.extracted = Took {amount}× {item}.
+monitor.extractFailed = No {item} could be taken out of the network.
+
+# --- commands (/ae2 …, admin)
+cmd.yes = yes
+cmd.no = no
+cmd.emitter.desc = Shows the state of a level emitter
+cmd.emitterset.desc = Sets item, threshold, mode, craft or fuzzy of a level emitter
+cmd.installcard.desc = Installs an upgrade card into a device
+cmd.busmode.desc = Sets the signal mode of an import or export bus
+cmd.signal.desc = Shows whether a block sends or receives the AE2 signal
+cmd.light.desc = Shows the light level at a position
+cmd.monitor.desc = Shows the state of a storage or conversion monitor
+cmd.monitorset.desc = Sets item or lock of a monitor
+cmd.monitorinsert.desc = Stores items through a conversion monitor
+cmd.monitorextract.desc = Takes the shown item out through a conversion monitor
+cmd.monitordisplay.desc = Switches the in-world display of the monitors on or off
+cmd.arg.setting = Setting
+cmd.arg.value = Value
+cmd.arg.card = Upgrade card item
+cmd.arg.mode = Signal mode
+cmd.arg.onOff = on or off
+cmd.noEmitter = [AE2] No level emitter at this position.
+cmd.noMonitor = [AE2] No monitor at this position.
+cmd.noConversionMonitor = [AE2] No conversion monitor at this position.
+cmd.noBus = [AE2] No import or export bus at this position.
+cmd.noCardSlots = [AE2] This block takes no upgrade cards.
+cmd.badValue = [AE2] This setting or value is not valid here.
+cmd.unknownItem = [AE2] Unknown item: {item}
+cmd.emitter.state = [AE2] Emitter · watches {what} · value {value} · threshold {threshold} · mode {mode} · cards {cards} · active {active} · emitting {emitting}
+cmd.cardInstalled = [AE2] {card} installed · cards {cards}
+cmd.cardRejected = [AE2] {card} does not fit or there is no free card slot.
+cmd.busmode.done = [AE2] Bus signal mode {mode} · redstone card {card}
+cmd.signal.state = [AE2] Signal at {x} {y} {z} · emitting {emitting} · powered {powered}
+cmd.light.state = [AE2] Light at {x} {y} {z}: {light}
+cmd.light.detector = [AE2] Light detector · light {light} · measured {measured} · emitting {emitting}
+cmd.monitor.state = [AE2] Monitor · item {item} · amount {amount} · locked {locked} · active {active} · display {display} at {at} · display entities {entities} · monitors with display {expected}
+cmd.monitor.count = [AE2] Display entities {entities} · monitors with display {expected}
+cmd.monitor.moved = [AE2] Moved {amount}× {item}
+cmd.monitordisplay.on = [AE2] Monitors show their item in the world.
+cmd.monitordisplay.off = [AE2] Monitors no longer show their item in the world.

@@ -1,0 +1,62 @@
+# Applied Energistics 2 – ME Annihilation Plane and ME Formation Plane
+# File ae2plane.lang -> key prefix 'ae2plane.'
+
+filter.normal = Filter ({used}/{slots}) – empty: places everything
+filter.inverted = Blacklist ({used}/{slots}) – places everything else
+
+setting.place.yes = Stored items: place as block
+setting.place.no = Stored items: drop as item
+
+info.front = In front: {block}
+info.offline = Offline – no power or no channel
+front.none = nothing
+front.unloaded = not loaded
+
+hint.place = Only blocks are placed, one at a time and only into free space. Everything else stays in the network. A fluid is placed as a source block for every full bucket.
+hint.drop = Whatever reaches the plane is dropped in front of it, up to one stack at a time.
+
+hud.front = In front
+hud.skyDust = open sky – generates Sky Stone Dust
+hud.mode = Mode
+hud.place = places blocks
+hud.drop = drops items
+hud.filter = Filter
+hud.filterEmpty = everything
+hud.filterUsed = {used} of {slots}
+hud.filterInverted = everything except {used} (of {slots})
+hud.priority = Priority
+
+cmd.desc = Inspect and configure Annihilation and Formation Planes
+cmd.info.desc = Shows the state of a plane
+cmd.filter.desc = Sets a filter slot of a Formation Plane (none clears it)
+cmd.mode.desc = Formation Plane: place blocks or drop items
+cmd.priority.desc = Sets the priority of a Formation Plane
+cmd.card.desc = Installs an upgrade card in a Formation Plane
+cmd.items.desc = Counts the items lying around a position
+cmd.drop.desc = Drops an item at a position
+cmd.arg.mode = block or item
+cmd.arg.priority = Priority
+cmd.arg.radius = Radius in blocks
+cmd.noPlane = [AE2] No plane at this position
+cmd.noFormationPlane = [AE2] No Formation Plane at this position
+cmd.state.online = online
+cmd.state.offline = offline
+cmd.info.annihilation = [AE2] Annihilation Plane · facing {facing} · in front ({x} {y} {z}): {block} · {state} · ticks: {ticking} · items in front: {items} · generating: {generating}
+cmd.info.formation = [AE2] Formation Plane · facing {facing} · in front ({x} {y} {z}): {block} · {state} · mode: {mode} · priority: {priority} · filter ({slots} slots): [{filter}] · cards: [{cards}]
+cmd.filter.invalid = [AE2] Unknown item or slot out of range (0 to {slots} − 1)
+cmd.filter.done = [AE2] Filter slot {slot}: {item}
+cmd.filter.cleared = [AE2] Filter slot {slot} cleared
+cmd.mode.invalid = [AE2] Mode must be block or item
+cmd.mode.done = [AE2] Mode: {mode}
+cmd.priority.done = [AE2] Priority: {priority}
+cmd.card.refused = [AE2] {item} does not fit (anymore)
+cmd.card.done = [AE2] {item} installed · filter slots: {slots}
+cmd.items.done = [AE2] Items lying around: {entities} stacks, {amount} items [{list}]
+cmd.drop.invalid = [AE2] Unknown item or amount below 1
+cmd.drop.done = [AE2] Dropped {amount} {item}
+cmd.place.desc = Places a plane facing a direction
+cmd.arg.type = annihilation or formation
+cmd.arg.direction = up, down, north, south, east or west
+cmd.place.invalid = [AE2] Type must be annihilation or formation, direction up, down, north, south, east or west
+cmd.place.done = [AE2] {item} placed, facing {direction}
+cmd.place.failed = [AE2] Could not place {item} facing {direction} (chunk not loaded?)

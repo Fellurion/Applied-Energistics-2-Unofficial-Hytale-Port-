@@ -25,11 +25,23 @@ import java.util.Locale;
 /** {@code /ae2 info x y z} – Netzwerk-Infos zu einem AE2-Block (wie AE2s Network Tool). */
 public final class AE2Command extends AbstractCommandCollection {
 
+    private static final java.util.List<com.hypixel.hytale.server.core.command.system.AbstractCommand> EXTRA =
+            new java.util.concurrent.CopyOnWriteArrayList<>();
+
+    /**
+     * Meldet einen weiteren Unterbefehl von {@code /ae2} an. Nur während des Plugin-Starts (aus dem {@code setup}
+     * eines Bereichs), bevor der Befehl selbst angelegt wird.
+     */
+    public static void registerSub(com.hypixel.hytale.server.core.command.system.AbstractCommand command) {
+        EXTRA.add(command);
+    }
+
     public AE2Command() {
         super("ae2", "ae2cmd.root.desc");
         requireNoPermission(); // Unterbefehle regeln ihre Rechte selbst (Admin: ae2.admin)
         addSubCommand(new Info());
         addSubCommand(new LanguageCommand());
+        addSubCommand(new de.fellurion.ae2.hytale.meteorite.MeteoriteCommands());
         addSubCommand(de.fellurion.ae2.hytale.advancements.AE2Advancements.createCommand());
         // Admin-/Testbefehle (Berechtigung ae2.admin)
         addSubCommand(new AE2DebugCommands.SetSlot());
@@ -39,8 +51,12 @@ public final class AE2Command extends AbstractCommandCollection {
         addSubCommand(new AE2DebugCommands.Cpus());
         addSubCommand(new AE2DebugCommands.Count());
         addSubCommand(new AE2DebugCommands.KeepLoaded());
+        addSubCommand(new AE2ConfigCommand());
         addSubCommand(new Perf());
         addSubCommand(new AE2DebugCommands.Stress());
+        addSubCommand(new AE2DebugCommands.Grow());
+        addSubCommand(new AE2DebugCommands.DropsOf());
+        EXTRA.forEach(this::addSubCommand);
     }
 
     /** {@code /ae2 perf}: Tick-Zeiten des AE2-Takts dieser Welt; startet zugleich 10 s Messung je Block-Art. */

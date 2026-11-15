@@ -42,6 +42,11 @@ public final class AE2Plugin extends JavaPlugin {
                 .registerComponent(AE2BlockComponent.class, AE2BlockComponent.ID, AE2BlockComponent.CODEC);
         HytaleBridge.registerComponentType(type);
 
+        // Chunk-Markierung "mit AE2 generiert" (Bauschutz der Meteoriten-Einschläge)
+        de.fellurion.ae2.hytale.meteorite.ChunkInfo.setComponentType(getChunkStoreRegistry().registerComponent(
+                de.fellurion.ae2.hytale.meteorite.ChunkInfo.class, de.fellurion.ae2.hytale.meteorite.ChunkInfo.ID,
+                de.fellurion.ae2.hytale.meteorite.ChunkInfo.CODEC));
+
         // Lebenszyklus (Platzieren/Abbauen/Laden) und AE2-Takt
         getChunkStoreRegistry().registerSystem(new AE2BlockLifecycle(type));
         getChunkStoreRegistry().registerSystem(new AE2TickSystem(getLogger()));
@@ -49,6 +54,10 @@ public final class AE2Plugin extends JavaPlugin {
         // Interaktion "AE2UseBlock" (RootInteraction AE2_Use_Block im Asset-Pack)
         getCodecRegistry(Interaction.CODEC).register(AE2UseBlockInteraction.TYPE_ID, AE2UseBlockInteraction.class,
                 AE2UseBlockInteraction.CODEC);
+        // Interaktion "AE2UseItem" (RootInteraction AE2_Use_Item): Klick mit einem AE2-Item in der Hand
+        getCodecRegistry(Interaction.CODEC).register(de.fellurion.ae2.hytale.items.AE2UseItemInteraction.TYPE_ID,
+                de.fellurion.ae2.hytale.items.AE2UseItemInteraction.class,
+                de.fellurion.ae2.hytale.items.AE2UseItemInteraction.CODEC);
 
         // ME-Logik, Rezeptdaten, Befehle
         HytaleBridge.setup(this);
@@ -59,6 +68,7 @@ public final class AE2Plugin extends JavaPlugin {
     @Override
     protected void shutdown() {
         de.fellurion.ae2.hytale.lang.AE2Language.shutdown();
+        de.fellurion.ae2.hytale.meteorite.Meteorites.shutdown();
         super.shutdown();
     }
 }

@@ -78,6 +78,7 @@ public class InterfaceLogic implements IGridTickable, IGridNodeListener, IAction
     private MEStorage localInvHandler;
     private CraftingHook craftingHook;
     private Runnable saveListener;
+    private Runnable storageListener;
 
     /** 9-slot interface; items stack to 64 unless {@link #InterfaceLogic(String, int, ToIntFunction)} is used. */
     public InterfaceLogic(String hostItemId) {
@@ -143,6 +144,14 @@ public class InterfaceLogic implements IGridTickable, IGridNodeListener, IAction
 
     public void setSaveListener(Runnable listener) {
         this.saveListener = listener;
+    }
+
+    /**
+     * Called first whenever a storage slot changed (stocking, returning, external access). Addition for the
+     * integration, which mirrors the storage slots into the block's real container; not part of AE2.
+     */
+    public void setStorageListener(Runnable listener) {
+        this.storageListener = listener;
     }
 
     private void markDirty() {
@@ -435,6 +444,9 @@ public class InterfaceLogic implements IGridTickable, IGridNodeListener, IAction
     }
 
     private void onStorageChanged() {
+        if (storageListener != null) {
+            storageListener.run();
+        }
         markDirty();
         updatePlan();
     }

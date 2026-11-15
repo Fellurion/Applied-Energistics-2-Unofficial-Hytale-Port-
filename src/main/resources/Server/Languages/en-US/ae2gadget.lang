@@ -1,0 +1,67 @@
+# Applied Energistics 2 – powered tools (Entropy Manipulator, Charged Staff, Matter Cannon, Color Applicator), Tiny TNT
+# File ae2gadget.lang -> key prefix 'ae2gadget.'
+
+noPower = Not enough energy – this needs more than {needed} AE. Charge the tool in a Charger.
+
+tnt.hint = Press [{key}] to ignite
+
+singularity.frequency = Entangled – frequency {frequency}
+singularity.unlinked = Not entangled
+
+cannon.tooltip.empty = No ammunition. Sneak and right click to load ammunition from your inventory.
+cannon.tooltip.ammo = Ammunition: {count} × {item}
+cannon.loaded = Loaded {count} × {item} ({total} in the cannon)
+cannon.unloaded = Unloaded {count} × {item}
+cannon.full = The Matter Cannon is full.
+cannon.noAmmoInInventory = No ammunition in your inventory. The cannon fires matter balls, metal bars, charcoal and paint balls.
+cannon.noAmmo = Ammo depleted. Sneak and right click to load ammunition from your inventory.
+
+applicator.tooltip.empty = No paint. Sneak and right click into the air to load paint balls from your inventory.
+applicator.tooltip.selected = Selected: {color}
+applicator.tooltip.entry = {count} × {color}
+applicator.cleaning = Cleaning
+applicator.empty = The Color Applicator holds no paint. Sneak and right click into the air to load paint balls from your inventory.
+applicator.selected = Selected: {color} ({count} left)
+applicator.loaded = Loaded {count} paint ({total} in the applicator)
+applicator.full = The Color Applicator is full.
+applicator.noPaintInInventory = No paint in your inventory. The applicator takes paint balls, and snow for cleaning.
+
+cmd.desc = Test commands for the powered tools and Tiny TNT
+cmd.arg.what = tnt or cannon
+cmd.arg.radius = Radius in blocks
+cmd.arg.mode = heat or cool
+cmd.arg.color = Colour, for example red, light_blue or fluix
+cmd.arg.direction = east, west, up, down, south or north
+cmd.ignite.desc = Ignite the Tiny TNT at a position
+cmd.ignite.none = [AE2] No Tiny TNT at this position
+cmd.ignite.done = [AE2] Tiny TNT ignited, fuse {ticks} ticks
+cmd.ignite.already = [AE2] Tiny TNT is already burning, fuse {ticks} ticks
+cmd.blockdamage.desc = Switch block damage of Tiny TNT or the Matter Cannon for this server run
+cmd.blockdamage.set = [AE2] Block damage: Tiny TNT {tnt}, Matter Cannon {cannon}
+cmd.drop.desc = Drop an item on the ground
+cmd.drop.unknown = [AE2] Unknown item {item}
+cmd.drop.done = [AE2] Dropped {amount} × {item}
+cmd.items.desc = List the items lying on the ground around a position
+cmd.items.list = [AE2] {count} items on the ground: {items}
+cmd.charge.desc = Show the charge of the item in a block slot
+cmd.charge.empty = [AE2] No item in this slot
+cmd.charge.value = [AE2] {item}: {stored} / {max} AE
+cmd.entropy.desc = Heat or cool a block like the Entropy Manipulator
+cmd.entropy.mode = [AE2] Mode must be heat or cool
+cmd.entropy.result = [AE2] Entropy {outcome}: {before} -> {after} (above: {above})
+cmd.recolor.desc = Recolour a cable like the Color Applicator
+cmd.recolor.color = [AE2] Unknown colour
+cmd.recolor.done = [AE2] Recoloured: {before} -> {after}
+cmd.recolor.none = [AE2] Nothing recoloured: {before} -> {after}
+cmd.shoot.desc = Fire a Matter Cannon shot from a position
+cmd.shoot.direction = [AE2] Direction must be east, west, up, down, south or north
+cmd.shoot.noAmmo = [AE2] {item} is no Matter Cannon ammunition
+cmd.shoot.result = [AE2] Shot with penetration {penetration}: {destroyed} blocks destroyed
+cmd.fill.desc = Fully charge the tool in your hand
+cmd.fill.none = [AE2] The item in your hand has no battery
+cmd.fill.done = [AE2] Charged to {stored} AE
+cmd.arg.fluid = Fluid id, none to remove it, or get to only show the cell
+cmd.fluid.desc = Set or remove the fluid of a cell
+cmd.fluid.now = [AE2] Cell is now {cell}
+cmd.signal.desc = Emit an AE2 signal at a position
+cmd.signal.set = [AE2] Signal {state}

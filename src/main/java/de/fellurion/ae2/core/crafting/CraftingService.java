@@ -15,6 +15,7 @@ import de.fellurion.ae2.core.grid.IGridService;
 import de.fellurion.ae2.core.stacks.AEKey;
 import de.fellurion.ae2.core.stacks.GenericStack;
 import de.fellurion.ae2.core.storage.IActionSource;
+import de.fellurion.ae2.core.storage.IStackWatcher;
 import de.fellurion.ae2.core.storage.IStorageMounts;
 import de.fellurion.ae2.core.storage.IStorageProvider;
 import de.fellurion.ae2.core.storage.MEStorage;
@@ -25,6 +26,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,8 +46,8 @@ import java.util.function.Predicate;
  * Typical use from a terminal: {@code plan = service.calculate(src, key, amount, strategy)}; show
  * {@code plan.missingItems()/bytes()}; then {@code service.submitJob(plan, null, null, true, src)}.
  * <p>
- * Deviations: calculations run synchronously; crafting watchers (level emitter "craftable" notifications) are not
- * ported; CPU clusters are formed from adjacent crafting nodes of the grid (filled cuboid, each extent ≤ 17 blocks,
+ * Deviations: calculations run synchronously; crafting watchers ({@link ICraftingWatcherNode}) are only told about
+ * request changes, not about craftable changes; CPU clusters are formed from adjacent crafting nodes of the grid (filled cuboid, each extent ≤ 17 blocks,
  * at least one storage block) when crafting nodes are added/removed, evaluated at the end of the tick.
  */
 public final class CraftingService implements IGridService {
@@ -63,6 +65,7 @@ public final class CraftingService implements IGridService {
     private final List<CraftingCpuCluster> craftingCPUClusters = new ArrayList<>();
     private final Map<UUID, CraftingLink.Nexus> craftingLinks = new HashMap<>();
     private final Set<AEKey> currentlyCrafting = new HashSet<>();
+    private final Map<GridNode, CraftingWatcher> craftingWatchers = new IdentityHashMap<>();
     private boolean updateList = false;
 
     public CraftingService(Grid grid) {
@@ -92,10 +95,20 @@ public final class CraftingService implements IGridService {
         if (node.getOwner() instanceof CraftingUnitLogic) {
             updateList = true;
         }
+        var watchingNode = node.getService(ICraftingWatcherNode.class);
+        if (watchingNode != null) {
+            var watcher = new CraftingWatcher(watchingNode);
+            craftingWatchers.put(node, watcher);
+            watchingNode.updateCraftingWatcher(watcher);
+        }
     }
 
     @Override
     public void removeNode(GridNode node) {
+        var craftingWatcher = craftingWatchers.remove(node);
+        if (craftingWatcher != null) {
+            craftingWatcher.reset();
+        }
         var requester = node.getService(ICraftingRequester.class);
         if (requester != null) {
             for (var nexus : craftingLinks.values()) {
@@ -127,9 +140,74 @@ public final class CraftingService implements IGridService {
                 cpu.craftingLogic.tickCraftingLogic(grid.getEnergyService(), this);
             }
         }
+        boolean watched = !craftingWatchers.isEmpty();
+        Set<AEKey> previouslyCrafting = !watched || currentlyCrafting.isEmpty() ? Set.of()
+                : new HashSet<>(currentlyCrafting);
         currentlyCrafting.clear();
         for (var cpu : craftingCPUClusters) {
             cpu.craftingLogic.getAllWaitingFor(currentlyCrafting);
+        }
+
+        // Notify watchers about keys whose crafting started or ended, but only if there can be changes and there
+        // are watchers
+        if (watched && !(previouslyCrafting.isEmpty() && currentlyCrafting.isEmpty())
+                && !previouslyCrafting.equals(currentlyCrafting)) {
+            var changed = new HashSet<AEKey>();
+            for (var what : previouslyCrafting) {
+                if (!currentlyCrafting.contains(what)) {
+                    changed.add(what);
+                }
+            }
+            for (var what : currentlyCrafting) {
+                if (!previouslyCrafting.contains(what)) {
+                    changed.add(what);
+                }
+            }
+            for (var watcher : List.copyOf(craftingWatchers.values())) {
+                for (var what : changed) {
+                    if (watcher.watchAll || watcher.keys.contains(what)) {
+                        watcher.host.onRequestChange(what);
+                    }
+                }
+            }
+        }
+    }
+
+    /** Port of {@code appeng.me.helpers.StackWatcher} for {@link ICraftingWatcherNode}s. */
+    private final class CraftingWatcher implements IStackWatcher {
+        final ICraftingWatcherNode host;
+        final Set<AEKey> keys = new HashSet<>();
+        boolean watchAll;
+
+        CraftingWatcher(ICraftingWatcherNode host) {
+            this.host = host;
+        }
+
+        @Override
+        public void setWatchAll(boolean watchAll) {
+            this.watchAll = watchAll;
+        }
+
+        @Override
+        public boolean add(AEKey key) {
+            return keys.add(key);
+        }
+
+        @Override
+        public boolean remove(AEKey key) {
+            return keys.remove(key);
+        }
+
+        @Override
+        public void reset() {
+            keys.clear();
+            watchAll = false;
+        }
+
+        @Override
+        public void destroy() {
+            reset();
+            craftingWatchers.values().remove(this);
         }
     }
 

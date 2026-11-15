@@ -1,0 +1,68 @@
+# Applied Energistics 2 – das Buch „AE2 Basics“
+# Datei ae2guide.lang -> Schlüsselpräfix 'ae2guide.'
+
+item.name = AE2 Basics
+item.description = Ein Handbuch für den Einstieg in Applied Energistics 2: alle Schritte und alle Rezepte der Gravurmaschine, mit Bildern. Mit Rechts- oder Linksklick aufschlagen.
+
+book.title = AE2 Basics
+book.subtitle = Deine ersten Schritte mit Applied Energistics 2
+book.intro = Tausende Items in wenigen Blöcken lagern und die Basis selbst herstellen lassen. Dieses Buch führt dich von der ersten Werkbank bis zu deinem ersten ME-Netzwerk. Wähle rechts ein Kapitel oder blättere mit den Pfeilen unten.
+book.contents = Inhalt
+book.contentsButton = Inhalt
+
+workbench.title = Die Energistics-Werkbank
+workbench.text1 = Alle AE2-Rezepte stellst du an der Energistics-Werkbank her. Sie selbst entsteht an der normalen Werkbank, in der Kategorie Tüfteln.
+workbench.text2 = Du brauchst 8 Eisenbarren, 6 Kupferbarren, 4 weiße Kristalle und 4 Baumstämme. Stell sie an einen zentralen Platz – du kommst ständig zu ihr zurück.
+
+meteorite.title = Meteoriten
+meteorite.text1 = AE2 hat keine Erze. Certus-Quarz, Himmelsstein und die vier Pressen der Gravurmaschine stammen aus Meteoriten: Krater mit einem Körper aus Himmelsstein und einer kleinen Kammer in der Mitte. Lade einen Eisenbarren im Ladegerät auf, dann bekommst du einen Meteoritenkompass – er zeigt zum nächsten Meteoriten.
+meteorite.text2 = Bau den geheimnisvollen Würfel in der Mitte des Meteoriten ab: Er lässt alle vier Pressen fallen. Jede Presse brauchst du nur einmal – die Gravurmaschine behält sie und kann sie kopieren.
+meteorite.text3 = Meteoriten gibt es nur in Gelände, das nach der Installation des Mods entstanden ist. Für ältere Welten hat die Energistics-Werkbank Ersatzrezepte für die Pressen, Himmelsstein und Certus-Quarz.
+
+quartz.title = Certus-Quarz züchten
+quartz.text1 = Knospender Certus-Quarz aus einem Meteoriten lässt an allen freien Seiten Knospen wachsen: kleine, mittlere und große Knospen, dann einen Cluster. Bau den Cluster ab, dann bekommst du Certus-Quarzkristalle; kleinere Knospen geben nur Staub. Fehlerhafter, angeschlagener und beschädigter knospender Quarz nutzt sich beim Wachsen ab, makelloser hält ewig – bau ihn also nicht ab.
+quartz.text2 = Ein Wachstumsbeschleuniger mit Energie neben dem knospenden Quarz lässt ihn viel schneller wachsen. Certus-Quarzstaub kommt aus der Gravurmaschine und wird im Ofen zu Silizium geschmolzen.
+
+charger.title = Das Ladegerät
+charger.text1 = Leg einen Certus-Quarzkristall ins Ladegerät, dann wird daraus ein geladener Certus-Quarzkristall. Das Ladegerät braucht Energie: Schließ es an ein ME-Netzwerk an oder setz eine Kurbel darauf und dreh sie von Hand.
+charger.text2 = Das Ladegerät lädt auch die Akkus der drahtlosen Konsole, der tragbaren Zellen und der Werkzeuge mit Energie.
+
+fluix.title = Fluix-Kristalle
+fluix.text1 = Wirf einen geladenen Certus-Quarzkristall, einen roten und einen weißen Kristall zusammen ins Wasser. Nach ein paar Sekunden werden daraus zwei Fluix-Kristalle – das Material für Kabel und die meisten ME-Geräte.
+fluix.text2 = Genauso werden ein geladener Certus-Quarzkristall und Certus-Quarzstaub zu zwei neuen Certus-Kristallen, und ein Quarzblock wird wieder zu knospendem Quarz.
+
+inscriber.title = Die Gravurmaschine
+inscriber.text1 = Die Gravurmaschine hat drei Plätze: oben eine Presse, in der Mitte das Material und unten eine Presse oder ein zweites Material. Energie bekommt sie von einer Kurbel oder aus dem Netzwerk. Geduckt benutzen baut Beschleunigungskarten ein.
+inscriber.text2 = Prozessoren entstehen in drei Schritten: einen Schaltkreis mit seiner Presse drucken, mit der Siliziumpresse gedrucktes Silizium herstellen, dann beides mit einem roten Kristall in der Mitte zusammenpressen.
+inscriber.text3 = Pressen bleiben in der Gravurmaschine und werden nie verbraucht. Mit einer Presse oben und einem Eisenbarren in der Mitte macht sie eine Kopie der Presse.
+inscriber.text4 = Rechtsklick mit einem Schneidmesser schneidet einen Namensdruck. Oben oder unten in der Gravurmaschine gibt er dem Item in der Mitte einen neuen Namen.
+inscriber.top = Oben: {item}
+inscriber.middle = Mitte: {item}
+inscriber.bottom = Unten: {item}
+inscriber.kept = Die Presse bleibt in der Maschine
+inscriber.consumed = Alles wird verbraucht
+inscriber.noPress = Keine Presse nötig
+inscriber.group.circuits = Gedruckte Schaltkreise
+inscriber.group.processors = Prozessoren
+inscriber.group.dusts = Staub
+inscriber.group.presses = Pressen kopieren
+inscriber.group.other = Weitere Rezepte
+inscriber.group.name = Items umbenennen
+
+power.title = Energie
+power.text1 = ME-Netzwerke laufen mit AE-Energie. Die Vibrationskammer verbrennt Brennstoff wie Holz oder Holzkohle, der Kristallresonanzgenerator erzeugt ohne Brennstoff ständig ein wenig Energie.
+power.text2 = Energiezellen speichern Energie für dein Netzwerk. Schau einen beliebigen AE2-Block an, dann siehst du Energie, Kanäle und Verbrauch seines Netzwerks.
+
+network.title = Dein erstes ME-Netzwerk
+network.text1 = Stell ein ME-Laufwerk auf, steck eine Speicherzelle hinein und verbinde eine ME-Konsole mit Kabeln. Kabel verbinden sich von selbst mit ihren Nachbarn; farbige Kabel nur mit derselben Farbe oder mit Fluix.
+network.text2 = Öffne die Konsole, um Items einzulagern und herauszunehmen. Alles in den Zellen des Laufwerks erscheint dort, und der Tooltip einer Zelle zeigt, wie voll sie ist.
+network.text3 = Ohne Controller hat ein Netzwerk 8 Kanäle. Für mehr Geräte baust du einen ME-Controller; normale Kabel tragen 8 Kanäle, dichte Kabel 32.
+
+autocrafting.title = Automatische Fertigung
+autocrafting.text1 = Die Schablonen-Kodierkonsole macht aus einem Rezept und einer leeren Schablone eine kodierte Schablone. Steck die Schablone in einen Schablonen-Provider neben einem Molekularassembler oder einer Maschine.
+autocrafting.text2 = Bau eine Fertigungs-CPU aus Fertigungseinheiten und Fertigungsspeicher. Dann kannst du in der Konsole jedes Item mit Schablone anfordern, und das Netzwerk stellt es für dich her.
+
+tips.title = Tipps
+tips.text1 = Benutz eine Maschine, einen Bus oder einen Schablonen-Provider geduckt, um Upgrade-Karten einzubauen und Einstellungen zu ändern.
+tips.text2 = Der Schraubenschlüssel dreht Geräte und baut sie geduckt ab, die Netzwerksonde zeigt den Zustand eines Netzwerks, und die Speicherkarte kopiert Einstellungen von einem Gerät aufs andere.
+tips.text3 = Jedes AE2-Item erklärt in seiner Beschreibung, was es tut. Mit /ae2 language en stellst du AE2 auf Englisch um.

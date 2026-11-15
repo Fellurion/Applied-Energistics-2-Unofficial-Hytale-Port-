@@ -1,0 +1,145 @@
+$C = "../../Common.ui";
+
+// Priorität eines Speichers (AE2: PriorityScreen) – für ME-Laufwerk und ME-Truhe: beim Einlagern kommt der
+// Speicher mit der höchsten Priorität zuerst, beim Entnehmen der mit der niedrigsten.
+// Knöpfe und Zahlenfeld wie im Prioritätsblock von DeviceConfig.ui; Texte und Werte setzt PriorityPage.java.
+// Nur bei der ME-Truhe mit Zelle sichtbar: „Zelle entnehmen“ (#TakeCell).
+
+@NameStyle = (FontSize: 18, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+@ValueStyle = (FontSize: 15, TextColor: #d3d6db, RenderBold: true, VerticalAlignment: Center);
+@HintStyle = (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Start, Wrap: true);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 560, Height: 444);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Priority";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Top;
+    Padding: (Horizontal: 16, Vertical: 10);
+
+    Group {
+      Anchor: (Height: 66);
+      LayoutMode: Left;
+
+      Group {
+        Anchor: (Width: 66, Height: 66);
+        Background: #1a2530;
+        Padding: 2;
+
+        ItemSlot #Icon {
+          Anchor: (Full: 0);
+          ShowQualityBackground: true;
+          ShowQuantity: false;
+        }
+      }
+
+      Label #Name {
+        Text: "";
+        FlexWeight: 1;
+        Padding: (Left: 14);
+        Style: @NameStyle;
+      }
+    }
+
+    Group { Anchor: (Height: 10); }
+
+    Label #PriorityLabel { Text: ""; Anchor: (Height: 28); Style: @ValueStyle; }
+
+    Group {
+      Anchor: (Height: 36);
+      LayoutMode: Left;
+
+      $C.@SmallSecondaryTextButton #PrioM100 {
+        @Anchor = (Width: 80);
+        @Text = "-100";
+      }
+
+      Group { Anchor: (Width: 4); }
+
+      $C.@SmallSecondaryTextButton #PrioM10 {
+        @Anchor = (Width: 80);
+        @Text = "-10";
+      }
+
+      Group { Anchor: (Width: 4); }
+
+      $C.@SmallSecondaryTextButton #PrioM1 {
+        @Anchor = (Width: 80);
+        @Text = "-1";
+      }
+
+      Group { Anchor: (Width: 14); }
+
+      $C.@SmallSecondaryTextButton #PrioP1 {
+        @Anchor = (Width: 80);
+        @Text = "+1";
+      }
+
+      Group { Anchor: (Width: 4); }
+
+      $C.@SmallSecondaryTextButton #PrioP10 {
+        @Anchor = (Width: 80);
+        @Text = "+10";
+      }
+
+      Group { Anchor: (Width: 4); }
+
+      $C.@SmallSecondaryTextButton #PrioP100 {
+        @Anchor = (Width: 80);
+        @Text = "+100";
+      }
+    }
+
+    Group { Anchor: (Height: 8); }
+
+    Group {
+      Anchor: (Height: 40);
+      LayoutMode: Left;
+
+      $C.@NumberField #PrioValue {
+        @Anchor = (Width: 160);
+        Format: (
+          MaxDecimalPlaces: 0,
+          Step: 1
+        );
+        Value: 0;
+      }
+
+      Group { Anchor: (Width: 8); }
+
+      $C.@SmallSecondaryTextButton #PrioSet {
+        @Anchor = (Width: 140, Top: 3);
+        @Text = "";
+      }
+    }
+
+    Group { Anchor: (Height: 8); }
+
+    Group {
+      Anchor: (Height: 36);
+      LayoutMode: Left;
+
+      $C.@SmallSecondaryTextButton #TakeCell {
+        @Anchor = (Width: 240);
+        @Text = "";
+        Visible: false;
+      }
+    }
+
+    Group { Anchor: (Height: 10); }
+
+    Label #Hint { Text: ""; FlexWeight: 1; Style: @HintStyle; }
+  }
+}
+
+$C.@BackButton {}

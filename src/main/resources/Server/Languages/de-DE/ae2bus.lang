@@ -1,0 +1,126 @@
+# Applied Energistics 2 – Konfigurationsseite der Geräte (Busse, ME-Interface, Maschinen …), Priorität
+# Datei ae2bus.lang -> Schlüsselpräfix 'ae2bus.'
+
+info.target = Verbunden mit: {block}
+info.noTarget = Vor diesem Bus steht kein Inventar.
+info.offline = Offline – kein Strom oder kein Kanal
+info.online = Online
+info.exposesStock = Storage-Busse davor sehen diesen Vorrat.
+info.exposesNetwork = Storage-Busse davor sehen das ganze Netz.
+info.condenser = Gespeicherte Materie: {stored} / {capacity} · {required} je Item
+info.condenserTrash = Gespeicherte Materie: {stored} / {capacity} · Items werden vernichtet
+info.chamber = bis zu {rate} AE/t · Brennstoffausbeute {efficiency} %
+info.locked = Herstellung gesperrt
+info.lockedResult = Herstellung gesperrt – wartet auf {amount}× {item}
+
+filter.import = Filter ({used}/{slots}) – leer: importiert alles
+filter.importInverted = Sperrliste ({used}/{slots}) – importiert alles andere
+filter.export = Zu exportierende Items ({used}/{slots}) – leer: exportiert nichts
+filter.storage = Filter ({used}/{slots}) – leer: nimmt alles an
+filter.storageInverted = Sperrliste ({used}/{slots}) – nimmt alles andere an
+filter.interface = Bereitzuhaltender Vorrat ({used}/{slots})
+filter.clear = Filter leeren
+filter.clearStock = Vorratsliste leeren
+filter.partition = Filter aus Inhalt
+
+upgrades.header = Upgrade-Karten ({count}/{max})
+upgrades.fits = Passend: {cards}
+upgrades.card = {card} ×{max}
+
+settings.header = Einstellungen
+settings.none = Weitere Einstellungen erscheinen, sobald die passende Upgrade-Karte eingebaut ist.
+setting.redstone.ignore = Signal: immer aktiv
+setting.redstone.low_signal = Signal: aktiv ohne Signal
+setting.redstone.high_signal = Signal: aktiv mit Signal
+setting.redstone.signal_pulse = Signal: einmal je Impuls
+setting.scheduling.default = Reihenfolge: von vorn
+setting.scheduling.roundrobin = Reihenfolge: reihum
+setting.scheduling.random = Reihenfolge: zufällig
+setting.craftOnly.yes = Nur herstellen: ja
+setting.craftOnly.no = Nur herstellen: nein
+setting.access.read_write = Zugriff: einlagern und entnehmen
+setting.access.read = Zugriff: nur entnehmen
+setting.access.write = Zugriff: nur einlagern
+setting.storageFilter.extractable_only = Zeigt: nur Entnehmbares
+setting.storageFilter.none = Zeigt: alles
+setting.filterOnExtract.yes = Beim Entnehmen filtern: ja
+setting.filterOnExtract.no = Beim Entnehmen filtern: nein
+setting.separateSides.yes = Automation: Seiten getrennt
+setting.separateSides.no = Automation: jede Seite
+setting.autoExport.yes = Auto-Export: an
+setting.autoExport.no = Auto-Export: aus
+setting.inputCapacity = Eingabeplätze fassen: {count}
+setting.condenser.trash = Ausgabe: Items vernichten
+setting.condenser.matter_balls = Ausgabe: Materiebälle
+setting.condenser.singularity = Ausgabe: Singularitäten
+setting.blocking.yes = Blockiermodus: an
+setting.blocking.no = Blockiermodus: aus
+setting.lock.none = Sperre: nie
+setting.lock.lock_until_pulse = Sperre: bis Signalimpuls
+setting.lock.lock_while_high = Sperre: bei Signal
+setting.lock.lock_while_low = Sperre: ohne Signal
+setting.lock.lock_until_result = Sperre: bis Ergebnis zurück
+setting.accessTerminal.yes = Schablonen-Konsole: sichtbar
+setting.accessTerminal.no = Schablonen-Konsole: verborgen
+
+priority.title = Priorität
+priority.value = Priorität: {value}
+priority.set = Setzen
+priority.takeCell = Zelle entnehmen
+priority.hint = Eingelagert wird zuerst in den Speicher mit der höchsten Priorität, entnommen zuerst aus dem mit der niedrigsten. Diese Seite öffnet sich, wenn du ein ME-Laufwerk oder eine ME-Truhe geduckt benutzt.
+
+amount.none = Klicke einen belegten Vorratsplatz an, um seine Menge zu ändern.
+amount.slot = Platz {slot}: {amount}× {item}
+storage.header = Gelagerte Items – Klick nimmt einen Stapel
+
+inventory.header = Dein Inventar
+selected.item = Gewählt: {item}
+selected.held = In der Hand: {item}
+selected.none = Wähle oben ein Item oder halte eines in der Hand.
+
+tip.filter = Klick entfernt das Item aus dem Filter
+tip.stock = Klick: Menge ändern · Rechtsklick: entfernen
+tip.card = Klick nimmt die Karte heraus
+tip.storage = Klick nimmt diesen Stapel
+
+msg.set = {item} hinzugefügt.
+msg.duplicate = {item} steht schon im Filter.
+msg.full = Kein freier Platz. Jede Kapazitätskarte bringt neun weitere.
+msg.fullStock = Alle neun Plätze sind belegt.
+msg.fullPlain = Kein freier Platz.
+msg.nothing = Wähle zuerst ein Item.
+msg.cleared = Platz geleert.
+msg.clearedAll = Alle Plätze geleert.
+msg.partitioned = Filter auf {count} Item-Arten aus dem verbundenen Inventar gesetzt.
+msg.partitionEmpty = Das verbundene Inventar ist leer – Filter geleert.
+msg.noTarget = Es ist kein Inventar verbunden.
+msg.cardInserted = {card} eingebaut.
+msg.cardRemoved = {card} herausgenommen.
+msg.cardHidden = {card} herausgenommen – {count} Filterplätze jenseits der restlichen Kapazität wurden geleert.
+msg.notACard = Wähle zuerst eine Upgrade-Karte.
+msg.cardUnsupported = {card} passt nicht in dieses Gerät.
+msg.cardMax = Mehr als {max}× {card} passen nicht hinein.
+msg.cardNoSlot = Alle Kartenplätze sind belegt.
+msg.inventoryFull = Dein Inventar ist voll.
+msg.taken = {amount}× {item} genommen.
+msg.stored = {amount}× {item} hineingelegt.
+msg.slotRejects = Dieser Platz nimmt das Item nicht an.
+msg.failed = Das hat nicht geklappt – nichts wurde verändert.
+
+hint.bus = Klicke oben ein Item an, um es zu wählen, dann einen Filterplatz oder Kartenplatz. Rechtsklick fügt es direkt hinzu. Klick auf einen belegten Platz leert ihn bzw. nimmt die Karte heraus.
+hint.interface = Klicke oben ein Item an, um es zu wählen, dann einen leeren Vorratsplatz, Kartenplatz oder Lagerplatz. Rechtsklick fügt es direkt hinzu. Gelagerte Items, die nicht auf der Vorratsliste stehen, gehen zurück ins Netz.
+hint.cards = Klicke oben eine Upgrade-Karte an, um sie zu wählen, dann einen Kartenplatz. Rechtsklick baut sie direkt ein. Klick auf eine eingebaute Karte nimmt sie heraus.
+hint.settings = Ein Klick auf eine Einstellung schaltet sie weiter.
+hint.lockSignal = Das Signal kommt von einer AE2-Signalquelle direkt neben diesem Block, zum Beispiel einem Level Emitter.
+hint.inscriber = Automation an den Seiten: Mit getrennten Seiten erreichen Busse die Platten nur von oben und unten. Die Größe der Eingabeplätze gilt für Automation, nicht im Slot-Fenster.
+
+hud.crouch = Ducken + Benutzen: Upgrades und Einstellungen
+hud.crouchSettings = Ducken + Benutzen: Einstellungen
+
+# /ae2 config (Admin): was ein Gerät der Konfigurationsseite anbietet
+cmd.desc = Zeigt oder ändert die Konfiguration eines AE2-Geräts (zum Testen)
+cmd.op = show, setting, card, slot, priority oder number
+cmd.value = Wert für die Aktion, - für keinen
+cmd.none = [AE2] Kein konfigurierbares Gerät bei {x} {y} {z}
+cmd.failed = [AE2] Bei diesem Gerät nicht möglich
+cmd.state = [AE2] {block}: {info} · Filter {slots} · Karten {cards} · Einstellungen: {settings} · Priorität {priority} · Zahl {number} · geduckt öffnen {crouch}

@@ -4,6 +4,7 @@
  */
 package de.fellurion.ae2.hytale.device;
 
+import de.fellurion.ae2.core.grid.NodeType;
 import de.fellurion.ae2.hytale.WorldNetworks;
 
 import javax.annotation.Nullable;
@@ -17,6 +18,16 @@ public interface Device {
     /** Owner-Objekt für {@code MEWorld.addNode} (implementiert Kern-Schnittstellen), oder null. */
     @Nullable
     default Object owner() {
+        return null;
+    }
+
+    /**
+     * Knotentyp für {@code MEWorld.addNode}, oder null für den Standard der Block-Art ({@code NodeType.forBlock}).
+     * Für Geräte, deren Knoten von ihrem Zustand abhängt (P2P-Tunnel je Tunnelart) oder die zwei Knoten haben
+     * (Hauptknoten hinten, zweiter Knoten vorn: ME-P2P-Tunnel, Quartz Fiber, Toggle Bus).
+     */
+    @Nullable
+    default NodeType nodeType(WorldNetworks nets, WorldNetworks.Node node) {
         return null;
     }
 
@@ -34,6 +45,14 @@ public interface Device {
 
     /** Block abgebaut ({@code broken}) oder Chunk entladen. */
     default void onRemoved(WorldNetworks nets, WorldNetworks.Node node, boolean broken) {
+    }
+
+    /**
+     * Der Block wurde gedreht (Schraubenschlüssel); {@code node.facing()} zeigt schon in die neue Richtung, die
+     * Verbindungen im Kern sind nachgezogen. Geräte, die sich etwas Richtungsabhängiges merken (das Ziel vor einem
+     * Bus), werfen es hier weg; wer {@code node.facing()} bei jedem Gebrauch liest, braucht nichts zu tun.
+     */
+    default void onRotated(WorldNetworks nets, WorldNetworks.Node node) {
     }
 
     /** Gewünschter Block-State, oder null für die Standardregel (Online/default). */

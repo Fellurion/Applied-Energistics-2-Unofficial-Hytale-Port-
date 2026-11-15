@@ -1,0 +1,124 @@
+$C = "../../Common.ui";
+
+// Pattern-Zugriffsterminal (AE2: PatternAccessTermScreen): alle Pattern Provider des ME-Netzes mit ihren Feldern.
+//
+// Links die Provider (je Zeile PatternProviderRow.ui, PatternAccessPage.java hängt sie an), rechts die kodierten
+// Patterns aus dem Inventar des Spielers. Klick auf ein Pattern in einem Provider nimmt es ins Inventar; ein Klick
+// rechts wählt ein Pattern aus, das „Einlegen“ (oder ein Klick auf ein leeres Feld) in den Provider legt.
+// Die Felder zeigen, was ein Pattern herstellt; die Gitter sind reine Anzeige, alles rechnet der Server.
+//
+// Feldgröße 48 mit Abstand 2; ein Feld belegt damit 50 Punkte.
+
+@GridStyle = (
+  SlotSize: 48,
+  SlotIconSize: 40,
+  SlotSpacing: 2,
+  SlotBackground: "../../Common/BlockSelectorSlotBackground.png"
+);
+
+@InfoStyle = (FontSize: 14, TextColor: #96a9be, VerticalAlignment: Center);
+@HeaderStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+@EmptyStyle = (FontSize: 15, TextColor: #5a6a7a, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
+@TextStyle = (FontSize: 13, TextColor: #d3d6db, VerticalAlignment: Center, Wrap: true);
+@OkStyle = (FontSize: 13, TextColor: #9ec47a, VerticalAlignment: Center, Wrap: true);
+@ErrorStyle = (FontSize: 13, TextColor: #e0796b, VerticalAlignment: Center, Wrap: true);
+@HintStyle = (FontSize: 12, TextColor: #5a6a7a, VerticalAlignment: Start, Wrap: true);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 1020, Height: 680);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #PageTitle {
+        @Text = "Pattern Access Terminal";
+      }
+    }
+
+    $C.@HeaderSearch {}
+  }
+
+  #Content {
+    LayoutMode: Left;
+    Padding: (Horizontal: 10, Vertical: 8);
+
+    // Links: die Pattern Provider des Netzes
+    Group #LeftCol {
+      FlexWeight: 1;
+      LayoutMode: Top;
+
+      Label #Summary { Text: ""; Anchor: (Height: 26); Style: @InfoStyle; }
+
+      Label #Empty { Text: ""; Anchor: (Height: 80); Style: @EmptyStyle; Visible: false; }
+
+      Group #ProviderContainer {
+        FlexWeight: 1;
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
+
+        Group #Providers {
+          LayoutMode: Top;
+        }
+      }
+    }
+
+    Group { Anchor: (Width: 12); }
+
+    // Rechts: kodierte Patterns im Inventar des Spielers, Auswahl und Meldungen
+    Group #RightCol {
+      Anchor: (Width: 310);
+      LayoutMode: Top;
+
+      Label #InvHeader { Text: ""; Anchor: (Height: 26); Style: @HeaderStyle; }
+
+      ItemGrid #InvPatterns {
+        Anchor: (Width: 300, Height: 300);
+        SlotsPerRow: 6;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+
+      Group { Anchor: (Height: 8); }
+      Group { Anchor: (Height: 1); Background: #2b3a4a; }
+      Group { Anchor: (Height: 8); }
+
+      Group {
+        Anchor: (Height: 50);
+        LayoutMode: Left;
+
+        ItemGrid #SelectedIcon {
+          Anchor: (Width: 50, Height: 50);
+          SlotsPerRow: 1;
+          AreItemsDraggable: false;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: true;
+          Style: @GridStyle;
+        }
+
+        Group { Anchor: (Width: 8); }
+
+        Label #SelectedText { Text: ""; FlexWeight: 1; Style: @TextStyle; }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      // Meldung der letzten Aktion: Erfolg (#Status) oder Fehler (#StatusError), nie beide
+      Group {
+        Anchor: (Height: 44);
+
+        Label #Status { Text: ""; Anchor: (Full: 0); Style: @OkStyle; }
+        Label #StatusError { Text: ""; Anchor: (Full: 0); Style: @ErrorStyle; Visible: false; }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Label #Hint { Text: ""; FlexWeight: 1; Style: @HintStyle; }
+    }
+  }
+}
+
+$C.@BackButton {}

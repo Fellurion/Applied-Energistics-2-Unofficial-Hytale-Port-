@@ -33,6 +33,8 @@ import de.fellurion.ae2.hytale.device.CraftingDevices;
 import de.fellurion.ae2.hytale.device.Device;
 import de.fellurion.ae2.hytale.device.GlassDevice;
 import de.fellurion.ae2.hytale.hud.LookInfo.Span;
+import de.fellurion.ae2.hytale.ui.ConfigHost;
+import de.fellurion.ae2.hytale.ui.TerminalTexts;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -68,6 +70,18 @@ final class BuiltinProviders {
 
     static void generic(HudContext ctx, WorldNetworks.Node node, LookInfo.Builder out) {
         status(ctx, node, out);
+        crouchHint(ctx, node, out);
+    }
+
+    /**
+     * Geräte, deren Benutzen ihr Slot-Fenster öffnet und die ihre Karten und Einstellungen geduckt zeigen
+     * ({@link ConfigHost#opensOnCrouch}): sagt das als letzte Zeile – sofern noch eine frei ist.
+     */
+    static void crouchHint(HudContext ctx, WorldNetworks.Node node, LookInfo.Builder out) {
+        if (node.device() instanceof ConfigHost host && host.opensOnCrouch()) {
+            out.line(muted(TerminalTexts.tr(ctx.locale(), host.upgradeCards() != null ? "ae2bus.hud.crouch"
+                    : "ae2bus.hud.crouchSettings")));
+        }
     }
 
     /** Zustandszeile für Netzblöcke; ohne Netzknoten (noch nicht angelegt / kein Netzblock) keine. */
@@ -333,6 +347,7 @@ final class BuiltinProviders {
                 out.line(muted(ctx.tr("machine.noFuel")));
             }
         }
+        crouchHint(ctx, node, out);
     }
 
     /** Molecular Assembler: Fortschritt des aktuellen Rezepts. */
@@ -349,6 +364,7 @@ final class BuiltinProviders {
         } else {
             out.line(muted(ctx.tr("machine.idle")));
         }
+        crouchHint(ctx, node, out);
     }
 
     /** Pattern Provider: Anzahl Muster, ob er gerade Zutaten ausliefert. */
@@ -363,6 +379,7 @@ final class BuiltinProviders {
         if (l.isBusy()) {
             out.line(value(ctx.tr("pattern.busy"), HudColors.INFO));
         }
+        crouchHint(ctx, node, out);
     }
 
     // ------------------------------------------------------------------ Crafting-CPU

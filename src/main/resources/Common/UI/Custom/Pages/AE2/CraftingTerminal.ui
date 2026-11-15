@@ -1,0 +1,407 @@
+$C = "../../Common.ui";
+
+// ME-Crafting-Terminal (AE2) als eigene Seite (ohne FTCore): links oben der Inhalt des ME-Netzes wie im ME-Terminal
+// (Terminal.ui, hier 4 statt 7 Zeilen), darunter das Herstellen, rechts das Inventar.
+//
+// Hytale kennt kein Rasterhandwerk; statt AE2s 3×3-Feld wählt der Spieler ein Rezept (#AE2CraftGrid, suchbar) und
+// stellt es mit „×1 / ×10 / Stapel / Max“ her. Die Zutaten kommen aus dem ME-Netz, was dort fehlt aus dem Inventar.
+// #AE2CraftInputs zeigt die Zutaten des gewählten Rezepts, darüber je Zutat „vorhanden/benötigt“
+// (#AE2CraftHave* weiß = reicht, #AE2CraftMiss* rot = fehlt; CraftingPanel.java schaltet je Zutat eines sichtbar).
+//
+// Feldgröße 48 mit Abstand 2; ein Feld belegt damit 50 Punkte.
+
+@GridStyle = (
+  SlotSize: 48,
+  SlotIconSize: 40,
+  SlotSpacing: 2,
+  SlotBackground: "../../Common/BlockSelectorSlotBackground.png"
+);
+
+@StatusStyle = (FontSize: 14, TextColor: #7caacc, VerticalAlignment: Center);
+@InfoStyle = (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center);
+@HeaderStyle = (FontSize: 14, TextColor: #96a9be, RenderBold: true, VerticalAlignment: Center);
+@EmptyStyle = (FontSize: 15, TextColor: #5a6a7a, HorizontalAlignment: Center, VerticalAlignment: Center, Wrap: true);
+@PageStyle = (FontSize: 14, TextColor: #96a9be, HorizontalAlignment: Center, VerticalAlignment: Center);
+@CraftInfoStyle = (FontSize: 13, TextColor: #96a9be, VerticalAlignment: Center, Wrap: true);
+@CraftErrorStyle = (FontSize: 13, TextColor: #e0796b, VerticalAlignment: Center, Wrap: true);
+@HaveStyle = (FontSize: 11, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: End, VerticalAlignment: End);
+@MissStyle = (FontSize: 11, TextColor: #ff6b5e, RenderBold: true, HorizontalAlignment: End, VerticalAlignment: End);
+
+$C.@PageOverlay {}
+
+$C.@DecoratedContainer {
+  Anchor: (Width: 980, Height: 740);
+
+  #Title {
+    Group {
+      LayoutMode: Left;
+      $C.@Title #AE2Title {
+        @Text = "ME Crafting Terminal";
+      }
+    }
+  }
+
+  #Content {
+    LayoutMode: Left;
+
+    // Linke Spalte: das ME-Netz, darunter das Herstellen
+    Group #AE2NetColumn {
+      Anchor: (Width: 456);
+      LayoutMode: Top;
+
+      // Status links, rechts daneben „Zugriff“ (nur für Besitzer/Admins sichtbar, TerminalView)
+      Group {
+        Anchor: (Height: 44);
+        LayoutMode: Left;
+
+        Group {
+          FlexWeight: 1;
+          LayoutMode: Top;
+
+          Label #AE2Status { Text: ""; Anchor: (Height: 24); Style: @StatusStyle; }
+          Label #AE2Storage { Text: ""; Anchor: (Height: 20); Style: @InfoStyle; }
+        }
+
+        $C.@SmallSecondaryTextButton #AE2Access {
+          @Anchor = (Width: 150, Top: 6);
+          @Text = "";
+          Visible: false;
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Group {
+        Anchor: (Height: 44);
+        LayoutMode: Left;
+
+        $C.@TextField #AE2Search {
+          FlexWeight: 1;
+          PlaceholderText: %ae2ui.terminal.search;
+        }
+
+        Group { Anchor: (Width: 8); }
+
+        $C.@SecondaryTextButton #AE2Sort {
+          @Anchor = (Width: 170);
+          Text: "";
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      // Gitter und Mengen übereinander: die Gruppe hat kein LayoutMode
+      Group #AE2NetStack {
+        Anchor: (Width: 450, Height: 200);
+
+        ItemGrid #AE2NetGrid {
+          Anchor: (Left: 0, Top: 0, Width: 450, Height: 200);
+          SlotsPerRow: 9;
+          AreItemsDraggable: true;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: false;
+          Style: @GridStyle;
+        }
+
+        Group #AE2NetAmounts {
+          Anchor: (Left: 0, Top: 0, Width: 450, Height: 200);
+          LayoutMode: Top;
+          HitTestVisible: false;
+        }
+
+        Label #AE2Empty {
+          Text: "";
+          Anchor: (Left: 20, Top: 70, Width: 410, Height: 60);
+          Style: @EmptyStyle;
+          Visible: false;
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Group {
+        Anchor: (Height: 44);
+        LayoutMode: Left;
+
+        $C.@SecondaryTextButton #AE2Prev {
+          @Anchor = (Width: 44);
+          Text: "<";
+        }
+
+        Label #AE2PageLabel {
+          Text: "1 / 1";
+          Anchor: (Width: 80);
+          Style: @PageStyle;
+        }
+
+        $C.@SecondaryTextButton #AE2Next {
+          @Anchor = (Width: 44);
+          Text: ">";
+        }
+
+        Group { FlexWeight: 1; }
+
+        $C.@SecondaryTextButton #AE2CraftMode {
+          @Anchor = (Width: 190);
+          Text: "";
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+      Group { Anchor: (Height: 1); Background: #2b3a4a; }
+      Group { Anchor: (Height: 6); }
+
+      // Herstellen: Rezeptsuche, Rezepte, gewähltes Rezept mit Zutaten, Mengen
+      Group {
+        Anchor: (Height: 44);
+        LayoutMode: Left;
+
+        $C.@TextField #AE2CraftSearch {
+          FlexWeight: 1;
+          PlaceholderText: %ae2ui.craftterm.search;
+        }
+
+        Group { Anchor: (Width: 8); }
+
+        $C.@SecondaryTextButton #AE2CraftFilter {
+          @Anchor = (Width: 190);
+          Text: "";
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Group #AE2CraftGridBox {
+        Anchor: (Width: 450, Height: 100);
+
+        ItemGrid #AE2CraftGrid {
+          Anchor: (Left: 0, Top: 0, Width: 450, Height: 100);
+          SlotsPerRow: 9;
+          AreItemsDraggable: false;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: true;
+          Style: @GridStyle;
+        }
+
+        Label #AE2CraftEmpty {
+          Text: "";
+          Anchor: (Left: 20, Top: 20, Width: 410, Height: 60);
+          Style: @EmptyStyle;
+          Visible: false;
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Group {
+        Anchor: (Height: 50);
+        LayoutMode: Left;
+
+        ItemGrid #AE2CraftOutput {
+          Anchor: (Width: 50, Height: 50);
+          SlotsPerRow: 1;
+          AreItemsDraggable: false;
+          RenderEmptySlots: true;
+          DisplayItemQuantity: true;
+          Style: @GridStyle;
+        }
+
+        Label #AE2CraftArrow {
+          Text: "<";
+          Anchor: (Width: 24);
+          Style: (FontSize: 20, TextColor: #7caacc, HorizontalAlignment: Center, VerticalAlignment: Center);
+        }
+
+        // Zutaten und ihre Mengen übereinander: die Gruppe hat kein LayoutMode
+        Group #AE2CraftInputBox {
+          Anchor: (Width: 350, Height: 50);
+
+          ItemGrid #AE2CraftInputs {
+            Anchor: (Left: 0, Top: 0, Width: 350, Height: 50);
+            SlotsPerRow: 7;
+            AreItemsDraggable: false;
+            RenderEmptySlots: true;
+            DisplayItemQuantity: false;
+            Style: @GridStyle;
+          }
+
+          Group #AE2CraftAmounts {
+            Anchor: (Left: 0, Top: 0, Width: 350, Height: 50);
+            LayoutMode: Left;
+            HitTestVisible: false;
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave0 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss0 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave1 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss1 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave2 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss2 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave3 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss3 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave4 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss4 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave5 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss5 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+
+            Group {
+              Anchor: (Width: 50, Height: 50);
+              HitTestVisible: false;
+              Label #AE2CraftHave6 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @HaveStyle; }
+              Label #AE2CraftMiss6 { Text: ""; Anchor: (Left: 0, Top: 0, Width: 46, Height: 47); Style: @MissStyle; Visible: false; }
+            }
+          }
+        }
+      }
+
+      Group { Anchor: (Height: 6); }
+
+      Group {
+        Anchor: (Height: 44);
+        LayoutMode: Left;
+
+        $C.@SecondaryTextButton #AE2CraftPrev {
+          @Anchor = (Width: 44);
+          Text: "<";
+        }
+
+        Label #AE2CraftPageLabel {
+          Text: "1 / 1";
+          Anchor: (Width: 60);
+          Style: @PageStyle;
+        }
+
+        $C.@SecondaryTextButton #AE2CraftNext {
+          @Anchor = (Width: 44);
+          Text: ">";
+        }
+
+        Group { FlexWeight: 1; }
+
+        $C.@SmallSecondaryTextButton #AE2CraftX1 {
+          @Anchor = (Width: 60, Top: 6);
+          @Text = "";
+        }
+
+        Group { Anchor: (Width: 4); }
+
+        $C.@SmallSecondaryTextButton #AE2CraftX10 {
+          @Anchor = (Width: 64, Top: 6);
+          @Text = "";
+        }
+
+        Group { Anchor: (Width: 4); }
+
+        $C.@SmallSecondaryTextButton #AE2CraftXStack {
+          @Anchor = (Width: 90, Top: 6);
+          @Text = "";
+        }
+
+        Group { Anchor: (Width: 4); }
+
+        $C.@SmallSecondaryTextButton #AE2CraftXMax {
+          @Anchor = (Width: 76, Top: 6);
+          @Text = "";
+        }
+      }
+
+      // Zustand des Herstellens: Hinweis/Erfolg (#AE2CraftStatus) oder Fehler (#AE2CraftError), nie beide
+      Group {
+        Anchor: (Height: 34);
+
+        Label #AE2CraftStatus { Text: ""; Anchor: (Full: 0); Style: @CraftInfoStyle; }
+        Label #AE2CraftError { Text: ""; Anchor: (Full: 0); Style: @CraftErrorStyle; Visible: false; }
+      }
+    }
+
+    Group { Anchor: (Width: 22); }
+
+    // Rechte Spalte: das Inventar des Spielers. #BackpackGrid bleibt aus, solange der Spieler keinen Rucksack trägt.
+    Group #AE2InvColumn {
+      Anchor: (Width: 456);
+      LayoutMode: Top;
+
+      Label #AE2InvHeader { Text: ""; Anchor: (Height: 24); Style: @HeaderStyle; }
+
+      ItemGrid #StorageGrid {
+        Anchor: (Width: 450, Height: 200);
+        SlotsPerRow: 9;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+
+      Label #AE2HotbarHeader { Text: ""; Anchor: (Top: 6, Height: 20); Style: @HeaderStyle; }
+
+      ItemGrid #HotbarGrid {
+        Anchor: (Width: 450, Height: 50);
+        SlotsPerRow: 9;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+
+      Label #AE2BackpackHeader { Text: ""; Anchor: (Top: 6, Height: 20); Style: @HeaderStyle; }
+
+      ItemGrid #BackpackGrid {
+        Anchor: (Width: 450, Height: 200);
+        SlotsPerRow: 9;
+        AreItemsDraggable: true;
+        RenderEmptySlots: true;
+        DisplayItemQuantity: true;
+        Style: @GridStyle;
+      }
+
+      Group { FlexWeight: 1; }
+
+      Group {
+        Anchor: (Height: 44);
+        LayoutMode: Left;
+
+        $C.@TextButton #AE2InsertAll {
+          @Anchor = (Width: 230);
+          Text: "";
+        }
+
+        Group { FlexWeight: 1; }
+
+        $C.@SecondaryTextButton #AE2Cpus {
+          @Anchor = (Width: 210);
+          Text: "";
+        }
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

@@ -31,9 +31,23 @@ public final class HytaleBridge {
         de.fellurion.ae2.hytale.lang.AE2Language.setup(plugin);
         de.fellurion.ae2.hytale.advancements.AE2Advancements.setup(plugin);
         Devices.init();
+        de.fellurion.ae2.hytale.transform.InWorldTransforms.setup(plugin);
         de.fellurion.ae2.hytale.ui.TerminalOpener.setup(plugin);
         de.fellurion.ae2.hytale.hud.AE2Hud.setup(plugin);
         de.fellurion.ae2.hytale.security.AE2Security.setup(plugin);
+        de.fellurion.ae2.hytale.meteorite.Meteorites.setup(plugin);
+        // Bereiche, die ihre Geräte und Aktionen selbst anmelden (Devices.register, UseHandlers.register, ItemUse.register)
+        de.fellurion.ae2.hytale.tools.Tools.setup(plugin);
+        de.fellurion.ae2.hytale.gadgets.Gadgets.setup(plugin);
+        de.fellurion.ae2.hytale.emitter.Emitters.setup(plugin);
+        de.fellurion.ae2.hytale.ioport.IOPorts.setup(plugin);
+        de.fellurion.ae2.hytale.plane.Planes.setup(plugin);
+        de.fellurion.ae2.hytale.p2p.P2P.setup(plugin);
+        de.fellurion.ae2.hytale.wireless.Wireless.setup(plugin);
+        de.fellurion.ae2.hytale.spatial.Spatial.setup(plugin);
+        de.fellurion.ae2.hytale.quantum.Quantum.setup(plugin);
+        de.fellurion.ae2.hytale.fluid.Fluids.setup(plugin);
+        de.fellurion.ae2.hytale.guide.Guide.setup(plugin);
         ItemKeys.installDurabilityResolver();
         // Verschachtelte Zellen: der Zelleninhalt steckt in den Item-Metadaten unter "AE2Cell" (siehe ItemKeys)
         StorageCells.setCellDataResolver(key -> {

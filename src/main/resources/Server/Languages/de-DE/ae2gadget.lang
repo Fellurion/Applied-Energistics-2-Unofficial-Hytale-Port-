@@ -1,0 +1,67 @@
+# Applied Energistics 2 – Werkzeuge mit Akku (Entropy Manipulator, Charged Staff, Matter Cannon, Color Applicator), Tiny TNT
+# Datei ae2gadget.lang -> Schlüsselpräfix 'ae2gadget.'
+
+noPower = Nicht genug Energie – dafür sind mehr als {needed} AE nötig. Lade das Werkzeug im Charger.
+
+tnt.hint = [{key}] drücken zum Zünden
+
+singularity.frequency = Verschränkt – Frequenz {frequency}
+singularity.unlinked = Nicht verschränkt
+
+cannon.tooltip.empty = Keine Munition. Geduckt rechtsklicken lädt Munition aus dem Inventar.
+cannon.tooltip.ammo = Munition: {count} × {item}
+cannon.loaded = {count} × {item} geladen ({total} in der Kanone)
+cannon.unloaded = {count} × {item} entladen
+cannon.full = Die Matter Cannon ist voll.
+cannon.noAmmoInInventory = Keine Munition im Inventar. Die Kanone verschießt Materiebälle, Metallbarren, Holzkohle und Farbbälle.
+cannon.noAmmo = Munition verbraucht. Geduckt rechtsklicken lädt Munition aus dem Inventar.
+
+applicator.tooltip.empty = Keine Farbe. Geduckt in die Luft rechtsklicken lädt Farbbälle aus dem Inventar.
+applicator.tooltip.selected = Gewählt: {color}
+applicator.tooltip.entry = {count} × {color}
+applicator.cleaning = Reinigung
+applicator.empty = Der Farbapplikator enthält keine Farbe. Geduckt in die Luft rechtsklicken lädt Farbbälle aus dem Inventar.
+applicator.selected = Gewählt: {color} (noch {count})
+applicator.loaded = {count} Farbe geladen ({total} im Applikator)
+applicator.full = Der Farbapplikator ist voll.
+applicator.noPaintInInventory = Keine Farbe im Inventar. Der Applikator nimmt Farbbälle und Schnee zum Reinigen.
+
+cmd.desc = Testbefehle für die Werkzeuge mit Akku und Tiny TNT
+cmd.arg.what = tnt oder cannon
+cmd.arg.radius = Radius in Blöcken
+cmd.arg.mode = heat oder cool
+cmd.arg.color = Farbe, zum Beispiel red, light_blue oder fluix
+cmd.arg.direction = east, west, up, down, south oder north
+cmd.ignite.desc = Tiny TNT an einer Stelle zünden
+cmd.ignite.none = [AE2] An dieser Stelle steht kein Tiny TNT
+cmd.ignite.done = [AE2] Tiny TNT gezündet, Zündschnur {ticks} Ticks
+cmd.ignite.already = [AE2] Tiny TNT brennt schon, Zündschnur {ticks} Ticks
+cmd.blockdamage.desc = Blockschaden von Tiny TNT oder Matter Cannon für diesen Serverlauf schalten
+cmd.blockdamage.set = [AE2] Blockschaden: Tiny TNT {tnt}, Matter Cannon {cannon}
+cmd.drop.desc = Einen Gegenstand auf den Boden legen
+cmd.drop.unknown = [AE2] Unbekanntes Item {item}
+cmd.drop.done = [AE2] {amount} × {item} abgelegt
+cmd.items.desc = Gegenstände am Boden um eine Stelle auflisten
+cmd.items.list = [AE2] {count} Gegenstände am Boden: {items}
+cmd.charge.desc = Ladung des Items in einem Block-Slot anzeigen
+cmd.charge.empty = [AE2] In diesem Slot liegt kein Item
+cmd.charge.value = [AE2] {item}: {stored} / {max} AE
+cmd.entropy.desc = Einen Block erhitzen oder kühlen wie der Entropy Manipulator
+cmd.entropy.mode = [AE2] Der Modus muss heat oder cool sein
+cmd.entropy.result = [AE2] Entropy {outcome}: {before} -> {after} (darüber: {above})
+cmd.recolor.desc = Ein Kabel umfärben wie der Color Applicator
+cmd.recolor.color = [AE2] Unbekannte Farbe
+cmd.recolor.done = [AE2] Umgefärbt: {before} -> {after}
+cmd.recolor.none = [AE2] Nichts umgefärbt: {before} -> {after}
+cmd.shoot.desc = Einen Schuss der Matter Cannon von einer Stelle abfeuern
+cmd.shoot.direction = [AE2] Die Richtung muss east, west, up, down, south oder north sein
+cmd.shoot.noAmmo = [AE2] {item} ist keine Munition der Matter Cannon
+cmd.shoot.result = [AE2] Schuss mit Durchschlagskraft {penetration}: {destroyed} Blöcke zerstört
+cmd.fill.desc = Das Werkzeug in der Hand voll laden
+cmd.fill.none = [AE2] Das Item in der Hand hat keinen Akku
+cmd.fill.done = [AE2] Auf {stored} AE geladen
+cmd.arg.fluid = Flüssigkeits-Id, none zum Entfernen oder get zum bloßen Anzeigen
+cmd.fluid.desc = Die Flüssigkeit einer Zelle setzen oder entfernen
+cmd.fluid.now = [AE2] Zelle ist jetzt {cell}
+cmd.signal.desc = An einer Stelle ein AE2-Signal senden
+cmd.signal.set = [AE2] Signal {state}

@@ -1,0 +1,10 @@
+{
+  "$Comment": "Buch aufschlagen: kurze Geste mit dem Buch und Buchgeräusch, dann öffnet AE2_Use_Item die Seiten",
+  "Type": "Simple",
+  "RunTime": 0.2,
+  "Effects": {
+    "ItemAnimationId": "Interact",
+    "LocalSoundEventId": "SFX_Drag_Weapons_Books"
+  },
+  "Next": "AE2_Use_Item"
+}

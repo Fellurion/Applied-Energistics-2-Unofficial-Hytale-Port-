@@ -102,7 +102,7 @@ final class AdvancementsPage extends CustomUIPage {
             cmd.set(sel + " #Accent.Visible", isDone);
             cmd.set(sel + " #Name.Style.TextColor", nameColor);
             cmd.set(sel + " #State.Style.TextColor", stateColor);
-            cmd.set(sel + " #State.Text", state);
+            cmd.set(sel + " #State.TextSpans", state);
         }
         int total = registry.size();
         cmd.set("#Progress.Text", Message.translation("ae2adv.page.progress").param("done", done).param("total", total));
